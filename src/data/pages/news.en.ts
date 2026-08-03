@@ -14,8 +14,9 @@
  * THIS PAGE IS NOT A TRANSLATION OF THE FRENCH ONE. Measured differences that
  * are reproduced, not repaired:
  *  · English carries a publication card French does not have at all —
- *    `Week at a Glance`, filed inside `Economic news`. 18 `<h3>` here
- *    against 17 in French.
+ *    `Week at a Glance`. 18 `<h3>` here against 17 in French. ⚠ The live page
+ *    files it inside `Economic news`, after both videos; S-20 moved it into
+ *    `Economic analysis`. The CARD is reproduced, its PLACEMENT is not.
  *  · `Guides and tools` lists the SAME four items as `Guides et outils` in a
  *    DIFFERENT order.
  *  · `Facts & Fiction` credits `The CIO Office of National Bank Investments`;

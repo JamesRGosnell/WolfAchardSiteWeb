@@ -22,11 +22,17 @@ import type { Locale } from '../types';
  *     `…-2026-06.pdf` in here would silently break that promise while still
  *     returning HTTP 200 — the failure is invisible. All 34 linked PDFs were
  *     verified live with `last-modified` between 2026-07-10 and 2026-07-31.
- *  2. **The catalogue is not ours to improve.** Nothing here is deduplicated,
- *     reordered, retitled or balanced between languages. Where the two
- *     languages disagree — a card English has that French lacks, four items
- *     listed in a different order, the same publication pair credited to two
- *     different research groups — each language reproduces ITS OWN page.
+ *  2. **The catalogue is not ours to rewrite.** Nothing here is deduplicated,
+ *     retitled or balanced between languages. Where the two languages
+ *     disagree — a card English has that French lacks, four items listed in a
+ *     different order, the same publication pair credited to two different
+ *     research groups — each language reproduces ITS OWN page.
+ *     ⚠ **Two things ARE reordered, and both are registered.** `S-20` moved
+ *     the English `Week at a Glance` card out of the videos section into
+ *     `Economic analysis`; `S-21` moved the Trump policy block out of the
+ *     lead position, in both languages. **Neither changed a string** — that is
+ *     the line this file holds: order is presentation and is registered when
+ *     it changes; wording is National Bank's and is never touched.
  *  3. **A static rebuild ends the automatic refresh the advisor has today.**
  *     That is a client decision, registered, not something this file can solve.
  *
@@ -148,9 +154,17 @@ export type NewsSection =
       heading: string;
       items: VideoItem[];
       /**
-       * English only. The live English page files `Week at a Glance` INSIDE its
-       * `Economic news` section; French has no such card at all. Reproduced
-       * where each language puts it, not moved to match the other.
+       * ⚠ NOTHING SETS THIS TODAY — see S-20.
+       *
+       * It exists for one card. The live ENGLISH page files `Week at a Glance`
+       * INSIDE its `Economic news` section, after both videos and both
+       * transcripts; French has no such card at all. S-20 moved that card into
+       * `Economic analysis`, where every other publication card lives.
+       *
+       * The field and its branch in `NewsSections.astro` are kept so the move
+       * is reverted purely in the data: put the card object back here and it
+       * renders in its live position again, unchanged. Delete the field and
+       * the renderer branch together, or neither.
        */
       publications?: PubCard[];
     }

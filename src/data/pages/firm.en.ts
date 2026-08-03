@@ -170,7 +170,7 @@ const content: FirmContent = {
     // differently from the 39 other English strings that carry it.
     heading: 'Wolf Archard Group',
     body: [
-      'Our team brings together Laurent Achard and David Alexandre Wolf, wealth advisors in Montreal. Our mission is to secure your financial future, to support you in achieving your ambitious life projects and to be the main partner in your financial success. We are committed to acting with integrity, communicating transparently and building a long-term relationship based on trust and professionalism.',
+      'Our team brings together Laurent Achard and David Alexandre Wolf, in Montreal. Our mission is to secure your financial future, to support you in achieving your ambitious life projects and to be the main partner in your financial success. We are committed to acting with integrity, communicating transparently and building a long-term relationship based on trust and professionalism.',
     ],
   },
 

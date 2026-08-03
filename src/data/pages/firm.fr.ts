@@ -175,7 +175,7 @@ const content: FirmContent = {
     // The team's own name, verbatim. Not new copy — an identity string.
     heading: 'Groupe Wolf Achard',
     body: [
-      'Notre équipe réunit Laurent Achard et David Alexandre Wolf, conseillers en gestion de patrimoine à Montréal. Notre mission est de sécuriser votre avenir financier, de vous accompagner dans la réalisation de vos projets de vie ambitieux et d’être le partenaire principal dans votre réussite financière. Nous nous engageons à agir de manière intègre, à communiquer de façon transparente et à construire une relation à long terme basée sur la confiance et le professionnalisme. Notre processus se déroule en quatre étapes: faisons connaissance, établissons une stratégie, déployons notre plan, restons en contact.',
+      'Notre équipe réunit Laurent Achard et David Alexandre Wolf, à Montréal. Notre mission est de sécuriser votre avenir financier, de vous accompagner dans la réalisation de vos projets de vie ambitieux et d’être le partenaire principal dans votre réussite financière. Nous nous engageons à agir de manière intègre, à communiquer de façon transparente et à construire une relation à long terme basée sur la confiance et le professionnalisme. Notre processus se déroule en quatre étapes: faisons connaissance, établissons une stratégie, déployons notre plan, restons en contact.',
     ],
   },
 
