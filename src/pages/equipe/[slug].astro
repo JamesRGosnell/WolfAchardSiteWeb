@@ -43,9 +43,13 @@
  * character-for-character the live one; only the element differs, so this is a
  * markup decision and not a register row.
  */
+/* D-94 - `primaryContactEmail` makes the sticky contact bar dial the advisor
+   whose page this is. Without it the bar used the first-listed line, so the
+   call and mail buttons on David Alexandre Wolf's own profile reached
+   Laurent Achard. The bar's names are screen-reader-only, so a sighted
+   visitor saw two unlabelled buttons and no way to tell. */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Section from '../../components/Section.astro';
-import Button from '../../components/Button.astro';
 import Icon from '../../components/Icon.astro';
 import ProfileRecord from '../_equipe/ProfileRecord.astro';
 import { t, alternatesForPair, advisorPath, pathFor } from '../../lib/i18n';
@@ -77,6 +81,7 @@ const teamLabel = s.nav.items.find((item) => item.key === 'team')!.liveLabel;
   activeKey="team"
   title={advisor.seo.title}
   description={advisor.seo.description}
+  primaryContactEmail={advisor.email}
 >
   <Section bg="paper" padding="compact" class="profile">
     <p class="profile__back">
@@ -111,9 +116,16 @@ const teamLabel = s.nav.items.find((item) => item.key === 'team')!.liveLabel;
 
         <ProfileRecord locale={locale} advisor={advisor} />
 
-        <p class="profile__cta">
-          <Button href={teamHref} variant="secondary" pill>{teamLabel}</Button>
-        </p>
+        {/* D-90 — NO second `Notre équipe` control here. This page is one screen
+            tall: a photograph, a name, a title and four rows. The back link above
+            the <h1> and a pill button below the record carried the SAME label to
+            the SAME href, both visible at once, and the page's only outbound
+            control read twice as "go back where you came from". The link above is
+            the one that stays: it sits where the live page's own
+            `< Voir tous les conseillers` sat and it is the control D-22
+            registered. `Notre équipe` also remains in the header nav and in the
+            footer's Navigation column, so three routes to the team page survive.
+            No word changed — one duplicate control removed. */}
       </div>
     </div>
   </Section>
@@ -184,9 +196,5 @@ const teamLabel = s.nav.items.find((item) => item.key === 'team')!.liveLabel;
     letter-spacing: 0.06em;
     line-height: 1.4;
     color: var(--muted);
-  }
-
-  .profile__cta {
-    margin-block-start: clamp(1.75rem, 3.5vw, 2.5rem);
   }
 </style>

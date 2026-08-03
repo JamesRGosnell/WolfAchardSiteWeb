@@ -31,9 +31,18 @@ import Icon from './Icon.astro';
 
 interface Props {
   locale: Locale;
+  /**
+   * D-94 — the email of the advisor this page is about, when the page is about
+   * one. Without it the bar dialled `people[0]` everywhere, so the call and
+   * mail buttons on David Alexandre Wolf's own profile phoned Laurent Achard.
+   * The names are screen-reader-only, so a sighted visitor saw two unlabelled
+   * buttons and no way to tell. Pages that are not about one advisor omit it
+   * and keep the previous first-listed behaviour.
+   */
+  primaryEmail?: string;
 }
 
-const { locale } = Astro.props as Props;
+const { locale, primaryEmail } = Astro.props as Props;
 
 const s = t(locale);
 const c = s.contactStrip;
@@ -49,8 +58,13 @@ const people = s.contact.phones.slice(0, 2).map((phone, index) => ({
   email: s.contact.emails[index],
 }));
 
-/** The mobile bar's two actions both go to the first line. */
-const primary = people[0];
+/**
+ * The mobile bar's two actions. On an advisor's own page they go to that
+ * advisor (D-94); elsewhere they fall back to the first line, as before.
+ */
+const primary =
+  (primaryEmail && people.find((person) => person.email?.label === primaryEmail)) ||
+  people[0];
 
 const PANEL_ID = 'contact-strip-panel';
 const TITLE_ID = 'contact-strip-title';

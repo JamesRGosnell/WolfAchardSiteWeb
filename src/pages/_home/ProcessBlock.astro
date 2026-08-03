@@ -76,6 +76,23 @@ const isRail = process.titleAs === 'p';
     margin-block: 1rem 0;
   }
 
+  /* D-81 — F-21 mounted the commitments list here to answer the colon the lead
+     ends on, and gave it this class, but nothing ever styled the class. The
+     result was the opposite of what F-21 intended: a lead-size sentence ending
+     in `:` with the small uppercase `Nos engagements` eyebrow jammed against it
+     at zero distance, and then a full band of air before the steps. The colon
+     resolved semantically and read as a collision.
+
+     Space above it — less than the steps get below, so the list still reads as
+     belonging to the sentence rather than as a third thing between two blocks —
+     and the same 46rem measure the ruled list is held to everywhere else. At
+     the container's full 76rem its hairlines ran twice as wide as any other
+     instance of this list on the site. */
+  .proc__commitments {
+    margin-block-start: clamp(1.75rem, 3vw, 2.5rem);
+    max-inline-size: 46rem;
+  }
+
   .proc__steps {
     margin: clamp(2rem, 4vw, 3rem) 0 0;
     padding: 0;

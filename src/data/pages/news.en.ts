@@ -106,6 +106,44 @@ const content: NewsContent = {
   },
 
   sections: [
+    /* ------------------------------------------------------------------------
+     * S-21 — SECTION ORDER. On the live page `Trump's Policy Updates` is the
+     * FIRST section under the H1 and `Spotlight: Now trending` the second.
+     * Those two are swapped here, in both languages identically, and nothing
+     * else on either page moves. Not a word, title, link, image or alt string
+     * changes; reverting is exchanging these two objects again.
+     *
+     * The full reasoning is in `news.fr.ts`, where the same swap is made. The
+     * short version: it is the first thing a prospective client reads, it is
+     * the only undated block on the page, and it is the one block whose two
+     * language versions disagree — THIS page's first card says
+     * `Canadian Concerns Removed`, the French page's first card, for the same
+     * PDF pair, does not. National Bank updated one side only.
+     * ---------------------------------------------------------------------- */
+    {
+      kind: 'documents',
+      id: 'spotlight',
+      heading: 'Spotlight: Now trending',
+      items: [
+        {
+          image: { src: img_img_article_july_article_fusions_acquisitions, alt: 'A National Bank specialist meets with clients to discuss value-creating merger and acquisition strategies for their business.' },
+          title: 'Commercial discipline in M&A: The best practices to drive real value',
+          href: 'https://www.nbc.ca/en/article/fusions-acquisitions-rigueur-commerciale.html?cid=nti_7QRH7F9FAM921668',
+        },
+        {
+          image: { src: img_img_article_july_article_maximiser_son_patrimoine, alt: 'A mother helps her children with their lessons at the kitchen island.' },
+          title: '8 tips to help you manage your family wealth',
+          href: 'https://www.nbc.ca/personal/advice/taxes-and-income/how-to-build-and-manage-wealth.html?cid=nti_ZA0BA7VK3D521669',
+        },
+        {
+          image: { src: img_img_article_july_article_pension_individuelle, alt: 'Asian senior woman working at home with a laptop.' },
+          title: 'Everything you need to know about the Individual Pension Plan',
+          href: 'https://www.nbc.ca/personal/advice/savings-investment/understanding-the-individual-pension-plan.html?cid=nti_MXOP6NJZD8S21670',
+        },
+      ],
+    },
+    /* S-21 — was the FIRST section on the live page. Moved one place down;
+       contents untouched. See the note at the top of `sections`. */
     {
       kind: 'documents',
       id: 'policy-updates',
@@ -126,28 +164,6 @@ const content: NewsContent = {
           image: { src: img_img_droit_de_douane_trump_767x433, alt: 'American flag flying over port container ship.' },
           title: 'Facing the tariffs together - Our commitment',
           href: `${NBFWM}/content/dam/fbngp/pdf/facing-the-tariffs-together-our-commitment.pdf`,
-        },
-      ],
-    },
-    {
-      kind: 'documents',
-      id: 'spotlight',
-      heading: 'Spotlight: Now trending',
-      items: [
-        {
-          image: { src: img_img_article_july_article_fusions_acquisitions, alt: 'A National Bank specialist meets with clients to discuss value-creating merger and acquisition strategies for their business.' },
-          title: 'Commercial discipline in M&A: The best practices to drive real value',
-          href: 'https://www.nbc.ca/en/article/fusions-acquisitions-rigueur-commerciale.html?cid=nti_7QRH7F9FAM921668',
-        },
-        {
-          image: { src: img_img_article_july_article_maximiser_son_patrimoine, alt: 'A mother helps her children with their lessons at the kitchen island.' },
-          title: '8 tips to help you manage your family wealth',
-          href: 'https://www.nbc.ca/personal/advice/taxes-and-income/how-to-build-and-manage-wealth.html?cid=nti_ZA0BA7VK3D521669',
-        },
-        {
-          image: { src: img_img_article_july_article_pension_individuelle, alt: 'Asian senior woman working at home with a laptop.' },
-          title: 'Everything you need to know about the Individual Pension Plan',
-          href: 'https://www.nbc.ca/personal/advice/savings-investment/understanding-the-individual-pension-plan.html?cid=nti_MXOP6NJZD8S21670',
         },
       ],
     },
@@ -218,15 +234,12 @@ const content: NewsContent = {
           },
         },
       ],
-      publications: [
-        {
-          image: { src: img_img_article_quarterly_investment_strategy, alt: 'A businessman, standing in a downtown area, smiling whilst looking at his phone.' },
-          title: 'Week at a Glance',
-          blurb: 'The experts at National Bank Financial give a detailed analysis on how the stock markets and fixed income markets have performed every week.',
-          cta: 'Read the latest version',
-          href: `${NBFWM}/content/dam/fbngp/pdf/week-at-a-glance.pdf`,
-        },
-      ],
+      /* S-20 — `Week at a Glance` USED TO SIT HERE, in a `publications` array
+         hanging off this videos section, because that is where the live
+         English page files it. It has been moved into `Economic analysis`
+         below; see the note on that section. The `publications` field is left
+         on the type and in the renderer so that the move is reverted by
+         putting the object back here, unchanged. */
     },
     {
       kind: 'promos',
@@ -253,6 +266,23 @@ const content: NewsContent = {
         },
       ],
     },
+    /* ------------------------------------------------------------------------
+     * S-20 — `Week at a Glance` is the SECOND card in this section. On the
+     * live English page it is not in this section at all: it hangs off the end
+     * of `Economic news`, after both videos and both transcript panels, as a
+     * single card alone in a three-column grid. It is the only publication
+     * card on the page that is not in a publications section, and a reader
+     * meets it immediately after a collapsed video transcript, under a heading
+     * about videos.
+     *
+     * Moved, not rewritten. Title, blurb, CTA, PDF link, image and alt text
+     * are the objects that were there before, character for character. The
+     * French page has no `Week at a Glance` card and none is created (P-5).
+     *
+     * Placed after `Weekly Economic Watch` because the two weeklies then lead
+     * the section and the three monthlies follow, and because it leaves the
+     * live relative order of the four existing cards untouched.
+     * ---------------------------------------------------------------------- */
     {
       kind: 'publications',
       id: 'economic-analysis',
@@ -264,6 +294,13 @@ const content: NewsContent = {
           blurb: 'This publication keeps you posted on a wide range of economic and financial indicators affecting the local, North American and global markets. It includes brief commentaries on economic and financial news items.',
           cta: 'Read the latest version',
           href: `${NBFWM}/content/dam/bnc/taux-analyses/analyse-eco/weekly-economic-watch.pdf`,
+        },
+        {
+          image: { src: img_img_article_quarterly_investment_strategy, alt: 'A businessman, standing in a downtown area, smiling whilst looking at his phone.' },
+          title: 'Week at a Glance',
+          blurb: 'The experts at National Bank Financial give a detailed analysis on how the stock markets and fixed income markets have performed every week.',
+          cta: 'Read the latest version',
+          href: `${NBFWM}/content/dam/fbngp/pdf/week-at-a-glance.pdf`,
         },
         {
           image: { src: img_img_article_monthly_vision, alt: 'A couple sitting at their dining room table looking at a laptop together.' },

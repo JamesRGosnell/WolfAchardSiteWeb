@@ -124,6 +124,57 @@ const content: NewsContent = {
   },
 
   sections: [
+    /* ------------------------------------------------------------------------
+     * S-21 — SECTION ORDER. On the live page `Actualités politiques de Trump`
+     * is the FIRST section under the H1; `Contenus en vedette` is the second.
+     * Those two are swapped here, and nothing else on the page moves.
+     *
+     * Not a word, title, link, image or alt string is changed by the swap, and
+     * reverting it is exchanging these two objects again.
+     *
+     * Three reasons, and the third is the one that decides it:
+     *  1. It is the first thing a prospective client reads on a regulated
+     *     advisor's site, and it is a named foreign politician.
+     *  2. It is the only undated block on the page. Every other section is
+     *     either evergreen or carries its own date; these three carry neither
+     *     a date nor a "latest version" link.
+     *  3. ⚠ IT IS THE ONE BLOCK WHERE THE TWO LANGUAGES TELL DIFFERENT
+     *     STORIES. The English first card is titled `One Big Beautiful Bill
+     *     Act | Canadian Concerns Removed`; the French one is
+     *     `One Big Beautiful Bill Act (OBBBA) - Projet d'article 899` and says
+     *     nothing about the concerns being removed. National Bank updated the
+     *     English side and not the French. A block that is stale in one
+     *     language and current in the other is the worst possible thing to
+     *     open a page with — and neither title may be touched (P-14).
+     *
+     * The three cards keep their live order INSIDE the section: the DAM
+     * filenames number them 228 (concerns removed) then 226 (after the Senate
+     * bill), so the live order is newest-first and correct as it stands.
+     * ---------------------------------------------------------------------- */
+    {
+      kind: 'documents',
+      id: 'spotlight',
+      heading: 'Contenus en vedette',
+      items: [
+        {
+          image: { src: img_img_article_july_article_fusions_acquisitions, alt: 'Photo d’une spécialiste de la Banque Nationale qui échange avec ses clients sur des stratégies de fusions et d’acquisitions créatrices de valeur pour leur entreprise' },
+          title: 'La rigueur commerciale dans les fusions et acquisitions : les meilleures pratiques pour créer de la valeur',
+          href: 'https://www.nbc.ca/fr/article/fusions-acquisitions-rigueur-commerciale.html?cid=nti_5NBGJA8LTAX21671',
+        },
+        {
+          image: { src: img_img_article_july_article_maximiser_son_patrimoine, alt: 'Une mère aide ses enfants à faire leurs devoirs à l’îlot de la cuisine.' },
+          title: '8 conseils pour bien gérer votre patrimoine familial',
+          href: 'https://www.bnc.ca/particuliers/conseils/impots-revenus/gerer-son-patrimoine-par-ou-commencer.html?cid=nti_DFMJWWP7ZXN21672',
+        },
+        {
+          image: { src: img_img_article_july_article_pension_individuelle, alt: 'Une femme asiatique âgée travaille à domicile sur un ordinateur portable.' },
+          title: 'Tout savoir sur le régime de retraite individuel',
+          href: 'https://www.bnc.ca/particuliers/conseils/epargne-placements/comprendre-le-regime-de-retraite-individuel.html?cid=nti_MTJE0ZLNX7F21673',
+        },
+      ],
+    },
+    /* S-21 — was the FIRST section on the live page. Moved one place down;
+       contents untouched. See the note at the top of `sections`. */
     {
       kind: 'documents',
       id: 'actualites-politiques',
@@ -144,28 +195,6 @@ const content: NewsContent = {
           image: { src: img_img_droit_de_douane_trump_767x433, alt: ' Drapeau américain qui survole un navire de conteneurs portuaires. ' },
           title: 'Faire face ensemble aux tarifs douaniers – Notre engagement',
           href: `${FBNGP}/content/dam/fbngp/pdf/faire-face-ensemble-aux-tarifs-douaniers-notre-engagement.pdf`,
-        },
-      ],
-    },
-    {
-      kind: 'documents',
-      id: 'spotlight',
-      heading: 'Contenus en vedette',
-      items: [
-        {
-          image: { src: img_img_article_july_article_fusions_acquisitions, alt: 'Photo d’une spécialiste de la Banque Nationale qui échange avec ses clients sur des stratégies de fusions et d’acquisitions créatrices de valeur pour leur entreprise' },
-          title: 'La rigueur commerciale dans les fusions et acquisitions : les meilleures pratiques pour créer de la valeur',
-          href: 'https://www.nbc.ca/fr/article/fusions-acquisitions-rigueur-commerciale.html?cid=nti_5NBGJA8LTAX21671',
-        },
-        {
-          image: { src: img_img_article_july_article_maximiser_son_patrimoine, alt: 'Une mère aide ses enfants à faire leurs devoirs à l’îlot de la cuisine.' },
-          title: '8 conseils pour bien gérer votre patrimoine familial',
-          href: 'https://www.bnc.ca/particuliers/conseils/impots-revenus/gerer-son-patrimoine-par-ou-commencer.html?cid=nti_DFMJWWP7ZXN21672',
-        },
-        {
-          image: { src: img_img_article_july_article_pension_individuelle, alt: 'Une femme asiatique âgée travaille à domicile sur un ordinateur portable.' },
-          title: 'Tout savoir sur le régime de retraite individuel',
-          href: 'https://www.bnc.ca/particuliers/conseils/epargne-placements/comprendre-le-regime-de-retraite-individuel.html?cid=nti_MTJE0ZLNX7F21673',
         },
       ],
     },

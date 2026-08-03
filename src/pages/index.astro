@@ -86,14 +86,21 @@ const onward = (['services', 'team'] as const).map((key) => ({
     )
   }
 
-  {/* Mission + commitments. No accessible name on the band: it holds TWO
-      sibling <h3> lists, so any single name would misdescribe it and a composed
-      one would be authored microcopy with no live counterpart. A <section>
-      without a name is not a landmark, which is the correct outcome. */}
+  {/* `Notre mission`. It held mission AND commitments until F-21 moved
+      `Nos engagements` into the process block to answer the lead's colon, so on
+      THIS page the band is now a single list — hence `lists--solo`, which is
+      what stops the pair grid from leaving an empty column beside it. The
+      English twin still holds both and still runs as a pair.
+
+      No accessible name on the band, in either language: it holds sibling <h3>
+      lists rather than one subject, so any single name would misdescribe it and
+      a composed one would be authored microcopy with no live counterpart. A
+      <section> without a name is not a landmark, which is the correct
+      outcome. */}
   {
     home.lists && home.lists.length > 0 && (
       <Section bg="paper">
-        <div class="lists">
+        <div class:list={['lists', home.lists.length === 1 && 'lists--solo']}>
           {home.lists.map((list) => (
             <RuledList list={list} class="reveal" />
           ))}
@@ -211,14 +218,27 @@ const onward = (['services', 'team'] as const).map((key) => ({
     margin-block-start: clamp(2rem, 4vw, 2.75rem);
   }
 
-  /* Mission + commitments, side by side. */
+  /* D-80 — the pair grid is now CONDITIONAL, and that is a consequence of F-21.
+     Two lists sit side by side; one does not. F-21 moved `Nos engagements` out
+     of this band and into the process block, and `repeat(2, minmax(0, 1fr))`
+     went on reserving the second column for it — leaving `Notre mission` at
+     half width with the right-hand half of a full band empty beside it.
+
+     A single list takes its own measure instead, which is exactly the treatment
+     `Ce qui nous distingue` gets on the English home page, where the same list
+     also holds a column alone. 46rem, so four long items do not run the full
+     76rem container. */
   .lists {
     display: grid;
     gap: clamp(2rem, 4vw, 3rem);
   }
 
+  .lists--solo {
+    max-inline-size: 46rem;
+  }
+
   @media (min-width: 48rem) {
-    .lists {
+    .lists:not(.lists--solo) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       column-gap: clamp(2.5rem, 5vw, 4.5rem);
       align-items: start;

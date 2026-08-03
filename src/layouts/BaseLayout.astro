@@ -63,6 +63,8 @@ interface Props {
   alternates?: Alternate[];
   /** Language-toggle target. Defaults to the `pageKey` pair, else the home page. */
   switchHref?: string;
+  /** D-94 — advisor this page is about, so the sticky bar dials the right one. */
+  primaryContactEmail?: string;
   /** Nav item to mark current. Defaults to `pageKey`. */
   activeKey?: PageKey | null;
   noindex?: boolean;
@@ -92,6 +94,7 @@ const {
   structuredData = true,
   bodyClass,
   showFooterCta = true,
+  primaryContactEmail,
 } = Astro.props;
 
 const s = t(locale);
@@ -229,7 +232,7 @@ const jsonLd = structuredData
 
     {/* Last in the DOM on purpose — it is chrome, and nothing before it should
         be pushed out of reading order by a fixed element. */}
-    <ContactStrip locale={locale} />
+    <ContactStrip locale={locale} primaryEmail={primaryContactEmail} />
 
     <script>
       import '../scripts/main.ts';

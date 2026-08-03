@@ -26,9 +26,13 @@
  * the <title> and description. F-13's doubled space is French-only and correctly
  * absent here.
  */
+/* D-94 - `primaryContactEmail` makes the sticky contact bar dial the advisor
+   whose page this is. Without it the bar used the first-listed line, so the
+   call and mail buttons on David Alexandre Wolf's own profile reached
+   Laurent Achard. The bar's names are screen-reader-only, so a sighted
+   visitor saw two unlabelled buttons and no way to tell. */
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Section from '../../../components/Section.astro';
-import Button from '../../../components/Button.astro';
 import Icon from '../../../components/Icon.astro';
 import ProfileRecord from '../../_equipe/ProfileRecord.astro';
 import { t, alternatesForPair, advisorPath, pathFor } from '../../../lib/i18n';
@@ -58,6 +62,7 @@ const teamLabel = s.nav.items.find((item) => item.key === 'team')!.liveLabel;
   activeKey="team"
   title={advisor.seo.title}
   description={advisor.seo.description}
+  primaryContactEmail={advisor.email}
 >
   <Section bg="paper" padding="compact" class="profile">
     <p class="profile__back">
@@ -88,9 +93,13 @@ const teamLabel = s.nav.items.find((item) => item.key === 'team')!.liveLabel;
 
         <ProfileRecord locale={locale} advisor={advisor} />
 
-        <p class="profile__cta">
-          <Button href={teamHref} variant="secondary" pill>{teamLabel}</Button>
-        </p>
+        {/* D-90 — NO second `Our team` control here; see the French twin. The
+            back link above the <h1> and a pill button below the record carried
+            the SAME label to the SAME href on a one-screen page. The link above
+            stays (it is the D-22 replacement for the live
+            `< See all advisors`); the button is cut. Applied symmetrically in
+            both language trees, because a layout defect repaired in one language
+            only is a second defect. */}
       </div>
     </div>
   </Section>
@@ -160,9 +169,5 @@ const teamLabel = s.nav.items.find((item) => item.key === 'team')!.liveLabel;
     letter-spacing: 0.06em;
     line-height: 1.4;
     color: var(--muted);
-  }
-
-  .profile__cta {
-    margin-block-start: clamp(1.75rem, 3.5vw, 2.5rem);
   }
 </style>

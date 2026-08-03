@@ -64,9 +64,9 @@ which file the reader had open, which is exactly how a reader reads them: side b
 | **`N-`** | **this file only** | Flag-only. A live defect we will **not** repair, because repairing it is a legal, identity or regulatory decision | `N-01` … `N-15` |
 | **`P-`** | **this file only** | Prohibition — a standing rule the build must not violate | `P-1` … `P-16` *(no leading zero, deliberately — a `P-` is a rule, not a row)* · **`P-16` is partially amended — §6.5** |
 | **`R-`** | **this file only** | Risk found during review, including risks in our own documents | `R-01` … `R-33` |
-| **`D-`** | `CHANGES` **only** | Build decision the client confirms | `D-01` … `D-32`, then `D-51` … `D-53`, then `D-70` … `D-76` *(the gaps are deliberate — parallel agents, and a gap is cheaper than a collision)* |
+| **`D-`** | `CHANGES` **only** | Build decision the client confirms | `D-01` … `D-32`, then `D-51` … `D-53`, then `D-70` … `D-76`, then `D-90` … `D-97` *(the gaps are deliberate — parallel agents, and a gap is cheaper than a collision)* |
 | **`NC-`** | `CHANGES` **only** | New copy written for the rebuild | `NC-01` … `NC-07`, then `NC-20` … `NC-28` *(gap deliberate, same reason)* |
-| **`S-`** | `CHANGES` **only** | Syndicated National Bank content | `S-01` … `S-08` |
+| **`S-`** | `CHANGES` **only** | Syndicated National Bank content | `S-01` … `S-08`, then `S-20` … *(the gap is deliberate — parallel page passes were each given their own block so two agents could not mint the same number. Later blocks may already be in use; this cell records the blocks that exist, not a ceiling.)* |
 | **`A-`** | `CHANGES` **only** | Brand artwork substitutions | `A-01` … `A-05` |
 | **`U-`** | `CHANGES` **only** | URL change | `U-01` |
 

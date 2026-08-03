@@ -38,6 +38,15 @@ interface Props {
 const { block, locale, level = 2, class: className } = Astro.props;
 const Heading = `h${level}` as 'h2' | 'h3';
 const headingId = `${block.id}-title`;
+
+/**
+ * D-82. Six of the seven English blocks carry `Purpose` AND `Main benefits`;
+ * `Philanthropy` carries ONE unlabelled list, because that is all the live page
+ * gives it. The pair grid below is conditional on there actually being a pair —
+ * otherwise Philanthropy's three items sat at half the content column with the
+ * other half empty, the only ragged block in the run of seven.
+ */
+const pairedGroups = (block.groups?.length ?? 0) > 1;
 ---
 
 <section id={block.id} class:list={['sblock', className]} aria-labelledby={headingId}>
@@ -48,7 +57,7 @@ const headingId = `${block.id}-title`;
 
     {
       block.groups && (
-        <div class="sblock__groups">
+        <div class:list={['sblock__groups', pairedGroups && 'sblock__groups--pair']}>
           {block.groups.map((group) => (
             <div class="sgroup">
               {/* The label and its list are one object, so a heading can never
@@ -111,14 +120,17 @@ const headingId = `${block.id}-title`;
   }
 
   /* `Purpose` and `Main benefits` side by side. English only — the French
-     blocks have no lists at all, so this grid never renders on that page. */
+     blocks have no lists at all, so this grid never renders on that page.
+     D-82: the two-column rule is on `--pair`, not on the container, so the one
+     block with a single list does not reserve a column for a second one that
+     the live page never gave it. */
   .sblock__groups {
     display: grid;
     gap: clamp(1.25rem, 2.5vw, 2rem);
   }
 
   @media (min-width: 48rem) {
-    .sblock__groups {
+    .sblock__groups--pair {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       column-gap: clamp(1.75rem, 3vw, 2.75rem);
       align-items: start;
