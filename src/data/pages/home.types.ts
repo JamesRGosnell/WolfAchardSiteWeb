@@ -153,6 +153,8 @@ export interface ProcessStep {
 }
 
 export interface HomeProcess {
+  /** F-21 — the list the live lead's colon promises. See home.fr.ts. */
+  commitments?: HomeList;
   heading: string;
   lead: string;
   /**

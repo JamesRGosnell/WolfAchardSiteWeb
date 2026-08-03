@@ -21,6 +21,7 @@
  * numbered legal-note markers, and this client already has marker problems
  * (P-12 is currently violated on the team page). The icons carry the sequence.
  */
+import RuledList from './RuledList.astro';
 import Figure from '../../components/Figure.astro';
 import type { HomeProcess } from '../../data/pages/home.types';
 
@@ -38,6 +39,12 @@ const isRail = process.titleAs === 'p';
     <h2 id={headingId} class="t-h2 serif-display proc__title">{process.heading}</h2>
     <p class="t-lead measure proc__lead">{process.lead}</p>
   </div>
+
+  {
+    process.commitments && (
+      <RuledList list={process.commitments} headingId="proc-commitments" class="proc__commitments" />
+    )
+  }
 
   <ol class="proc__steps">
     {

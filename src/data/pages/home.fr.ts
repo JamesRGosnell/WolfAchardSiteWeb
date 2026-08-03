@@ -116,15 +116,6 @@ const content: HomeContent = {
         'Construire une relation à long terme basée sur la confiance et le professionnalisme',
       ],
     },
-    {
-      heading: 'Nos engagements',
-      items: [
-        'Agir de manière intègre et communiquer de façon transparente',
-        'Demeurer informés pour prendre des décisions éclairées',
-        'Investir de manière audacieuse sans être imprudents',
-        'Respecter tous nos engagements pour assurer le travail bien fait et le devoir accompli',
-      ],
-    },
   ],
 
   // C-27. Mentions `rendements` — the only return-adjacent language on the
@@ -160,18 +151,27 @@ const content: HomeContent = {
 
   process: {
     heading: 'Un processus éprouvé',
-    /* F-20 - TRUNCATED, NOT REWRITTEN. The live lead ends
-       `... En effet, vous pourrez toujours compter sur:` and the next thing on
-       the page is the h3 `Faisons connaissance` - a process step, not a thing
-       you can count on. The colon promises a list the client never wrote; the
-       live document order (h2 > this p > h3 Faisons connaissance) confirms the
-       dangle is theirs, not ours. Cutting at the sentence boundary removes the
-       broken promise using only their words - no clause is rewritten and none
-       is invented. The remaining sentence is complete and introduces the
-       section cleanly. Reverting restores the live text exactly.
-       NOTE: their `Nos engagements` list IS four things a client can count on;
-       if they want the colon back, that list is the honest continuation. */
-    lead: 'Nos conseils, notre accompagnement et notre dévouement sont très appréciés de tous nos clients.',
+    /* F-21 - the live lead ends with a colon promising a list, and on the live
+       site the next element is the h3 `Faisons connaissance` - a process step,
+       not something a client can count on. The list the colon asks for exists
+       on their own page: `Nos engagements`. It is moved here from its own
+       section (it no longer appears in `lists`) so the sentence resolves.
+       Every word is theirs, including `sur:` with no space before the colon,
+       which is how the live markup has it. Supersedes F-20 (truncation). */
+    lead: 'Nos conseils, notre accompagnement et notre dévouement sont très appréciés de tous nos clients. En effet, vous pourrez toujours compter sur:',
+
+    /* F-21 — the live colon promises a list; this is the client's own
+       `Nos engagements`, moved here from its own section so the sentence
+       resolves. Four things a client can count on. No word changed. */
+    commitments: {
+        heading: 'Nos engagements',
+        items: [
+          'Agir de manière intègre et communiquer de façon transparente',
+          'Demeurer informés pour prendre des décisions éclairées',
+          'Investir de manière audacieuse sans être imprudents',
+          'Respecter tous nos engagements pour assurer le travail bien fait et le devoir accompli',
+        ],
+      },
     titleAs: 'h3',
     steps: [
       {
