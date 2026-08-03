@@ -1,0 +1,727 @@
+---
+/**
+ * Site header.
+ *
+ * ONE row on paper, full-bleed. The co-brand lockup sits IN the bar beside the
+ * team lockup, at equal prominence — there is no separate ink pre-header strip:
+ *
+ *   [ FBNGP / NBFWM ] │ [ Groupe Wolf Achard ]   nav   FR|EN   ( Accès client )
+ *
+ * Two layers, in DOM order:
+ *   1. The bar — paper at 92% with a backdrop blur, bottom hairline once
+ *      scrolled.
+ *   2. Mobile overlay — full-screen ink menu, serif links, staggered in. This
+ *      is the one place ink is allowed outside the footer.
+ *
+ * FIVE THINGS THAT ARE LOAD-BEARING. Each was a real failure on the reference
+ * build; none is a style preference.
+ *
+ * 1. STICKY LIVES ON <header>, NOT ON `.bar`. A sticky element can only travel
+ *    inside its containing block, and <header> is only as tall as the bar — so
+ *    `position: sticky` on `.bar` sticks for one pixel and then scrolls away
+ *    with its parent. It looks fine on a short page and vanishes on a long one.
+ *    Do not move it back down a level.
+ *
+ * 2. `flex: none` ON THE BRAND CLUSTER, NEVER `min-inline-size: 0`. The latter
+ *    lets the cluster be squeezed narrower than the lockups inside it; the
+ *    images then overflow and sit silently ON TOP OF the first nav link, with
+ *    nothing wrong in the box model to show for it. Refusing to shrink turns
+ *    that class of mistake into a visible overflow instead of a quiet collision
+ *    that overprints a regulated wordmark.
+ *
+ * 3. THE BAR IS FULL-BLEED, capped at 120rem — not inside the 76rem content
+ *    column. The lockups hug the viewport gutter. At 110rem the cap starts
+ *    biting around 1900px and quietly pulls the lockups back inboard, which is
+ *    the opposite of the intent.
+ *
+ * 4. THE SCROLLED STATE USES A SCROLL OFFSET, NOT A SENTINEL. A 1px sentinel
+ *    above the bar stops working the moment <header> itself is sticky — the
+ *    sentinel rides along and can only ever report "not scrolled".
+ *
+ * 5. FRENCH IS THE BINDING LOCALE. French labels are longer and French lockups
+ *    are wider (~3.21:1 vs ~3:1). Every 1px of lockup height costs ~6.4px of
+ *    bar width with two lockups. Test French first, always.
+ *
+ * COMPLIANCE
+ *  · The firm lockup is not decoration. A header showing the team lockup
+ *    without FBNGP/NBFWM beside it misrepresents the relationship, and the firm
+ *    lockup is required above the fold AND in the footer on every page. With no
+ *    pre-header strip, THIS BAR IS THAT PLACEMENT — do not drop it at any
+ *    breakpoint.
+ *  · Both lockups are chosen from `locale` by <Logo>. Nothing here is
+ *    hand-picked, so an EN lockup can never appear on an FR page.
+ *  · The lockup <img>s are decorative (`alt=""`); the ANCHORS carry the
+ *    accessible names — the team lockup gets `s.a11y.homeLink`, the firm lockup
+ *    its regulated wordmark.
+ *  · The language toggle's accessible name starts with the visible "EN"/"FR"
+ *    (WCAG 2.5.3) and stays in the page's own language.
+ */
+import type { Locale, PageKey } from '../data/types';
+import { t, pathFor, otherLocale, isActivePath, homePath } from '../lib/i18n';
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import Button from './Button.astro';
+
+interface Props {
+  locale: Locale;
+  /** Path of the page being rendered, for the active-nav fallback test. */
+  currentPath: string;
+  /** Language-toggle destination, resolved by BaseLayout. */
+  switchHref: string;
+  /** Nav item to mark as current; `null` on the 404. */
+  activeKey?: PageKey | null;
+}
+
+const { locale, currentPath, switchHref, activeKey = null } = Astro.props;
+
+const s = t(locale);
+const other = otherLocale(locale);
+const otherStrings = t(other);
+
+const home = homePath(locale);
+
+const navItems = s.nav.items.map((item) => {
+  const href = pathFor(item.key, locale);
+  const active = activeKey ? activeKey === item.key : isActivePath(currentPath, href);
+  return { ...item, href, active };
+});
+
+const MENU_ID = 'site-menu';
+---
+
+<header class="site-header no-print">
+  {/* ---------- 1. The bar (the <header> above it is what sticks) ---------- */}
+  <div class="bar" data-header-bar>
+    {/* NOT `.container-site`: the bar runs edge-to-edge so both lockups sit at
+        the viewport gutter rather than inset to the 76rem content column. */}
+    <div class="bar__inner">
+      <div class="bar__brands">
+        <a
+          class="bar__firm"
+          href={s.brand.nbfwmHref}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Logo
+            kind="nbfwm"
+            locale={locale}
+            height={44}
+            cssHeight="var(--logo-h-bar)"
+            alt={s.brand.nbfwmLogoAlt}
+          />
+          <span class="sr-only">({s.a11y.opensNewWindow})</span>
+        </a>
+
+        <span class="bar__sep" aria-hidden="true"></span>
+
+        <a class="bar__lockup" href={home} aria-label={s.a11y.homeLink}>
+          <Logo
+            kind="team"
+            locale={locale}
+            height={44}
+            cssHeight="var(--logo-h-bar)"
+            alt=""
+          />
+        </a>
+      </div>
+
+      <nav class="bar__nav" aria-label={s.nav.ariaLabel}>
+        <ul class="bar__list">
+          {
+            navItems.map((item) => (
+              <li>
+                <a
+                  class:list={['bar__link', item.active && 'is-active']}
+                  href={item.href}
+                  aria-current={item.active ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="bar__end">
+        <p class="lang" role="group" aria-label={s.languageLabel}>
+          <span class="lang__current" aria-current="true">{s.localeShort}</span>
+          <span class="lang__sep" aria-hidden="true"></span>
+          <a class="lang__link" href={switchHref} hreflang={otherStrings.htmlLang}>
+            {s.otherLocaleShort}
+            <span class="sr-only"> — {s.switchLanguageAria}</span>
+          </a>
+        </p>
+
+        {/* SECONDARY, deliberately. `Accès client` / `Client Access` is a login
+            for people who are ALREADY clients. As the bar's `primary` it was the
+            single heaviest control on all 17 pages — and on `/contact/`, where
+            neither <ContactBlock> nor the footer CTA band renders (D-11), it was
+            the only button on the page. So the most prominent action on the site
+            served the one audience that does not need converting.
+
+            Nothing was promoted to replace it: the contact controls are already
+            `primary` in <ContactBlock> and the footer band. Demoting this one is
+            what lets them read as the primary action. Same words, same link,
+            same 44px target — a class swap, so no register row. */}
+        <Button
+          class="bar__cta"
+          href={s.cta.clientAccess.href}
+          variant="secondary"
+          pill
+          external
+          externalLabel={s.a11y.opensNewWindow}
+          aria-label={s.cta.clientAccess.ariaLabel}
+        >
+          {s.cta.clientAccess.label}
+        </Button>
+
+        <button
+          class="bar__burger tap"
+          type="button"
+          data-menu-toggle
+          aria-expanded="false"
+          aria-controls={MENU_ID}
+        >
+          <Icon name="menu" size={24} />
+          <span class="sr-only">{s.nav.openMenu}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  {/* ---------- 2. Mobile overlay ---------- */}
+  <div
+    class="menu on-ink"
+    id={MENU_ID}
+    data-menu
+    hidden
+    role="dialog"
+    aria-modal="true"
+    aria-label={s.nav.menuLabel}
+  >
+    <div class="menu__inner container-site">
+      <div class="menu__top">
+        <a class="menu__lockup" href={home} aria-label={s.a11y.homeLink}>
+          <Logo kind="team" tone="ink" locale={locale} height={40} alt="" />
+        </a>
+        <button class="menu__close tap" type="button" data-menu-close>
+          <Icon name="x" size={26} />
+          <span class="sr-only">{s.nav.closeMenu}</span>
+        </button>
+      </div>
+
+      <nav class="menu__nav" aria-label={s.nav.ariaLabel}>
+        <ul class="menu__list">
+          {
+            navItems.map((item, index) => (
+              <li class="menu__item" style={`--i:${index}`}>
+                <a
+                  class:list={['menu__link', item.active && 'is-active']}
+                  href={item.href}
+                  aria-current={item.active ? 'page' : undefined}
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <div class="menu__foot menu__item" style={`--i:${navItems.length}`}>
+        <Button
+          href={s.cta.clientAccess.href}
+          variant="on-ink"
+          external
+          externalLabel={s.a11y.opensNewWindow}
+          aria-label={s.cta.clientAccess.ariaLabel}
+        >
+          {s.cta.clientAccess.label}
+        </Button>
+
+        <p class="menu__lang" role="group" aria-label={s.languageLabel}>
+          <span class="lang__current" aria-current="true">{s.localeShort}</span>
+          <span class="lang__sep" aria-hidden="true"></span>
+          <a class="lang__link" href={switchHref} hreflang={otherStrings.htmlLang}>
+            {s.otherLocaleShort}
+            <span class="sr-only"> — {s.switchLanguageAria}</span>
+          </a>
+        </p>
+
+        <ul class="menu__contact">
+          {
+            s.contact.phones.map((phone) => (
+              <li>
+                <a class="menu__contact-link" href={phone.href}>
+                  <Icon name="phone" size={16} />
+                  <span class="sr-only">{phone.label} — </span>
+                  <span class="tabular">{phone.display}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  /* ---------------------------------------------------------------------
+     1. The bar — see note 1 in the header comment above.
+     ------------------------------------------------------------------ */
+  .site-header {
+    position: sticky;
+    inset-block-start: 0;
+    z-index: 100;
+  }
+
+  .bar {
+    background-color: var(--paper);
+    border-block-end: 1px solid transparent;
+    transition:
+      border-color 220ms var(--ease-wa),
+      background-color 220ms var(--ease-wa);
+  }
+
+  @supports (backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px)) {
+    .bar {
+      background-color: color-mix(in srgb, var(--paper) 92%, transparent);
+      -webkit-backdrop-filter: saturate(1.35) blur(14px);
+      backdrop-filter: saturate(1.35) blur(14px);
+    }
+  }
+
+  @media (prefers-reduced-transparency: reduce) {
+    .bar {
+      background-color: var(--paper);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+  }
+
+  @media (prefers-contrast: more) {
+    .bar {
+      background-color: var(--paper);
+      border-block-end-color: var(--stone);
+    }
+  }
+
+  .bar[data-scrolled] {
+    border-block-end-color: var(--hairline);
+  }
+
+  /* Full-bleed, unlike every other row on the site. The 120rem cap is far wider
+     than the 76rem content column, so every ordinary monitor up to 1920px is
+     genuinely edge-to-edge and only ultra-wide displays re-centre it. The
+     gutter matches the page, so the lockup lines up with content on mobile
+     where the cap never binds. */
+  .bar__inner {
+    display: flex;
+    align-items: center;
+    /* Cap 2rem, not 2.5rem. `margin-inline-end: auto` on the brand cluster
+       absorbs all free space, so at wide viewports the brands-to-nav gap is far
+       larger than this cap and lowering it costs nothing there. It only binds
+       at the tight end — which is exactly where the 16px it returns is worth
+       having. See the --breakpoint-nav arithmetic in global.css. */
+    gap: clamp(1rem, 3vw, 2rem);
+    inline-size: 100%;
+    max-inline-size: 120rem;
+    margin-inline: auto;
+    padding-inline: var(--spacing-gutter);
+    /* Derived from --logo-h-bar, never authored directly: the lockups drive the
+       bar, so a lockup can never outgrow the bar holding it. */
+    min-block-size: var(--header-h);
+    transition: min-block-size 220ms var(--ease-wa);
+  }
+
+  .bar[data-scrolled] .bar__inner {
+    min-block-size: var(--header-h-scrolled);
+  }
+
+  /* --- brand cluster: co-brand lockup │ team lockup --------------------
+     `flex: none` is load-bearing. See note 2 in the header comment. */
+  .bar__brands {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.625rem, 1.6vw, 1.125rem);
+    margin-inline-end: auto;
+    flex: none;
+  }
+
+  .bar__firm,
+  .bar__lockup {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+    text-decoration: none;
+  }
+
+  /* `:global()` is required for anything rendered by a child component
+     (<Logo>, <Button>) — Astro's scope attribute stops at this template.
+     Both lockups share one height: equal prominence is the compliance posture,
+     not a style preference. */
+  .bar__firm :global(.logo-img),
+  .bar__lockup :global(.logo-img) {
+    transition:
+      block-size 220ms var(--ease-wa),
+      opacity 180ms var(--ease-wa);
+  }
+
+  .bar[data-scrolled] .bar__firm :global(.logo-img),
+  .bar[data-scrolled] .bar__lockup :global(.logo-img) {
+    block-size: var(--logo-h-bar-scrolled);
+  }
+
+  .bar__firm:hover :global(.logo-img) {
+    opacity: 0.82;
+  }
+
+  /* The thin rule that holds the two marks apart without ranking them. */
+  .bar__sep {
+    flex: none;
+    inline-size: 1px;
+    block-size: clamp(1.5rem, 3vw, 2.25rem);
+    background-color: var(--hairline);
+  }
+
+  /* --- nav ---------------------------------------------------------- */
+  .bar__nav {
+    display: none;
+  }
+
+  .bar__list {
+    display: flex;
+    align-items: center;
+    /* Cap 1.5rem, not 2.25rem: four gaps between five French labels cost 4x
+       whatever this is, and the bar has none to spare. 24px still reads as
+       separation at 17px/500. See the --breakpoint-nav arithmetic. */
+    gap: clamp(1.125rem, 2.6vw, 1.5rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* 17px, not 15px. These are the only wayfinding labels on the page; at
+     small-print size they read as chrome rather than navigation. */
+  .bar__link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 48px;
+    padding-inline: 0.125rem;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-decoration: none;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .bar__link::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 0.75rem;
+    block-size: 1px;
+    background-color: var(--nb-red);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 220ms var(--ease-wa);
+  }
+
+  .bar__link:hover::after,
+  .bar__link:focus-visible::after,
+  .bar__link.is-active::after {
+    transform: scaleX(1);
+  }
+
+  /* Red is the TRANSIENT hover underline. The standing "you are here" rule is
+     ink, so the header carries exactly one resting red accent: the underline
+     under the current language. */
+  .bar__link.is-active::after {
+    background-color: var(--fg);
+  }
+
+  .bar__link.is-active {
+    font-weight: 600;
+  }
+
+  /* --- end cluster --------------------------------------------------- */
+  .bar__end {
+    display: flex;
+    align-items: center;
+    gap: clamp(0.5rem, 1.5vw, 1rem);
+  }
+
+  .lang {
+    display: none;
+    align-items: center;
+    gap: 0.125rem;
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .lang__current {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* 32x44. WCAG 2.5.8 asks for 24x24 minimum, so this is still comfortably
+       clear of the floor; the 44px height is what makes it a real target. */
+    min-inline-size: 2rem;
+    min-block-size: 44px;
+    color: var(--fg);
+    border-block-end: 1px solid var(--nb-red);
+  }
+
+  .lang__sep {
+    inline-size: 1px;
+    block-size: 0.875rem;
+    background-color: var(--rule);
+  }
+
+  .lang__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* 32x44. WCAG 2.5.8 asks for 24x24 minimum, so this is still comfortably
+       clear of the floor; the 44px height is what makes it a real target. */
+    min-inline-size: 2rem;
+    min-block-size: 44px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 180ms var(--ease-wa);
+  }
+
+  .lang__link:hover {
+    color: var(--fg);
+  }
+
+  /* The one conversion control in the header. Its PRESENCE is what makes it
+     read as a destination rather than a chip; the 48px height carries that, so
+     the inline padding is back at `.btn-pill`'s 1.25rem. At 1.625rem it was
+     52px of pure padding on the single widest item in the tightest cluster.
+
+     The external-link icon (18px + 8px gap) STAYS. This link leaves the site
+     for a bank login, and signalling that visibly is worth 26px. */
+  .bar__end :global(.bar__cta) {
+    display: none;
+    min-block-size: 3rem;
+    padding-inline: 1.25rem;
+    font-size: 0.9375rem;
+  }
+
+  .bar__burger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: none;
+    color: var(--ink);
+    cursor: pointer;
+    margin-inline-end: -0.5rem;
+  }
+
+  /* --- desktop switch --------------------------------------------------
+     MUST match --breakpoint-nav in global.css and NAV_BREAKPOINT in
+     src/scripts/main.ts. A CSS custom property cannot be used in a media
+     query, so this literal is the third copy of one number — change all
+     three together. Measured in FRENCH. */
+  @media (min-width: 80rem) {
+    .bar__nav,
+    .lang {
+      display: flex;
+    }
+
+    .bar__end :global(.bar__cta) {
+      display: inline-flex;
+    }
+
+    .bar__burger {
+      display: none;
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+     2. Full-screen mobile overlay — the one ink surface outside the footer
+     ------------------------------------------------------------------ */
+  .menu {
+    position: fixed;
+    inset: 0;
+    z-index: 120;
+    display: flex;
+    background-color: var(--ink);
+    color: var(--on-ink);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    opacity: 0;
+    transition: opacity 260ms var(--ease-wa);
+  }
+
+  .menu[hidden] {
+    display: none;
+  }
+
+  .menu[data-open] {
+    opacity: 1;
+  }
+
+  .menu__inner {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(2rem, 6vh, 3.5rem);
+    inline-size: 100%;
+    padding-block: 0.4375rem clamp(2rem, 8vh, 4rem);
+  }
+
+  .menu__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-block-size: var(--header-h);
+    border-block-end: 1px solid var(--ink-hairline);
+  }
+
+  .menu__lockup {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+    text-decoration: none;
+  }
+
+  .menu__lockup :global(.logo-img) {
+    block-size: 2.25rem;
+  }
+
+  .menu__close {
+    border: 0;
+    background: none;
+    color: var(--on-ink);
+    cursor: pointer;
+    margin-inline-end: -0.5rem;
+  }
+
+  .menu__list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .menu__list > li + li {
+    border-block-start: 1px solid var(--ink-hairline);
+  }
+
+  .menu__link {
+    display: flex;
+    align-items: center;
+    min-block-size: 64px;
+    padding-block: 0.5rem;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    /* French labels are long: `Nouvelles et articles` must not wrap into a
+       second line at 375px, so the upper bound of this clamp is deliberately
+       modest. */
+    font-size: clamp(1.625rem, 7vw, 2.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+    color: var(--on-ink);
+    transition: color 180ms var(--ease-wa);
+  }
+
+  .menu__link.is-active,
+  .menu__link:hover {
+    color: #ffffff;
+  }
+
+  /* No red tick prefixes the current item. The brighter weight carries "you are
+     here" visually and `aria-current` carries it for assistive tech. */
+
+  .menu__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    padding-block-start: clamp(1.5rem, 4vh, 2.5rem);
+    border-block-start: 1px solid var(--ink-hairline);
+  }
+
+  .menu__lang {
+    display: flex;
+    align-items: center;
+    gap: 0.125rem;
+    margin: 0;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .menu__contact {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 1.25rem;
+    margin: 0;
+    margin-inline-start: auto;
+    padding: 0;
+    list-style: none;
+  }
+
+  .menu__contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-block-size: 44px;
+    font-size: var(--text-small);
+    color: var(--on-ink-muted);
+    text-decoration: none;
+    transition: color 180ms var(--ease-wa);
+  }
+
+  .menu__contact-link:hover {
+    color: var(--on-ink);
+  }
+
+  /* stagger-in */
+  .menu__item {
+    opacity: 0;
+  }
+
+  .menu[data-open] .menu__item {
+    animation: menu-in 460ms var(--ease-wa) both;
+    animation-delay: calc(var(--i, 0) * 60ms);
+  }
+
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu__item {
+      opacity: 1;
+    }
+  }
+
+  /* The overlay is a mobile affordance only. JS also force-closes it at the
+     breakpoint; this is the belt-and-braces half. */
+  @media (min-width: 80rem) {
+    .menu {
+      display: none;
+    }
+  }
+</style>

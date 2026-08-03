@@ -1,0 +1,5 @@
+<!-- PLACEHOLDER Safari pinned-tab mask. Must be a single-colour path on a
+     transparent 16x16 ground; Safari applies the `color` from the <link>. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+  <path d="M1 1h14v14H1z M3 3v10h10V3z" fill="#000" fill-rule="evenodd"/>
+</svg>

@@ -1,0 +1,179 @@
+---
+/**
+ * PAGE-LOCAL. One of the seven services, in either language.
+ *
+ * IT IS NOT AN ACCORDION, and that is a deliberate compliance choice, not a
+ * styling preference. On the live English page five of these seven panels are
+ * COLLAPSED BY DEFAULT and each one hides a third-party-provider disclosure
+ * sentence and its disclaimer marker inside it. A regulatory reference behind a
+ * disclosure widget is a reference most readers never see. Rendered open, every
+ * marker, every disclosure sentence and every claim is in view, in the DOM, in
+ * the print output and findable by in-page search — which is the standard
+ * audit check 53 already sets for the disclaimers themselves. Wording, order
+ * and structure are untouched; only the reveal is gone. See D-27.
+ *
+ * The two languages fill this component completely differently and neither is
+ * padded to look like the other (P-16):
+ *   FR — `body`: the team's own prose, two short paragraphs per service.
+ *   EN — `groups`: National Bank's syndicated `Purpose` / `Main benefits`
+ *        lists, plus a lead paragraph on two of the seven.
+ * A block renders exactly what its data holds; there is no empty state.
+ *
+ * `id` is a STABLE ANCHOR. It is the slug of the live accordion title, so an
+ * existing deep link into a service still lands after the rebuild.
+ */
+import Prose from '../../components/Prose.astro';
+import NoteRefs from './NoteRefs.astro';
+import type { Locale } from '../../data/types';
+import type { ServiceBlock } from '../../data/pages/services.types';
+
+interface Props {
+  block: ServiceBlock;
+  locale: Locale;
+  /** Live heading level of a service title is `<h2>` in BOTH languages. */
+  level?: 2 | 3;
+  class?: string;
+}
+
+const { block, locale, level = 2, class: className } = Astro.props;
+const Heading = `h${level}` as 'h2' | 'h3';
+const headingId = `${block.id}-title`;
+---
+
+<section id={block.id} class:list={['sblock', className]} aria-labelledby={headingId}>
+  <Heading id={headingId} class="t-h3 sblock__title">{block.title}</Heading>
+
+  <div class="sblock__content">
+    {block.body?.map((paragraph) => <Prose text={paragraph} locale={locale} class="sblock__prose" />)}
+
+    {
+      block.groups && (
+        <div class="sblock__groups">
+          {block.groups.map((group) => (
+            <div class="sgroup">
+              {/* The label and its list are one object, so a heading can never
+                  outlive the list it names. `Banking solutions` and
+                  `Philanthropy` genuinely have an unlabelled list on the live
+                  page — no label is invented to make the grid look even. */}
+              {group.heading && <p class="sgroup__label">{group.heading}</p>}
+              <ul class="sgroup__list">
+                {group.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )
+    }
+
+    {
+      block.footnote && (
+        /* No whitespace between the sentence and the marker: the live markup
+           has none, and where it does the character is a U+00A0 carried on the
+           sentence itself. An accidental newline here would insert a real
+           space into a disclosure line. */
+        <p class="sblock__footnote">{block.footnote.text}<NoteRefs refs={block.footnote.refs} locale={locale} /></p>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .sblock {
+    display: grid;
+    gap: clamp(0.75rem, 2vw, 1.25rem);
+    padding-block: clamp(1.75rem, 3.5vw, 2.5rem);
+    scroll-margin-block-start: calc(var(--header-h) + 1.5rem);
+  }
+
+  @media (min-width: 60rem) {
+    .sblock {
+      grid-template-columns: 4fr 8fr;
+      column-gap: clamp(2rem, 4vw, 3.5rem);
+      align-items: start;
+    }
+  }
+
+  .sblock__title {
+    margin: 0;
+  }
+
+  .sblock__content {
+    display: grid;
+    gap: clamp(1rem, 2vw, 1.375rem);
+  }
+
+  .sblock__prose {
+    margin: 0;
+    max-inline-size: var(--measure);
+    line-height: 1.65;
+  }
+
+  /* `Purpose` and `Main benefits` side by side. English only — the French
+     blocks have no lists at all, so this grid never renders on that page. */
+  .sblock__groups {
+    display: grid;
+    gap: clamp(1.25rem, 2.5vw, 2rem);
+  }
+
+  @media (min-width: 48rem) {
+    .sblock__groups {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(1.75rem, 3vw, 2.75rem);
+      align-items: start;
+    }
+  }
+
+  .sgroup__label {
+    margin: 0 0 0.625rem;
+    font-family: var(--font-sans);
+    font-size: var(--text-eyebrow);
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  .sgroup__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--text-small);
+    line-height: 1.6;
+  }
+
+  .sgroup__list > li {
+    position: relative;
+    padding-inline-start: 1.125rem;
+  }
+
+  .sgroup__list > li + li {
+    margin-block-start: 0.625rem;
+  }
+
+  /* A dot, not a numeral. Numerals next to copy on THIS page collide with the
+     footnote markers, and a reader cannot tell decoration from a regulatory
+     reference. */
+  .sgroup__list > li::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0.1875rem;
+    inset-block-start: 0.6em;
+    inline-size: 4px;
+    block-size: 4px;
+    border-radius: 50%;
+    background-color: var(--stone);
+  }
+
+  /* The third-party-provider disclosure. Quiet, but never hidden and never
+     smaller than the site's small size — this is the sentence the marker
+     qualifies. */
+  .sblock__footnote {
+    margin: 0;
+    max-inline-size: 62ch;
+    font-size: var(--text-small);
+    line-height: 1.55;
+    color: var(--muted);
+  }
+</style>

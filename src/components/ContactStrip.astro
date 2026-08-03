@@ -1,0 +1,434 @@
+---
+/**
+ * Sticky contact strip — the always-available contact affordance, rendered by
+ * <BaseLayout> on every page in both trees. It is layout furniture, not a
+ * per-page opt-in.
+ *
+ * COMPLIANCE
+ *  · The two people are NOT re-declared here. They are read from
+ *    `contact.phones` / `contact.emails`, which list the head-of-team pair in
+ *    the same order in both languages — so the strip cannot drift from the
+ *    numbers the footer prints, and the per-language `@bnc.ca` / `@nbc.ca`
+ *    split lives in exactly one place.
+ *  · No form. `tel:` and `mailto:` are the whole affordance.
+ *  · Hidden in print (`.no-print`): it is chrome, not content, and must never
+ *    print over the footer's legal block.
+ *
+ * DESIGN
+ *   · >=48rem — a discreet vertical tab pinned to the right edge, vertically
+ *     centred, ink, rotated label. Click opens a small ink card to its left.
+ *   · <48rem — a slim fixed bottom bar with two 48px actions.
+ *  Red appears nowhere here except the focus ring. Hover deepens toward black,
+ *  like every other primary control.
+ *
+ * BEHAVIOUR lives in src/scripts/main.ts (`initContactStrip`): aria-expanded
+ * toggle, Esc and click-outside close, focus returns to the tab, and the whole
+ * strip tucks away while the footer's legal region is on screen.
+ */
+import type { Locale } from '../data/types';
+import { t } from '../lib/i18n';
+import Icon from './Icon.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props as Props;
+
+const s = t(locale);
+const c = s.contactStrip;
+
+/**
+ * The head-of-team pair, in the order the data files list them. Sliced
+ * defensively: if a third line is ever added to the footer's phone list, the
+ * strip must still show only these two.
+ */
+const people = s.contact.phones.slice(0, 2).map((phone, index) => ({
+  name: phone.label,
+  phone,
+  email: s.contact.emails[index],
+}));
+
+/** The mobile bar's two actions both go to the first line. */
+const primary = people[0];
+
+const PANEL_ID = 'contact-strip-panel';
+const TITLE_ID = 'contact-strip-title';
+---
+
+<div class="cstrip no-print" data-contact-strip>
+  {/* -------------------------------------------------- >=48rem: edge tab */}
+  <div class="cstrip__desk">
+    <button
+      class="cstrip__tab"
+      type="button"
+      aria-expanded="false"
+      aria-controls={PANEL_ID}
+      data-cstrip-toggle
+    >
+      <span class="cstrip__tab-text">{c.heading}</span>
+    </button>
+
+    <div class="cstrip__panel" id={PANEL_ID} hidden data-cstrip-panel>
+      <div class="cstrip__head">
+        <h2 class="cstrip__title" id={TITLE_ID}>{c.heading}</h2>
+        <button class="cstrip__close" type="button" data-cstrip-close>
+          <Icon name="x" size={18} />
+          <span class="sr-only">{c.closeLabel}</span>
+        </button>
+      </div>
+
+      <ul class="cstrip__people">
+        {
+          people.map((person) => (
+            <li class="cstrip__person">
+              <p class="cstrip__name">{person.name}</p>
+
+              <a class="cstrip__link" href={person.phone.href}>
+                <Icon name="phone" size={15} />
+                <span class="tabular">{person.phone.display}</span>
+                <span class="sr-only"> — {person.name}</span>
+              </a>
+
+              {person.email && (
+                <a class="cstrip__link cstrip__link--mail" href={person.email.href}>
+                  <Icon name="mail" size={15} />
+                  <span>{person.email.label}</span>
+                  <span class="sr-only"> — {person.name}</span>
+                </a>
+              )}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+
+  {/* --------------------------------------------------- <48rem: bottom bar */}
+  {
+    primary && (
+      <div class="cstrip__bar">
+        <a class="cstrip__action" href={primary.phone.href}>
+          <Icon name="phone" size={17} />
+          <span>{c.callLabel}</span>
+          <span class="sr-only"> — {primary.name}</span>
+        </a>
+
+        {primary.email && (
+          <a class="cstrip__action" href={primary.email.href}>
+            <Icon name="mail" size={17} />
+            <span>{c.emailLabel}</span>
+            <span class="sr-only"> — {primary.name}</span>
+          </a>
+        )}
+      </div>
+    )
+  }
+</div>
+
+<style>
+  /* ---------------------------------------------------------------------
+     Shared. z-index sits BELOW the sticky header (100) and the mobile menu
+     (120): chrome must never cover the nav or the language toggle.
+     ------------------------------------------------------------------ */
+  .cstrip {
+    --cstrip-z: 90;
+  }
+
+  /* The full-screen menu owns the viewport while it is open. */
+  :global(body[data-menu-open='true']) .cstrip {
+    display: none;
+  }
+
+  .cstrip__desk,
+  .cstrip__bar {
+    transition:
+      transform 260ms var(--ease-wa),
+      opacity 260ms var(--ease-wa),
+      visibility 0s;
+  }
+
+  /* Tucked = the footer's legal region is on screen. The strip gets out of the
+     way rather than floating over the regulatory block, and `visibility` takes
+     it out of the tab order once the slide-out has finished. */
+  .cstrip[data-tucked] .cstrip__desk {
+    transform: translate(100%, -50%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition-delay: 0s, 0s, 260ms;
+  }
+
+  .cstrip[data-tucked] .cstrip__bar {
+    transform: translateY(100%);
+    visibility: hidden;
+    transition-delay: 0s, 0s, 260ms;
+  }
+
+  /* ---------------------------------------------------------------------
+     >=48rem — the edge tab and its card
+     ------------------------------------------------------------------ */
+  .cstrip__desk {
+    display: none;
+    position: fixed;
+    inset-inline-end: 0;
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    z-index: var(--cstrip-z);
+    /* DOM order is [tab, panel] so the trigger comes first for keyboard and
+       screen-reader users; row-reverse paints the card to its LEFT. */
+    flex-direction: row-reverse;
+    align-items: center;
+  }
+
+  .cstrip__tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: 44px;
+    min-block-size: 44px;
+    padding-block: 1.125rem;
+    padding-inline: 0.5rem;
+    border: 0;
+    border-radius: var(--radius-card) 0 0 var(--radius-card);
+    background-color: var(--ink);
+    color: var(--on-ink);
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background-color 220ms var(--ease-wa);
+  }
+
+  .cstrip__tab:hover,
+  .cstrip__tab[aria-expanded='true'] {
+    background-color: var(--ink-deep);
+  }
+
+  /* Reads bottom-to-top, the convention for a right-edge tab. */
+  .cstrip__tab-text {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    line-height: 1;
+  }
+
+  .cstrip__panel {
+    display: flex;
+    flex-direction: column;
+    inline-size: min(19rem, calc(100vw - 5rem));
+    /* Capped so the card can never run past the viewport, whatever the
+       language: French runs ~15% longer and the addresses are long. */
+    max-block-size: min(28rem, calc(100vh - 8rem));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 1.25rem 1.375rem 0.5rem;
+    background-color: var(--ink);
+    color: var(--on-ink);
+    border: 1px solid var(--ink-hairline);
+    border-inline-end: 0;
+    border-radius: var(--radius-card) 0 0 var(--radius-card);
+    box-shadow: var(--shadow-lift);
+    opacity: 0;
+    transform: translateX(10px);
+    transition:
+      opacity 220ms var(--ease-wa),
+      transform 220ms var(--ease-wa);
+  }
+
+  .cstrip__panel[hidden] {
+    display: none;
+  }
+
+  .cstrip__panel[data-open] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .cstrip__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-block-end: 0.875rem;
+    border-block-end: 1px solid var(--ink-hairline);
+  }
+
+  /* Serif heading — the one display voice this small card is allowed. */
+  .cstrip__title {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.375rem;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    color: var(--on-ink);
+  }
+
+  .cstrip__close {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    /* Visually 32px, but the hit area is grown to 44px. */
+    inline-size: 2rem;
+    block-size: 2rem;
+    margin: -0.375rem -0.5rem 0 0;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius-pill);
+    background: none;
+    color: var(--on-ink-muted);
+    cursor: pointer;
+    transition: color 180ms var(--ease-wa);
+  }
+
+  .cstrip__close::before {
+    content: '';
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    inline-size: 44px;
+    block-size: 44px;
+    transform: translate(-50%, -50%);
+  }
+
+  .cstrip__close:hover {
+    color: var(--on-ink);
+  }
+
+  .cstrip__people {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cstrip__person {
+    padding-block: 0.875rem 0.5rem;
+  }
+
+  .cstrip__person + .cstrip__person {
+    border-block-start: 1px solid var(--ink-hairline);
+  }
+
+  .cstrip__name {
+    margin: 0 0 0.125rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--on-ink);
+  }
+
+  .cstrip__link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-block-size: 44px;
+    font-size: var(--text-small);
+    color: var(--on-ink-muted);
+    text-decoration: none;
+    transition: color 180ms var(--ease-wa);
+  }
+
+  .cstrip__link--mail {
+    overflow-wrap: anywhere;
+  }
+
+  .cstrip__link :global(svg) {
+    flex: none;
+    opacity: 0.7;
+  }
+
+  .cstrip__link:hover {
+    color: var(--on-ink);
+  }
+
+  @media (min-width: 48rem) {
+    .cstrip__desk {
+      display: flex;
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+     <48rem — slim bottom bar. Two 48px actions plus the home-indicator inset,
+     so it never eats more than ~56px of a phone viewport.
+     ------------------------------------------------------------------ */
+  .cstrip__bar {
+    position: fixed;
+    inset-inline: 0;
+    inset-block-end: 0;
+    z-index: var(--cstrip-z);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background-color: var(--ink);
+    color: var(--on-ink);
+    border-block-start: 1px solid var(--ink-hairline);
+    padding-block-end: env(safe-area-inset-bottom, 0px);
+  }
+
+  .cstrip__action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-block-size: var(--cstrip-bar-h);
+    font-size: var(--text-small);
+    font-weight: 600;
+    color: var(--on-ink);
+    text-decoration: none;
+    transition: background-color 180ms var(--ease-wa);
+  }
+
+  .cstrip__action + .cstrip__action {
+    border-inline-start: 1px solid var(--ink-hairline);
+  }
+
+  .cstrip__action:hover,
+  .cstrip__action:active {
+    background-color: var(--ink-deep);
+  }
+
+  .cstrip__action :global(svg) {
+    flex: none;
+    opacity: 0.8;
+  }
+
+  @media (min-width: 48rem) {
+    .cstrip__bar {
+      display: none;
+    }
+  }
+
+  /* The bar floats over the end of the document, so the footer reserves its
+     height in ink — the strip may tuck away, and a paper-coloured gap under an
+     ink footer would be worse than the bar itself. Belt and braces with the JS
+     tuck: with scripting off the legal block is still never covered. */
+  @media (max-width: 47.99rem) {
+    :global(.site-footer) {
+      padding-block-end: calc(var(--cstrip-bar-h) + env(safe-area-inset-bottom, 0px));
+    }
+  }
+
+  /* Reduced motion kills the slide, never the affordance. The desk keeps its
+     centring translate — dropping it would move the tab, not hide it; opacity
+     and visibility do the hiding. */
+  @media (prefers-reduced-motion: reduce) {
+    .cstrip__panel {
+      transform: none;
+    }
+
+    .cstrip[data-tucked] .cstrip__desk {
+      transform: translateY(-50%);
+      transition-delay: 0s;
+    }
+
+    .cstrip[data-tucked] .cstrip__bar {
+      transform: none;
+      transition-delay: 0s;
+    }
+  }
+</style>

@@ -1,0 +1,225 @@
+---
+/**
+ * One monthly / quarterly video, as a LINK plus its transcript.
+ *
+ * ⚠ THE ONE THING THIS COMPONENT EXISTS TO GET RIGHT.
+ *
+ * The live page embeds a YouTube player in an `<iframe>`. This site makes ZERO
+ * third-party requests — no analytics, no consent stack, no embeds — and that
+ * is a stated differentiator, not a nice-to-have. A `youtube-nocookie.com`
+ * frame is still a request to Google on page load, still sets storage on play,
+ * and would be the only thing on the whole site a consent banner had to govern.
+ *
+ * So the video ships as an ordinary outbound link carrying the CAPTURED player
+ * URL, unaltered — not rewritten to a `watch?v=` form, because "every URL ships
+ * as captured" does not bend just because the element around it changed. The
+ * link text is the `aria-label` National Bank already wrote on the iframe, so
+ * even the wording is theirs. Registered as S-03.
+ *
+ * The transcript is NOT a substitute we invented: the live page publishes it
+ * beside the player, behind an accordion. It matters more here than there —
+ * with no embed, it is the only part of the video that is on the page — so it
+ * ships in a native `<details>`, which needs no JavaScript and cannot break.
+ * `<summary>` may contain one heading element, so the live `<h3>` outline
+ * survives exactly.
+ *
+ * `watchLabel` is the live episode title and rotates monthly. Do not treat it
+ * as stable copy; `npm run check:nbf` is what notices.
+ */
+import Icon from '../../components/Icon.astro';
+import type { VideoItem } from '../../data/pages/news.types';
+
+interface Props {
+  item: VideoItem;
+  /** Localised "opens in a new window", from the locale dictionary. */
+  externalLabel: string;
+  /** Localised format badge — `Vidéo` / `Video`. NC-05. */
+  videoLabel: string;
+}
+
+const { item, externalLabel, videoLabel } = Astro.props;
+---
+
+<article class="vblock">
+  <h3 class="t-h3 vblock__title">{item.title}</h3>
+  <p class="vblock__blurb">{item.blurb}</p>
+
+  <p class="vblock__actions">
+    <a
+      class="vblock__watch"
+      href={item.watchHref}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <span class="vblock__badge">{videoLabel}</span>
+      <span>{item.watchLabel}</span>
+      <span class="sr-only"> ({externalLabel})</span>
+      <Icon name="external-link" size={16} class="vblock__icon" />
+    </a>
+
+    {
+      item.more && (
+        <a class="link-rule vblock__more" href={item.more.href} target="_blank" rel="noopener noreferrer">
+          {item.more.label}
+          <span class="sr-only"> ({externalLabel})</span>
+        </a>
+      )
+    }
+  </p>
+
+  <details class="vblock__transcript">
+    <summary class="vblock__summary">
+      <h3 class="vblock__summary-title">{item.transcript.title}</h3>
+      <Icon name="chevron-down" size={18} class="vblock__chevron" />
+    </summary>
+    <div class="vblock__panel">
+      {item.transcript.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+  </details>
+</article>
+
+<style>
+  .vblock {
+    padding-block: clamp(1.75rem, 3.5vw, 2.5rem);
+    border-block-start: 1px solid var(--rule);
+  }
+
+  .vblock:first-child {
+    border-block-start: 0;
+    padding-block-start: 0;
+  }
+
+  .vblock__title {
+    margin: 0 0 0.75rem;
+  }
+
+  /* Same calibrated measure as the transcript below. At the bespoke 62ch this
+     used to carry, the audit measured these blurbs at 77–78 characters per
+     line — the only blocks on the site over 75 apart from the ranking note. */
+  .vblock__blurb {
+    margin: 0 0 1.25rem;
+    max-inline-size: var(--measure);
+    line-height: 1.65;
+  }
+
+  .vblock__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.875rem 1.75rem;
+    margin: 0;
+  }
+
+  .vblock__watch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    min-block-size: 44px;
+    max-inline-size: 52ch;
+    color: inherit;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .vblock__watch:hover span:not(.vblock__badge) {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .vblock__badge {
+    flex: none;
+    padding: 0.125rem 0.45rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-btn);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .vblock__icon {
+    flex: none;
+    color: var(--muted);
+  }
+
+  /* 44px minimum target, like every other control on the site. Measured at
+     375px it was 25px before this rule. */
+  .vblock__more {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+    font-size: var(--text-small);
+    font-weight: 600;
+  }
+
+  .vblock__transcript {
+    /* Calibrated measure — 1ch of Instrument Sans renders ~1.5 characters
+       of this client's copy, so --measure is 48ch, not 72ch. */
+    max-inline-size: var(--measure);
+    margin-block-start: 1.5rem;
+    border-block-start: 1px solid var(--rule);
+  }
+
+  .vblock__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 0.9rem;
+    min-block-size: 44px;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .vblock__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .vblock__summary:hover .vblock__summary-title {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  /* The live element is an <h3>; keep the outline and drop the display size. */
+  .vblock__summary-title {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+  }
+
+  .vblock__chevron {
+    flex: none;
+    color: var(--muted);
+    transition: transform 200ms var(--ease-wa);
+  }
+
+  .vblock__transcript[open] .vblock__chevron {
+    transform: rotate(180deg);
+  }
+
+  .vblock__panel {
+    padding-block-end: 1.25rem;
+    max-inline-size: 68ch;
+  }
+
+  .vblock__panel :global(p) {
+    margin: 0 0 0.9rem;
+    font-size: var(--text-small);
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  .vblock__panel :global(p:last-child) {
+    margin-block-end: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .vblock__chevron {
+      transition: none;
+    }
+  }
+</style>

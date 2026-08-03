@@ -1,0 +1,175 @@
+---
+/**
+ * PAGE-LOCAL. The process section — the one place the two languages are
+ * composed deliberately rather than simply diverging.
+ *
+ * FRENCH  `Un processus éprouvé`: four steps, each an <h3> with a described
+ *         paragraph. Rendered as hairline-ruled rows, icon + heading + prose.
+ *
+ * ENGLISH `Our unique approach`: four steps that are BARE <p> labels. There is
+ *         no English prose to render and P-16 forbids writing any. Rendered as
+ *         a compact single-line rail: same rule, same icons, same reading
+ *         order, one line per item.
+ *
+ * The rail is NOT the French layout with the description slot left empty. A row
+ * sized for a paragraph with no paragraph in it reads as broken; a row sized for
+ * a label reads as designed. `titleAs` — which reproduces the live element,
+ * `h3` in French and `p` in English — is what selects between them, so the
+ * layout can never disagree with the document outline.
+ *
+ * NO STEP NUMERALS. Numerals set next to copy on this site collide with the
+ * numbered legal-note markers, and this client already has marker problems
+ * (P-12 is currently violated on the team page). The icons carry the sequence.
+ */
+import Figure from '../../components/Figure.astro';
+import type { HomeProcess } from '../../data/pages/home.types';
+
+interface Props {
+  process: HomeProcess;
+  headingId: string;
+}
+
+const { process, headingId } = Astro.props;
+const isRail = process.titleAs === 'p';
+---
+
+<div class:list={['proc', isRail ? 'proc--rail' : 'proc--rows']}>
+  <div class="proc__head">
+    <h2 id={headingId} class="t-h2 serif-display proc__title">{process.heading}</h2>
+    <p class="t-lead measure proc__lead">{process.lead}</p>
+  </div>
+
+  <ol class="proc__steps">
+    {
+      process.steps.map((step) => (
+        <li class="proc__step">
+          <span class="proc__icon">
+            <Figure image={step.icon} />
+          </span>
+          <div class="proc__body">
+            {process.titleAs === 'h3' ? (
+              <h3 class="proc__step-title">{step.title}</h3>
+            ) : (
+              <p class="proc__step-title">{step.title}</p>
+            )}
+            {step.description && <p class="proc__step-text">{step.description}</p>}
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</div>
+
+<style>
+  .proc__title {
+    margin: 0;
+  }
+
+  .proc__lead {
+    margin-block: 1rem 0;
+  }
+
+  .proc__steps {
+    margin: clamp(2rem, 4vw, 3rem) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .proc__step {
+    /* Calibrated measure — 1ch of Instrument Sans renders ~1.5 characters
+       of this client's copy, so --measure is 48ch, not 72ch. */
+    max-inline-size: var(--measure);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: clamp(1rem, 2.5vw, 2rem);
+    align-items: start;
+    border-block-start: 1px solid var(--rule);
+  }
+
+  .proc__step:last-child {
+    border-block-end: 1px solid var(--rule);
+  }
+
+  .proc__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .proc__icon :global(img) {
+    inline-size: auto;
+  }
+
+  .proc__step-title {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+
+  .proc__step-text {
+    margin: 0.5rem 0 0;
+    color: var(--muted);
+    line-height: 1.6;
+    max-inline-size: 56ch;
+  }
+
+  /* ---------- FRENCH: described rows ------------------------------------- */
+  .proc--rows .proc__step {
+    padding-block: clamp(1.5rem, 2.6vw, 2rem);
+  }
+
+  .proc--rows .proc__icon :global(img) {
+    block-size: clamp(2.75rem, 4vw, 3.5rem);
+  }
+
+  .proc--rows .proc__step-title {
+    font-size: var(--text-h3);
+    line-height: 1.25;
+  }
+
+  @media (min-width: 60rem) {
+    .proc--rows .proc__step {
+      grid-template-columns: auto 20rem 1fr;
+      align-items: baseline;
+      column-gap: 2.5rem;
+    }
+
+    .proc--rows .proc__icon {
+      align-self: start;
+    }
+
+    .proc--rows .proc__body {
+      display: contents;
+    }
+
+    .proc--rows .proc__step-text {
+      margin: 0;
+    }
+  }
+
+  /* ---------- ENGLISH: the compact single-line rail ----------------------- */
+  .proc--rail .proc__step {
+    padding-block: 0.9375rem;
+    align-items: center;
+  }
+
+  .proc--rail .proc__icon :global(img) {
+    block-size: 2.25rem;
+  }
+
+  .proc--rail .proc__step-title {
+    font-size: 1.125rem;
+    line-height: 1.35;
+  }
+
+  @media (min-width: 48rem) {
+    .proc--rail .proc__step {
+      padding-block: 1.125rem;
+    }
+
+    .proc--rail .proc__step-title {
+      font-size: 1.25rem;
+    }
+  }
+</style>

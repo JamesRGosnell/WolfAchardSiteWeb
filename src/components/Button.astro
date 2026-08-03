@@ -1,0 +1,85 @@
+---
+/**
+ * Button / CTA link. Renders <a> when `href` is set, otherwise <button>.
+ * Every variant is at least 44px tall.
+ *
+ *   <Button href="/contact/" icon="arrow-right">Nous joindre</Button>
+ *   <Button variant="secondary" href="/services/">Nos services</Button>
+ *   <Button variant="on-ink" href="…">…</Button>   // inside the ink footer
+ *
+ * There is deliberately NO red variant. Brand red is reserved for disclaimer
+ * superscripts and focus rings; a red button spends the whole budget in one
+ * place. The primary control is ink, deepening toward black on hover.
+ */
+import Icon from './Icon.astro';
+import type { IconName } from './icons';
+
+interface Props {
+  href?: string;
+  type?: 'button' | 'submit';
+  variant?: 'primary' | 'secondary' | 'on-ink';
+  size?: 'md' | 'sm';
+  pill?: boolean;
+  block?: boolean;
+  icon?: IconName;
+  /** Opens in a new tab with rel="noopener noreferrer" + external-link icon. */
+  external?: boolean;
+  /** Localised "opens in a new window" text, announced to screen readers. */
+  externalLabel?: string;
+  'aria-label'?: string;
+  'aria-expanded'?: 'true' | 'false';
+  'aria-controls'?: string;
+  /** For a control whose label is in the OTHER language (the bilingual 404). */
+  lang?: string;
+  hreflang?: string;
+  id?: string;
+  class?: string;
+}
+
+const {
+  href,
+  type = 'button',
+  variant = 'primary',
+  size = 'md',
+  pill = false,
+  block = false,
+  icon,
+  external = false,
+  externalLabel,
+  id,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const variantClass = {
+  primary: 'btn-primary',
+  secondary: 'btn-secondary',
+  'on-ink': 'btn-on-ink',
+}[variant];
+
+const classes = [
+  'btn',
+  variantClass,
+  size === 'sm' && 'btn-sm',
+  pill && 'btn-pill',
+  block && 'btn-block',
+  className,
+]
+  .filter(Boolean)
+  .join(' ');
+
+const resolvedIcon: IconName | undefined = icon ?? (external ? 'external-link' : undefined);
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag
+  id={id}
+  class={classes}
+  {...href ? { href } : { type }}
+  {...external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+  {...rest}
+>
+  <span><slot /></span>
+  {resolvedIcon && <Icon name={resolvedIcon} size={size === 'sm' ? 16 : 18} />}
+  {external && externalLabel && <span class="sr-only">({externalLabel})</span>}
+</Tag>

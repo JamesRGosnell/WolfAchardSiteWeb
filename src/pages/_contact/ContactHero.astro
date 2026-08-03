@@ -1,0 +1,97 @@
+---
+/**
+ * PAGE-LOCAL. The contact opener, both languages.
+ *
+ * Same hero rule as the home page, and for the same reason: the client's
+ * VERBATIM live <h1> ships exactly as captured, at label size, and the large
+ * visual line lives in a NON-HEADING element beside it. Nothing
+ * compliance-approved is resized away and nothing is replaced.
+ *
+ * Neither message line is new copy. In BOTH languages the large line is the
+ * live <p> that already sits immediately after the <h1> inside the same AEM
+ * teaser — `Contactez nos experts pour trouver réponse à vos questions` and
+ * `Need answers? Contact us!`. So the hero adds no `NC-` row.
+ *
+ * The English line is four words against the French line's nine. It is set at
+ * the same scale rather than padded out: the design brief's rule for the thin
+ * English tree is that a short page breathes rather than stretches.
+ *
+ * The banner is a wide plate UNDER the type, not a strip with text over it. The
+ * DAM master is 1199×375 and carries no treatment guaranteeing text contrast —
+ * which a bank photograph must not be asked to provide.
+ */
+import Figure from '../../components/Figure.astro';
+import type { ContactHero } from '../../data/pages/contact.types';
+
+interface Props {
+  hero: ContactHero;
+}
+
+const { hero } = Astro.props;
+---
+
+<section class="bg-paper on-paper hero">
+  <div class="container-site hero__inner">
+    <h1 class="hero__name">{hero.heading}</h1>
+    <p class="hero__message serif-display">{hero.message}</p>
+
+    {
+      hero.banner && (
+        <div class="media hero-media hero__plate">
+          <Figure image={hero.banner} loading="eager" fetchpriority="high" />
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(2.25rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem);
+  }
+
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* The verbatim <h1>, at LABEL size — matched to the home page's hero name so
+     the two openers read as one system. Full ink, not muted. */
+  .hero__name {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.005em;
+    color: var(--ink);
+  }
+
+  /* The display line. >=56px from 1040px upward. It is a <p>, so the document
+     outline is untouched. 24ch rather than the home page's 19ch: the French
+     line here is nine words and would otherwise break to four ragged rows. */
+  .hero__message {
+    margin-block: clamp(0.875rem, 1.6vw, 1.375rem) 0;
+    max-inline-size: 24ch;
+    font-size: clamp(2.5rem, 4.8vw, 4.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+  }
+
+  .hero__plate {
+    margin-block-start: clamp(2rem, 4.5vw, 3.5rem);
+    aspect-ratio: 1199 / 375;
+    max-block-size: 22rem;
+  }
+
+  @media (max-width: 47.99rem) {
+    .hero__message {
+      max-inline-size: none;
+    }
+
+    .hero__plate {
+      aspect-ratio: 16 / 9;
+    }
+  }
+</style>

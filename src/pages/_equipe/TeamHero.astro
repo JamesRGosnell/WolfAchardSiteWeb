@@ -1,0 +1,94 @@
+---
+/**
+ * PAGE-LOCAL. The team-page opener, both languages.
+ *
+ * THE HERO RULE, carried over from the home page unchanged:
+ *
+ *   The client's VERBATIM live <h1> ships exactly as captured, at label size.
+ *   The large visual line lives in a NON-HEADING element beside it.
+ *
+ * Neither line is new copy. `Découvrez notre équipe` / `Meet our team` is the
+ * live <h1>; `Des professionnels à l'écoute de vos besoins` / `Professionals who
+ * listen to your needs` is the live <p> that already sits immediately after it
+ * inside the same AEM teaser (`cmp-teaser__description`). Nothing was written,
+ * nothing was substituted and nothing was reordered, so the hero adds no NC- row.
+ *
+ * The banner is a wide plate UNDER the type rather than a full-bleed strip with
+ * text over it — same measured reasoning as the home hero. The two masters are
+ * 2000×380 (FR, bespoke) and 1199×375 (EN, National Bank's generic microsite
+ * banner), so a full-bleed strip would upscale the English one at every desktop
+ * width, and neither picture has a treatment that guarantees text contrast.
+ */
+import Figure from '../../components/Figure.astro';
+import type { TeamHero } from '../../data/pages/team.types';
+
+interface Props {
+  hero: TeamHero;
+}
+
+const { hero } = Astro.props;
+---
+
+<section class="bg-paper on-paper hero">
+  <div class="container-site hero__inner">
+    <h1 class="hero__name">{hero.heading}</h1>
+    <p class="hero__message serif-display">{hero.message}</p>
+
+    {
+      hero.banner && (
+        <div class="media hero-media hero__plate">
+          <Figure image={hero.banner} loading="eager" fetchpriority="high" />
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(2.25rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem);
+  }
+
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* The verbatim <h1>, at LABEL size. Full ink, not muted. */
+  .hero__name {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.005em;
+    color: var(--ink);
+  }
+
+  /* The display line. >=56px from 1040px upward, 76px at 1440 and above. It is
+     a <p>, so the document outline is untouched. */
+  .hero__message {
+    margin-block: clamp(0.875rem, 1.6vw, 1.375rem) 0;
+    max-inline-size: 19ch;
+    font-size: clamp(2.75rem, 5.4vw, 4.75rem);
+    line-height: 1.03;
+    letter-spacing: -0.014em;
+    color: var(--ink);
+  }
+
+  .hero__plate {
+    margin-block-start: clamp(2rem, 4.5vw, 3.5rem);
+    aspect-ratio: 1199 / 375;
+    max-block-size: 22rem;
+  }
+
+  @media (max-width: 47.99rem) {
+    .hero__message {
+      max-inline-size: none;
+    }
+
+    .hero__plate {
+      aspect-ratio: 16 / 9;
+    }
+  }
+</style>

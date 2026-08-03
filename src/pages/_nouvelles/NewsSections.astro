@@ -1,0 +1,178 @@
+---
+/**
+ * Renders the syndicated catalogue, one live `<h2>` at a time.
+ *
+ * ONE component drives BOTH languages, deliberately: this page is the same
+ * central fragment in two locales, and giving each language its own renderer is
+ * how the two silently drift apart. Everything that differs between them —
+ * a card English has and French does not, four items in a different order, two
+ * different research groups credited for the same publication pair — lives in
+ * the DATA, where the register can see it.
+ *
+ * WHAT THIS COMPONENT WILL NOT DO
+ *  · It cannot embed anything. There is no iframe, no script and no
+ *    `set:html` in this file or in anything it renders.
+ *  · It cannot deduplicate, reorder or summarise. It walks `content.sections`
+ *    in order and prints what is there.
+ *  · It never renders an empty container: a section with no items would render
+ *    no heading either, because the heading and the items are one object.
+ *
+ * BAND RHYTHM (DESIGN_BRIEF §4): every section is paper; only the closing fraud
+ * note takes the page's single greige tint.
+ */
+import Section from '../../components/Section.astro';
+import NewsCard from '../../components/NewsCard.astro';
+import VideoBlock from './VideoBlock.astro';
+import FraudBlock from './FraudBlock.astro';
+import type { NewsContent } from '../../data/pages/news.types';
+
+interface Props {
+  content: NewsContent;
+  /** Localised "opens in a new window", from the locale dictionary. */
+  externalLabel: string;
+}
+
+const { content, externalLabel } = Astro.props;
+const { labels } = content;
+
+/** The section heading owns the band's accessible name. */
+const headingId = (id: string) => `${id}-heading`;
+---
+
+{
+  content.sections.map((section) => {
+    if (section.kind === 'fraud') {
+      return (
+        <Section bg="greige" id={section.id} aria-labelledby={headingId(section.id)}>
+          <h2 id={headingId(section.id)} class="t-h2 serif-display nsec__heading">
+            {section.heading}
+          </h2>
+          <FraudBlock block={section.block} externalLabel={externalLabel} />
+        </Section>
+      );
+    }
+
+    return (
+      <Section bg="paper" id={section.id} aria-labelledby={headingId(section.id)}>
+        <h2 id={headingId(section.id)} class="t-h2 serif-display nsec__heading">
+          {section.heading}
+        </h2>
+
+        {section.kind === 'videos' && (
+          <div class="nsec__videos">
+            {section.items.map((item) => (
+              <VideoBlock item={item} externalLabel={externalLabel} videoLabel={labels.video} />
+            ))}
+          </div>
+        )}
+
+        {/* English only: `Week at a Glance` is filed inside `Economic news`
+            on the live English page. It is rendered where English puts it. */}
+        {section.kind === 'videos' && section.publications && (
+          <div class="nsec__grid nsec__grid--after">
+            {section.publications.map((item) => (
+              <NewsCard
+                title={item.title}
+                summary={item.blurb}
+                href={item.href}
+                image={item.image.src}
+                imageAlt={item.image.alt}
+                cta={item.cta}
+                note={labels.pdf}
+                external
+                externalLabel={externalLabel}
+                level={3}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* Trump documents and Spotlight articles: the title IS the link, and
+            the live markup gives neither a blurb. Nothing is written to fill
+            the gap — a card with no summary is a card with no summary. */}
+        {section.kind === 'documents' && (
+          <div class="nsec__grid">
+            {section.items.map((item) => (
+              <NewsCard
+                title={item.title}
+                href={item.href}
+                image={item.image.src}
+                imageAlt={item.image.alt}
+                note={section.note === 'pdf' ? labels.pdf : undefined}
+                external
+                externalLabel={externalLabel}
+                level={3}
+              />
+            ))}
+          </div>
+        )}
+
+        {/* `Les finances en lumière` / `Finance in focus`: one <p> per card,
+            holding the link and then the blurb after a <br />. */}
+        {section.kind === 'promos' && (
+          <div class="nsec__grid">
+            {section.items.map((item) => (
+              <NewsCard
+                title={item.title}
+                summary={item.blurb}
+                href={item.href}
+                image={item.image.src}
+                imageAlt={item.image.alt}
+                external
+                externalLabel={externalLabel}
+                level={3}
+              />
+            ))}
+          </div>
+        )}
+
+        {section.kind === 'publications' && (
+          <div class="nsec__grid">
+            {section.items.map((item) => (
+              <NewsCard
+                title={item.title}
+                summary={item.blurb}
+                href={item.href}
+                image={item.image.src}
+                imageAlt={item.image.alt}
+                cta={item.cta}
+                note={item.href.endsWith('.pdf') ? labels.pdf : undefined}
+                external
+                externalLabel={externalLabel}
+                level={3}
+              />
+            ))}
+          </div>
+        )}
+      </Section>
+    );
+  })
+}
+
+<style>
+  .nsec__heading {
+    margin: 0 0 clamp(1.5rem, 3vw, 2.25rem);
+    max-inline-size: 24ch;
+  }
+
+  .nsec__grid {
+    display: grid;
+    gap: clamp(1.25rem, 2.5vw, 1.75rem);
+  }
+
+  @media (min-width: 44rem) {
+    .nsec__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 62rem) {
+    .nsec__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .nsec__grid--after {
+    margin-block-start: clamp(2rem, 4vw, 3rem);
+  }
+</style>

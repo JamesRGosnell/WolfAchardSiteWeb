@@ -1,0 +1,55 @@
+---
+/**
+ * ENGLISH news — `/en/news/`
+ * Live: `https://www.nbfwm.ca/advisor/wolf-archard-group/news-articles.html`
+ *
+ * ⚠ NONE OF THIS PAGE IS THE CLIENT'S CONTENT. Same central National Bank
+ * fragment as the French page, regionalised. Read
+ * `src/data/pages/news.types.ts` before changing anything here.
+ *
+ * THIS IS NOT A TRANSLATION OF `/nouvelles/`, AND IT MUST NOT BE MADE ONE.
+ * Measured against the French capture, this page:
+ *  · carries a publication card French does not have at all — `Week at a
+ *    Glance`, filed inside `Economic news`, giving 18 `<h3>`s against 17;
+ *  · lists the same four `Guides and tools` items in a DIFFERENT order;
+ *  · credits `The CIO Office of National Bank Investments` where French credits
+ *    `Le groupe Économie et stratégie`, for the same publication pair;
+ *  · names a different campaign ambassador, over a genuinely different
+ *    photograph;
+ *  · renders THREE empty heading shells where French renders four.
+ * Every one of those is National Bank's, reproduced, and flagged in
+ * CHANGES-FOR-APPROVAL.md. None of them is repaired here.
+ *
+ * ANCHORS. `#spotlight`, `#economic` and `#guide` are the LIVE ids the home
+ * page's news teasers link at (`src/data/pages/home.en.ts`). Load-bearing. The
+ * other six are ours — the live page puts `#economic` on three sections and
+ * `#finance` on two. S-02.
+ *
+ * `<h1>` is `News and articles`; the browser `<title>` is `News & articles`.
+ * That is the live site, in both places, and both ship.
+ *
+ * Do NOT edit shared files from a page build. Report the friction instead.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Section from '../../../components/Section.astro';
+import NewsHero from '../../_nouvelles/NewsHero.astro';
+import NewsSections from '../../_nouvelles/NewsSections.astro';
+import { t } from '../../../lib/i18n';
+import news from '../../../data/pages/news.en';
+
+const locale = 'en' as const;
+const s = t(locale);
+---
+
+<BaseLayout
+  locale={locale}
+  pageKey="news"
+  title={news.meta.title}
+  description={news.meta.description}
+>
+  <Section bg="paper" padding="compact" class="page-hero" aria-labelledby="news-heading">
+    <NewsHero hero={news.hero} headingId="news-heading" />
+  </Section>
+
+  <NewsSections content={news} externalLabel={s.a11y.opensNewWindow} />
+</BaseLayout>

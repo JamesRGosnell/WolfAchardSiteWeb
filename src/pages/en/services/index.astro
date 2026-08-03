@@ -1,0 +1,222 @@
+---
+/**
+ * ENGLISH SERVICES — `/en/services/`
+ *
+ * Section order is the CAPTURE's document order:
+ *   hero · opener H2 + prose · `Our approach` (H2, lead, four numbered steps,
+ *   eight bullets) · `Our services` H2 + lead, with the wheel and its caption
+ *   beside them · the seven services · Toolbox · Legal Disclaimers · contact.
+ *
+ * THIS PAGE IS NOT A TRANSLATION OF ITS FRENCH TWIN. It is the FATTER of the
+ * two — the one place on this site where English carries more than French:
+ * an entire `Our approach` section French does not have, an `Our services`
+ * heading and lead French does not have, National Bank's `Purpose` / `Main
+ * benefits` boilerplate inside every service block, and 52 list items against
+ * French's 5. The accordions also run in different orders (estate 3rd / tax
+ * 4th here; fiscale 3rd / successorale 4th in French). Reproduced as found;
+ * P-16 forbids translating any of it into French.
+ *
+ * MARKER DISCIPLINE — this is the page the marker apparatus is broken on:
+ *   · `. *<sup>1, 2, 3</sup>` — the stray asterisk has NO footnote anywhere on
+ *     the live page. It does not ship; the three references become real links.
+ *     D-26. ⚠ NOT the same object as the `*` on the FRENCH `notre-firme`
+ *     accordion, which is the first character of a verbatim regulated sentence
+ *     and DOES ship (`content/COMPLIANCE.md` §1.7, C-35).
+ *   · `<sub>…sentence… ₁</sub>` on Portfolio management — a literal U+2081
+ *     SUBSCRIPT ONE used as a footnote marker, inside a `<sub>` wrapping the
+ *     whole sentence. Shipped as ordinary text with a real `<sup>` link. D-25.
+ *   · `<sup> 1</sup>`, `<sup>2</sup>` ×2, `<sup>3</sup>` — kept exactly, now
+ *     resolvable. D-24.
+ *   · <LegalNotes> renders ALL FIVE disclaimers, in order, always. Disclaimers
+ *     4 and 5 render citing nothing, which is the correct state (P-12).
+ *   · `Banking solutions` makes fee and rate claims with NO marker on the live
+ *     page (C-43). No marker is invented for it (P-6); it is reported.
+ *
+ * BAND RHYTHM: paper everywhere, exactly ONE greige tint block (the toolbox),
+ * ink confined to the footer.
+ *
+ * Do NOT edit shared files (components, layouts, lib, styles, config,
+ * data/{fr,en,types}.ts) from a page build. Report the friction instead.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Section from '../../../components/Section.astro';
+import LegalNotes from '../../../components/LegalNotes.astro';
+import ServicesHero from '../../_services/ServicesHero.astro';
+import Prose from '../../../components/Prose.astro';
+import Figure from '../../../components/Figure.astro';
+import NoteRefs from '../../_services/NoteRefs.astro';
+import ServiceBlock from '../../_services/ServiceBlock.astro';
+import ApproachSteps from '../../_services/ApproachSteps.astro';
+import Toolbox from '../../_services/Toolbox.astro';
+/* The closing contact block is the SAME live block the home page ends on, so
+   it is the same component rather than a second copy that could drift. It
+   lives under `_home/` only because the home page was built first; promoting it
+   to `src/components/` is a shared-file edit this build may not make, and is
+   reported as friction. */
+import ContactBlock from '../../../components/ContactBlock.astro';
+import services from '../../../data/pages/services.en';
+
+const locale = 'en' as const;
+const wheel = services.services.wheel;
+---
+
+{/*
+   D-11 — this page closes with its own <ContactBlock>, and its lead
+   `Our team members are there for you. Contact us directly at` exists
+   nowhere else on the site, so it is the block that stays.
+*/}
+<BaseLayout
+  locale={locale}
+  pageKey="services"
+  title={services.meta.title}
+  description={services.meta.description}
+  showFooterCta={false}
+>
+  <ServicesHero hero={services.hero} />
+
+  <Section bg="paper" aria-labelledby="intro-heading">
+    <h2 id="intro-heading" class="t-h2 serif-display intro__heading">{services.intro.heading}</h2>
+    {
+      services.intro.body.map((paragraph) => (
+        <Prose text={paragraph} locale={locale} class="t-lead measure intro__prose" />
+      ))
+    }
+  </Section>
+
+  {/* ENGLISH ONLY. The guard is what makes this section ABSENT from the French
+      page rather than empty there — the French data has no `approach` key at
+      all, and there is deliberately no placeholder state for one. */}
+  {
+    services.approach && (
+      <Section bg="paper" aria-labelledby="approach-heading">
+        <h2 id="approach-heading" class="t-h2 serif-display approach__heading">
+          {services.approach.heading}
+        </h2>
+        {services.approach.body.map((paragraph) => (
+          <Prose text={paragraph} locale={locale} class="t-lead measure approach__lead" />
+        ))}
+        <div class="approach__steps">
+          <ApproachSteps steps={services.approach.steps} />
+        </div>
+      </Section>
+    )
+  }
+
+  <Section bg="paper" aria-labelledby="services-heading">
+    <div class="opener">
+      <div class="opener__text">
+        <h2 id="services-heading" class="t-h2 serif-display opener__heading">
+          {services.services.heading}
+        </h2>
+        {services.services.lead && <p class="t-lead opener__lead">{services.services.lead}</p>}
+      </div>
+
+      {/* National Bank's GENERIC diagram: it reads `Your Wealth Advisor` and
+          `Client` and never names the team, where the French page's wheel is
+          bespoke and reads `Groupe Wolf Achard` / `Vous`. Supplied brand
+          artwork is not relabelled and the two are not swapped (C-51). */}
+      <figure class="wheel reveal">
+        <div class="media wheel__media">
+          <Figure image={wheel.image} />
+        </div>
+        {/* No whitespace between the caption and its marker — the live markup
+            has none (the stray `*` that sat there does not ship, D-26). */}
+        <figcaption class="wheel__caption">{wheel.caption.text}<NoteRefs refs={wheel.caption.refs} locale={locale} /></figcaption>
+      </figure>
+    </div>
+
+    <div class="blocks rule-y">
+      {services.services.blocks.map((block) => <ServiceBlock block={block} locale={locale} />)}
+    </div>
+  </Section>
+
+  {/* THE one tint block on this page. */}
+  <Section bg="greige" aria-labelledby="toolbox-heading">
+    <Toolbox toolbox={services.toolbox} headingId="toolbox-heading" locale={locale} />
+  </Section>
+
+  {/* Every marker above resolves into this. All five notes, in order, on the
+      same page — never a subset (P-12). */}
+  <Section bg="paper" padding="compact">
+    <LegalNotes locale={locale} refs={[1, 2, 3]} id={services.legalNotesId} />
+  </Section>
+
+  <Section bg="paper" aria-labelledby="contact-heading">
+    <ContactBlock contact={services.contact} headingId="contact-heading" />
+  </Section>
+</BaseLayout>
+
+<style>
+  .intro__heading,
+  .approach__heading {
+    margin: 0 0 clamp(1.25rem, 2.5vw, 1.75rem);
+    max-inline-size: 22ch;
+  }
+
+  .intro__prose {
+    margin: 0 0 1rem;
+    line-height: 1.6;
+  }
+
+  .intro__prose:last-child {
+    margin-block-end: 0;
+  }
+
+  .approach__lead {
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .approach__steps {
+    margin-block-start: clamp(2rem, 4vw, 3rem);
+  }
+
+  /* Asymmetric split — text 7, wheel 5. */
+  .opener {
+    display: grid;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+
+  @media (min-width: 60rem) {
+    .opener {
+      grid-template-columns: 7fr 5fr;
+      align-items: center;
+      column-gap: clamp(2.5rem, 5vw, 4.5rem);
+    }
+  }
+
+  .opener__heading {
+    margin: 0 0 clamp(1.25rem, 2.5vw, 1.75rem);
+    max-inline-size: 22ch;
+  }
+
+  .opener__lead {
+    margin: 0;
+    /* --measure, not a hand-picked `ch` count. See the token in global.css. */
+    max-inline-size: var(--measure);
+    line-height: 1.6;
+  }
+
+  .wheel {
+    margin: 0;
+  }
+
+  .wheel__media {
+    aspect-ratio: 1 / 1;
+  }
+
+  /* The page-level disclosure, and one of six on this page. Small, but never
+     smaller than the site's small size and never hidden. */
+  .wheel__caption {
+    margin-block-start: 0.875rem;
+    font-size: var(--text-small);
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  .blocks {
+    margin-block-start: clamp(2.5rem, 5vw, 4rem);
+    border-block-start: 1px solid var(--rule);
+    border-block-end: 1px solid var(--rule);
+  }
+</style>

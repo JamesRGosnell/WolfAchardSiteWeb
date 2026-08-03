@@ -1,0 +1,2918 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+    <head>
+        <title>Nos conseillers financiers | Groupe Wolf Achard | Financière Banque Nationale - Gestion de patrimoine</title>
+        
+
+    
+        <meta property="og:title" content="Nos conseillers financiers | Groupe Wolf Achard | Financière Banque Nationale - Gestion de patrimoine"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe.html"/>
+        <meta property="og:description" content="En tant que partenaire pour tous vos besoins financiers, notre équipe possède l&#39;expertise qui vous aidera à atteindre vos objectifs. Découvrez notre équipe!"/>
+        <meta property="og:image" content="https://www.fbngp.ca/content/dam/global/logo/bnc-logo.png"/>
+    
+
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    
+
+    
+    <meta name="description" content="En tant que partenaire pour tous vos besoins financiers, notre équipe possède l&#39;expertise qui vous aidera à atteindre vos objectifs. Découvrez notre équipe!"/>
+    <meta name="template" content="notre-equipe-microsite"/>
+
+    
+    <link rel="canonical" href="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe.html"/>
+
+    
+    
+        
+            
+                
+                
+                    <link rel="alternate" hreflang="fr" href="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe.html"/>
+                    <link rel="alternate" hreflang="fr-ca" href="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe.html"/>
+                    <link rel="alternate" hreflang="x-default" href="https://www.nbfwm.ca/advisor/wolf-archard-group/our-team.html"/>
+                
+                
+            
+        
+            
+                
+                
+                
+                    <link rel="alternate" hreflang="en" href="https://www.nbfwm.ca/advisor/wolf-archard-group/our-team.html"/>
+                    <link rel="alternate" hreflang="en-ca" href="https://www.nbfwm.ca/advisor/wolf-archard-group/our-team.html"/>
+                
+            
+        
+    
+
+    
+    
+    
+
+    
+    
+        
+
+
+
+
+    <script>
+        function getLanguage() {
+            let frRegex = /\/content\/(.*)\/fr\//;
+            let pagePath = "/content/fbngp/fr/accueil/conseiller/groupe-wolf-achard/notre-equipe";
+
+            if(frRegex.test(pagePath)){
+                return "fr";
+            }
+            else{ //default is English
+                return "en";
+            }
+        }
+
+        /*
+        * AEM Page properties hierarchy function
+        * Sets the SDK parameters to be the same as the default parameters configured by the site
+        */
+        function setSiteConfig(){
+            
+            scriptUrl = "https://dam.bnc.ca/content/dam/tools/cmp/notice.js";
+            configDidomi = ("true" === "true");
+            activateDidomi = ("true" === "true");
+            applyDidomiToChildren = ("true" === "true");
+            showDidomi = ("true" === "true");
+            siteToken = "bFXc6fFy";
+            lang = getLanguage();
+        }
+
+
+        /*
+        * AEM Page properties hierarchy function
+        * Updates the SDK parameters if a configuration was set on a page or on a parent page
+        */
+        function setChildParentConfig(){
+            
+            configDidomi = ("true" === "true");
+            activateDidomi = ("true" === "true");
+            applyDidomiToChildren = ("true" === "true");
+            showDidomi = ("true" === "true");
+            childToken = "null";
+            if(childToken === "null"){
+                configDidomi = false;
+            }else{
+                configDidomi = true;
+                foundParentConfig = true;
+            }
+            
+        }
+
+
+        /*
+        * AEM Page properties hierarchy function
+        * Sets the notice token based on the page hierarchy
+        */
+        function setToken(){
+            if(configDidomi){
+                //child on
+                if(foundParentConfig  && applyDidomiToChildren && activateDidomi){
+                    bannerToken = childToken;
+                }
+                //parent on
+                if(!foundParentConfig  && activateDidomi){
+                    bannerToken = childToken;
+                }
+                //parent on, child on with default
+                if(foundParentConfig && !applyDidomiToChildren){
+                    bannerToken = siteToken;
+                }
+            } else{ // default
+                bannerToken = siteToken;
+            }
+        }
+
+
+        /*
+        * Loads Didomi script (notice.js) with correct parameters
+        */
+        function loadJS(FILE_URL, async = true, language, token, enableDidomi) {
+            let scriptEle = document.createElement("script");
+
+            scriptEle.setAttribute("src", FILE_URL);
+            scriptEle.setAttribute("type", "text/javascript");
+            scriptEle.setAttribute("async", async);
+            scriptEle.setAttribute("language", language);
+            scriptEle.setAttribute("token", token);
+            scriptEle.setAttribute("enableDidomi", enableDidomi);
+
+            document.head.appendChild(scriptEle);
+
+            // error event
+            scriptEle.addEventListener("error", (ev) => {
+                console.log("Error on loading file", ev);
+            });
+        }
+
+        /*
+        * The AEM parameters retrieved earlier from the page properties are set in the Didomi SDK
+        * language: the language the banner appears in
+        * notice.enable: wether the notice is visible on the page or not
+        */
+        function setSDKConfigs(language, enableDidomi){
+            //default Didomi config
+            window.didomiConfig = {
+                languages: {
+                    enabled: ['en', 'fr'],
+                    default: ''
+                },
+                notice: {
+                    enable: true
+                }
+            };
+
+            //set banner visibility
+            if(!enableDidomi){
+                window.didomiConfig.notice.enable = enableDidomi;
+            }
+
+            //set language
+            if("fr" === language){
+                window.didomiConfig.languages.enabled = ['fr']
+                window.didomiConfig.languages.default = 'fr'
+            } else{
+                window.didomiConfig.languages.enabled = ['en']
+                window.didomiConfig.languages.default = 'en'
+            }
+        }
+
+
+        /*
+        * Given the banner token, loads Didomi SDK
+        * Config Parameters must always be set before the SDK is loaded
+        */
+        function loadSDK(token) {
+
+            window.gdprAppliesGlobally = true;
+            (function() {
+                (function(e, r) {
+                    var t = document.createElement("link");
+                    t.rel = "preconnect";
+                    t.as = "script";
+
+                    var n = document.createElement("link");
+                    n.rel = "dns-prefetch";
+                    n.as = "script";
+
+                    var i = document.createElement("link");
+                    i.rel = "preload";
+                    i.as = "script";
+
+                    var o = document.createElement("script");
+                    o.id = "spcloader";
+                    o.type = "text/javascript";
+                    o.async = true;
+                    o.charset = "utf-8";
+
+                    var a = "https://sdk.privacy-center.org/" + e + "/loader.js?target_type=notice&target=" + r;
+                    if (window.didomiConfig && window.didomiConfig.user) {
+                        var c = window.didomiConfig.user;
+                        var s = c.country;
+                        var d = c.region;
+                        if (s) {
+                            a += "&country=" + s;
+                            if (d) {
+                                a += "&region=" + d;
+                            }
+                        }
+                    }
+
+                    t.href = "https://sdk.privacy-center.org/";
+                    n.href = "https://sdk.privacy-center.org/";
+                    i.href = a;
+                    o.src = a;
+
+                    var p = document.getElementsByTagName("script")[0];
+                    p.parentNode.insertBefore(t, p);
+                    p.parentNode.insertBefore(n, p);
+                    p.parentNode.insertBefore(i, p);
+                    p.parentNode.insertBefore(o, p);
+                })("f93cfeed-d62f-4357-bfe9-f9f6887f69fb", token);
+            })();
+        }
+
+
+        /*
+        * main function
+        */
+        function initializeDidomi(){
+
+            // set default parameters
+            setSiteConfig();
+
+            // if didomi is active at site level
+            if(configDidomi && applyDidomiToChildren && activateDidomi){
+
+                //reset variables for child/parent configs
+                configDidomi = false;
+
+                setChildParentConfig();
+                setToken();
+
+
+                if(true){
+                    setSDKConfigs(lang, showDidomi);
+                    loadSDK(bannerToken);
+                }else{
+                    loadJS(scriptUrl, true, lang, bannerToken, showDidomi);
+                }
+            }
+            // else didomi should not appear on the page
+        }
+
+
+        // PARAMETERS
+        let lang = "";
+        let bannerToken = "";
+        let siteToken = "";
+        let configDidomi = false;
+        let applyDidomiToChildren = false;
+        let activateDidomi = false;
+        let showDidomi = false;
+        let foundParentConfig = false;
+        let childToken = "";
+        let scriptUrl = "";
+
+        initializeDidomi();
+    </script>
+
+    
+
+    
+    
+    
+
+    
+
+    
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/clientlibs/web-sites-toolkit/toolkit-clientlib/clientlibs/clientlib-grid.min.fe198145cabc1203cbab2e73c189fe6a.css" type="text/css">
+
+
+
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/clientlibs/web-sites-toolkit/toolkit-clientlib/clientlibs/clientlib-base.min.b9e58db3c42afa6e5488f495d4804f33.css" type="text/css">
+
+
+
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/layoutContainer.min.84beee8800683e039d2bd5c1da611ae1.css" type="text/css">
+
+
+
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/container/clientlibs.min.90932f7188b6de3499a57fd9afe1ddb6.css" type="text/css">
+
+
+
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-core-components.min.92ac67899fe3d5f4241b959add6754f8.css" type="text/css">
+
+
+
+
+    
+        
+    
+
+    
+
+        
+        
+            
+    
+<script src="/etc.clientlibs/web-sites/clientlibs/vendor/jquery/base.min.3f56e989e786c643b30d5668a97daa52.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/websites.min.afe369e2daa031e232e9e25e1415ac64.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/dataLayer.min.bb151da6cddfb1aa78316cc5dbef60db.js"></script>
+
+
+
+
+            <script async src="//assets.adobedtm.com/launch-ENce80544c76a04686ae546c50bbd9979e.min.js"></script>
+
+            
+
+            <script type="text/javascript">
+                var eventSource = "nbfwm";
+                var pageVariables = JSON.parse("[{\x22elementName\x22:\x22loB\x22,\x22elementValue\x22:\x22nbfwm\x22}]");
+                var rulesDefinitionFilePath = "/content/dam/dataLayerConfig/rules-fbngp.json";
+                var responseStatus = 200;
+
+                Websites.DataLayer.init(eventSource, pageVariables, rulesDefinitionFilePath, responseStatus);
+            </script>
+        
+    
+
+    
+    
+    
+
+    
+
+    
+    
+    
+
+
+
+    
+
+    
+
+    
+    
+        <link rel="icon" type="image/ico" href="/content/dam/global/logo/favicon.ico"/>
+    
+
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+    
+        <link type="text/css" rel="stylesheet" href="/content/dam/css/fbngp-microsite.css"/>
+    
+
+
+
+    
+    
+    
+
+    
+
+    
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="167x167" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-167x167.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="167x167" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-167x167-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="152x152" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-152x152.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-152x152-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="144x144" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-144x144.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-144x144-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="120x120" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-120x120.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-120x120-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="any" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-48x48.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="any" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-48x48-precomposed.png"/>
+
+
+
+    
+                                <script>!function(e){var n="https://s.go-mpulse.net/boomerang/";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,n="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="CBWCH-YHXC8-UX5PM-CKJ3F-WKW7N",function(){function e(){if(!r){var e=document.createElement("script");e.id="boomr-scr-as",e.src=window.BOOMR.url,e.async=!0,o.appendChild(e),r=!0}}function t(e){r=!0;var n,t,a,i,d=document,O=window;if(window.BOOMR.snippetMethod=e?"if":"i",t=function(e,n){var t=d.createElement("script");t.id=n||"boomr-if-as",t.src=window.BOOMR.url,BOOMR_lstart=(new Date).getTime(),e=e||d.body,e.appendChild(t)},!window.addEventListener&&window.attachEvent&&navigator.userAgent.match(/MSIE [67]\./))return window.BOOMR.snippetMethod="s",void t(o,"boomr-async");a=document.createElement("IFRAME"),a.src="about:blank",a.title="",a.role="presentation",a.loading="eager",i=(a.frameElement||a).style,i.width=0,i.height=0,i.border=0,i.display="none",o.appendChild(a);try{O=a.contentWindow,d=O.document.open()}catch(_){n=document.domain,a.src="javascript:var d=document.open();d.domain='"+n+"';void 0;",O=a.contentWindow,d=O.document.open()}if(n)d._boomrl=function(){this.domain=n,t()},d.write("<bo"+"dy onload='document._boomrl();'>");else if(O._boomrl=function(){t()},O.addEventListener)O.addEventListener("load",O._boomrl,!1);else if(O.attachEvent)O.attachEvent("onload",O._boomrl);d.close()}function a(e){window.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!window.BOOMR||!window.BOOMR.version&&!window.BOOMR.snippetExecuted){window.BOOMR=window.BOOMR||{},window.BOOMR.snippetStart=(new Date).getTime(),window.BOOMR.snippetExecuted=!0,window.BOOMR.snippetVersion=14,window.BOOMR.url=n+"CBWCH-YHXC8-UX5PM-CKJ3F-WKW7N";var i=document.currentScript||document.getElementsByTagName("script")[0],o=i.parentNode,r=!1,d=document.createElement("link");if(d.relList&&"function"==typeof d.relList.supports&&d.relList.supports("preload")&&"as"in d)window.BOOMR.snippetMethod="p",d.href=window.BOOMR.url,d.rel="preload",d.as="script",d.addEventListener("load",e),d.addEventListener("error",function(){t(!0)}),setTimeout(function(){if(!r)t(!0)},3e3),BOOMR_lstart=(new Date).getTime(),o.appendChild(d);else t(!1);if(window.addEventListener)window.addEventListener("load",a,!1);else if(window.attachEvent)window.attachEvent("onload",a)}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var n=""=="true"?1:0,t="",a="r5uv2vvyd2lfa2tp6tjq-f-c690b3afe-clientnsv4-s.akamaihd.net",i="false"=="true"?2:1,o={"ak.v":"41","ak.cp":"1490177","ak.ai":parseInt("891279",10),"ak.ol":"0","ak.cr":50,"ak.ipv":4,"ak.proto":"http/1.1","ak.rid":"471ae0dd","ak.r":47660,"ak.a2":n,"ak.m":"b","ak.n":"essl","ak.cport":26320,"ak.gh":"184.30.149.80","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.0rtt.ed":"","ak.csrc":"-","ak.acc":"bbr","ak.t":"1785722067","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==GEzTY0x9L9pV+AqzYkydpFlSSDMfPf5w1bmkLZPc0CXppEOKZ7MAmdzwOQlH3jZJRoZYJya+JIybqH2AxVq1h9IQUis5fXGSJR/ptcOgM5rewYai/Pv2iQZZ8bkAYiDsiCsdACQAD6KCkDsl7fZ3ExIT+Nun34i+8mFE4PxmpSZP0rJnzpCIKNW/ZTevzPHBfziSaO8IFHmlzAgjEW8lgc61VBmhc7l1968EBbFXZmqzfJz4c2OqBGI0N9WT1VCnUs0Uxk39rxxlHUn463W5cvzl/vJtgLe2tITsR0tp01RCY+pxsDJen14lix4ulPTY2GIgtCf/imACtZ/J2/MVtXxC36dAIrEvK/jRPz4rtOacc37X/4oB8ND97OqDVeRa7qYG0deuACE9vg1eeTJu09FxOU7zkOsZyWUka7g8kfw=","ak.pv":"170","ak.dpoabenc":"","ak.tf":i};if(""!==t)o["ak.ruds"]=t;var r={i:!1,av:function(n){var t="http.initiator";if(n&&(!n[t]||"spa_hard"===n[t]))o["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(o)},rv:function(){var e=["ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.0rtt.ed","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:o,akDNSPreFetchDomain:a,init:function(){if(!r.i){var e=BOOMR.subscribe;e("before_beacon",r.av,null,null),e("onbeacon",r.rv,null,null),r.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+    <body class="page basicpage">
+        
+        
+            
+
+
+
+            
+<div class="root responsivegrid">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="headerreference aem-GridColumn aem-GridColumn--default--12">
+<div class="cmp-headerreference">
+
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/structure/menuMicrositeBase/v1/menuMicrositeBase/clientlibs/clientlib.min.a043b7e0920cd8528a2262dc1c8431e1.css" type="text/css">
+<script src="/etc.clientlibs/web-sites-toolkit/clientlibs/web-sites-toolkit/toolkit-clientlib/clientlibs/vendor/lodash.min.a98e817fa80e9f0446305f835cdaa621.js"></script>
+<script src="/etc.clientlibs/web-sites-toolkit/clientlibs/web-sites-toolkit/toolkit-clientlib/clientlibs/clientlib-base.min.9e53360934d7d8c817cca5a2a127c13f.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/events.min.16e5209efa2702100afd766ec89fcae0.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/component.min.047d4d7858d9ff4849ffebffd22e5c10.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/eventListenerHandlers.min.6da5ec95ff88986fe5a678195fb73f2e.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/basepage.min.3097d244e3acdaa1cc46cbe27a844341.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/sticky.min.f7421d1f70d92b9a74fb9655256bba54.js"></script>
+<script src="/etc.clientlibs/web-sites-toolkit/components/structure/menuMicrositeBase/v1/menuMicrositeBase/clientlibs/clientlib.min.96a238afac5ac7358bccd1854f8d7d77.js"></script>
+
+
+
+
+
+
+
+    <header id="microsite-header-91bbcdf627" class="header menuMicrosite">
+        <nav class="header__navigation" aria-label="main menu">
+            <div class="header__top_wrapper">
+                <div class="header__top">
+                    <div class="header__button-burger--wrapper">
+                        <button type="button" class="header__button-burger" id="header__button-burger" aria-expanded="false" aria-controls="menu__list">
+                            <span class="line"></span>
+                            <span class="line"></span>
+                            <span class="line"></span>
+                        </button>
+                    </div>
+                    <div class="header__logo_container-mobile">
+                        
+                            
+
+    <a class="header__logo-image_wrapper" target="_self" href="/conseiller/groupe-wolf-achard.html">
+        <img class="logo__image-mobile" src="/content/dam/fbngp/logos/logo-cp-fbngp-s.svg" alt="Logo Financière Banque Nationale Gestion de patrimoine"/>
+    </a>
+
+                        
+                        
+                            
+
+    <a class="header__logo-image_wrapper" target="_self" href="/conseiller/groupe-wolf-achard.html">
+        <img class="logo__image-mobile" src="/content/dam/fbngp/logos/groupe-wolf-achard/logo-cp-groupe-wolf-achard-S.svg" alt="Logo Groupe Wolf Achard"/>
+    </a>
+
+                        
+                    </div>
+                    <div class="header__links_container">
+                        <ul>
+                            
+                                
+                                
+    
+
+        
+        <li class="header__links_item header__links_item-desktop header__link-icon-view">
+            <a href="/conseiller/groupe-wolf-achard/nous-joindre.html" target="_self" class="header__top-menu-link header__link-styled false style3 ">
+                <i class="bnc-icon-menu-locator"></i>
+                <span>Nous joindre</span>
+            </a>
+        </li>
+    
+
+                            
+
+                            
+                                
+                                <li class="header__links_item header__links_item-desktop">
+                                    <a class="header__lang--mobile header__top-menu-link" href="https://www.nbfwm.ca/advisor/wolf-archard-group/our-team.html" target="_self">
+                                        En</a>
+                                </li>
+                            
+
+                            
+                                
+                                
+    
+
+        
+        <li class="header__links_item header__link-icon-view">
+            <a href="https://client.bnc.ca/fbngp/login" target="_self" class="header__top-menu-link header__link-styled false style1 ">
+                <i class="bnc-icon-menu-secureLogin"></i>
+                <span>Accès client</span>
+            </a>
+        </li>
+    
+
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="header__bottom_wrapper">
+                <div id="menu__list" class="header__bottom menu-close">
+                    
+                    <div class="header__logo_container-desktop">
+                        <div class="header__logo-desktop">
+                            
+
+    <a class="header__logo-image_wrapper" target="_self" href="/conseiller/groupe-wolf-achard.html">
+        <img class="logo__image-desktop" src="/content/dam/fbngp/logos/logo-cp-fbngp-L.svg" alt="Logo Financière Banque Nationale Gestion de patrimoine"/>
+    </a>
+
+                        </div>
+                        <div class="header__logo-tablet">
+                            
+
+    <a class="header__logo-image_wrapper" target="_self" href="/conseiller/groupe-wolf-achard.html">
+        <img class="logo__image-tablet" src="/content/dam/fbngp/logos/logo-cp-fbngp-M.svg" alt="Logo Financière Banque Nationale Gestion de patrimoine"/>
+    </a>
+
+                        </div>
+                        <div class="header__logo-desktop">
+                            
+
+    <a class="header__logo-image_wrapper" target="_self" href="/conseiller/groupe-wolf-achard.html">
+        <img class="logo__image-desktop" src="/content/dam/fbngp/logos/groupe-wolf-achard/logo-cp-groupe-wolf-achard-L.svg" alt="Logo Groupe Wolf Achard"/>
+    </a>
+
+                        </div>
+                        <div class="header__logo-tablet">
+                            
+
+    <a class="header__logo-image_wrapper" target="_self" href="/conseiller/groupe-wolf-achard.html">
+        <img class="logo__image-tablet" src="/content/dam/fbngp/logos/groupe-wolf-achard/logo-cp-groupe-wolf-achard-M.svg" alt="Logo Groupe Wolf Achard"/>
+    </a>
+
+                        </div>
+                    </div>
+                    <div class="header__items_container">
+                        <div class="header__items_container--inner">
+                            <ul>
+                                
+                                <li class="header__links_item header__list-item--mobile header__list-item--mobile-home">
+                                    <a href="/conseiller/groupe-wolf-achard.html">Groupe Wolf Achard</a>
+                                </li>
+
+                                
+                                    <li class="header__links_item nav_item">
+                                        <a href="/conseiller/groupe-wolf-achard/notre-equipe.html" target="_self">Notre équipe</a>
+                                    </li>
+                                
+                                    <li class="header__links_item nav_item">
+                                        <a href="/conseiller/groupe-wolf-achard/nos-services.html" target="_self">Nos services</a>
+                                    </li>
+                                
+                                    <li class="header__links_item nav_item">
+                                        <a href="/conseiller/groupe-wolf-achard/nouvelles-articles.html" target="_self">Nouvelles et articles</a>
+                                    </li>
+                                
+                                    <li class="header__links_item nav_item">
+                                        <a href="/conseiller/groupe-wolf-achard/notre-firme.html" target="_self">Notre firme</a>
+                                    </li>
+                                
+                                
+                                    <li class="header__links_item header__list-item--mobile">
+                                        
+                                        <a class="header__items_link--mobile style3" href="/conseiller/groupe-wolf-achard/nous-joindre.html" target="_self">Nous joindre</a>
+                                    </li>
+                                
+                                
+                                    
+                                    <li class="header__links_item header__list-item--mobile">
+                                        <a class="header__lang--mobile" href="https://www.nbfwm.ca/advisor/wolf-archard-group/our-team.html" target="_self">English</a>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    
+    
+
+</div>
+
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid microsite-banner aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid microsite-banner aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="teaser aem-GridColumn aem-GridColumn--default--12">
+
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/teaser/clientlib.min.2a8bf729728ac71c4139af1e8f923a85.css" type="text/css">
+
+
+
+
+<div id="teaser-c81b74ae52" class="cmp-teaser">
+    
+    <div class="cmp-teaser__image">
+<div data-cmp-is="image" data-cmp-lazy data-cmp-lazythreshold="0" data-cmp-src="/conseiller/groupe-wolf-achard/notre-equipe/_jcr_content/root/responsivegrid_528981803/responsivegrid/teaser.coreimg.100{.width}.jpeg/1728070436088/ban-page-notre-equipe-groupe-wolf-achard.jpeg" data-cmp-widths="767,991,1199,2000" data-asset="/content/dam/fbngp/microsites/groupe-wolf-achard/bannieres/notre-equipe/ban-page-notre-equipe-groupe-wolf-achard.jpg" id="image-c81b74ae52" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        <noscript data-cmp-hook-image="noscript">
+            
+            <img src="/conseiller/groupe-wolf-achard/notre-equipe/_jcr_content/root/responsivegrid_528981803/responsivegrid/teaser.coreimg.jpeg/1728070436088/ban-page-notre-equipe-groupe-wolf-achard.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt/>
+            
+        </noscript>
+    
+    
+    
+</div>
+
+    
+
+</div>
+
+    <div class="cmp-teaser__content">
+        
+    
+
+        
+    <h1 class="cmp-teaser__title">
+        Découvrez notre équipe
+    </h1>
+
+        
+    <div class="cmp-teaser__description"><p>Des professionnels à l'écoute de vos besoins</p>
+</div>
+
+        
+    
+
+    </div>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    
+    
+</div>
+</div>
+<div class="responsivegrid bnc-container margin_top_2_per aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/title/clientlib.min.60c616f6d42d7869b8a5943fbf3fc194.css" type="text/css">
+
+
+
+
+<div id="title-00bbf66002" class="cmp-title">
+    <h2 class="cmp-title__text">Ensemble, nous œuvrons pour atteindre vos objectifs</h2>
+</div>
+
+    
+
+</div>
+<div class="text aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/text/clientlib.min.771beae701bf79d068035f58f7ca4842.css" type="text/css">
+<script src="/etc.clientlibs/web-sites-toolkit/components/content/text/clientlib.min.e608268427093228dec948a90f1526fd.js"></script>
+
+
+
+
+<div id="text-6fc3322ea4" class="cmp-text cmp-text-v2">
+    <p>Notre équipe est composée de professionnels en finance et en service
+  à la clientèle pour vous accompagner au mieux dans la gestion de votre
+  patrimoine. Avec eux, vous pourrez choisir parmi notre gamme complète
+  de produits ceux qui répondent le mieux à vos besoins.</p>
+ <p>Nous sommes animés par une passion commune: celle d'aider les
+  particuliers et les entreprises à bâtir et préserver leur richesse, à
+  développer leur patrimoine et à en faire bénéficier leur succession.</p>
+
+</div>
+
+    
+</div>
+<div class="bncButton button aem-GridColumn aem-GridColumn--default--12">
+
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/bncButton/clientlib.min.ff27e95926e61a9d67279e67e1ea9cd6.css" type="text/css">
+
+
+
+
+<button type="button" id="bncButton-3fa08faa37" class="cmp-button center" target="self">
+    
+    
+
+    
+</button></div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid bnc-container aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid bnc-container margin_top_2_per aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-8251c4507a" class="cmp-title">
+    <h2 class="cmp-title__text">Notre équipe d&#39;experts</h2>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid bnc-container layout-container-gutter aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    
+    
+</div>
+</div>
+<div class="responsivegrid bnc-container showcase-team aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid padding_top_md_15 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--default--4 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid width_90 border-bottom-light aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--default--4 aem-Grid--bootstrapxs--12 ">
+    
+    <div class="image aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--3 aem-GridColumn aem-GridColumn--bootstrapxs--6 aem-GridColumn--offset--default--1 aem-GridColumn--default--2">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/conseiller/groupe-wolf-achard/notre-equipe/_jcr_content/root/responsivegrid_12622/responsivegrid_19691_532097465/responsivegrid/responsivegrid_copy_/image.coreimg.100{.width}.png/1728065029920/photo-laurent-achard-montreal-350x330.png" data-cmp-widths="767,991,1200" data-asset="/content/dam/fbngp/photo/photo-laurent-achard-montreal-350x330.png" data-title="Photo de Laurent Achard, Conseiller en gestion de patrimoin , membre de l&#39;équipe expert." id="image-b194c6527b" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        <noscript data-cmp-hook-image="noscript">
+            
+            <img src="/conseiller/groupe-wolf-achard/notre-equipe/_jcr_content/root/responsivegrid_12622/responsivegrid_19691_532097465/responsivegrid/responsivegrid_copy_/image.coreimg.png/1728065029920/photo-laurent-achard-montreal-350x330.png" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Photo de Laurent Achard, Conseiller en gestion de patrimoin , membre de l&#39;équipe expert."/>
+            
+        </noscript>
+    
+    
+    
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid width_90 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--bootstrapxs--12 aem-Grid--default--4 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="title title-article-spacing font_16 aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+    
+
+
+
+
+<div id="title-cbc2d3d755" class="cmp-title">
+    <h3 class="cmp-title__text"><a class="cmp-title__link" href="/conseiller/groupe-wolf-achard/notre-equipe/laurent-achard.html">Laurent Achard</a></h3>
+</div>
+
+    
+
+</div>
+<div class="title no-top cp-title-h4 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+    
+
+
+
+
+<div id="title-ebdb657c7d" class="cmp-title">
+    <h4 class="cmp-title__text">Conseiller en gestion de patrimoine </h4>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid width_90 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--bootstrapxs--12 aem-Grid--default--4 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 ">
+    
+    <div class="image aem-GridColumn--default--none aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--1 aem-GridColumn--default--1">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/conseiller/groupe-wolf-achard/notre-equipe/_jcr_content/root/responsivegrid_12622/responsivegrid_19691_532097465/responsivegrid/responsivegrid_18406/responsivegrid_copy__1233424729/image.coreimg{.width}.svg/1603826880779/icn-phone-conseillers-20x20.svg" data-asset="/content/dam/fbngp/picto/icn-phone-conseillers-20x20.svg" data-title="Picto téléphone" id="image-307c6fb3ce" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/conseiller/groupe-wolf-achard/notre-equipe/_jcr_content/root/responsivegrid_12622/responsivegrid_19691_532097465/responsivegrid/responsivegrid_18406/responsivegrid_copy__1233424729/image.coreimg.svg/1603826880779/icn-phone-conseillers-20x20.svg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Picto téléphone"/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="text text-team aem-GridColumn--default--none aem-GridColumn aem-GridColumn--default--11 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--11">
+
+    
+
+
+
+
+<div id="text-ed344e2733" class="cmp-text cmp-text-v2">
+    <p>
+  <a href="tel:+15143951937">514 395-1937</a></p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 ">
+    
+    <div class="image aem-GridColumn--default--none aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--1 aem-GridColumn--default--1">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/conseiller/groupe-wolf-achard/notre-equipe/_jcr_content/root/responsivegrid_12622/responsivegrid_19691_532097465/responsivegrid/responsivegrid_18406/responsivegrid_copy__1837197225/image_copy.coreimg{.width}.svg/1603827642198/icn-mail-conseillers-20x20.svg" data-asset="/content/dam/fbngp/picto/icn-mail-conseillers-20x20.svg" data-title="Picto courriel" id="image-ea53f68db9" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/conseiller/groupe-wolf-achard/notre-equipe/_jcr_content/root/responsivegrid_12622/responsivegrid_19691_532097465/responsivegrid/responsivegrid_18406/responsivegrid_copy__1837197225/image_copy.coreimg.svg/1603827642198/icn-mail-conseillers-20x20.svg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Picto courriel"/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="text text-team aem-GridColumn--default--none aem-GridColumn aem-GridColumn--default--11 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--11">
+
+    
+
+
+
+
+<div id="text-4ce6b4d4b1" class="cmp-text cmp-text-v2">
+    <p>
+  <a href="mailto:laurent.achard@bnc.ca">laurent.achard@bnc.ca</a></p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 ">
+    
+    <div class="image aem-GridColumn--default--none aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--1 aem-GridColumn--default--1">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/conseiller/groupe-wolf-achard/notre-equipe/_jcr_content/root/responsivegrid_12622/responsivegrid_19691_532097465/responsivegrid/responsivegrid_18406/responsivegrid_copy__30556779/image_copy.coreimg{.width}.svg/1603828349693/icn-chat-conseillers-20x20.svg" data-asset="/content/dam/fbngp/picto/icn-chat-conseillers-20x20.svg" data-title="Picto langues parlées" id="image-56756b9140" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/conseiller/groupe-wolf-achard/notre-equipe/_jcr_content/root/responsivegrid_12622/responsivegrid_19691_532097465/responsivegrid/responsivegrid_18406/responsivegrid_copy__30556779/image_copy.coreimg.svg/1603828349693/icn-chat-conseillers-20x20.svg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Picto langues parlées"/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="text text-team aem-GridColumn--default--none aem-GridColumn aem-GridColumn--default--11 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--11">
+
+    
+
+
+
+
+<div id="text-71f0985899" class="cmp-text cmp-text-v2">
+    <p>Français, anglais, italien</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid padding_top_md_15 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--default--4 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid width_90 border-bottom-light aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--default--4 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapmd--4 ">
+    
+    <div class="image aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--3 aem-GridColumn aem-GridColumn--offset--bootstrapmd--1 aem-GridColumn--bootstrapxs--6 aem-GridColumn--bootstrapmd--none aem-GridColumn--offset--default--1 aem-GridColumn--bootstrapmd--2 aem-GridColumn--default--2">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/conseiller/groupe-wolf-achard/notre-equipe/_jcr_content/root/responsivegrid_12622/responsivegrid_19691_532097465/responsivegrid_359681271/responsivegrid_copy/image.coreimg.100{.width}.png/1728065015099/photo-david-alexandre-groupe-wolf-achard-mtl-350x330.png" data-cmp-widths="767,991,1200" data-asset="/content/dam/fbngp/photo/photo-david-alexandre-groupe-wolf-achard-mtl-350x330.png" data-title="Photo de David Alexandre Wolf, Conseiller en gestion de patrimoine, membre de l&#39;équipe expert." id="image-315f6cb7a1" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        <noscript data-cmp-hook-image="noscript">
+            
+            <img src="/conseiller/groupe-wolf-achard/notre-equipe/_jcr_content/root/responsivegrid_12622/responsivegrid_19691_532097465/responsivegrid_359681271/responsivegrid_copy/image.coreimg.png/1728065015099/photo-david-alexandre-groupe-wolf-achard-mtl-350x330.png" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Photo de David Alexandre Wolf, Conseiller en gestion de patrimoine, membre de l&#39;équipe expert."/>
+            
+        </noscript>
+    
+    
+    
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid width_90 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--bootstrapxs--12 aem-Grid--default--4 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="title title-article-spacing font_16 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+    
+
+
+
+
+<div id="title-a1b88e893c" class="cmp-title">
+    <h3 class="cmp-title__text"><a class="cmp-title__link" href="/conseiller/groupe-wolf-achard/notre-equipe/david-alexandre-wolf.html">David Alexandre Wolf</a></h3>
+</div>
+
+    
+
+</div>
+<div class="title no-top cp-title-h4 aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+    
+
+
+
+
+<div id="title-5e8a0c4fcc" class="cmp-title">
+    <h4 class="cmp-title__text">Conseiller en gestion de patrimoine </h4>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid width_90 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--bootstrapxs--12 aem-Grid--default--4 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 ">
+    
+    <div class="image aem-GridColumn--default--none aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--1 aem-GridColumn--default--1">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/conseiller/groupe-wolf-achard/notre-equipe/_jcr_content/root/responsivegrid_12622/responsivegrid_19691_532097465/responsivegrid_359681271/responsivegrid_18406/responsivegrid_copy/image.coreimg{.width}.svg/1603826880779/icn-phone-conseillers-20x20.svg" data-asset="/content/dam/fbngp/picto/icn-phone-conseillers-20x20.svg" data-title="Picto téléphone" id="image-4d22d69e53" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/conseiller/groupe-wolf-achard/notre-equipe/_jcr_content/root/responsivegrid_12622/responsivegrid_19691_532097465/responsivegrid_359681271/responsivegrid_18406/responsivegrid_copy/image.coreimg.svg/1603826880779/icn-phone-conseillers-20x20.svg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Picto téléphone"/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="text text-team aem-GridColumn--default--none aem-GridColumn aem-GridColumn--default--11 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--11">
+
+    
+
+
+
+
+<div id="text-9f878375aa" class="cmp-text cmp-text-v2">
+    <p>
+  <a href="tel:+15144120370">514 412-0370</a></p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 ">
+    
+    <div class="image aem-GridColumn--default--none aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--1 aem-GridColumn--default--1">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/conseiller/groupe-wolf-achard/notre-equipe/_jcr_content/root/responsivegrid_12622/responsivegrid_19691_532097465/responsivegrid_359681271/responsivegrid_18406/responsivegrid_copy__1837197225/image.coreimg{.width}.svg/1603827648951/icn-mail-conseillers-20x20.svg" data-asset="/content/dam/fbngp/picto/icn-mail-conseillers-20x20.svg" data-title="Picto courriel" id="image-db772eac08" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/conseiller/groupe-wolf-achard/notre-equipe/_jcr_content/root/responsivegrid_12622/responsivegrid_19691_532097465/responsivegrid_359681271/responsivegrid_18406/responsivegrid_copy__1837197225/image.coreimg.svg/1603827648951/icn-mail-conseillers-20x20.svg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Picto courriel"/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="text text-team aem-GridColumn--default--none aem-GridColumn aem-GridColumn--default--11 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--11">
+
+    
+
+
+
+
+<div id="text-1ee6570380" class="cmp-text cmp-text-v2">
+    <p>
+  <a href="mailto:davidalexandre.wolf@bnc.ca">davidalexandre.wolf@bnc.ca</a></p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 ">
+    
+    <div class="image aem-GridColumn--default--none aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--1 aem-GridColumn--default--1">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/conseiller/groupe-wolf-achard/notre-equipe/_jcr_content/root/responsivegrid_12622/responsivegrid_19691_532097465/responsivegrid_359681271/responsivegrid_18406/responsivegrid_copy__30556779/image.coreimg{.width}.svg/1603828363676/icn-chat-conseillers-20x20.svg" data-asset="/content/dam/fbngp/picto/icn-chat-conseillers-20x20.svg" data-title="Picto langues parlées" id="image-8a0e13c3a3" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/conseiller/groupe-wolf-achard/notre-equipe/_jcr_content/root/responsivegrid_12622/responsivegrid_19691_532097465/responsivegrid_359681271/responsivegrid_18406/responsivegrid_copy__30556779/image.coreimg.svg/1603828363676/icn-chat-conseillers-20x20.svg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Picto langues parlées"/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="text text-team aem-GridColumn--default--none aem-GridColumn aem-GridColumn--default--11 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--11">
+
+    
+
+
+
+
+<div id="text-d90c40536c" class="cmp-text cmp-text-v2">
+    <p>Français, anglais</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid bnc-container margin_top_3_per aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-81fa665541" class="cmp-title">
+    <h2 class="cmp-title__text">Nos partenaires </h2>
+</div>
+
+    
+
+</div>
+<div class="responsivegrid layout-container-gutter aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid padding_top_md_15 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--default--4 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--bootstrapxs--12 aem-Grid--default--4 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="reference parbase aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12"><div class="cq-dd-paragraph"><div class="page basicpage"><!DOCTYPE HTML>
+<html lang="fr">
+    <head>
+        <title>Nos conseillers financiers | Groupe Wolf Achard | Financière Banque Nationale - Gestion de patrimoine</title>
+        
+
+    
+        <meta property="og:title" content="Nos conseillers financiers | Groupe Wolf Achard | Financière Banque Nationale - Gestion de patrimoine"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe.html"/>
+        <meta property="og:description" content="En tant que partenaire pour tous vos besoins financiers, notre équipe possède l&#39;expertise qui vous aidera à atteindre vos objectifs. Découvrez notre équipe!"/>
+        <meta property="og:image" content="https://www.fbngp.ca/content/dam/global/logo/bnc-logo.png"/>
+    
+
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    
+
+    
+    <meta name="description" content="Lysane Tougas, Conseillère principale, planification successorale, collaborateur et partenaire. "/>
+    <meta name="template" content="notre-equipe-microsite"/>
+
+    
+    <link rel="canonical" href="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe.html"/>
+
+    
+    
+        
+            
+                
+                
+                    <link rel="alternate" hreflang="fr" href="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe.html"/>
+                    <link rel="alternate" hreflang="fr-ca" href="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe.html"/>
+                    <link rel="alternate" hreflang="x-default" href="https://www.nbfwm.ca/advisor/wolf-archard-group/our-team.html"/>
+                
+                
+            
+        
+            
+                
+                
+                
+                    <link rel="alternate" hreflang="en" href="https://www.nbfwm.ca/advisor/wolf-archard-group/our-team.html"/>
+                    <link rel="alternate" hreflang="en-ca" href="https://www.nbfwm.ca/advisor/wolf-archard-group/our-team.html"/>
+                
+            
+        
+    
+
+    
+    
+    
+
+    
+    
+        
+
+
+
+
+    <script>
+        function getLanguage() {
+            let frRegex = /\/content\/(.*)\/fr\//;
+            let pagePath = "/content/fbngp/fr/accueil/conseiller/groupe-wolf-achard/notre-equipe";
+
+            if(frRegex.test(pagePath)){
+                return "fr";
+            }
+            else{ //default is English
+                return "en";
+            }
+        }
+
+        /*
+        * AEM Page properties hierarchy function
+        * Sets the SDK parameters to be the same as the default parameters configured by the site
+        */
+        function setSiteConfig(){
+            
+            scriptUrl = "https://dam.bnc.ca/content/dam/tools/cmp/notice.js";
+            configDidomi = ("true" === "true");
+            activateDidomi = ("true" === "true");
+            applyDidomiToChildren = ("true" === "true");
+            showDidomi = ("true" === "true");
+            siteToken = "bFXc6fFy";
+            lang = getLanguage();
+        }
+
+
+        /*
+        * AEM Page properties hierarchy function
+        * Updates the SDK parameters if a configuration was set on a page or on a parent page
+        */
+        function setChildParentConfig(){
+            
+            configDidomi = ("true" === "true");
+            activateDidomi = ("true" === "true");
+            applyDidomiToChildren = ("true" === "true");
+            showDidomi = ("true" === "true");
+            childToken = "null";
+            if(childToken === "null"){
+                configDidomi = false;
+            }else{
+                configDidomi = true;
+                foundParentConfig = true;
+            }
+            
+        }
+
+
+        /*
+        * AEM Page properties hierarchy function
+        * Sets the notice token based on the page hierarchy
+        */
+        function setToken(){
+            if(configDidomi){
+                //child on
+                if(foundParentConfig  && applyDidomiToChildren && activateDidomi){
+                    bannerToken = childToken;
+                }
+                //parent on
+                if(!foundParentConfig  && activateDidomi){
+                    bannerToken = childToken;
+                }
+                //parent on, child on with default
+                if(foundParentConfig && !applyDidomiToChildren){
+                    bannerToken = siteToken;
+                }
+            } else{ // default
+                bannerToken = siteToken;
+            }
+        }
+
+
+        /*
+        * Loads Didomi script (notice.js) with correct parameters
+        */
+        function loadJS(FILE_URL, async = true, language, token, enableDidomi) {
+            let scriptEle = document.createElement("script");
+
+            scriptEle.setAttribute("src", FILE_URL);
+            scriptEle.setAttribute("type", "text/javascript");
+            scriptEle.setAttribute("async", async);
+            scriptEle.setAttribute("language", language);
+            scriptEle.setAttribute("token", token);
+            scriptEle.setAttribute("enableDidomi", enableDidomi);
+
+            document.head.appendChild(scriptEle);
+
+            // error event
+            scriptEle.addEventListener("error", (ev) => {
+                console.log("Error on loading file", ev);
+            });
+        }
+
+        /*
+        * The AEM parameters retrieved earlier from the page properties are set in the Didomi SDK
+        * language: the language the banner appears in
+        * notice.enable: wether the notice is visible on the page or not
+        */
+        function setSDKConfigs(language, enableDidomi){
+            //default Didomi config
+            window.didomiConfig = {
+                languages: {
+                    enabled: ['en', 'fr'],
+                    default: ''
+                },
+                notice: {
+                    enable: true
+                }
+            };
+
+            //set banner visibility
+            if(!enableDidomi){
+                window.didomiConfig.notice.enable = enableDidomi;
+            }
+
+            //set language
+            if("fr" === language){
+                window.didomiConfig.languages.enabled = ['fr']
+                window.didomiConfig.languages.default = 'fr'
+            } else{
+                window.didomiConfig.languages.enabled = ['en']
+                window.didomiConfig.languages.default = 'en'
+            }
+        }
+
+
+        /*
+        * Given the banner token, loads Didomi SDK
+        * Config Parameters must always be set before the SDK is loaded
+        */
+        function loadSDK(token) {
+
+            window.gdprAppliesGlobally = true;
+            (function() {
+                (function(e, r) {
+                    var t = document.createElement("link");
+                    t.rel = "preconnect";
+                    t.as = "script";
+
+                    var n = document.createElement("link");
+                    n.rel = "dns-prefetch";
+                    n.as = "script";
+
+                    var i = document.createElement("link");
+                    i.rel = "preload";
+                    i.as = "script";
+
+                    var o = document.createElement("script");
+                    o.id = "spcloader";
+                    o.type = "text/javascript";
+                    o.async = true;
+                    o.charset = "utf-8";
+
+                    var a = "https://sdk.privacy-center.org/" + e + "/loader.js?target_type=notice&target=" + r;
+                    if (window.didomiConfig && window.didomiConfig.user) {
+                        var c = window.didomiConfig.user;
+                        var s = c.country;
+                        var d = c.region;
+                        if (s) {
+                            a += "&country=" + s;
+                            if (d) {
+                                a += "&region=" + d;
+                            }
+                        }
+                    }
+
+                    t.href = "https://sdk.privacy-center.org/";
+                    n.href = "https://sdk.privacy-center.org/";
+                    i.href = a;
+                    o.src = a;
+
+                    var p = document.getElementsByTagName("script")[0];
+                    p.parentNode.insertBefore(t, p);
+                    p.parentNode.insertBefore(n, p);
+                    p.parentNode.insertBefore(i, p);
+                    p.parentNode.insertBefore(o, p);
+                })("f93cfeed-d62f-4357-bfe9-f9f6887f69fb", token);
+            })();
+        }
+
+
+        /*
+        * main function
+        */
+        function initializeDidomi(){
+
+            // set default parameters
+            setSiteConfig();
+
+            // if didomi is active at site level
+            if(configDidomi && applyDidomiToChildren && activateDidomi){
+
+                //reset variables for child/parent configs
+                configDidomi = false;
+
+                setChildParentConfig();
+                setToken();
+
+
+                if(true){
+                    setSDKConfigs(lang, showDidomi);
+                    loadSDK(bannerToken);
+                }else{
+                    loadJS(scriptUrl, true, lang, bannerToken, showDidomi);
+                }
+            }
+            // else didomi should not appear on the page
+        }
+
+
+        // PARAMETERS
+        let lang = "";
+        let bannerToken = "";
+        let siteToken = "";
+        let configDidomi = false;
+        let applyDidomiToChildren = false;
+        let activateDidomi = false;
+        let showDidomi = false;
+        let foundParentConfig = false;
+        let childToken = "";
+        let scriptUrl = "";
+
+        initializeDidomi();
+    </script>
+
+    
+
+    
+    
+    
+
+    
+
+    
+    
+    
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+
+    
+        
+    
+
+    
+
+        
+        
+            
+    
+
+
+
+
+            <script async src="//assets.adobedtm.com/launch-ENce80544c76a04686ae546c50bbd9979e.min.js"></script>
+
+            
+
+            <script type="text/javascript">
+                var eventSource = "nbfwm";
+                var pageVariables = JSON.parse("[{\x22elementName\x22:\x22loB\x22,\x22elementValue\x22:\x22nbfwm\x22}]");
+                var rulesDefinitionFilePath = "/content/dam/dataLayerConfig/rules-fbngp.json";
+                var responseStatus = 200;
+
+                Websites.DataLayer.init(eventSource, pageVariables, rulesDefinitionFilePath, responseStatus);
+            </script>
+        
+    
+
+    
+    
+    
+
+    
+
+    
+    
+    
+
+
+
+    
+
+    
+
+    
+    
+        <link rel="icon" type="image/ico" href="/content/dam/global/logo/favicon.ico"/>
+    
+
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+    
+        <link type="text/css" rel="stylesheet" href="/content/dam/css/fbngp-microsite.css"/>
+    
+
+
+
+    
+    
+    
+
+    
+
+    
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="167x167" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-167x167.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="167x167" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-167x167-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="152x152" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-152x152.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-152x152-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="144x144" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-144x144.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-144x144-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="120x120" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-120x120.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-120x120-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="any" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-48x48.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="any" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-48x48-precomposed.png"/>
+
+
+
+    
+                                <script>!function(e){var n="https://s.go-mpulse.net/boomerang/";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,n="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="CBWCH-YHXC8-UX5PM-CKJ3F-WKW7N",function(){function e(){if(!r){var e=document.createElement("script");e.id="boomr-scr-as",e.src=window.BOOMR.url,e.async=!0,o.appendChild(e),r=!0}}function t(e){r=!0;var n,t,a,i,d=document,O=window;if(window.BOOMR.snippetMethod=e?"if":"i",t=function(e,n){var t=d.createElement("script");t.id=n||"boomr-if-as",t.src=window.BOOMR.url,BOOMR_lstart=(new Date).getTime(),e=e||d.body,e.appendChild(t)},!window.addEventListener&&window.attachEvent&&navigator.userAgent.match(/MSIE [67]\./))return window.BOOMR.snippetMethod="s",void t(o,"boomr-async");a=document.createElement("IFRAME"),a.src="about:blank",a.title="",a.role="presentation",a.loading="eager",i=(a.frameElement||a).style,i.width=0,i.height=0,i.border=0,i.display="none",o.appendChild(a);try{O=a.contentWindow,d=O.document.open()}catch(_){n=document.domain,a.src="javascript:var d=document.open();d.domain='"+n+"';void 0;",O=a.contentWindow,d=O.document.open()}if(n)d._boomrl=function(){this.domain=n,t()},d.write("<bo"+"dy onload='document._boomrl();'>");else if(O._boomrl=function(){t()},O.addEventListener)O.addEventListener("load",O._boomrl,!1);else if(O.attachEvent)O.attachEvent("onload",O._boomrl);d.close()}function a(e){window.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!window.BOOMR||!window.BOOMR.version&&!window.BOOMR.snippetExecuted){window.BOOMR=window.BOOMR||{},window.BOOMR.snippetStart=(new Date).getTime(),window.BOOMR.snippetExecuted=!0,window.BOOMR.snippetVersion=14,window.BOOMR.url=n+"CBWCH-YHXC8-UX5PM-CKJ3F-WKW7N";var i=document.currentScript||document.getElementsByTagName("script")[0],o=i.parentNode,r=!1,d=document.createElement("link");if(d.relList&&"function"==typeof d.relList.supports&&d.relList.supports("preload")&&"as"in d)window.BOOMR.snippetMethod="p",d.href=window.BOOMR.url,d.rel="preload",d.as="script",d.addEventListener("load",e),d.addEventListener("error",function(){t(!0)}),setTimeout(function(){if(!r)t(!0)},3e3),BOOMR_lstart=(new Date).getTime(),o.appendChild(d);else t(!1);if(window.addEventListener)window.addEventListener("load",a,!1);else if(window.attachEvent)window.attachEvent("onload",a)}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var n=""=="true"?1:0,t="",a="r5uv2vvyd2lfa2tp6tjq-f-c690b3afe-clientnsv4-s.akamaihd.net",i="false"=="true"?2:1,o={"ak.v":"41","ak.cp":"1490177","ak.ai":parseInt("891279",10),"ak.ol":"0","ak.cr":50,"ak.ipv":4,"ak.proto":"http/1.1","ak.rid":"471ae0dd","ak.r":47660,"ak.a2":n,"ak.m":"b","ak.n":"essl","ak.cport":26320,"ak.gh":"184.30.149.80","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.0rtt.ed":"","ak.csrc":"-","ak.acc":"bbr","ak.t":"1785722067","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==GEzTY0x9L9pV+AqzYkydpFlSSDMfPf5w1bmkLZPc0CXppEOKZ7MAmdzwOQlH3jZJRoZYJya+JIybqH2AxVq1h9IQUis5fXGSJR/ptcOgM5rewYai/Pv2iQZZ8bkAYiDsiCsdACQAD6KCkDsl7fZ3ExIT+Nun34i+8mFE4PxmpSZP0rJnzpCIKNW/ZTevzPHBfziSaO8IFHmlzAgjEW8lgc61VBmhc7l1968EBbFXZmqzfJz4c2OqBGI0N9WT1VCnUs0Uxk39rxxlHUn463W5cvzl/vJtgLe2tITsR0tp01RCY+pxsDJen14lix4ulPTY2GIgtCf/imACtZ/J2/MVtXxC36dAIrEvK/jRPz4rtOacc37X/4oB8ND97OqDVeRa7qYG0deuACE9vg1eeTJu09FxOU7zkOsZyWUka7g8kfw=","ak.pv":"170","ak.dpoabenc":"","ak.tf":i};if(""!==t)o["ak.ruds"]=t;var r={i:!1,av:function(n){var t="http.initiator";if(n&&(!n[t]||"spa_hard"===n[t]))o["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(o)},rv:function(){var e=["ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.0rtt.ed","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:o,akDNSPreFetchDomain:a,init:function(){if(!r.i){var e=BOOMR.subscribe;e("before_beacon",r.av,null,null),e("onbeacon",r.rv,null,null),r.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+    <body class="page basicpage">
+        
+        
+            
+
+
+
+            
+<div class="root responsivegrid">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid padding_top_md_15 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12 aem-GridColumn--bootstrapsm--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid width_90 border-bottom-light aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--bootstrapxs--12 aem-GridColumn--bootstrapsm--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--bootstrapxs--12 aem-Grid--default--12 ">
+    
+    <div class="image aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--3 aem-GridColumn aem-GridColumn--bootstrapxs--6 aem-GridColumn--default--6 aem-GridColumn--offset--default--3">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/outils-applications/references/collaborateurs/lysane-tougas/_jcr_content/root/responsivegrid_copy_/responsivegrid/image_180994292.coreimg{.width}.png/1655500066402/photo-lysanne-tougas-collaborateur-350x330.png" data-asset="/content/dam/fbngp/microsites/photos-collaborateurs/photo-lysanne-tougas-collaborateur-350x330.png" data-asset-id="f7a97733-b79e-4947-a02b-858729d0f550" data-title="Photo de Lysane Tougas, Conseillère principale, planification successorale, collaborateur et partenaire. " id="image-04e8a4b863" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/outils-applications/references/collaborateurs/lysane-tougas/_jcr_content/root/responsivegrid_copy_/responsivegrid/image_180994292.coreimg.png/1655500066402/photo-lysanne-tougas-collaborateur-350x330.png" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Photo de Lysane Tougas, Conseillère principale, planification successorale, collaborateur et partenaire. "/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid width_90 aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--bootstrapxs--12 aem-GridColumn--bootstrapsm--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--bootstrapxs--12 aem-Grid--default--12 ">
+    
+    <div class="title title-article-spacing font_16 aem-GridColumn--default--none aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+    
+
+
+
+
+<div id="title-12cf350906" class="cmp-title">
+    <h3 class="cmp-title__text">Lysane Tougas</h3>
+</div>
+
+    
+
+</div>
+<div class="text aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--bootstrapxs--12">
+
+    
+
+
+
+
+<div id="text-b94ae8ce0d" class="cmp-text cmp-text-v2">
+    <p
+  style="font-size: 12.0px;line-height: 14.0px;color: rgb(68,68,68);letter-spacing: 0.3px;margin-bottom: 8.0px;">Conseillère
+  principale, planification successorale<sup>2</sup></p>
+
+</div>
+
+    
+</div>
+<div class="text aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--bootstrapxs--12">
+
+    
+
+
+
+
+<div id="text-1d3a32172a" class="cmp-text cmp-text-v2">
+    <p
+  style="font-size: 12.0px;line-height: 14.0px;color: rgb(68,68,68);letter-spacing: 0.3px;margin-bottom: 8.0px;">Financière
+  Banque Nationale - Gestion de patrimoine<br />  </p>
+
+</div>
+
+    
+</div>
+<div class="responsivegrid aem-GridColumn--default--none aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="accordion panelcontainer aem-GridColumn aem-GridColumn--default--12">
+
+    
+<script src="/etc.clientlibs/core/wcm/components/commons/site/clientlibs/container.min.0a6aff292f5cc42142779cde92054524.js"></script>
+
+
+
+
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/accordion/clientlibs/site.min.f6c1348a612942645a5181a642bcadb4.css" type="text/css">
+
+
+
+
+
+<div id="accordion-b5d491c40d" class="cmp-accordion" data-cmp-is="accordion" data-placeholder-text="faux">
+    <div class="cmp-accordion__item" data-cmp-hook-accordion="item" id="accordion-b5d491c40d-item-c66af83665">
+        <h3 class="cmp-accordion__header">
+            <button id="accordion-b5d491c40d-item-c66af83665-button" class="cmp-accordion__button" aria-controls="accordion-b5d491c40d-item-c66af83665-panel" data-cmp-hook-accordion="button">
+                <span class="cmp-accordion__title">Biographie</span>
+                <span class="cmp-accordion__icon"></span>
+            </button>
+        </h3>
+        <div data-cmp-hook-accordion="panel" id="accordion-b5d491c40d-item-c66af83665-panel" class="cmp-accordion__panel cmp-accordion__panel--hidden" role="region" aria-labelledby="accordion-b5d491c40d-item-c66af83665-button"><div class="text">
+
+    
+
+
+
+
+<div id="text-45e3996408" class="cmp-text cmp-text-v2">
+    <p>Lysane est membre du Barreau du Québec depuis 1998. Elle a complété
+  son baccalauréat en droit à l’Université de Montréal ainsi qu’une
+  maîtrise en droit, option fiscalité, en 2004.</p>
+  <p>Elle possède une vaste expérience en matière de planification
+  successorale et testamentaire ainsi qu’en droit fiscal. Elle a exercé
+  pendant plusieurs années dans des cabinets d’avocats et d’experts
+  comptables d’envergure.</p>
+  <p>Elle accompagne notre équipe dans la prestation d’un service
+  conseil   engageant et de haut calibre. Son expertise, son empathie et
+  son   écoute lui permettent d’accompagner nos clients dans
+  l’élaboration et   l’atteinte de leurs objectifs successoraux.</p>
+
+</div>
+
+    
+</div>
+</div>
+    </div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+
+            
+    
+    
+
+
+
+    
+    
+    
+<script src="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-core-components.min.0e78d12b97b3829e02f2e042879f70aa.js"></script>
+
+
+
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/staticFooter/clientlibs.min.56d0cad8fb312fb999e0715679433926.css" type="text/css">
+<script src="/etc.clientlibs/web-sites-toolkit/components/content/staticFooter/clientlibs.min.45ad76f31352c347554825e250a74963.js"></script>
+
+
+
+
+    
+
+    
+
+    
+    
+    
+
+            
+
+
+            
+            
+
+        
+    </body>
+</html>
+</div>
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid padding_top_md_15 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--default--4 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--bootstrapxs--12 aem-Grid--default--4 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="reference parbase aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12"><div class="cq-dd-paragraph"><div class="page basicpage"><!DOCTYPE HTML>
+<html lang="fr">
+    <head>
+        <title>Nos conseillers financiers | Groupe Wolf Achard | Financière Banque Nationale - Gestion de patrimoine</title>
+        
+
+    
+        <meta property="og:title" content="Nos conseillers financiers | Groupe Wolf Achard | Financière Banque Nationale - Gestion de patrimoine"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe.html"/>
+        <meta property="og:description" content="En tant que partenaire pour tous vos besoins financiers, notre équipe possède l&#39;expertise qui vous aidera à atteindre vos objectifs. Découvrez notre équipe!"/>
+        <meta property="og:image" content="https://www.fbngp.ca/content/dam/global/logo/bnc-logo.png"/>
+    
+
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    
+
+    
+    <meta name="description" content="Photo de Jean-Francois Gobeil, Planificateur financier, collaborateur"/>
+    <meta name="template" content="notre-equipe-microsite"/>
+
+    
+    <link rel="canonical" href="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe.html"/>
+
+    
+    
+        
+            
+                
+                
+                    <link rel="alternate" hreflang="fr" href="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe.html"/>
+                    <link rel="alternate" hreflang="fr-ca" href="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe.html"/>
+                    <link rel="alternate" hreflang="x-default" href="https://www.nbfwm.ca/advisor/wolf-archard-group/our-team.html"/>
+                
+                
+            
+        
+            
+                
+                
+                
+                    <link rel="alternate" hreflang="en" href="https://www.nbfwm.ca/advisor/wolf-archard-group/our-team.html"/>
+                    <link rel="alternate" hreflang="en-ca" href="https://www.nbfwm.ca/advisor/wolf-archard-group/our-team.html"/>
+                
+            
+        
+    
+
+    
+    
+    
+
+    
+    
+        
+
+
+
+
+    <script>
+        function getLanguage() {
+            let frRegex = /\/content\/(.*)\/fr\//;
+            let pagePath = "/content/fbngp/fr/accueil/conseiller/groupe-wolf-achard/notre-equipe";
+
+            if(frRegex.test(pagePath)){
+                return "fr";
+            }
+            else{ //default is English
+                return "en";
+            }
+        }
+
+        /*
+        * AEM Page properties hierarchy function
+        * Sets the SDK parameters to be the same as the default parameters configured by the site
+        */
+        function setSiteConfig(){
+            
+            scriptUrl = "https://dam.bnc.ca/content/dam/tools/cmp/notice.js";
+            configDidomi = ("true" === "true");
+            activateDidomi = ("true" === "true");
+            applyDidomiToChildren = ("true" === "true");
+            showDidomi = ("true" === "true");
+            siteToken = "bFXc6fFy";
+            lang = getLanguage();
+        }
+
+
+        /*
+        * AEM Page properties hierarchy function
+        * Updates the SDK parameters if a configuration was set on a page or on a parent page
+        */
+        function setChildParentConfig(){
+            
+            configDidomi = ("true" === "true");
+            activateDidomi = ("true" === "true");
+            applyDidomiToChildren = ("true" === "true");
+            showDidomi = ("true" === "true");
+            childToken = "null";
+            if(childToken === "null"){
+                configDidomi = false;
+            }else{
+                configDidomi = true;
+                foundParentConfig = true;
+            }
+            
+        }
+
+
+        /*
+        * AEM Page properties hierarchy function
+        * Sets the notice token based on the page hierarchy
+        */
+        function setToken(){
+            if(configDidomi){
+                //child on
+                if(foundParentConfig  && applyDidomiToChildren && activateDidomi){
+                    bannerToken = childToken;
+                }
+                //parent on
+                if(!foundParentConfig  && activateDidomi){
+                    bannerToken = childToken;
+                }
+                //parent on, child on with default
+                if(foundParentConfig && !applyDidomiToChildren){
+                    bannerToken = siteToken;
+                }
+            } else{ // default
+                bannerToken = siteToken;
+            }
+        }
+
+
+        /*
+        * Loads Didomi script (notice.js) with correct parameters
+        */
+        function loadJS(FILE_URL, async = true, language, token, enableDidomi) {
+            let scriptEle = document.createElement("script");
+
+            scriptEle.setAttribute("src", FILE_URL);
+            scriptEle.setAttribute("type", "text/javascript");
+            scriptEle.setAttribute("async", async);
+            scriptEle.setAttribute("language", language);
+            scriptEle.setAttribute("token", token);
+            scriptEle.setAttribute("enableDidomi", enableDidomi);
+
+            document.head.appendChild(scriptEle);
+
+            // error event
+            scriptEle.addEventListener("error", (ev) => {
+                console.log("Error on loading file", ev);
+            });
+        }
+
+        /*
+        * The AEM parameters retrieved earlier from the page properties are set in the Didomi SDK
+        * language: the language the banner appears in
+        * notice.enable: wether the notice is visible on the page or not
+        */
+        function setSDKConfigs(language, enableDidomi){
+            //default Didomi config
+            window.didomiConfig = {
+                languages: {
+                    enabled: ['en', 'fr'],
+                    default: ''
+                },
+                notice: {
+                    enable: true
+                }
+            };
+
+            //set banner visibility
+            if(!enableDidomi){
+                window.didomiConfig.notice.enable = enableDidomi;
+            }
+
+            //set language
+            if("fr" === language){
+                window.didomiConfig.languages.enabled = ['fr']
+                window.didomiConfig.languages.default = 'fr'
+            } else{
+                window.didomiConfig.languages.enabled = ['en']
+                window.didomiConfig.languages.default = 'en'
+            }
+        }
+
+
+        /*
+        * Given the banner token, loads Didomi SDK
+        * Config Parameters must always be set before the SDK is loaded
+        */
+        function loadSDK(token) {
+
+            window.gdprAppliesGlobally = true;
+            (function() {
+                (function(e, r) {
+                    var t = document.createElement("link");
+                    t.rel = "preconnect";
+                    t.as = "script";
+
+                    var n = document.createElement("link");
+                    n.rel = "dns-prefetch";
+                    n.as = "script";
+
+                    var i = document.createElement("link");
+                    i.rel = "preload";
+                    i.as = "script";
+
+                    var o = document.createElement("script");
+                    o.id = "spcloader";
+                    o.type = "text/javascript";
+                    o.async = true;
+                    o.charset = "utf-8";
+
+                    var a = "https://sdk.privacy-center.org/" + e + "/loader.js?target_type=notice&target=" + r;
+                    if (window.didomiConfig && window.didomiConfig.user) {
+                        var c = window.didomiConfig.user;
+                        var s = c.country;
+                        var d = c.region;
+                        if (s) {
+                            a += "&country=" + s;
+                            if (d) {
+                                a += "&region=" + d;
+                            }
+                        }
+                    }
+
+                    t.href = "https://sdk.privacy-center.org/";
+                    n.href = "https://sdk.privacy-center.org/";
+                    i.href = a;
+                    o.src = a;
+
+                    var p = document.getElementsByTagName("script")[0];
+                    p.parentNode.insertBefore(t, p);
+                    p.parentNode.insertBefore(n, p);
+                    p.parentNode.insertBefore(i, p);
+                    p.parentNode.insertBefore(o, p);
+                })("f93cfeed-d62f-4357-bfe9-f9f6887f69fb", token);
+            })();
+        }
+
+
+        /*
+        * main function
+        */
+        function initializeDidomi(){
+
+            // set default parameters
+            setSiteConfig();
+
+            // if didomi is active at site level
+            if(configDidomi && applyDidomiToChildren && activateDidomi){
+
+                //reset variables for child/parent configs
+                configDidomi = false;
+
+                setChildParentConfig();
+                setToken();
+
+
+                if(true){
+                    setSDKConfigs(lang, showDidomi);
+                    loadSDK(bannerToken);
+                }else{
+                    loadJS(scriptUrl, true, lang, bannerToken, showDidomi);
+                }
+            }
+            // else didomi should not appear on the page
+        }
+
+
+        // PARAMETERS
+        let lang = "";
+        let bannerToken = "";
+        let siteToken = "";
+        let configDidomi = false;
+        let applyDidomiToChildren = false;
+        let activateDidomi = false;
+        let showDidomi = false;
+        let foundParentConfig = false;
+        let childToken = "";
+        let scriptUrl = "";
+
+        initializeDidomi();
+    </script>
+
+    
+
+    
+    
+    
+
+    
+
+    
+    
+    
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+
+    
+        
+    
+
+    
+
+        
+        
+            
+    
+
+
+
+
+            <script async src="//assets.adobedtm.com/launch-ENce80544c76a04686ae546c50bbd9979e.min.js"></script>
+
+            
+
+            <script type="text/javascript">
+                var eventSource = "nbfwm";
+                var pageVariables = JSON.parse("[{\x22elementName\x22:\x22loB\x22,\x22elementValue\x22:\x22nbfwm\x22}]");
+                var rulesDefinitionFilePath = "/content/dam/dataLayerConfig/rules-fbngp.json";
+                var responseStatus = 200;
+
+                Websites.DataLayer.init(eventSource, pageVariables, rulesDefinitionFilePath, responseStatus);
+            </script>
+        
+    
+
+    
+    
+    
+
+    
+
+    
+    
+    
+
+
+
+    
+
+    
+
+    
+    
+        <link rel="icon" type="image/ico" href="/content/dam/global/logo/favicon.ico"/>
+    
+
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+    
+        <link type="text/css" rel="stylesheet" href="/content/dam/css/fbngp-microsite.css"/>
+    
+
+
+
+    
+    
+    
+
+    
+
+    
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="167x167" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-167x167.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="167x167" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-167x167-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="152x152" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-152x152.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-152x152-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="144x144" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-144x144.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-144x144-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="120x120" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-120x120.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-120x120-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="any" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-48x48.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="any" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-48x48-precomposed.png"/>
+
+
+
+    
+                                <script>!function(e){var n="https://s.go-mpulse.net/boomerang/";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,n="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="CBWCH-YHXC8-UX5PM-CKJ3F-WKW7N",function(){function e(){if(!r){var e=document.createElement("script");e.id="boomr-scr-as",e.src=window.BOOMR.url,e.async=!0,o.appendChild(e),r=!0}}function t(e){r=!0;var n,t,a,i,d=document,O=window;if(window.BOOMR.snippetMethod=e?"if":"i",t=function(e,n){var t=d.createElement("script");t.id=n||"boomr-if-as",t.src=window.BOOMR.url,BOOMR_lstart=(new Date).getTime(),e=e||d.body,e.appendChild(t)},!window.addEventListener&&window.attachEvent&&navigator.userAgent.match(/MSIE [67]\./))return window.BOOMR.snippetMethod="s",void t(o,"boomr-async");a=document.createElement("IFRAME"),a.src="about:blank",a.title="",a.role="presentation",a.loading="eager",i=(a.frameElement||a).style,i.width=0,i.height=0,i.border=0,i.display="none",o.appendChild(a);try{O=a.contentWindow,d=O.document.open()}catch(_){n=document.domain,a.src="javascript:var d=document.open();d.domain='"+n+"';void 0;",O=a.contentWindow,d=O.document.open()}if(n)d._boomrl=function(){this.domain=n,t()},d.write("<bo"+"dy onload='document._boomrl();'>");else if(O._boomrl=function(){t()},O.addEventListener)O.addEventListener("load",O._boomrl,!1);else if(O.attachEvent)O.attachEvent("onload",O._boomrl);d.close()}function a(e){window.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!window.BOOMR||!window.BOOMR.version&&!window.BOOMR.snippetExecuted){window.BOOMR=window.BOOMR||{},window.BOOMR.snippetStart=(new Date).getTime(),window.BOOMR.snippetExecuted=!0,window.BOOMR.snippetVersion=14,window.BOOMR.url=n+"CBWCH-YHXC8-UX5PM-CKJ3F-WKW7N";var i=document.currentScript||document.getElementsByTagName("script")[0],o=i.parentNode,r=!1,d=document.createElement("link");if(d.relList&&"function"==typeof d.relList.supports&&d.relList.supports("preload")&&"as"in d)window.BOOMR.snippetMethod="p",d.href=window.BOOMR.url,d.rel="preload",d.as="script",d.addEventListener("load",e),d.addEventListener("error",function(){t(!0)}),setTimeout(function(){if(!r)t(!0)},3e3),BOOMR_lstart=(new Date).getTime(),o.appendChild(d);else t(!1);if(window.addEventListener)window.addEventListener("load",a,!1);else if(window.attachEvent)window.attachEvent("onload",a)}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var n=""=="true"?1:0,t="",a="r5uv2vvyd2lfa2tp6tjq-f-c690b3afe-clientnsv4-s.akamaihd.net",i="false"=="true"?2:1,o={"ak.v":"41","ak.cp":"1490177","ak.ai":parseInt("891279",10),"ak.ol":"0","ak.cr":50,"ak.ipv":4,"ak.proto":"http/1.1","ak.rid":"471ae0dd","ak.r":47660,"ak.a2":n,"ak.m":"b","ak.n":"essl","ak.cport":26320,"ak.gh":"184.30.149.80","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.0rtt.ed":"","ak.csrc":"-","ak.acc":"bbr","ak.t":"1785722067","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==GEzTY0x9L9pV+AqzYkydpFlSSDMfPf5w1bmkLZPc0CXppEOKZ7MAmdzwOQlH3jZJRoZYJya+JIybqH2AxVq1h9IQUis5fXGSJR/ptcOgM5rewYai/Pv2iQZZ8bkAYiDsiCsdACQAD6KCkDsl7fZ3ExIT+Nun34i+8mFE4PxmpSZP0rJnzpCIKNW/ZTevzPHBfziSaO8IFHmlzAgjEW8lgc61VBmhc7l1968EBbFXZmqzfJz4c2OqBGI0N9WT1VCnUs0Uxk39rxxlHUn463W5cvzl/vJtgLe2tITsR0tp01RCY+pxsDJen14lix4ulPTY2GIgtCf/imACtZ/J2/MVtXxC36dAIrEvK/jRPz4rtOacc37X/4oB8ND97OqDVeRa7qYG0deuACE9vg1eeTJu09FxOU7zkOsZyWUka7g8kfw=","ak.pv":"170","ak.dpoabenc":"","ak.tf":i};if(""!==t)o["ak.ruds"]=t;var r={i:!1,av:function(n){var t="http.initiator";if(n&&(!n[t]||"spa_hard"===n[t]))o["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(o)},rv:function(){var e=["ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.0rtt.ed","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:o,akDNSPreFetchDomain:a,init:function(){if(!r.i){var e=BOOMR.subscribe;e("before_beacon",r.av,null,null),e("onbeacon",r.rv,null,null),r.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+    <body class="page basicpage">
+        
+        
+            
+
+
+
+            
+<div class="root responsivegrid">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid padding_top_md_15 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12 aem-GridColumn--bootstrapsm--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid width_90 border-bottom-light aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--bootstrapxs--12 aem-GridColumn--bootstrapsm--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--bootstrapxs--12 aem-Grid--default--12 ">
+    
+    <div class="image aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--3 aem-GridColumn aem-GridColumn--bootstrapxs--6 aem-GridColumn--default--6 aem-GridColumn--offset--default--3">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/outils-applications/references/collaborateurs/jean-francois-gobeil/_jcr_content/root/responsivegrid_copy_/responsivegrid/image_180994292.coreimg{.width}.png/1655499081441/photo-jean-francois-gobeil-collaborateur-350x330.png" data-asset="/content/dam/fbngp/microsites/photos-collaborateurs/photo-jean-francois-gobeil-collaborateur-350x330.png" data-asset-id="3918278e-6d9f-4a75-9c69-ff31e91de0d1" data-title="Photo de Jean-Francois Gobeil, Planificateur financier, collaborateur" id="image-349b3450c4" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/outils-applications/references/collaborateurs/jean-francois-gobeil/_jcr_content/root/responsivegrid_copy_/responsivegrid/image_180994292.coreimg.png/1655499081441/photo-jean-francois-gobeil-collaborateur-350x330.png" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Photo de Jean-Francois Gobeil, Planificateur financier, collaborateur"/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid width_90 aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--bootstrapxs--12 aem-GridColumn--bootstrapsm--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--bootstrapxs--12 aem-Grid--default--12 ">
+    
+    <div class="title title-article-spacing font_16 aem-GridColumn--default--none aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+    
+
+
+
+
+<div id="title-ac2de7909e" class="cmp-title">
+    <h3 class="cmp-title__text">Jean-Francois Gobeil </h3>
+</div>
+
+    
+
+</div>
+<div class="text aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--bootstrapxs--12">
+
+    
+
+
+
+
+<div id="text-295e5a8f7b" class="cmp-text cmp-text-v2">
+    <p
+  style="font-size: 12.0px;line-height: 14.0px;color: rgb(68,68,68);letter-spacing: 0.3px;margin-bottom: 8.0px;">Planificateur financier<sup>1</sup></p>
+
+</div>
+
+    
+</div>
+<div class="text aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--bootstrapxs--12">
+
+    
+
+
+
+
+<div id="text-9efa4cf6da" class="cmp-text cmp-text-v2">
+    <p
+  style="font-size: 12.0px;line-height: 14.0px;color: rgb(68,68,68);letter-spacing: 0.3px;margin-bottom: 8.0px;">Financière
+  Banque Nationale - Gestion de patrimoine<br />  </p>
+
+</div>
+
+    
+</div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="accordion panelcontainer aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+    
+
+
+
+
+
+<div id="accordion-85d0b2cd03" class="cmp-accordion" data-cmp-is="accordion" data-placeholder-text="faux">
+    <div class="cmp-accordion__item" data-cmp-hook-accordion="item" id="accordion-85d0b2cd03-item-b9c9133c3d">
+        <h3 class="cmp-accordion__header">
+            <button id="accordion-85d0b2cd03-item-b9c9133c3d-button" class="cmp-accordion__button" aria-controls="accordion-85d0b2cd03-item-b9c9133c3d-panel" data-cmp-hook-accordion="button">
+                <span class="cmp-accordion__title">Biographie</span>
+                <span class="cmp-accordion__icon"></span>
+            </button>
+        </h3>
+        <div data-cmp-hook-accordion="panel" id="accordion-85d0b2cd03-item-b9c9133c3d-panel" class="cmp-accordion__panel cmp-accordion__panel--hidden" role="region" aria-labelledby="accordion-85d0b2cd03-item-b9c9133c3d-button"><div class="text">
+
+    
+
+
+
+
+<div id="text-f050806df8" class="cmp-text cmp-text-v2">
+    <p>Jean-François est un passionné de la finance et de l’expérience
+  client. Vous trouverez en lui une oreille attentive doublée d’un
+  expert très aguerri en matière de finances personnelles. Son expertise
+  s’étend à la retraite, la finance, la fiscalité, les placements, les
+  assurances et la gestion des risques, puis aux aspects légaux et à la
+  succession. Son expérience terrain étendue vous aidera à mieux
+  comprendre vos finances et à demeurer en contrôle de vos affaires.</p>
+  <p>Il est titulaire d’un B.B.A de l’université Bishops en finance et
+  il   est membre de l’IQPF depuis 2015. Il a complété son diplôme en
+  planification financière au HEC Montréal et se prépare actuellement
+  pour l’examen du CFA niveau III. Il compte plus de 8 ans
+  d’expertise-conseil au sein d’équipe de courtiers en épargne
+  collective et sécurité financière, de courtiers en placement et au
+  sein des succursales bancaires à la fois au Québec et en Ontario.</p>
+
+</div>
+
+    
+</div>
+</div>
+    </div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+
+            
+    
+    
+
+
+
+    
+    
+    
+
+
+
+    
+    
+
+
+
+
+    
+
+    
+
+    
+    
+    
+
+            
+
+
+            
+            
+
+        
+    </body>
+</html>
+</div>
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    
+    
+</div>
+</div>
+<div class="responsivegrid layout_equal_height aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    
+    
+</div>
+</div>
+<div class="responsivegrid bnc-container layout-container-gutter margin_top_3_per layout_equal_height aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--bootstrapsm--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid layout_equal_height aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12 aem-GridColumn--bootstrapsm--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid footer1 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12 aem-GridColumn--bootstrapsm--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--6 aem-Grid--bootstrapxs--6 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="title aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--bootstrapxs--6 aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0">
+<div id="title-5d4113b9a2" class="cmp-title">
+    <h3 class="cmp-title__text">Contactez-nous</h3>
+</div>
+
+    
+
+</div>
+<div class="text aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--bootstrapxs--6 aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0">
+<div id="text-a7aad0014f" class="cmp-text">
+    <p>Obtenez les coordonnées des membres de notre équipe et voyez où se
+  trouvent nos bureaux.</p>
+  <p> </p>
+
+</div>
+
+    
+
+</div>
+<div class="bncButton button bt_cta_niveau1 aem-GridColumn--bootstrapsm--4 aem-GridColumn--default--none aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--4">
+
+    
+
+
+
+
+<a id="bncButton-ccc4682625" class="cmp-button left" href="/conseiller/groupe-wolf-achard/nous-joindre.html" target="_self">
+    
+    
+
+    <span class="cmp-button__text">Voir nos coordonnées</span>
+</a></div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid layout_equal_height aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid footer2 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12 aem-GridColumn--bootstrapsm--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--3 aem-Grid--bootstrapxs--3 aem-Grid--bootstrapsm--3 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--bootstrapsm--3 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--bootstrapxs--3">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--bootstrapxs--11 aem-Grid--default--12 aem-Grid--bootstrapsm--9 ">
+    
+    <div class="image aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--bootstrapxs--11 aem-GridColumn--bootstrapsm--9">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/conseiller/groupe-wolf-achard/notre-equipe.coreimg{.width}.png/structure/jcr:content/root/responsivegrid_copy_/responsivegrid_20512/responsivegrid/responsivegrid/image/1608132653421/picto-telephone-rouge-80x80.png" data-asset="/content/dam/fbngp/picto/picto-telephone-rouge-80x80.png" data-asset-id="5667bd1a-3d4b-478e-84a0-2ddb892c8864" data-title="Picto téléphone" id="image-1a9bc80b0c" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/conseiller/groupe-wolf-achard/notre-equipe.coreimg.png/structure/_jcr_content/root/responsivegrid_copy_/responsivegrid_20512/responsivegrid/responsivegrid/image/1608132653421/picto-telephone-rouge-80x80.png" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Picto téléphone"/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="text aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--bootstrapxs--11 aem-GridColumn--bootstrapsm--9">
+<div id="text-2a33a6ad7c" class="cmp-text">
+    <p>
+  <a href="tel:+15143951937">514 395-1937</a></p>
+ <p>
+  <a href="tel:+15144120370">514 412-0370</a></p>
+
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid layout_equal_height aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--3 aem-Grid--default--3 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid footer2 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--3 aem-Grid--bootstrapxs--3 aem-Grid--bootstrapsm--3 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--bootstrapsm--3 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--bootstrapxs--3">
+
+
+<div class="aem-Grid aem-Grid--3 aem-Grid--bootstrapxs--11 aem-Grid--default--3 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--3 aem-GridColumn--bootstrapxs--11">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/conseiller/groupe-wolf-achard/notre-equipe.coreimg{.width}.png/structure/jcr:content/root/responsivegrid_copy_/responsivegrid_13724_2130609452/responsivegrid_copy_/responsivegrid/image/1608132660009/picto-courriel-rouge-80x80.png" data-asset="/content/dam/fbngp/picto/picto-courriel-rouge-80x80.png" data-asset-id="90b308e2-cadc-4b0d-b7a4-541a3dfb1444" data-title="Picto courriel" id="image-ccfe88e6e1" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/conseiller/groupe-wolf-achard/notre-equipe.coreimg.png/structure/_jcr_content/root/responsivegrid_copy_/responsivegrid_13724_2130609452/responsivegrid_copy_/responsivegrid/image/1608132660009/picto-courriel-rouge-80x80.png" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Picto courriel"/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="text aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--3 aem-GridColumn--bootstrapxs--11">
+<div id="text-bd666d62b5" class="cmp-text">
+    <p>
+  <b>
+    <a href="mailto:laurent.achard@bnc.ca">laurent.achard@bnc.ca</a></b></p>
+ <p>
+  <a href="mailto:davidalexandre.wolf@bnc.ca"><b>davidalexandre.wolf@bnc.ca</b></a></p>
+
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid margin_top_2_per aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    
+    
+</div>
+</div>
+<div class="footer aem-GridColumn aem-GridColumn--default--12">
+    
+    
+
+
+<footer id="footer-fbngp-fr" class="cmp-staticFooter">
+    <div class="staticFooterContainer">
+<nav aria-label="Liens d’informations et de contact" class="first-level">
+<ul>
+<li>
+<div class="controller" id="aideController" aria-owns="aide">
+<p>Aide et contact</p>
+<img loading="lazy" alt="closed" src="/content/dam/bnc/particuliers/picto/collapse-closed.svg"/>
+</div>
+<div class="links" id="aide">
+<a href="/contact.html">Nous joindre</a>
+</div>
+</li>
+<li>
+<div class="controller" id="utilesController" aria-owns="utiles">
+<p>Liens utiles</p>
+<img loading="lazy" alt="closed" src="/content/dam/bnc/particuliers/picto/collapse-closed.svg"/>
+</div>
+<div class="links" id="utiles">
+<a href="/conseiller.html">Trouver un conseiller</a>
+<a href="/a-propos/informations-reglementaires.html">Informations réglementaires</a>
+<a href="/resolution-insatisfactions.html">Résolution des insatisfactions</a>
+</div>
+</li>
+<li>
+<div class="controller" id="proposController" aria-owns="propos">
+<p>À propos de nous</p>
+<img loading="lazy" alt="closed" src="/content/dam/bnc/particuliers/picto/collapse-closed.svg"/>
+</div>
+<div class="links" id="propos">
+<a href="/a-propos.html">Notre organisation</a>
+<a href="https://www.bnc.ca/particuliers.html">Banque Nationale du Canada</a>
+<a href="https://www.bnc.ca/coordonnees.html">Filiales Banque Nationale</a>
+<a href="/carriere.html">Carrières</a>
+</div>
+</li>
+<li>
+<div class="controller" id="affutController" aria-owns="affut">
+<p>Restez à l'affût</p>
+<img loading="lazy" alt="closed" src="/content/dam/bnc/particuliers/picto/collapse-closed.svg"/>
+</div>
+<div class="links" id="affut">
+<a href="https://www.bnc.ca/a-propos-de-nous/nouvelles-medias.html">Communiqués</a>
+</div>
+</li>
+</ul>
+</nav>
+<hr>
+<nav aria-label="Liens de règlementation" class="second-level">
+<ul>
+<li>
+<a href="/convention.html">Convention</a>
+</li>
+<li>
+<a href="https://www.bnc.ca/politique-de-confidentialite.html">Politique de protection des renseignements personnels</a>
+</li>
+<li>
+<a href="/politique-donnees-numeriques.html">Politique sur les données numériques</a>
+</li>
+<li>
+<a href="https://www.bnc.ca/abc-securite.html">ABC de la sécurité</a>
+</li>
+<li>
+<a href="https://www.bnc.ca/a-propos-de-nous/esg/enonce-sur-accessibilite.html">Accessibilité</a>
+</li>
+<li>
+    <a href="https://www.bnc.ca/a-propos-de-nous/esg/rapport-etape-accessibilite.html">Rapport d'étape sur l'accessibilité</a>
+    </li>
+<li>
+<a href="https://www.bnc.ca/a-propos-de-nous/esg/plan-accessibilite.html#2.2">Processus de rétroaction en matière d'accessibilité</a>
+</li>
+</ul>
+</nav>
+<hr>
+<nav aria-label="Notes légales et réseaux sociaux" class="third-level">
+<ul>
+<li>
+<img loading="lazy" alt="Banque Nationale" src="/content/dam/bnc/particuliers/picto/picto-logo-bn-24x22.svg"/>
+</li>
+</li>
+<li>
+<p id="copyright">© FBNGP Tous droits réservés 2026.</p>
+</li>
+<li>
+<a href="https://www.linkedin.com/company/financi-re-banque-nationale/" target="_blank">
+<img class="social-footer" loading="lazy" alt="LinkedIn, lien externe qui s'ouvre dans un nouvel onglet." src="/content/dam/bnc/particuliers/picto/picto-social-linkedin.svg"/>
+</a>
+</li>
+</ul>
+</nav>
+<nav aria-label="Partenaires" class="fourth-level">
+<ul>
+<li>
+<a href="https://www.ocri.ca/" target="_blank">
+<img loading="lazy" alt="Organisme Canadien de Réglementation des Investissements (OCRI), lien externe qui s'ouvre dans un nouvel onglet." src="/content/dam/fbngp/logos/logo-ocri.svg"/>
+</a>
+<a href="https://www.ocri.ca/bureau-des-investisseurs/rapport-info-conseiller" target="_blank" aria-label="Consultez les rapports Info-Conseiller de l'OCRI, lien externe qui s'ouvre dans un nouvel onglet.">Consultez les rapports Info-Conseiller de l'OCRI
+<img class="external-link" loading="lazy" alt="" src="/content/dam/bnc/particuliers/picto/external-link.svg">
+</a>
+</li>
+<li>
+<a href="https://www.fcpi.ca/" target="_blank">
+<img loading="lazy" alt="Fonds Canadien de protection des investisseurs (FPCI), lien externe qui s'ouvre dans un nouvel onglet." src="/content/dam/fbngp/logos/logo-fcpi.svg"/>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</footer>
+
+
+
+</div>
+
+    
+</div>
+</div>
+
+
+            
+    
+    
+
+
+
+    
+    
+    
+
+
+
+    
+    
+
+
+
+
+    
+
+    
+
+    
+    
+    
+
+            
+
+
+            
+            
+
+        
+    </body>
+</html>

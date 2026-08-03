@@ -1,0 +1,246 @@
+---
+/**
+ * PAGE-LOCAL. One advisor, as the contact page presents them.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * IDENTITY DATA COMES IN FROM TWO PLACES, NEITHER OF WHICH IS THIS FILE
+ *
+ *  · `advisor` — name, regulated title, languages line and headshot, from
+ *    `contact.{fr,en}.ts`, verbatim from this page's own capture.
+ *  · `phone` / `email` — from `t(locale).contact`, the SAME rows the footer and
+ *    the sticky strip print, paired to this advisor by name in the page.
+ *
+ * So a number never appears beside a licensed advisor's photograph unless it is
+ * the same string the rest of the site already carries. Nothing is retyped here.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * WHAT MAY NOT BE ADDED
+ *
+ *  · NO designation, credential or letters after either name. Neither advisor
+ *    displays any anywhere on the live site, and NBF's own records holding one
+ *    does not license displaying it (P-8).
+ *  · The title string is regulated and ships exactly as captured, including the
+ *    TRAILING U+00A0 the French `<h4>` carries and the English one does not.
+ *  · The `alt` on the headshot ships SIC. F-01 (French, `patrimoin ` truncated),
+ *    F-07 and F-08 (English, stray spaces) are all PENDING; no policy amendment
+ *    authorises applying them, so the default holds: verbatim with a flag.
+ *  · The languages line is this SURFACE's own value. Four live surfaces make
+ *    four different assertions about these two people (C-07 / C-08) and two of
+ *    the four are inside one language tree. They are not reconciled here.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * THE HEADING LINKS TO THE PROFILE PAGE, exactly as the live `<h3>` does. The
+ * destination is the rebuilt route (`/equipe/<slug>/`, `/en/team/<slug>/`), not
+ * the live `.html` path — the same root-level move U-01 registers for this page.
+ * The slug is IDENTICAL in both languages; only the parent path differs.
+ */
+import Figure from '../../components/Figure.astro';
+import Icon from '../../components/Icon.astro';
+import type { ContactAdvisor } from '../../data/pages/contact.types';
+import type { LinkItem, PhoneEntry } from '../../data/types';
+
+interface Props {
+  advisor: ContactAdvisor;
+  /** From `t(locale).contact.phones` — never re-declared on the page. */
+  phone: PhoneEntry;
+  /** From `t(locale).contact.emails` — never re-declared on the page. */
+  email: LinkItem;
+  /** Profile-page path, built with `advisorPath(slug, locale)`. */
+  href: string;
+}
+
+const { advisor, phone, email, href } = Astro.props;
+
+/**
+ * Lucide `message-circle`, inlined page-locally.
+ *
+ * FRICTION, reported rather than worked around: `src/components/icons.ts` is a
+ * shared file this build may not edit, and it carries no speech-bubble glyph.
+ * The live page marks the languages line with a speech-bubble pictogram
+ * (`icn-chat-conseillers-20x20.svg`), so dropping the mark would change the
+ * line's meaning from "languages spoken" to an unlabelled fragment, and adding
+ * a text label instead would be authored copy needing an `NC-` row. A local
+ * copy of the glyph adds no string and no shared-file edit. It should move into
+ * `icons.ts` the next time that file is legitimately open.
+ */
+const SPEECH_BUBBLE = '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>';
+---
+
+<article class="card advisor">
+  <div class="advisor__portrait media">
+    <Figure image={advisor.photo} />
+  </div>
+
+  <div class="advisor__body">
+    <h3 class="advisor__name">
+      <a class="advisor__link" href={href}>{advisor.name}</a>
+    </h3>
+    {/* Regulated title, verbatim — trailing U+00A0 and all. */}
+    <p class="advisor__title">{advisor.title}</p>
+
+    <ul class="advisor__lines">
+      <li class="advisor__line">
+        <Icon name="phone" size={16} class="advisor__icon" />
+        <a class="advisor__value tabular" href={phone.href}>{phone.display}</a>
+      </li>
+      <li class="advisor__line">
+        <Icon name="mail" size={16} class="advisor__icon" />
+        <a class="advisor__value" href={email.href}>{email.label}</a>
+      </li>
+      <li class="advisor__line">
+        <svg
+          class="advisor__icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <Fragment set:html={SPEECH_BUBBLE} />
+        </svg>
+        <span class="advisor__value advisor__value--static">{advisor.languages}</span>
+      </li>
+    </ul>
+  </div>
+</article>
+
+<style>
+  /* Horizontal card: the DAM headshots are 350×330 masters, so a full-width
+     photo above the text would be upscaled at every desktop width. At 150px the
+     portrait is served from the source at 2× and never enlarged. */
+  .advisor {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: clamp(1.125rem, 2.5vw, 1.75rem);
+    align-items: start;
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  }
+
+  .advisor__portrait {
+    inline-size: clamp(6rem, 14vw, 9.375rem);
+    aspect-ratio: 350 / 330;
+  }
+
+  .advisor__body {
+    min-inline-size: 0;
+  }
+
+  .advisor__name {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-size: clamp(1.375rem, 2vw, 1.625rem);
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+  }
+
+  /* The name is a real navigation control — it is the only route from this page
+     to the advisor's profile — and it is NOT inline in a sentence, so WCAG
+     2.5.8's inline exception does not cover it. As a bare anchor inside a 22px
+     serif heading its box was 25.3px at 375px.
+     The floor is carried by an invisible centred overlay rather than by
+     `min-block-size`, because growing the anchor would push 19px of air between
+     the name and the title beneath it. Same device as `.cstrip__close`.
+     It extends ~9.4px past the line box; the nearest interactive element below
+     is the phone link, 41px away, so no two targets overlap. */
+  .advisor__link {
+    position: relative;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .advisor__link::before {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: 50%;
+    block-size: 44px;
+    translate: 0 -50%;
+  }
+
+  .advisor__link:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  /* DELIBERATELY NOT a whole-card click target. The pattern is tempting on a
+     directory card, but on THIS page the two things inside the card are the
+     site's only conversion paths — a `tel:` and a `mailto:` — and an overlay
+     linking to the profile page would sit on top of both, steal stray clicks
+     and make the numbers un-selectable. The name is the link; the number and
+     the address are their own links; nothing overlaps. */
+
+  .advisor__title {
+    margin: 0.375rem 0 0;
+    font-size: 0.9375rem;
+    line-height: 1.4;
+    color: var(--stone);
+  }
+
+  .advisor__lines {
+    margin: clamp(0.875rem, 2vw, 1.125rem) 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 0.375rem;
+  }
+
+  .advisor__line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-block-size: 32px;
+  }
+
+  .advisor__icon {
+    flex: none;
+    color: var(--stone);
+  }
+
+  /* inline-flex + a height floor, because these two anchors are the page's
+     primary conversion actions and a bare inline anchor is only ~20px tall —
+     under the 24px WCAG 2.5.8 floor, and nowhere near comfortable on touch. */
+  .advisor__value {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 32px;
+    font-size: 0.9375rem;
+    line-height: 1.35;
+    color: var(--ink);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  a.advisor__value:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  /* Not a link — the languages line is a statement, not an action. */
+  .advisor__value--static {
+    color: var(--stone);
+  }
+
+  /* The two actionable lines get the full 44px — UNCONDITIONALLY. This used to
+     sit behind `@media (pointer: coarse)`, which looks right and is not:
+     `pointer` reports the PRIMARY input, so a Windows laptop with a touchscreen
+     and a trackpad reports `fine` and served 32px targets to someone tapping
+     with a finger. The floor is not a touch affordance, it is the floor.
+     `a.` scoped, so the languages line — a statement, not an action — stays
+     compact and the card does not grow for nothing. */
+  a.advisor__value {
+    min-block-size: 44px;
+  }
+
+  @media (max-width: 26rem) {
+    .advisor {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

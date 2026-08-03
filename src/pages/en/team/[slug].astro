@@ -1,0 +1,168 @@
+---
+/**
+ * ENGLISH advisor profile — `/en/team/<slug>/`. The twin of
+ * `src/pages/equipe/[slug].astro`; see that file for the full reasoning.
+ *
+ * The slug is IDENTICAL in both languages even though the parent path is not
+ * (`/equipe/` vs `/en/team/`). Do not translate a slug — and note that the TEAM
+ * slug DOES differ between the live trees (`groupe-wolf-achard` vs
+ * `wolf-archard-group`, C-21), which is exactly why nothing here derives one
+ * language's path from the other's.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * TWO ENGLISH-SPECIFIC POINTS
+ *
+ *  · The live `View website` link on BOTH English profile pages points at the
+ *    FRENCH microsite (`https://www.fbngp.ca/conseiller/groupe-wolf-achard.html`)
+ *    — a language-purity breach in NBF's own record (N-09). The row is dropped
+ *    here rather than shipped or silently repointed. D-21.
+ *  · The languages field says `English, French` / `French, English, Italian`,
+ *    while the ENGLISH TEAM PAGE says `English` for both men. A
+ *    self-contradiction inside one language tree (C-07 / C-08). Both surfaces
+ *    ship their own string; harmonising them is a judgment about a licensed
+ *    advisor's declared capability and is not a builder's to make.
+ *
+ * F-12 (`Laurent Achard , Wealth Advisor` — space before the comma) ships SIC in
+ * the <title> and description. F-13's doubled space is French-only and correctly
+ * absent here.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Section from '../../../components/Section.astro';
+import Button from '../../../components/Button.astro';
+import Icon from '../../../components/Icon.astro';
+import ProfileRecord from '../../_equipe/ProfileRecord.astro';
+import { t, alternatesForPair, advisorPath, pathFor } from '../../../lib/i18n';
+import { advisorsByLocale, displayName } from '../../../data/advisors';
+import { Image } from 'astro:assets';
+
+export function getStaticPaths() {
+  return advisorsByLocale.en.map((advisor) => ({
+    params: { slug: advisor.slug },
+    props: { advisor },
+  }));
+}
+
+const locale = 'en' as const;
+const s = t(locale);
+const { advisor } = Astro.props;
+
+const teamHref = pathFor('team', locale);
+const teamLabel = s.nav.items.find((item) => item.key === 'team')!.liveLabel;
+---
+
+<BaseLayout
+  locale={locale}
+  pageKey={null}
+  alternates={alternatesForPair(advisorPath(advisor.slug, 'fr'), advisorPath(advisor.slug, 'en'))}
+  switchHref={advisorPath(advisor.slug, 'fr')}
+  activeKey="team"
+  title={advisor.seo.title}
+  description={advisor.seo.description}
+>
+  <Section bg="paper" padding="compact" class="profile">
+    <p class="profile__back">
+      <a class="profile__back-link" href={teamHref}>
+        <Icon name="chevron-right" size={16} class="profile__back-icon" />
+        <span>{teamLabel}</span>
+      </a>
+    </p>
+
+    <div class="profile__grid">
+      <div class="profile__portrait media">
+        {/* The live <img> carries NO alt attribute at all (N-12). This alt is
+            NC-07: name and title, nothing more. */}
+        <Image
+          src={advisor.image}
+          alt={advisor.imageAlt}
+          widths={[280, 350]}
+          sizes="(min-width: 48rem) 20rem, calc(100vw - 2.5rem)"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </div>
+
+      <div class="profile__info">
+        <h1 class="profile__name serif-display">{displayName(advisor)}</h1>
+        <p class="profile__title">{advisor.title.profile}</p>
+
+        <ProfileRecord locale={locale} advisor={advisor} />
+
+        <p class="profile__cta">
+          <Button href={teamHref} variant="secondary" pill>{teamLabel}</Button>
+        </p>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .profile__back {
+    margin: 0 0 clamp(1.5rem, 3vw, 2.25rem);
+    font-size: var(--text-small);
+  }
+
+  .profile__back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    min-block-size: 44px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 180ms var(--ease-wa);
+  }
+
+  .profile__back-link:hover {
+    color: var(--fg);
+    text-decoration: underline;
+    text-decoration-color: var(--nb-red);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.28em;
+  }
+
+  .profile__back-link :global(.profile__back-icon) {
+    flex: none;
+    transform: rotate(180deg);
+  }
+
+  .profile__grid {
+    display: grid;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+
+  @media (min-width: 48rem) {
+    .profile__grid {
+      grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+      align-items: start;
+      column-gap: clamp(2.5rem, 5vw, 4rem);
+    }
+  }
+
+  .profile__portrait {
+    aspect-ratio: 4 / 5;
+    max-inline-size: 20rem;
+    background-color: var(--greige);
+  }
+
+  .profile__name {
+    margin: 0;
+    font-size: clamp(2.25rem, 4.4vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+  }
+
+  /* Regulated title: styled, never transformed. */
+  .profile__title {
+    margin: 0.5rem 0 clamp(1.75rem, 3.5vw, 2.5rem);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+
+  .profile__cta {
+    margin-block-start: clamp(1.75rem, 3.5vw, 2.5rem);
+  }
+</style>

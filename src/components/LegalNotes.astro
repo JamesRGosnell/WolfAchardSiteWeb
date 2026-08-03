@@ -1,0 +1,201 @@
+---
+/**
+ * "Notes légales" / "Legal Disclaimers" — the five numbered disclaimers.
+ *
+ * THE RULE: any page that renders a superscript marker MUST render this
+ * component on the same page. Zero orphan markers, ever.
+ *
+ * WHERE THIS GOES is decided by the compliance crib sheet's attachment map,
+ * built by extracting every `<sup>` from `source-assets/html/`. Audit it in
+ * BOTH directions — live NBF sites break this routinely, and this client's
+ * live site is already known to have one of each defect:
+ *   · `nos-services.html` renders the accordion with ZERO markers anywhere
+ *     (five disclaimers citing nothing)
+ *   · `notre-equipe.html` renders markers 1 and 2 with NO accordion on the page
+ *
+ * WHAT THIS COMPONENT WILL NOT DO
+ *  · It never renders a subset. All five items always render, in order, with
+ *    their original numbering. Re-ordering, re-numbering, splitting, merging,
+ *    truncating or partially revealing them is forbidden. `refs` marks which
+ *    ones this page points at; it is NOT a filter, and passing it changes
+ *    nothing about what is rendered.
+ *  · It never hides the text from search, print or assistive tech. <details>
+ *    keeps the content in the DOM and exposes expanded/collapsed state
+ *    natively; main.ts additionally force-opens it for printing and when a
+ *    marker link targets an item inside it.
+ *
+ * MARKER MARKUP for page authors — the ids are stable and this is the contract:
+ *
+ *   <sup class="note-ref"><a href="#legal-note-3"
+ *        aria-label="Note légale 3">3</a></sup>
+ */
+import type { Locale } from '../data/types';
+import { t } from '../lib/i18n';
+import Icon from './Icon.astro';
+
+interface Props {
+  locale: Locale;
+  /**
+   * Disclaimer numbers (1–5) this page's markers point at. Documentation and
+   * emphasis only — never a filter. Defaults to none referenced.
+   */
+  refs?: number[];
+  /** Render expanded. The live site ships it collapsed. */
+  open?: boolean;
+  id?: string;
+  class?: string;
+}
+
+const { locale, refs = [], open = false, id, class: className } = Astro.props;
+
+const s = t(locale);
+const notes = s.legalNotes;
+const headingId = `${id ?? 'legal-notes'}-title`;
+---
+
+<section
+  id={id}
+  class:list={['legal-notes', className]}
+  aria-labelledby={headingId}
+  data-legal-refs={refs.join(',')}
+>
+  <details class="legal-notes__details" data-legal-notes open={open}>
+    <summary class="legal-notes__summary">
+      <h2 id={headingId} class="legal-notes__title">{notes.title}</h2>
+      <Icon name="chevron-down" size={18} class="legal-notes__chevron" />
+    </summary>
+
+    <ol class="legal-notes__list">
+      {
+        notes.items.map((text, index) => (
+          <li
+            id={`legal-note-${index + 1}`}
+            class:list={['legal-notes__item', refs.includes(index + 1) && 'is-referenced']}
+          >
+            {text}
+          </li>
+        ))
+      }
+    </ol>
+  </details>
+</section>
+
+<style>
+  .legal-notes {
+    border-block: 1px solid var(--rule);
+  }
+
+  .legal-notes__details {
+    max-inline-size: 100%;
+  }
+
+  .legal-notes__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-block-size: 56px;
+    padding-block: 0.75rem;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  /* Replace the UA disclosure triangle with our own chevron. */
+  .legal-notes__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .legal-notes__summary::marker {
+    content: '';
+  }
+
+  .legal-notes__summary:focus-visible {
+    outline: 2px solid var(--nb-red);
+    outline-offset: 2px;
+  }
+
+  .legal-notes__title {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-eyebrow);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color 180ms var(--ease-wa);
+  }
+
+  .legal-notes__summary:hover .legal-notes__title {
+    color: var(--fg);
+  }
+
+  /* :global — the chevron is rendered by <Icon>, outside this scope. */
+  .legal-notes__summary :global(.legal-notes__chevron) {
+    flex: none;
+    color: var(--muted);
+    transition: transform 220ms var(--ease-wa);
+  }
+
+  .legal-notes__details[open] .legal-notes__summary :global(.legal-notes__chevron) {
+    transform: rotate(180deg);
+  }
+
+  .legal-notes__list {
+    margin: 0;
+    padding: 0 0 1.75rem 1.5rem;
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  /* Regulated small print is the copy on this site that most needs a readable
+     line, and it had the longest: `78ch` at 13px rendered 118 characters.
+     --measure is the calibrated token — see global.css for why `ch` is not a
+     character. */
+  .legal-notes__item {
+    max-inline-size: var(--measure);
+    padding-inline-start: 0.25rem;
+    scroll-margin-block-start: calc(var(--header-h) + 2rem);
+  }
+
+  .legal-notes__item + .legal-notes__item {
+    margin-block-start: 0.75rem;
+  }
+
+  /* The 1–5 numerals are load-bearing — they are the marker targets — so they
+     stay emphasised, but in --fg. Never red: a red numeral here would be
+     indistinguishable from a red superscript marker. */
+  .legal-notes__item::marker {
+    color: var(--fg);
+    font-weight: 600;
+  }
+
+  /* A marker on this page points here — quietly acknowledged. */
+  .legal-notes__item.is-referenced {
+    color: var(--fg);
+  }
+
+  .legal-notes__item:target {
+    background-color: var(--greige);
+    box-shadow: 0 0 0 0.375rem var(--greige);
+    border-radius: 1px;
+  }
+
+  /* Legal text must print, expanded, whatever its state on screen. main.ts
+     opens it on beforeprint; this is the CSS half of the belt and braces. */
+  @media print {
+    .legal-notes__summary :global(.legal-notes__chevron) {
+      display: none;
+    }
+
+    .legal-notes__details:not([open]) > :not(summary) {
+      content-visibility: visible !important;
+      display: revert !important;
+    }
+  }
+</style>

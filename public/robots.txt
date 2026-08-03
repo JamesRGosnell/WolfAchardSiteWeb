@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://groupewolfachard.ca/sitemap-index.xml
+
+# NOTE: this is the PRODUCTION robots.txt. The client demo deploy must ship a
+# hardened one (Disallow: /) plus noindex on every page and no sitemap — an
+# unapproved draft of a co-branded bank site is shareable by link and invisible
+# to search. Keep the hardening in the demo workflow, never here.

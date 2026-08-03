@@ -1,0 +1,192 @@
+---
+/**
+ * FRENCH advisor profile — `/equipe/<slug>/`, one page per registered advisor.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * WHAT THIS PAGE IS. NOT this team's content.
+ *
+ * The live pages under `/conseiller/groupe-wolf-achard/notre-equipe/<slug>.html`
+ * carry `meta[name=template]=fiche-conseillers-placement-template` and are
+ * rendered by National Bank from a CENTRAL STRUCTURED ADVISOR RECORD into the
+ * corporate `fbngp.ca` chrome — not the microsite chrome. Name, title, phone,
+ * email, website, address and languages are all fields in NBF's record. Copying
+ * them into static files removes the updating the advisor has today; that is an
+ * open question for the client, registered in the S-series.
+ *
+ * Every visible string here comes from `src/data/advisors.ts` or from the shared
+ * address strings. Nothing is authored on this page except the two field labels
+ * (NC-06, see <ProfileRecord>).
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * COMPLIANCE
+ *
+ *  · `COMPLIANCE.md` AP-02 — the live profile pages carry NO <sup> markers and no disclaimer
+ *    accordion. Nothing here cites one, so <LegalNotes> is deliberately ABSENT.
+ *    Adding it would be as much a deviation as dropping one.
+ *  · `COMPLIANCE.md` AP-01 — defects on these pages originate in NBF's record,
+ *    not in the page.
+ *    The space before the comma in `Laurent Achard , Conseiller…` (F-12) and the
+ *    doubled space in David Alexandre Wolf's title (F-13) ship SIC in the
+ *    `<title>` and description, exactly as captured. Neither is repaired.
+ *  · The live `< Voir tous les conseillers` link is dead (`href="#"`, N-10) and
+ *    means "all advisors on fbngp.ca" — a destination this site does not have.
+ *    It is replaced by a real link to this site's own team page, labelled with
+ *    the site's own live nav string `Notre équipe`. D-22.
+ *  · The live `Voir le site Web` row is dropped. D-21 — see <ProfileRecord>.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * MARKUP NOTE, no words changed
+ *
+ * The live page renders the job title as an `<h3>` directly beneath the `<h1>`,
+ * skipping `<h2>` and making a title string claim to be a section heading it
+ * does not head. Here it is a `<p>` immediately after the `<h1>`. The STRING is
+ * character-for-character the live one; only the element differs, so this is a
+ * markup decision and not a register row.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/Section.astro';
+import Button from '../../components/Button.astro';
+import Icon from '../../components/Icon.astro';
+import ProfileRecord from '../_equipe/ProfileRecord.astro';
+import { t, alternatesForPair, advisorPath, pathFor } from '../../lib/i18n';
+import { advisorsByLocale, displayName } from '../../data/advisors';
+import { Image } from 'astro:assets';
+
+export function getStaticPaths() {
+  return advisorsByLocale.fr.map((advisor) => ({
+    params: { slug: advisor.slug },
+    props: { advisor },
+  }));
+}
+
+const locale = 'fr' as const;
+const s = t(locale);
+const { advisor } = Astro.props;
+
+const teamHref = pathFor('team', locale);
+/* liveLabel, never label: the bar-level shortening (NC-01/NC-02) must never
+   reach page copy. `Notre équipe` is unshortened either way. */
+const teamLabel = s.nav.items.find((item) => item.key === 'team')!.liveLabel;
+---
+
+<BaseLayout
+  locale={locale}
+  pageKey={null}
+  alternates={alternatesForPair(advisorPath(advisor.slug, 'fr'), advisorPath(advisor.slug, 'en'))}
+  switchHref={advisorPath(advisor.slug, 'en')}
+  activeKey="team"
+  title={advisor.seo.title}
+  description={advisor.seo.description}
+>
+  <Section bg="paper" padding="compact" class="profile">
+    <p class="profile__back">
+      <a class="profile__back-link" href={teamHref}>
+        <Icon name="chevron-right" size={16} class="profile__back-icon" />
+        <span>{teamLabel}</span>
+      </a>
+    </p>
+
+    <div class="profile__grid">
+      <div class="profile__portrait media">
+        {/* The live <img> carries NO alt attribute at all — not `alt=""`, the
+            attribute is absent (N-12). A photograph of a named, licensed
+            advisor with no accessible name is an accessibility failure we do
+            not reproduce. This alt is NC-07: name and title, nothing more. */}
+        <Image
+          src={advisor.image}
+          alt={advisor.imageAlt}
+          widths={[280, 350]}
+          sizes="(min-width: 48rem) 20rem, calc(100vw - 2.5rem)"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </div>
+
+      <div class="profile__info">
+        <h1 class="profile__name serif-display">{displayName(advisor)}</h1>
+        {/* VERBATIM regulated title, in this page's own surface form. A <p>,
+            not the live <h3> — see the markup note above. */}
+        <p class="profile__title">{advisor.title.profile}</p>
+
+        <ProfileRecord locale={locale} advisor={advisor} />
+
+        <p class="profile__cta">
+          <Button href={teamHref} variant="secondary" pill>{teamLabel}</Button>
+        </p>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .profile__back {
+    margin: 0 0 clamp(1.5rem, 3vw, 2.25rem);
+    font-size: var(--text-small);
+  }
+
+  .profile__back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    min-block-size: 44px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 180ms var(--ease-wa);
+  }
+
+  .profile__back-link:hover {
+    color: var(--fg);
+    text-decoration: underline;
+    text-decoration-color: var(--nb-red);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.28em;
+  }
+
+  .profile__back-link :global(.profile__back-icon) {
+    flex: none;
+    transform: rotate(180deg);
+  }
+
+  .profile__grid {
+    display: grid;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+
+  @media (min-width: 48rem) {
+    .profile__grid {
+      grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+      align-items: start;
+      column-gap: clamp(2.5rem, 5vw, 4rem);
+    }
+  }
+
+  .profile__portrait {
+    aspect-ratio: 4 / 5;
+    max-inline-size: 20rem;
+    background-color: var(--greige);
+  }
+
+  .profile__name {
+    margin: 0;
+    font-size: clamp(2.25rem, 4.4vw, 3.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+  }
+
+  /* Regulated title: styled, never transformed — no text-transform, no
+     title-casing, no truncation. */
+  .profile__title {
+    margin: 0.5rem 0 clamp(1.75rem, 3.5vw, 2.5rem);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+
+  .profile__cta {
+    margin-block-start: clamp(1.75rem, 3.5vw, 2.5rem);
+  }
+</style>

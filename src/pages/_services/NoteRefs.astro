@@ -1,0 +1,50 @@
+---
+/**
+ * PAGE-LOCAL. A numbered disclaimer marker — the one thing on this site that is
+ * allowed to be red at rest.
+ *
+ * THE CONTRACT, from <LegalNotes>: a marker is a real `<sup>` containing a link
+ * to `#legal-note-N`, with an accessible name that says what it is. A bare
+ * digit appended to a sentence is not a regulatory reference anyone can follow.
+ *
+ *   <sup class="note-ref"><a href="#legal-note-3"
+ *        aria-label="Note légale 3">3</a></sup>
+ *
+ * P-12: any page that renders one of these renders the FULL 1–5 disclaimer set
+ * on the same page, in order. `refs` chooses which markers appear; it never
+ * filters which notes render.
+ *
+ * A COMMA LIST IS STILL SEVERAL REFERENCES. The live pages both carry a
+ * `1, 2, 3` marker as one lump of text pointing nowhere. Rendered here as three
+ * separate links inside one `<sup>`, the visible glyphs are unchanged — the
+ * reader still sees `1, 2, 3` — and each one now resolves. The separator is
+ * `aria-hidden` so a screen reader announces three named references rather than
+ * "one comma two comma three".
+ *
+ * WHAT THIS COMPONENT WILL NOT DO: invent a marker. Where the live copy makes a
+ * claim with no marker on it — the banking blocks in BOTH languages make fee
+ * and financing claims that disclaimers 4 and 5 exist to qualify — the claim
+ * ships uncovered and is reported. Attaching a reference the live page does not
+ * carry is inventing regulatory wording (P-6).
+ */
+import type { Locale } from '../../data/types';
+import type { NoteRef } from '../../data/pages/services.types';
+import { t } from '../../lib/i18n';
+
+interface Props {
+  refs: NoteRef[];
+  locale: Locale;
+}
+
+const { refs, locale } = Astro.props;
+const s = t(locale);
+
+/* WHITESPACE IS LOAD-BEARING IN THIS FILE. The template below is one line, it
+   starts at the very first character after the fence, and it carries no
+   comment above it — an Astro `{/* … *\/}` comment leaves the newline after it
+   in the output as a real space, which would put a U+0020 between a
+   disclosure sentence and its marker where the live markup has either nothing
+   or a U+00A0. The separator between references lives inside its own span so
+   the visible glyphs read exactly `1, 2, 3`. */
+---
+<sup class="note-ref">{refs.map((ref, index) => (<>{index > 0 && <span aria-hidden="true">, </span>}<a href={`#legal-note-${ref}`} aria-label={`${s.a11y.legalNoteRef} ${ref}`}>{ref}</a></>))}</sup>

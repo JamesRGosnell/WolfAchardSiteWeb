@@ -1,0 +1,100 @@
+---
+/**
+ * PAGE-LOCAL. The services opener, both languages.
+ *
+ * THE HERO RULE (DESIGN_BRIEF §3), applied exactly as the home page applies it:
+ *
+ *   The client's VERBATIM live <h1> ships as captured, at label size.
+ *   The large visual line lives in a NON-HEADING element beside it.
+ *
+ * Neither line is new copy. In both languages the display line is the live <p>
+ * that already sits immediately after the <h1> inside the same AEM teaser
+ * (`cmp-teaser__description`) — `Profitez de notre expertise` and `Investment
+ * management. Financial planning. Estate planning.` Nothing was written and
+ * nothing was substituted, so the hero adds no NC- row.
+ *
+ * The banner is a wide plate UNDER the type rather than a full-bleed strip with
+ * text over it: both DAM masters are 2000×380 with no treatment that guarantees
+ * text contrast, and a bank photograph must not be asked to provide it.
+ *
+ * The two banners are NOT the same picture. French serves bespoke team artwork;
+ * English serves National Bank's shared microsite banner. That divergence is the
+ * live site's and is reproduced, not repaired (INTAKE Q4, D-04 precedent).
+ */
+import Figure from '../../components/Figure.astro';
+import type { ServicesHero } from '../../data/pages/services.types';
+
+interface Props {
+  hero: ServicesHero;
+}
+
+const { hero } = Astro.props;
+---
+
+<section class="bg-paper on-paper hero">
+  <div class="container-site hero__inner">
+    <h1 class="hero__name">{hero.heading}</h1>
+    <p class="hero__message serif-display">{hero.message}</p>
+
+    {
+      hero.banner && (
+        <div class="media hero-media hero__plate">
+          <Figure image={hero.banner} loading="eager" fetchpriority="high" />
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(2.25rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem);
+  }
+
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* The verbatim <h1>, at LABEL size — same scale as the home page's. */
+  .hero__name {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.005em;
+    color: var(--ink);
+  }
+
+  /* The display line. >=56px from 1040px upward, 76px at 1440 — identical to
+     the home hero, so the two openers are the same instrument. The measure is
+     wider than the home page's 19ch because the English line is a 58-character
+     three-sentence list, not a four-word phrase. */
+  .hero__message {
+    margin-block: clamp(0.875rem, 1.6vw, 1.375rem) 0;
+    max-inline-size: 22ch;
+    font-size: clamp(2.75rem, 5.4vw, 4.75rem);
+    line-height: 1.03;
+    letter-spacing: -0.014em;
+    color: var(--ink);
+  }
+
+  .hero__plate {
+    margin-block-start: clamp(2rem, 4.5vw, 3.5rem);
+    /* Both masters are 2000×380. Bounded so the fold still shows the opener
+       beneath. */
+    aspect-ratio: 2000 / 380;
+    max-block-size: 22rem;
+  }
+
+  @media (max-width: 47.99rem) {
+    .hero__message {
+      max-inline-size: none;
+    }
+
+    .hero__plate {
+      aspect-ratio: 16 / 9;
+    }
+  }
+</style>

@@ -1,0 +1,104 @@
+---
+/**
+ * PAGE-LOCAL. The home opener, both languages.
+ *
+ * THE HERO RULE, and it is the whole reason this component exists separately:
+ *
+ *   The client's VERBATIM live <h1> ships exactly as captured, at label size.
+ *   The large visual line lives in a NON-HEADING element beside it.
+ *
+ * Measured on the benchmark site (entourageconseils.ca, 1440): their <h1> is a
+ * 22px category label and their 65px message is a styled <p>. Visual hierarchy
+ * and heading hierarchy are separate problems, and conflating them is what
+ * forces a rebuild to either shrink an approved <h1> or replace it.
+ *
+ * Neither message line is new copy. In BOTH languages the large line is the
+ * live <p> that already sits immediately after the <h1> inside the same AEM
+ * teaser (`cmp-teaser__description`) — `Réalisons des projets ambitieux` and
+ * `Our expert team is here to meet your financial needs`. Nothing was written
+ * and nothing was substituted, so no NC- row arises from the hero.
+ *
+ * The banner is a wide plate UNDER the type rather than a full-bleed strip with
+ * text over it. Two reasons, both measured: the DAM masters are 2000×380 (FR)
+ * and only 1199×375 (EN), so a full-bleed strip would upscale the English one
+ * at every desktop width; and neither banner has a treatment that guarantees
+ * text contrast, which a bank photograph must not be asked to provide.
+ */
+import Figure from '../../components/Figure.astro';
+import type { HomeHero } from '../../data/pages/home.types';
+
+interface Props {
+  hero: HomeHero;
+}
+
+const { hero } = Astro.props;
+---
+
+<section class="bg-paper on-paper hero">
+  <div class="container-site hero__inner">
+    <h1 class="hero__name">{hero.heading}</h1>
+    <p class="hero__message serif-display">{hero.message}</p>
+
+    {
+      hero.banner && (
+        <div class="media hero-media hero__plate">
+          <Figure image={hero.banner} loading="eager" fetchpriority="high" />
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(2.25rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem);
+  }
+
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* The verbatim <h1>, at LABEL size. Full ink, not muted — demoting the
+     client's own name to grey would be a different mistake from the one this
+     rule exists to avoid. */
+  .hero__name {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.005em;
+    color: var(--ink);
+  }
+
+  /* The display line. >=56px from 1040px upward; 76px at 1440 and above, which
+     clears the 65px benchmark. It is a <p>, so the document outline is
+     untouched. */
+  .hero__message {
+    margin-block: clamp(0.875rem, 1.6vw, 1.375rem) 0;
+    max-inline-size: 19ch;
+    font-size: clamp(2.75rem, 5.4vw, 4.75rem);
+    line-height: 1.03;
+    letter-spacing: -0.014em;
+    color: var(--ink);
+  }
+
+  .hero__plate {
+    margin-block-start: clamp(2rem, 4.5vw, 3.5rem);
+    /* Panoramic, so it reads as a plate rather than a hero photo competing with
+       the type. Height is bounded so the fold still shows the section beneath. */
+    aspect-ratio: 1199 / 375;
+    max-block-size: 22rem;
+  }
+
+  @media (max-width: 47.99rem) {
+    .hero__message {
+      max-inline-size: none;
+    }
+
+    .hero__plate {
+      aspect-ratio: 16 / 9;
+    }
+  }
+</style>

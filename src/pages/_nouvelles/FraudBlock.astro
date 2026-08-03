@@ -1,0 +1,76 @@
+---
+/**
+ * `Prévention de la fraude` / `Fraud prevention` — the page's closing note.
+ *
+ * The live block is a 512px pictogram, one sentence and one outbound link. It
+ * gets THE page's single greige band (DESIGN_BRIEF §4: at most one tint block
+ * per page) because it is the one item here that is advice rather than a
+ * publication, and it reads as an aside rather than another card in the grid.
+ *
+ * The pictogram is informative on the live page — it carries authored alt text
+ * — so it ships with that text verbatim rather than being made decorative.
+ */
+import { Image } from 'astro:assets';
+import Button from '../../components/Button.astro';
+import type { FraudBlock } from '../../data/pages/news.types';
+
+interface Props {
+  block: FraudBlock;
+  externalLabel: string;
+}
+
+const { block, externalLabel } = Astro.props;
+---
+
+<div class="fraud">
+  <div class="fraud__icon">
+    {/* 512×512 source — never ask for more than it has. */}
+    <Image src={block.image.src} alt={block.image.alt} widths={[96, 192]} sizes="6rem" loading="lazy" />
+  </div>
+
+  <div class="fraud__body">
+    <p class="fraud__text">{block.body}</p>
+    <Button
+      href={block.href}
+      variant="secondary"
+      size="sm"
+      external
+      externalLabel={externalLabel}
+    >
+      {block.cta}
+    </Button>
+  </div>
+</div>
+
+<style>
+  .fraud {
+    display: grid;
+    gap: clamp(1.25rem, 3vw, 2rem);
+    align-items: start;
+  }
+
+  @media (min-width: 40rem) {
+    .fraud {
+      grid-template-columns: auto minmax(0, 1fr);
+      column-gap: clamp(1.75rem, 4vw, 2.75rem);
+      align-items: center;
+    }
+  }
+
+  .fraud__icon {
+    inline-size: clamp(3.5rem, 8vw, 5rem);
+    flex: none;
+  }
+
+  .fraud__icon :global(img) {
+    inline-size: 100%;
+    block-size: auto;
+  }
+
+  .fraud__text {
+    margin: 0 0 1.25rem;
+    max-inline-size: 52ch;
+    font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+    line-height: 1.6;
+  }
+</style>

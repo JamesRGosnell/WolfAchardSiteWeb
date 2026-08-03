@@ -1,0 +1,348 @@
+---
+/**
+ * Team card — 4:5 portrait (or a greige initials plate when there is no
+ * headshot), serif name, EXACT title, hairline contact row.
+ *
+ * COMPLIANCE
+ *  · `name` and `title` are REGULATED STRINGS. Pass them verbatim, in the
+ *    page's language, including credentials appended to the name and their
+ *    exact spacing (`B.Eng`, `Pl.Fin.` — the punctuation and internal spaces
+ *    matter). This component never transforms them: no text-transform, no
+ *    title-casing, no truncation.
+ *  · `noteRefs` renders the footnote markers that belong to a title. They are
+ *    real superscript links into <LegalNotes>; the page MUST also render
+ *    <LegalNotes>, or the marker is an orphan.
+ *  · Emails are `@bnc.ca` on FR pages and `@nbc.ca` on EN pages — with
+ *    per-person exceptions that do exist on these microsites. Never translate
+ *    an address; read it off the capture, per page.
+ *  · Alt text asserts nothing: no headcount, no "our team" framing for a
+ *    partial group, no regulated status.
+ */
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+import type { Locale } from '../data/types';
+import { t, locales, localeFromPath } from '../lib/i18n';
+
+interface Props {
+  /**
+   * Language of the page. Optional so existing call sites keep working; falls
+   * back to the URL (everything under /en/ is English). Used ONLY for the
+   * accessible name of the legal-note markers — no content depends on it.
+   */
+  locale?: Locale;
+  /** Verbatim, credentials included. */
+  name: string;
+  /** Verbatim regulated title. */
+  title: string;
+  /** Employer line, verbatim (partners' lines differ deliberately). */
+  org?: string;
+  image?: ImageMetadata;
+  /** Alt text in the page's language. */
+  imageAlt?: string;
+  /**
+   * Srcset widths. The default matches the large-card layout; pass a smaller
+   * set for small source files. NEVER let sharp generate an upscale — check the
+   * source dimensions against this array before shipping.
+   */
+  widths?: number[];
+  /** `sizes` attribute. Override alongside `widths` when the slot is smaller. */
+  sizes?: string;
+  /** Fallback plate when there is no headshot. Defaults to the name initials. */
+  initials?: string;
+  /** Legal-note numbers attached to the title, e.g. [3]. */
+  noteRefs?: number[];
+  phone?: { display: string; href: string };
+  fax?: { display: string };
+  email?: string;
+  linkedin?: string;
+  /** Verbatim languages line, e.g. "Français, Anglais". */
+  languages?: string;
+  /** Smaller variant for a dense grid. */
+  compact?: boolean;
+  /** Wrap the name in a link — used when a profile page exists. */
+  href?: string;
+  level?: 2 | 3 | 4;
+  class?: string;
+}
+
+const {
+  locale,
+  name,
+  title,
+  org,
+  image,
+  imageAlt,
+  widths = [280, 420, 560],
+  sizes = '(min-width: 62rem) 20rem, 45vw',
+  initials,
+  noteRefs = [],
+  phone,
+  fax,
+  email,
+  linkedin,
+  languages,
+  compact = false,
+  href,
+  level = 3,
+  class: className,
+} = Astro.props;
+
+const Heading = `h${level}` as 'h2' | 'h3' | 'h4';
+
+/* Locale resolution: explicit prop → Astro's i18n locale (unset in this
+   project, but honoured if it is ever configured) → the URL. */
+const currentLocale = Astro.currentLocale as Locale | undefined;
+const resolvedLocale: Locale =
+  locale ??
+  (currentLocale && locales.includes(currentLocale)
+    ? currentLocale
+    : localeFromPath(Astro.url.pathname));
+
+/* A marker must carry a programmatic reference: a bare "3" is not an accessible
+   name for a regulatory footnote. Renders as "Note légale 3" / "Legal note 3",
+   in the page's own language. */
+const noteRefLabel = t(resolvedLocale).a11y.legalNoteRef;
+
+const fallbackInitials =
+  initials ??
+  name
+    .replace(/,.*$/, '')
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? '')
+    .join('');
+---
+
+<article class:list={['tcard', compact && 'tcard--compact', className]}>
+  <div class="tcard__portrait media">
+    {
+      image ? (
+        <Image src={image} alt={imageAlt ?? ''} widths={widths} sizes={sizes} loading="lazy" />
+      ) : (
+        <span class="tcard__initials" aria-hidden="true">
+          {fallbackInitials}
+        </span>
+      )
+    }
+  </div>
+
+  <div class="tcard__body">
+    <Heading class="tcard__name">
+      {href ? <a class="tcard__name-link" href={href}>{name}</a> : name}
+    </Heading>
+
+    {/* Kept tight on one line: a newline here renders as a space and detaches
+        the footnote marker from the title it belongs to. */}
+    <p class="tcard__title">{title}{noteRefs.map((note) => (<sup class="note-ref"><a href={`#legal-note-${note}`} aria-label={`${noteRefLabel} ${note}`}>{note}</a></sup>))}</p>
+
+    {org && <p class="tcard__org">{org}</p>}
+    {languages && <p class="tcard__languages">{languages}</p>}
+
+    {
+      (phone || email || fax || linkedin) && (
+        <ul class="tcard__contact">
+          {phone && (
+            <li>
+              <a class="tcard__link" href={phone.href}>
+                <Icon name="phone" size={16} />
+                <span class="tabular">{phone.display}</span>
+              </a>
+            </li>
+          )}
+          {fax && (
+            <li>
+              <p class="tcard__link tcard__link--static">
+                <Icon name="printer" size={16} />
+                <span class="tabular">{fax.display}</span>
+              </p>
+            </li>
+          )}
+          {email && (
+            <li>
+              <a class="tcard__link tcard__link--mail" href={`mailto:${email}`}>
+                <Icon name="mail" size={16} />
+                <span>{email}</span>
+              </a>
+            </li>
+          )}
+          {linkedin && (
+            <li>
+              <a class="tcard__link" href={linkedin} target="_blank" rel="noopener noreferrer">
+                <Icon name="linkedin" size={16} />
+                <span>LinkedIn</span>
+                <span class="sr-only">— {name}</span>
+              </a>
+            </li>
+          )}
+        </ul>
+      )
+    }
+
+    {/*
+      APPEND SLOT — for content that BELONGS TO THIS CARD but is not part of a
+      person's identity record: the partners' `Biographie` accordion is the only
+      caller today (`_equipe/PartnerCard.astro`).
+
+      It exists because without it a caller had to wrap <TeamCard> in its own
+      div and render the extra block as a SIBLING, which made the accordion a
+      separate object beside the card instead of part of it. Slotted markup
+      keeps the calling component's own `data-astro-cid`, so the caller styles
+      it with its own scoped rules exactly as before.
+
+      ⚠ If the card also has `href`, `.tcard__name-link::after` lays a
+      whole-card overlay over everything inside. Interactive slotted content
+      must then set `position: relative; z-index: 1`, the same guard
+      `.tcard__link` already carries. No current caller does both.
+    */}
+    <slot name="after" />
+  </div>
+</article>
+
+<style>
+  .tcard {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .tcard__portrait {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--greige);
+  }
+
+  .tcard--compact .tcard__portrait {
+    aspect-ratio: 1 / 1;
+  }
+
+  .tcard__initials {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: var(--stone);
+  }
+
+  .tcard__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .tcard__name {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    color: var(--fg);
+  }
+
+  .tcard--compact .tcard__name {
+    font-size: 1.25rem;
+  }
+
+  .tcard__name-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .tcard__name-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .tcard:has(.tcard__name-link) {
+    position: relative;
+  }
+
+  .tcard__name-link:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--nb-red);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+  }
+
+  /* Regulated title: styled, never transformed. */
+  .tcard__title {
+    margin: 0;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+
+  .tcard__org,
+  .tcard__languages {
+    margin: 0;
+    font-size: var(--text-small);
+    color: var(--muted);
+  }
+
+  /* `.note-ref` is styled centrally in src/styles/global.css — the base marker
+     PLUS the `.on-ink` variant that swaps the red glyph for --on-ink with a red
+     underline (red on ink is 2.59:1, below AA). Re-declaring the colour here
+     would shadow that fix, so this component deliberately owns none of it. */
+
+  .tcard__contact {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 0 0;
+    padding: 0;
+    list-style: none;
+    border-block-start: 1px solid var(--rule);
+  }
+
+  .tcard__contact > li + li {
+    border-block-start: 1px solid var(--rule);
+  }
+
+  .tcard__link {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    min-block-size: 44px;
+    margin: 0;
+    font-size: var(--text-small);
+    color: var(--fg);
+    text-decoration: none;
+    transition: color 180ms var(--ease-wa);
+    /* Sits above the whole-card overlay so tel:/mailto: stay clickable. */
+    position: relative;
+    z-index: 1;
+  }
+
+  .tcard__link--mail {
+    overflow-wrap: anywhere;
+  }
+
+  .tcard__link--static {
+    color: var(--muted);
+  }
+
+  .tcard__link :global(svg) {
+    flex: none;
+    color: var(--muted);
+    transition: color 180ms var(--ease-wa);
+  }
+
+  /* The hover accent is a tiny red underline, not red text. Red body text on
+     paper is 4.53:1 — legal, but red is reserved for markers and focus rings. */
+  a.tcard__link:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--nb-red);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.28em;
+  }
+
+  a.tcard__link:hover :global(svg) {
+    color: var(--fg);
+  }
+</style>

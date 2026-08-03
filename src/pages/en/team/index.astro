@@ -1,0 +1,183 @@
+---
+/**
+ * ENGLISH team page — `/en/team/`
+ *
+ * Structurally identical to the French page: hero · intro · advisors ·
+ * partners · legal notes, in the capture's own document order. The live English
+ * page has the same five sections in the same order as the French one, so
+ * nothing here is a compensating layout.
+ *
+ * THE ONE DIFFERENCE IS THE BIOGRAPHIES. French carries two `Biographie`
+ * accordions; this page carries none, because the live English page carries
+ * none. P-16 forbids writing them — they are credential claims about named,
+ * licensed individuals. `bio` is `undefined` in `team.en.ts` and <PartnerCard>
+ * renders nothing at all for it, so the English cards are simply shorter. No
+ * empty accordion, no placeholder, no heading over absent content.
+ *
+ * The live page's closing `Contact us` block is not repeated here — D-07 moved
+ * it into the site footer, where it renders at the foot of every page.
+ *
+ * BAND RHYTHM: paper everywhere, exactly ONE greige tint block (the partners),
+ * ink confined to the footer.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * THE ORPHAN MARKERS
+ *
+ * Same defect as the French page, symmetrically: <sup>2</sup> and <sup>1</sup>
+ * on the two partners' titles, no accordion anywhere on the live page. The
+ * <LegalNotes> set below resolves both. The disposition is made once and applied
+ * to both language trees — a compliance decision that differed by language would
+ * be a second defect. D-14.
+ *
+ * Do NOT edit shared files (components, layouts, lib, styles, config,
+ * data/{fr,en,types}.ts) from a page build. Report the friction instead.
+ */
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Section from '../../../components/Section.astro';
+import TeamCard from '../../../components/TeamCard.astro';
+import LegalNotes from '../../../components/LegalNotes.astro';
+import TeamHero from '../../_equipe/TeamHero.astro';
+import PartnerCard from '../../_equipe/PartnerCard.astro';
+import team from '../../../data/pages/team.en';
+import { advisorsByLocale } from '../../../data/advisors';
+import { advisorPath } from '../../../lib/i18n';
+
+const locale = 'en' as const;
+const advisors = advisorsByLocale[locale];
+
+/* Advisor headshots are 350px wide in the DAM; the srcset stops there so sharp
+   is never asked to upscale. */
+const ADVISOR_WIDTHS = [280, 350];
+const ADVISOR_SIZES = '(min-width: 62rem) 22rem, (min-width: 40rem) 45vw, calc(100vw - 2.5rem)';
+---
+
+<BaseLayout
+  locale={locale}
+  pageKey="team"
+  title={team.meta.title}
+  description={team.meta.description}
+>
+  <TeamHero hero={team.hero} />
+
+  <Section bg="paper" aria-labelledby="intro-heading">
+    <div class="intro">
+      <h2 id="intro-heading" class="t-h2 serif-display intro__heading">
+        {team.intro.heading}
+      </h2>
+      <div class="intro__body">
+        {team.intro.body.map((paragraph) => <p class="intro__prose">{paragraph}</p>)}
+      </div>
+    </div>
+  </Section>
+
+  {/* The two registered advisors. Each name links to that advisor's own profile
+      page — an unlinked profile page is an orphan. */}
+  <Section bg="paper" aria-labelledby="advisors-heading">
+    <h2 id="advisors-heading" class="t-h2 serif-display band__heading">
+      {team.advisorsHeading}
+    </h2>
+    <div class="cards">
+      {
+        advisors.map((advisor) => (
+          <TeamCard
+            locale={locale}
+            name={advisor.name}
+            title={advisor.title.team}
+            image={advisor.image}
+            imageAlt={advisor.imageAlt}
+            widths={ADVISOR_WIDTHS}
+            sizes={ADVISOR_SIZES}
+            phone={{ display: advisor.phone.display.team, href: advisor.phone.href }}
+            email={advisor.email}
+            languages={advisor.languages.team}
+            href={advisorPath(advisor.slug, locale)}
+            level={3}
+            class="reveal"
+          />
+        ))
+      }
+    </div>
+  </Section>
+
+  {/* THE one tint block on this page. */}
+  <Section bg="greige" aria-labelledby="partners-heading">
+    <h2 id="partners-heading" class="t-h2 serif-display band__heading">
+      {team.partners.heading}
+    </h2>
+    <div class="cards">
+      {
+        team.partners.people.map((partner) => (
+          <PartnerCard locale={locale} partner={partner} class="reveal" />
+        ))
+      }
+    </div>
+  </Section>
+
+  {/* Renders the complete 1–5 set. Without it, the two <sup> markers above are
+      orphans and the page repeats the live site's P-12 defect. */}
+  <Section bg="paper" padding="compact">
+    <LegalNotes locale={locale} refs={team.legalRefs} />
+  </Section>
+</BaseLayout>
+
+<style>
+  .intro {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  @media (min-width: 60rem) {
+    .intro {
+      grid-template-columns: 5fr 7fr;
+      align-items: start;
+      column-gap: clamp(2.5rem, 5vw, 4.5rem);
+    }
+  }
+
+  .intro__heading {
+    margin: 0;
+    max-inline-size: 18ch;
+  }
+
+  .intro__prose {
+    margin: 0 0 1rem;
+    /* --measure, not a hand-picked `ch` count. See the token in global.css. */
+    max-inline-size: var(--measure);
+    line-height: 1.65;
+  }
+
+  .intro__prose:last-child {
+    margin-block-end: 0;
+  }
+
+  .band__heading {
+    margin: 0 0 clamp(2rem, 4vw, 2.75rem);
+    max-inline-size: 22ch;
+  }
+
+  .cards {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 3.5rem);
+  }
+
+  @media (min-width: 40rem) {
+    .cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: start;
+      column-gap: clamp(2rem, 4.5vw, 4rem);
+    }
+  }
+
+  /* The DAM headshots are only 350x330. Capping the column at 22rem (352px)
+     keeps the card within a rounding error of the source width instead of
+     stretching it across half a 76rem container. The 4:5 portrait crop still
+     scales a 330px-tall master vertically — that is an artwork limitation, not
+     a build one, and it is why "team photography commissioned" is on the
+     pre-launch checklist. The `widths` arrays stop at 350 so sharp is never
+     asked to generate an upscale. */
+  @media (min-width: 62rem) {
+    .cards {
+      grid-template-columns: repeat(2, minmax(0, 22rem));
+    }
+  }
+</style>

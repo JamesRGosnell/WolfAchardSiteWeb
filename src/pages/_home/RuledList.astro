@@ -1,0 +1,64 @@
+---
+/**
+ * PAGE-LOCAL. A heading with its hairline-ruled list.
+ *
+ * The heading and the items are ONE prop, deliberately. A caller cannot render
+ * this component with a heading and no items, so the "heading floating over an
+ * absent list" failure the English page would otherwise invite is impossible by
+ * construction rather than by remembering to guard.
+ *
+ * FRENCH ONLY today: the English home page has zero list items and therefore
+ * never mounts this component (P-16 — the gap is not filled).
+ *
+ * The rules are hairlines between rows, no bullets and no ticks. A tick or a
+ * bullet in brand red would spend the page's whole red budget on decoration;
+ * red is reserved for disclaimer superscripts and focus rings.
+ */
+import type { HomeList } from '../../data/pages/home.types';
+
+interface Props {
+  list: HomeList;
+  headingId?: string;
+  class?: string;
+}
+
+const { list, headingId, class: className } = Astro.props;
+---
+
+<div class:list={['ruled', className]}>
+  <h3 id={headingId} class="ruled__heading">{list.heading}</h3>
+  <ul class="ruled__list">
+    {list.items.map((item) => <li class="ruled__item">{item}</li>)}
+  </ul>
+</div>
+
+<style>
+  .ruled__heading {
+    margin: 0 0 0.25rem;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    letter-spacing: 0.085em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  .ruled__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ruled__item {
+    padding-block: 0.9375rem;
+    border-block-end: 1px solid var(--hairline);
+    font-size: 1.0625rem;
+    line-height: 1.5;
+    /* Live copy carries trailing no-break spaces on two of these items. They
+       are preserved in the data; this keeps them from ever collapsing the row. */
+    text-wrap: pretty;
+  }
+
+  .ruled__item:first-child {
+    border-block-start: 1px solid var(--hairline);
+  }
+</style>

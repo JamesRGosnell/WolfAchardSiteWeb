@@ -1,0 +1,68 @@
+---
+/**
+ * Section band. Owns the surface, the vertical rhythm and the container.
+ *
+ * `bg="ink"` flips the contextual variables (--rule, --muted, --fg, --surface)
+ * through `.on-ink`, so nothing inside needs to know which surface it is on.
+ *
+ * BAND RHYTHM — the discipline this component exists to make easy: mostly
+ * paper, AT MOST ONE barely-there `greige` tint block per page, ink confined to
+ * the footer. A page with two tint blocks is fighting itself, and no page
+ * section should be full-bleed ink at all.
+ *
+ *   <Section bg="greige" id="services">…</Section>
+ */
+interface Props {
+  bg?: 'paper' | 'raised' | 'greige' | 'ink';
+  padding?: 'default' | 'compact' | 'none';
+  as?: 'section' | 'div' | 'article' | 'aside' | 'header';
+  id?: string;
+  class?: string;
+  /** Skip the inner container (full-bleed content lays out its own). */
+  full?: boolean;
+  containerClass?: string;
+  'aria-label'?: string;
+  'aria-labelledby'?: string;
+}
+
+const {
+  bg = 'paper',
+  padding = 'default',
+  as = 'section',
+  id,
+  class: className,
+  full = false,
+  containerClass,
+  ...rest
+} = Astro.props;
+
+const Tag = as;
+
+const surface: Record<NonNullable<Props['bg']>, string> = {
+  paper: 'bg-paper on-paper',
+  raised: 'bg-paper-raised on-paper',
+  greige: 'bg-greige on-paper',
+  ink: 'bg-ink on-ink',
+};
+
+const pad =
+  padding === 'none'
+    ? 'section section--flush'
+    : padding === 'compact'
+      ? 'section section--compact'
+      : 'section';
+
+const classes = [surface[bg], pad, className].filter(Boolean).join(' ');
+---
+
+<Tag id={id} class={classes} {...rest}>
+  {
+    full ? (
+      <slot />
+    ) : (
+      <div class:list={['container-site', containerClass]}>
+        <slot />
+      </div>
+    )
+  }
+</Tag>

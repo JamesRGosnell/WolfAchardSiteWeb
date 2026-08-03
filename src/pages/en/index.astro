@@ -1,0 +1,251 @@
+---
+/**
+ * ENGLISH HOME — `/en/`
+ *
+ * NOT a translation of `/`. A different page with a different section list,
+ * because the live English tree is a different page. It has no mission, no
+ * commitments, no philosophy, no differentiators and zero list items, and its
+ * four process steps are bare labels. P-16 prohibits writing English copy to
+ * close that gap.
+ *
+ * So the page is composed to READ AS COMPOSED rather than as broken:
+ *
+ *  · Sections whose content does not exist in English are not rendered at all.
+ *    `home.intro`, `home.lists`, `home.essay` and `home.distinctions` are
+ *    `undefined` in `home.en.ts`, so there is no heading over an absent list and
+ *    no card grid with holes — the markup for them never runs.
+ *  · The page BREATHES rather than stretches. `Personalized support` is set at
+ *    lead size on a short measure with a 5/7 split, so five sections of real
+ *    content fill the page at a confident scale instead of six padded ones.
+ *  · The process is the one place composed deliberately: the French ruled rows
+ *    become a compact single-line rail (see ProcessBlock.astro), and it takes
+ *    the page's single tint block so the thinnest section is also its most
+ *    designed one.
+ *
+ * Nobody sees the two languages side by side. This page has to stand alone, and
+ * it does — with the client's own words only.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/Section.astro';
+import HomeHero from '../_home/HomeHero.astro';
+import Prose from '../../components/Prose.astro';
+import Figure from '../../components/Figure.astro';
+import ProcessBlock from '../_home/ProcessBlock.astro';
+import NewsBlock from '../_home/NewsBlock.astro';
+import ContactBlock from '../../components/ContactBlock.astro';
+import Button from '../../components/Button.astro';
+import { t, pathFor } from '../../lib/i18n';
+import home from '../../data/pages/home.en';
+
+const locale = 'en' as const;
+const s = t(locale);
+
+/**
+ * D-52 — the two onward links under the process block, the English twin of the
+ * pair on `/`. This page did link `/en/team/`, but only as a single word inside
+ * a sentence of body copy (live markup, `home.en.ts`), and it linked
+ * `/en/services/` not at all.
+ *
+ * NO NEW COPY: the labels are `nav.items[].liveLabel`, the client's own live
+ * navigation wording. Both trees get the same structure — that is the same rule
+ * NC-01/NC-02 follow.
+ */
+const onward = (['services', 'team'] as const).map((key) => ({
+  key,
+  label: s.nav.items.find((item) => item.key === key)!.liveLabel,
+  href: pathFor(key, locale),
+}));
+---
+
+{/*
+   D-11 — this page closes with its own <ContactBlock>: same heading, same
+   lead sentence, same two direct lines as the footer's CTA band.
+*/}
+<BaseLayout
+  locale={locale}
+  pageKey="home"
+  title={home.meta.title}
+  description={home.meta.description}
+  showFooterCta={false}
+>
+  <HomeHero hero={home.hero} />
+
+  {
+    home.support && (
+      <Section bg="paper" aria-labelledby="support-heading">
+        <div class="support">
+          <h2 id="support-heading" class="t-h2 serif-display support__heading">
+            {home.support.heading}
+          </h2>
+          <div class="support__body">
+            {home.support.body.map((paragraph) => (
+              <Prose text={paragraph} locale={locale} class="support__prose" />
+            ))}
+          </div>
+        </div>
+      </Section>
+    )
+  }
+
+  {
+    home.company && (
+      <Section bg="paper" aria-labelledby="company-heading">
+        <h2 id="company-heading" class="t-h2 serif-display company__heading">
+          {home.company.heading}
+        </h2>
+        <div class="company">
+          {home.company.image && (
+            <div class="media company__media reveal">
+              <Figure image={home.company.image} />
+            </div>
+          )}
+          <div class="company__text">
+            <h3 class="company__subheading">{home.company.subheading}</h3>
+            <dl class="company__points">
+              {home.company.points.map((point) => (
+                <div class="company__point">
+                  <dt class="company__point-title">{point.heading}</dt>
+                  <dd class="company__point-body">
+                    <Prose text={point.body} locale={locale} />
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </Section>
+    )
+  }
+
+  {/* THE one tint block on this page — the process rail. */}
+  <Section bg="greige" aria-labelledby="process-heading">
+    <ProcessBlock process={home.process} headingId="process-heading" />
+
+    {/* D-52 — see the note in the frontmatter. Secondary, not primary: the
+        page's primary control is its closing contact block. */}
+    <div class="onward">
+      {
+        onward.map((link) => (
+          <Button href={link.href} variant="secondary" icon="arrow-right">
+            {link.label}
+          </Button>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section bg="paper" aria-labelledby="news-heading">
+    <NewsBlock news={home.news} headingId="news-heading" />
+  </Section>
+
+  <Section bg="paper" aria-labelledby="contact-heading">
+    <ContactBlock contact={home.contact} headingId="contact-heading" />
+  </Section>
+</BaseLayout>
+
+<style>
+  /* `Personalized support` — the page's widest breath. Heading left, prose
+     right, both at a larger scale than the French equivalent gets, because this
+     page carries fewer sections and can afford the room. */
+  .support {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  /* D-52 — the two onward links. Wraps to one per row at 375px; every child is
+     a <Button>, so the 44px floor is already carried. */
+  .onward {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem 1rem;
+    margin-block-start: clamp(2rem, 4vw, 2.75rem);
+  }
+
+  @media (min-width: 60rem) {
+    .support {
+      grid-template-columns: 5fr 7fr;
+      align-items: start;
+      column-gap: clamp(3rem, 6vw, 6rem);
+    }
+  }
+
+  .support__heading {
+    margin: 0;
+    max-inline-size: 14ch;
+  }
+
+  .support__prose {
+    margin: 0 0 1.25rem;
+    max-inline-size: var(--measure);
+    font-size: var(--text-lead);
+    line-height: 1.55;
+  }
+
+  .support__prose:last-child {
+    margin-block-end: 0;
+  }
+
+  .company__heading {
+    margin: 0 0 clamp(2rem, 4vw, 3rem);
+    max-inline-size: 18ch;
+  }
+
+  .company {
+    display: grid;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+
+  @media (min-width: 60rem) {
+    .company {
+      grid-template-columns: 6fr 6fr;
+      align-items: center;
+      column-gap: clamp(2.5rem, 5vw, 4.5rem);
+    }
+  }
+
+  .company__media {
+    aspect-ratio: 767 / 431;
+  }
+
+  .company__subheading {
+    margin: 0 0 0.25rem;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    letter-spacing: 0.085em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  .company__points {
+    margin: 0;
+  }
+
+  .company__point {
+    padding-block: clamp(1.25rem, 2.4vw, 1.75rem);
+    border-block-end: 1px solid var(--hairline);
+  }
+
+  .company__point:first-child {
+    border-block-start: 1px solid var(--hairline);
+  }
+
+  .company__point-title {
+    margin: 0 0 0.5rem;
+    font-family: var(--font-sans);
+    font-size: var(--text-h3);
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+  }
+
+  .company__point-body {
+    margin: 0;
+  }
+
+  .company__point-body :global(p) {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.6;
+    max-inline-size: 48ch;
+  }
+</style>

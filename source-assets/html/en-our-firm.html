@@ -1,0 +1,1501 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>Our Firm | National Bank Financial - Wealth Management</title>
+        
+
+    
+        <meta property="og:title" content="Our Firm | National Bank Financial - Wealth Management"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="https://www.nbfwm.ca/advisor/wolf-archard-group/our-firm.html"/>
+        <meta property="og:description" content="Doing business with National Bank Financial - Wealth Management means having access to a wide range of resources and a strong network of experts."/>
+        <meta property="og:image" content="https://www.nbfwm.ca/content/dam/global/logo/bnc-logo.png"/>
+    
+
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    
+
+    
+    <meta name="description" content="Doing business with National Bank Financial - Wealth Management means having access to a wide range of resources and a strong network of experts."/>
+    <meta name="template" content="microsites-header-footer-reference"/>
+
+    
+    <link rel="canonical" href="https://www.nbfwm.ca/advisor/wolf-archard-group/our-firm.html"/>
+
+    
+    
+        
+            
+                
+                
+                
+                    <link rel="alternate" hreflang="fr" href="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-firme.html"/>
+                    <link rel="alternate" hreflang="fr-ca" href="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-firme.html"/>
+                
+            
+        
+            
+                
+                
+                    <link rel="alternate" hreflang="en" href="https://www.nbfwm.ca/advisor/wolf-archard-group/our-firm.html"/>
+                    <link rel="alternate" hreflang="en-ca" href="https://www.nbfwm.ca/advisor/wolf-archard-group/our-firm.html"/>
+                    <link rel="alternate" hreflang="x-default" href="https://www.nbfwm.ca/advisor/wolf-archard-group/our-firm.html"/>
+                
+                
+            
+        
+    
+
+    
+    
+    
+
+    
+    
+        
+
+
+
+
+    <script>
+        function getLanguage() {
+            let frRegex = /\/content\/(.*)\/fr\//;
+            let pagePath = "/content/fbngp/en/accueil/conseiller/groupe-wolf-achard/notre-firme";
+
+            if(frRegex.test(pagePath)){
+                return "fr";
+            }
+            else{ //default is English
+                return "en";
+            }
+        }
+
+        /*
+        * AEM Page properties hierarchy function
+        * Sets the SDK parameters to be the same as the default parameters configured by the site
+        */
+        function setSiteConfig(){
+            
+            scriptUrl = "https://dam.bnc.ca/content/dam/tools/cmp/notice.js";
+            configDidomi = ("true" === "true");
+            activateDidomi = ("true" === "true");
+            applyDidomiToChildren = ("true" === "true");
+            showDidomi = ("true" === "true");
+            siteToken = "bFXc6fFy";
+            lang = getLanguage();
+        }
+
+
+        /*
+        * AEM Page properties hierarchy function
+        * Updates the SDK parameters if a configuration was set on a page or on a parent page
+        */
+        function setChildParentConfig(){
+            
+            configDidomi = ("true" === "true");
+            activateDidomi = ("true" === "true");
+            applyDidomiToChildren = ("true" === "true");
+            showDidomi = ("true" === "true");
+            childToken = "null";
+            if(childToken === "null"){
+                configDidomi = false;
+            }else{
+                configDidomi = true;
+                foundParentConfig = true;
+            }
+            
+        }
+
+
+        /*
+        * AEM Page properties hierarchy function
+        * Sets the notice token based on the page hierarchy
+        */
+        function setToken(){
+            if(configDidomi){
+                //child on
+                if(foundParentConfig  && applyDidomiToChildren && activateDidomi){
+                    bannerToken = childToken;
+                }
+                //parent on
+                if(!foundParentConfig  && activateDidomi){
+                    bannerToken = childToken;
+                }
+                //parent on, child on with default
+                if(foundParentConfig && !applyDidomiToChildren){
+                    bannerToken = siteToken;
+                }
+            } else{ // default
+                bannerToken = siteToken;
+            }
+        }
+
+
+        /*
+        * Loads Didomi script (notice.js) with correct parameters
+        */
+        function loadJS(FILE_URL, async = true, language, token, enableDidomi) {
+            let scriptEle = document.createElement("script");
+
+            scriptEle.setAttribute("src", FILE_URL);
+            scriptEle.setAttribute("type", "text/javascript");
+            scriptEle.setAttribute("async", async);
+            scriptEle.setAttribute("language", language);
+            scriptEle.setAttribute("token", token);
+            scriptEle.setAttribute("enableDidomi", enableDidomi);
+
+            document.head.appendChild(scriptEle);
+
+            // error event
+            scriptEle.addEventListener("error", (ev) => {
+                console.log("Error on loading file", ev);
+            });
+        }
+
+        /*
+        * The AEM parameters retrieved earlier from the page properties are set in the Didomi SDK
+        * language: the language the banner appears in
+        * notice.enable: wether the notice is visible on the page or not
+        */
+        function setSDKConfigs(language, enableDidomi){
+            //default Didomi config
+            window.didomiConfig = {
+                languages: {
+                    enabled: ['en', 'fr'],
+                    default: ''
+                },
+                notice: {
+                    enable: true
+                }
+            };
+
+            //set banner visibility
+            if(!enableDidomi){
+                window.didomiConfig.notice.enable = enableDidomi;
+            }
+
+            //set language
+            if("fr" === language){
+                window.didomiConfig.languages.enabled = ['fr']
+                window.didomiConfig.languages.default = 'fr'
+            } else{
+                window.didomiConfig.languages.enabled = ['en']
+                window.didomiConfig.languages.default = 'en'
+            }
+        }
+
+
+        /*
+        * Given the banner token, loads Didomi SDK
+        * Config Parameters must always be set before the SDK is loaded
+        */
+        function loadSDK(token) {
+
+            window.gdprAppliesGlobally = true;
+            (function() {
+                (function(e, r) {
+                    var t = document.createElement("link");
+                    t.rel = "preconnect";
+                    t.as = "script";
+
+                    var n = document.createElement("link");
+                    n.rel = "dns-prefetch";
+                    n.as = "script";
+
+                    var i = document.createElement("link");
+                    i.rel = "preload";
+                    i.as = "script";
+
+                    var o = document.createElement("script");
+                    o.id = "spcloader";
+                    o.type = "text/javascript";
+                    o.async = true;
+                    o.charset = "utf-8";
+
+                    var a = "https://sdk.privacy-center.org/" + e + "/loader.js?target_type=notice&target=" + r;
+                    if (window.didomiConfig && window.didomiConfig.user) {
+                        var c = window.didomiConfig.user;
+                        var s = c.country;
+                        var d = c.region;
+                        if (s) {
+                            a += "&country=" + s;
+                            if (d) {
+                                a += "&region=" + d;
+                            }
+                        }
+                    }
+
+                    t.href = "https://sdk.privacy-center.org/";
+                    n.href = "https://sdk.privacy-center.org/";
+                    i.href = a;
+                    o.src = a;
+
+                    var p = document.getElementsByTagName("script")[0];
+                    p.parentNode.insertBefore(t, p);
+                    p.parentNode.insertBefore(n, p);
+                    p.parentNode.insertBefore(i, p);
+                    p.parentNode.insertBefore(o, p);
+                })("f93cfeed-d62f-4357-bfe9-f9f6887f69fb", token);
+            })();
+        }
+
+
+        /*
+        * main function
+        */
+        function initializeDidomi(){
+
+            // set default parameters
+            setSiteConfig();
+
+            // if didomi is active at site level
+            if(configDidomi && applyDidomiToChildren && activateDidomi){
+
+                //reset variables for child/parent configs
+                configDidomi = false;
+
+                setChildParentConfig();
+                setToken();
+
+
+                if(true){
+                    setSDKConfigs(lang, showDidomi);
+                    loadSDK(bannerToken);
+                }else{
+                    loadJS(scriptUrl, true, lang, bannerToken, showDidomi);
+                }
+            }
+            // else didomi should not appear on the page
+        }
+
+
+        // PARAMETERS
+        let lang = "";
+        let bannerToken = "";
+        let siteToken = "";
+        let configDidomi = false;
+        let applyDidomiToChildren = false;
+        let activateDidomi = false;
+        let showDidomi = false;
+        let foundParentConfig = false;
+        let childToken = "";
+        let scriptUrl = "";
+
+        initializeDidomi();
+    </script>
+
+    
+
+    
+    
+    
+
+    
+
+    
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/clientlibs/web-sites-toolkit/toolkit-clientlib/clientlibs/clientlib-grid.min.fe198145cabc1203cbab2e73c189fe6a.css" type="text/css">
+
+
+
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/clientlibs/web-sites-toolkit/toolkit-clientlib/clientlibs/clientlib-base.min.b9e58db3c42afa6e5488f495d4804f33.css" type="text/css">
+
+
+
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/layoutContainer.min.84beee8800683e039d2bd5c1da611ae1.css" type="text/css">
+
+
+
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/container/clientlibs.min.90932f7188b6de3499a57fd9afe1ddb6.css" type="text/css">
+
+
+
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-core-components.min.92ac67899fe3d5f4241b959add6754f8.css" type="text/css">
+
+
+
+
+    
+        
+    
+
+    
+
+        
+        
+            
+    
+<script src="/etc.clientlibs/web-sites/clientlibs/vendor/jquery/base.min.3f56e989e786c643b30d5668a97daa52.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/websites.min.afe369e2daa031e232e9e25e1415ac64.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/dataLayer.min.bb151da6cddfb1aa78316cc5dbef60db.js"></script>
+
+
+
+
+            <script async src="//assets.adobedtm.com/launch-ENce80544c76a04686ae546c50bbd9979e.min.js"></script>
+
+            
+
+            <script type="text/javascript">
+                var eventSource = "nbfwm";
+                var pageVariables = JSON.parse("[{\x22elementName\x22:\x22loB\x22,\x22elementValue\x22:\x22nbfwm\x22}]");
+                var rulesDefinitionFilePath = "/content/dam/dataLayerConfig/rules-fbngp.json";
+                var responseStatus = 200;
+
+                Websites.DataLayer.init(eventSource, pageVariables, rulesDefinitionFilePath, responseStatus);
+            </script>
+        
+    
+
+    
+    
+    
+
+    
+
+    
+    
+    
+
+
+
+    
+
+    
+
+    
+    
+        <link rel="icon" type="image/ico" href="/content/dam/global/logo/favicon.ico"/>
+    
+
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+    
+        <link type="text/css" rel="stylesheet" href="/content/dam/css/fbngp-microsite.css"/>
+    
+
+
+
+    
+    
+    
+
+    
+
+    
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="167x167" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-167x167.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="167x167" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-167x167-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="152x152" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-152x152.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-152x152-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="144x144" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-144x144.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-144x144-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="120x120" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-120x120.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-120x120-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="any" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-48x48.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="any" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-48x48-precomposed.png"/>
+
+
+
+    
+                                <script>!function(e){var n="https://s.go-mpulse.net/boomerang/";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,n="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="CBWCH-YHXC8-UX5PM-CKJ3F-WKW7N",function(){function e(){if(!r){var e=document.createElement("script");e.id="boomr-scr-as",e.src=window.BOOMR.url,e.async=!0,o.appendChild(e),r=!0}}function t(e){r=!0;var n,t,a,i,d=document,O=window;if(window.BOOMR.snippetMethod=e?"if":"i",t=function(e,n){var t=d.createElement("script");t.id=n||"boomr-if-as",t.src=window.BOOMR.url,BOOMR_lstart=(new Date).getTime(),e=e||d.body,e.appendChild(t)},!window.addEventListener&&window.attachEvent&&navigator.userAgent.match(/MSIE [67]\./))return window.BOOMR.snippetMethod="s",void t(o,"boomr-async");a=document.createElement("IFRAME"),a.src="about:blank",a.title="",a.role="presentation",a.loading="eager",i=(a.frameElement||a).style,i.width=0,i.height=0,i.border=0,i.display="none",o.appendChild(a);try{O=a.contentWindow,d=O.document.open()}catch(_){n=document.domain,a.src="javascript:var d=document.open();d.domain='"+n+"';void 0;",O=a.contentWindow,d=O.document.open()}if(n)d._boomrl=function(){this.domain=n,t()},d.write("<bo"+"dy onload='document._boomrl();'>");else if(O._boomrl=function(){t()},O.addEventListener)O.addEventListener("load",O._boomrl,!1);else if(O.attachEvent)O.attachEvent("onload",O._boomrl);d.close()}function a(e){window.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!window.BOOMR||!window.BOOMR.version&&!window.BOOMR.snippetExecuted){window.BOOMR=window.BOOMR||{},window.BOOMR.snippetStart=(new Date).getTime(),window.BOOMR.snippetExecuted=!0,window.BOOMR.snippetVersion=14,window.BOOMR.url=n+"CBWCH-YHXC8-UX5PM-CKJ3F-WKW7N";var i=document.currentScript||document.getElementsByTagName("script")[0],o=i.parentNode,r=!1,d=document.createElement("link");if(d.relList&&"function"==typeof d.relList.supports&&d.relList.supports("preload")&&"as"in d)window.BOOMR.snippetMethod="p",d.href=window.BOOMR.url,d.rel="preload",d.as="script",d.addEventListener("load",e),d.addEventListener("error",function(){t(!0)}),setTimeout(function(){if(!r)t(!0)},3e3),BOOMR_lstart=(new Date).getTime(),o.appendChild(d);else t(!1);if(window.addEventListener)window.addEventListener("load",a,!1);else if(window.attachEvent)window.attachEvent("onload",a)}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var n=""=="true"?1:0,t="",a="r5uv2vvyd2lio2tp6tlq-f-718873dd8-clientnsv4-s.akamaihd.net",i="false"=="true"?2:1,o={"ak.v":"41","ak.cp":"1490176","ak.ai":parseInt("891279",10),"ak.ol":"0","ak.cr":66,"ak.ipv":4,"ak.proto":"http/1.1","ak.rid":"291102b3","ak.r":44990,"ak.a2":n,"ak.m":"x","ak.n":"essl","ak.cport":58640,"ak.gh":"184.30.149.142","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.0rtt.ed":"","ak.csrc":"-","ak.acc":"bbr","ak.t":"1785722071","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==xNChK4dRS40ZIA6iOtnwcOozjrLXuF3kZPGePyAvJpTp6GxA+gP3jzGTO3g4cuiQmYxldeH4bnZOBPPrqA9ue99HngAGmJENfoQY+rZ/zWDphTyQPE/tF/o+O41MSlUg/jrYlGseZhK4F8KJgLWKSa9CUaOIpRENZN4+Q/wsn6CnjC6PY5uuhnftC8tUsDcM+S9DOvOuOvx+xzzTtvlTrljZPaBBl9w5OnikvTsoCU2HSu92pd+/v/OxIf720SBZExIV3EkYoUg+6D7jCSieAoRRkd7UGJkE9NotNBWmFofQ7ELwH96RWj887nDUJmjOlO/Q3y8V5o2LSlTNh0m/0GjV0Z8cLdokTZcBuHvt5iZSTu50k5MfqIFJAejl2ghVYooquc3aQUJIusKY7d1KYHoZ6BAYcff0H8/f9kXfqiE=","ak.pv":"170","ak.dpoabenc":"","ak.tf":i};if(""!==t)o["ak.ruds"]=t;var r={i:!1,av:function(n){var t="http.initiator";if(n&&(!n[t]||"spa_hard"===n[t]))o["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(o)},rv:function(){var e=["ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.0rtt.ed","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:o,akDNSPreFetchDomain:a,init:function(){if(!r.i){var e=BOOMR.subscribe;e("before_beacon",r.av,null,null),e("onbeacon",r.rv,null,null),r.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+    <body class="page basicpage">
+        
+        
+            
+
+
+
+            
+<div class="root responsivegrid">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="headerreference aem-GridColumn aem-GridColumn--default--12">
+<div class="cmp-headerreference">
+
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/structure/menuMicrositeBase/v1/menuMicrositeBase/clientlibs/clientlib.min.a043b7e0920cd8528a2262dc1c8431e1.css" type="text/css">
+<script src="/etc.clientlibs/web-sites-toolkit/clientlibs/web-sites-toolkit/toolkit-clientlib/clientlibs/vendor/lodash.min.a98e817fa80e9f0446305f835cdaa621.js"></script>
+<script src="/etc.clientlibs/web-sites-toolkit/clientlibs/web-sites-toolkit/toolkit-clientlib/clientlibs/clientlib-base.min.9e53360934d7d8c817cca5a2a127c13f.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/events.min.16e5209efa2702100afd766ec89fcae0.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/component.min.047d4d7858d9ff4849ffebffd22e5c10.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/eventListenerHandlers.min.6da5ec95ff88986fe5a678195fb73f2e.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/basepage.min.3097d244e3acdaa1cc46cbe27a844341.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/sticky.min.f7421d1f70d92b9a74fb9655256bba54.js"></script>
+<script src="/etc.clientlibs/web-sites-toolkit/components/structure/menuMicrositeBase/v1/menuMicrositeBase/clientlibs/clientlib.min.96a238afac5ac7358bccd1854f8d7d77.js"></script>
+
+
+
+
+
+
+
+    <header id="microsite-header-085cd2caaa" class="header menuMicrosite">
+        <nav class="header__navigation" aria-label="main menu">
+            <div class="header__top_wrapper">
+                <div class="header__top">
+                    <div class="header__button-burger--wrapper">
+                        <button type="button" class="header__button-burger" id="header__button-burger" aria-expanded="false" aria-controls="menu__list">
+                            <span class="line"></span>
+                            <span class="line"></span>
+                            <span class="line"></span>
+                        </button>
+                    </div>
+                    <div class="header__logo_container-mobile">
+                        
+                            
+
+    <a class="header__logo-image_wrapper" target="_self" href="/advisor/wolf-archard-group.html">
+        <img class="logo__image-mobile" src="/content/dam/fbngp/logos/logo-cp-fbngp-s.svg" alt="National Bank Financial Wealth Management logo"/>
+    </a>
+
+                        
+                        
+                            
+
+    <a class="header__logo-image_wrapper" target="_self" href="/advisor/wolf-archard-group.html">
+        <img class="logo__image-mobile" src="/content/dam/fbngp/logos/groupe-wolf-achard/logo-ia-wolf-achard-group-S.svg" alt="Wolf Archard Group logo"/>
+    </a>
+
+                        
+                    </div>
+                    <div class="header__links_container">
+                        <ul>
+                            
+                                
+                                
+    
+
+        
+        <li class="header__links_item header__links_item-desktop header__link-icon-view">
+            <a href="/advisor/wolf-archard-group/contact-us.html" target="_self" class="header__top-menu-link header__link-styled false style3 ">
+                <i class="bnc-icon-menu-locator"></i>
+                <span>Contact us</span>
+            </a>
+        </li>
+    
+
+                            
+
+                            
+                                
+                                <li class="header__links_item header__links_item-desktop">
+                                    <a class="header__lang--mobile header__top-menu-link" href="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-firme.html" target="_self">
+                                        Fr</a>
+                                </li>
+                            
+
+                            
+                                
+                                
+    
+
+        
+        <li class="header__links_item header__link-icon-view">
+            <a href="https://client.bnc.ca/nbfwm/home" target="_self" class="header__top-menu-link header__link-styled false style1 ">
+                <i class="bnc-icon-menu-secureLogin"></i>
+                <span>Client Access</span>
+            </a>
+        </li>
+    
+
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="header__bottom_wrapper">
+                <div id="menu__list" class="header__bottom menu-close">
+                    
+                    <div class="header__logo_container-desktop">
+                        <div class="header__logo-desktop">
+                            
+
+    <a class="header__logo-image_wrapper" target="_self" href="/advisor/wolf-archard-group.html">
+        <img class="logo__image-desktop" src="/content/dam/fbngp/logos/logo-cp-nbfwm-L.svg" alt="National Bank Financial Wealth Management logo"/>
+    </a>
+
+                        </div>
+                        <div class="header__logo-tablet">
+                            
+
+    <a class="header__logo-image_wrapper" target="_self" href="/advisor/wolf-archard-group.html">
+        <img class="logo__image-tablet" src="/content/dam/fbngp/logos/logo-cp-nbfwm-M.svg" alt="National Bank Financial Wealth Management logo"/>
+    </a>
+
+                        </div>
+                        <div class="header__logo-desktop">
+                            
+
+    <a class="header__logo-image_wrapper" target="_self" href="/advisor/wolf-archard-group.html">
+        <img class="logo__image-desktop" src="/content/dam/fbngp/logos/groupe-wolf-achard/logo-ia-wolf-achard-group-L.svg" alt="Wolf Archard Group logo"/>
+    </a>
+
+                        </div>
+                        <div class="header__logo-tablet">
+                            
+
+    <a class="header__logo-image_wrapper" target="_self" href="/advisor/wolf-archard-group.html">
+        <img class="logo__image-tablet" src="/content/dam/fbngp/logos/groupe-wolf-achard/logo-ia-wolf-achard-group-M.svg" alt="Wolf Archard Group logo"/>
+    </a>
+
+                        </div>
+                    </div>
+                    <div class="header__items_container">
+                        <div class="header__items_container--inner">
+                            <ul>
+                                
+                                <li class="header__links_item header__list-item--mobile header__list-item--mobile-home">
+                                    <a href="/advisor/wolf-archard-group.html">Wolf Archard Group</a>
+                                </li>
+
+                                
+                                    <li class="header__links_item nav_item">
+                                        <a href="/advisor/wolf-archard-group/our-team.html" target="_self">Our team</a>
+                                    </li>
+                                
+                                    <li class="header__links_item nav_item">
+                                        <a href="/advisor/wolf-archard-group/our-services.html" target="_self">Our services</a>
+                                    </li>
+                                
+                                    <li class="header__links_item nav_item">
+                                        <a href="/advisor/wolf-archard-group/news-articles.html" target="_self">News &amp; articles</a>
+                                    </li>
+                                
+                                    <li class="header__links_item nav_item">
+                                        <a href="/advisor/wolf-archard-group/our-firm.html" target="_self">Our Firm</a>
+                                    </li>
+                                
+                                
+                                    <li class="header__links_item header__list-item--mobile">
+                                        
+                                        <a class="header__items_link--mobile style3" href="/advisor/wolf-archard-group/contact-us.html" target="_self">Contact us</a>
+                                    </li>
+                                
+                                
+                                    
+                                    <li class="header__links_item header__list-item--mobile">
+                                        <a class="header__lang--mobile" href="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-firme.html" target="_self">Français</a>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    
+    
+
+</div>
+
+
+</div>
+
+    
+</div>
+</div>
+<div class="reference parbase aem-GridColumn aem-GridColumn--default--12"><div class="cq-dd-paragraph"><div class="responsivegrid_206164895 responsivegrid microsite-banner">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid microsite-banner aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="teaser aem-GridColumn aem-GridColumn--default--12">
+
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/teaser/clientlib.min.2a8bf729728ac71c4139af1e8f923a85.css" type="text/css">
+
+
+
+
+<div id="teaser-cb1f789b37" class="cmp-teaser">
+    
+    <div class="cmp-teaser__image">
+<div data-cmp-is="image" data-cmp-lazy data-cmp-lazythreshold="0" data-cmp-src="/tools-apps/references/pages/about-us/_jcr_content/root/responsivegrid_206164895/responsivegrid/teaser.coreimg.100{.width}.jpeg/1749475836108/ban-microsites-notre-a-propos.jpeg" data-cmp-widths="767,991,1199,2000" data-asset="/content/dam/fbngp/ban/notre-firme/ban-microsites-notre-a-propos.jpg" id="image-cb1f789b37" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        <noscript data-cmp-hook-image="noscript">
+            
+            <img src="/tools-apps/references/pages/about-us/_jcr_content/root/responsivegrid_206164895/responsivegrid/teaser.coreimg.jpeg/1749475836108/ban-microsites-notre-a-propos.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt/>
+            
+        </noscript>
+    
+    
+    
+</div>
+
+    
+
+</div>
+
+    <div class="cmp-teaser__content">
+        
+    
+
+        
+    <h1 class="cmp-teaser__title">
+        About us
+    </h1>
+
+        
+    <div class="cmp-teaser__description"><p>National Bank Financial - Wealth Management</p>
+  <p> </p>
+</div>
+
+        
+    
+
+    </div>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+</div>
+</div>
+<div class="reference parbase aem-GridColumn aem-GridColumn--default--12"><div class="cq-dd-paragraph"><div class="responsivegrid">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid bnc-container aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="title margin_top_5_per aem-GridColumn aem-GridColumn--default--12">
+
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/title/clientlib.min.60c616f6d42d7869b8a5943fbf3fc194.css" type="text/css">
+
+
+
+
+<div id="title-a28858563f" class="cmp-title">
+    <h2 class="cmp-title__text">A financial partner for Canadian families</h2>
+</div>
+
+    
+
+</div>
+<div class="text aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--10 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12 aem-GridColumn--bootstrapsm--12">
+
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/text/clientlib.min.771beae701bf79d068035f58f7ca4842.css" type="text/css">
+<script src="/etc.clientlibs/web-sites-toolkit/components/content/text/clientlib.min.e608268427093228dec948a90f1526fd.js"></script>
+
+
+
+
+<div id="text-f5f5a63b82" class="cmp-text cmp-text-v2">
+    <p>Since 1902, we have been building lasting relationships with Canadian
+  families. NBFWM’s mission is to help our clients manage their wealth
+  from generation to generation. Our network includes over 850 wealth
+  advisors at 100 branches across Canada—from Victoria to Halifax.</p>
+ <p>Our experts offer personalized service to help you realize your life goals.</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid margin_top_2_per showcase-light-full aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid bnc-container text-center aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title no-top aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-c2c9926a3a" class="cmp-title">
+    <h2 class="cmp-title__text">A strong partner</h2>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid bnc-container padding_bottom_60 margin_top_3_per aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid text-center margin_top_md_2_per aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--3 aem-Grid--default--3 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="image height_65 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/tools-apps/references/pages/about-us/_jcr_content/root/responsivegrid/responsivegrid_99993/responsivegrid/responsivegrid_11704/image.coreimg{.width}.svg/1604350083276/icn-revenu-par-annee.svg" data-asset="/content/dam/fbngp/picto/icn_revenu_par_annee.svg" data-title="National Bank employee picto" id="image-efae3c31e5" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/tools-apps/references/pages/about-us/_jcr_content/root/responsivegrid/responsivegrid_99993/responsivegrid/responsivegrid_11704/image.coreimg.svg/1604350083276/icn-revenu-par-annee.svg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="National Bank employee picto"/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="text padding_top_30 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--bootstrapxs--12">
+
+    
+
+
+
+
+<div id="text-07f2cfab79" class="cmp-text cmp-text-v2">
+    <p>
+  <b>$1 billion<br />  in revenue</b> per year</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid text-center margin_top_md_2_per aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--3 aem-Grid--default--3 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="image height_65 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/tools-apps/references/pages/about-us/_jcr_content/root/responsivegrid/responsivegrid_99993/responsivegrid/responsivegrid/image.coreimg{.width}.svg/1604350104352/icn-part-canada.svg" data-asset="/content/dam/fbngp/picto/icn_part_canada.svg" data-title="Bulb and dollar sign picto" id="image-d61ddd9dc8" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/tools-apps/references/pages/about-us/_jcr_content/root/responsivegrid/responsivegrid_99993/responsivegrid/responsivegrid/image.coreimg.svg/1604350104352/icn-part-canada.svg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Bulb and dollar sign picto"/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="text padding_top_30 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--bootstrapxs--12">
+
+    
+
+
+
+
+<div id="text-0ddba68f40" class="cmp-text cmp-text-v2">
+    <p>More than <b>$200 billion in assets</b>
+  <br /> under management</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid text-center margin_top_md_2_per aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--3 aem-Grid--default--3 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="image height_65 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/tools-apps/references/pages/about-us/_jcr_content/root/responsivegrid/responsivegrid_99993/responsivegrid/responsivegrid_1886381031/image.coreimg{.width}.svg/1604350121289/icn-part-de-marche.svg" data-asset="/content/dam/fbngp/picto/icn_part_de_marche.svg" data-title="Market share picto" id="image-daab9b48bb" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/tools-apps/references/pages/about-us/_jcr_content/root/responsivegrid/responsivegrid_99993/responsivegrid/responsivegrid_1886381031/image.coreimg.svg/1604350121289/icn-part-de-marche.svg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Market share picto"/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="text padding_top_30 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--bootstrapxs--12">
+
+    
+
+
+
+
+<div id="text-6682ce504c" class="cmp-text cmp-text-v2">
+    <p>
+  <b>29%</b> Market share<br /> in Quebec</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid text-center margin_top_md_2_per aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--3 aem-Grid--default--3 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="image height_65 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/tools-apps/references/pages/about-us/_jcr_content/root/responsivegrid/responsivegrid_99993/responsivegrid/responsivegrid_18863/image.coreimg{.width}.svg/1604350158144/icn-actif-sous-gestion.svg" data-asset="/content/dam/fbngp/picto/icn_actif_sous_gestion.svg" data-title="Wallet with a National Bank logo picto" id="image-3a924d7d32" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/tools-apps/references/pages/about-us/_jcr_content/root/responsivegrid/responsivegrid_99993/responsivegrid/responsivegrid_18863/image.coreimg.svg/1604350158144/icn-actif-sous-gestion.svg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Wallet with a National Bank logo picto"/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="text padding_top_30 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--bootstrapxs--12">
+
+    
+
+
+
+
+<div id="text-50719d51e5" class="cmp-text cmp-text-v2">
+    <p>
+  <b>9%</b> Market share <br /> in Canada</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid bnc-container margin_top_2_per aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid layout-container-gutter margin_top_2_per aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--default--5 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--5 aem-Grid--default--5 aem-Grid--bootstrapxs--12 ">
+    
+    <div class="image aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--default--5 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/tools-apps/references/pages/about-us/_jcr_content/root/responsivegrid/responsivegrid_17158/responsivegrid_354992669/responsivegrid_1705054143/responsivegrid_11625/image.coreimg.100{.width}.png/1604350183045/img-microsites-humain-a-propos-2-474x464.png" data-cmp-widths="767,991,1200" data-asset="/content/dam/fbngp/img/img-microsites-humain-a-propos-2-474x464.png" data-title="Two women are talking as they walk down a corridor in an office." id="image-24da05b5b6" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        <noscript data-cmp-hook-image="noscript">
+            
+            <img src="/tools-apps/references/pages/about-us/_jcr_content/root/responsivegrid/responsivegrid_17158/responsivegrid_354992669/responsivegrid_1705054143/responsivegrid_11625/image.coreimg.png/1604350183045/img-microsites-humain-a-propos-2-474x464.png" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Two women are talking as they walk down a corridor in an office."/>
+            
+        </noscript>
+    
+    
+    
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--default--7 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--7 aem-Grid--default--7 aem-Grid--bootstrapxs--12 ">
+    
+    <div class="title aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--default--7 aem-GridColumn--bootstrapxs--12">
+
+    
+
+
+
+
+<div id="title-b8364b9103" class="cmp-title">
+    <h2 class="cmp-title__text">Keep up with financial news</h2>
+</div>
+
+    
+
+</div>
+<div class="text aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--default--7 aem-GridColumn--bootstrapxs--12">
+
+    
+
+
+
+
+<div id="text-40ccd97722" class="cmp-text cmp-text-v2">
+    <p>Read articles written by our experts for the latest <a href="/documentation/financial-publications.html" target="_blank">economic news</a>. Our reliable, well-respected
+  publications will help you achieve your financial goals and make
+  informed choices.</p>
+ <p>For clear and concise information on the state of the global
+  economy, see our <a href="/content/dam/fbngp/pdf/doc-investment-strategy.pdf" target="_blank" title="NBFWM - Investment Strategy">quarterly
+    investment strategy publication</a>.</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid bnc-container layout-container-gutter padding_top_15 template-2-columns aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 ">
+    
+    <div class="responsivegrid padding_right_10 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--default--7 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--7 aem-Grid--default--7 aem-Grid--bootstrapxs--12 ">
+    
+    <div class="title no-bottom aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--default--7 aem-GridColumn--bootstrapxs--12">
+
+    
+
+
+
+
+<div id="title-3afe9cfa7a" class="cmp-title">
+    <h2 class="cmp-title__text">About National Bank of Canada</h2>
+</div>
+
+    
+
+</div>
+<div class="title no-top aem-GridColumn aem-GridColumn--default--7 aem-GridColumn--bootstrapxs--12">
+
+    
+
+
+
+
+<div id="title-c9b97b12ee" class="cmp-title">
+    <h3 class="cmp-title__text">One of Canada&#39;s leading financial institutions</h3>
+</div>
+
+    
+
+</div>
+<div class="text aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--default--7 aem-GridColumn--bootstrapxs--12">
+
+    
+
+
+
+
+<div id="text-dced0c917d" class="cmp-text cmp-text-v2">
+    <p>We build on the outstanding reputation of our parent company. With
+  $424 billion in assets as at October 31, 2023, National Bank of
+  Canada, together with its subsidiaries, forms one of Canada's leading
+  integrated financial services groups. It has more than
+  31,243 employees in knowledge-intensive positions and has been
+  recognized numerous times as a top employer and for its commitment to
+  diversity. Its securities are listed on the Toronto Stock Exchange
+  (TSX: NA). Follow the Bank's activities at <a href="http://nbc.ca/" target="_blank">nbc.ca</a>, through our <a href="https://www.nbc.ca/about-us/news-media.html" target="_blank">News Room</a> or via social media such as Facebook,
+  LinkedIn and Twitter.</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--default--5 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--5 aem-Grid--default--5 aem-Grid--bootstrapxs--12 ">
+    
+    <div class="image aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--default--5 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/tools-apps/references/pages/about-us/_jcr_content/root/responsivegrid/responsivegrid_17158/responsivegrid/responsivegrid/image.coreimg.100{.width}.png/1604350207161/img-microsites-aspirationnel-a-propos-1-474x464.png" data-cmp-widths="767,991,1200" data-asset="/content/dam/fbngp/img/img-microsites-aspirationnel-a-propos-1-474x464.png" data-title="A light blue lake surrounded by mountains." id="image-f2abc666bc" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        <noscript data-cmp-hook-image="noscript">
+            
+            <img src="/tools-apps/references/pages/about-us/_jcr_content/root/responsivegrid/responsivegrid_17158/responsivegrid/responsivegrid/image.coreimg.png/1604350207161/img-microsites-aspirationnel-a-propos-1-474x464.png" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="A light blue lake surrounded by mountains."/>
+            
+        </noscript>
+    
+    
+    
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+</div>
+</div>
+<div class="responsivegrid margin_top_5_per aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid bnc-container layout-container-gutter layout_equal_height aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--bootstrapsm--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid footer1 layout_equal_height aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12 aem-GridColumn--bootstrapsm--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--11 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12 aem-GridColumn--bootstrapsm--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--6 aem-Grid--bootstrapxs--6 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="title aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--bootstrapxs--6 aem-GridColumn--default--6">
+
+    
+
+
+
+
+<div id="title-d362ea7145" class="cmp-title">
+    <h3 class="cmp-title__text">Contact us</h3>
+</div>
+
+    
+
+</div>
+<div class="text aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--bootstrapxs--6 aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0">
+<div id="text-4d386f090e" class="cmp-text">
+    <p>Get contact information for our team members and find out where our
+  offices are.</p>
+ <p> </p>
+
+</div>
+
+    
+
+</div>
+<div class="bncButton button btnRTE3 aem-GridColumn--bootstrapsm--4 aem-GridColumn--default--none aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--4">
+
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/bncButton/clientlib.min.ff27e95926e61a9d67279e67e1ea9cd6.css" type="text/css">
+
+
+
+
+<a id="bncButton-8392e35404" class="cmp-button left" href="/advisor/wolf-archard-group/contact-us.html" target="_self">
+    
+    
+
+    <span class="cmp-button__text">See Our Contact Details</span>
+</a></div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid footer2 layout_equal_height aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12 aem-GridColumn--bootstrapsm--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--3 aem-Grid--bootstrapxs--3 aem-Grid--bootstrapsm--3 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--bootstrapsm--3 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--bootstrapxs--3">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--bootstrapxs--11 aem-Grid--default--12 aem-Grid--bootstrapsm--9 ">
+    
+    <div class="image aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--bootstrapxs--11 aem-GridColumn--bootstrapsm--9">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/advisor/wolf-archard-group/our-firm.coreimg{.width}.png/structure/jcr:content/root/responsivegrid_1261976424/responsivegrid_copy_/responsivegrid_20512/responsivegrid/responsivegrid/image/1608132387458/picto-telephone-rouge-80x80.png" data-asset="/content/dam/fbngp/picto/picto-telephone-rouge-80x80.png" data-asset-id="5667bd1a-3d4b-478e-84a0-2ddb892c8864" data-title="Phone picto" id="image-ece550cf10" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/advisor/wolf-archard-group/our-firm.coreimg.png/structure/_jcr_content/root/responsivegrid_1261976424/responsivegrid_copy_/responsivegrid_20512/responsivegrid/responsivegrid/image/1608132387458/picto-telephone-rouge-80x80.png" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Phone picto"/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="text aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--bootstrapxs--11 aem-GridColumn--bootstrapsm--9">
+<div id="text-789f3b3050" class="cmp-text">
+    <p>
+  <a href="tel:+15143951937">514-395-1937</a></p>
+ <p>
+  <a href="tel:+15144120370">514-412-0370</a></p>
+
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid layout_equal_height aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid footer2 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12 aem-GridColumn--bootstrapsm--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--3 aem-Grid--bootstrapxs--3 aem-Grid--bootstrapsm--3 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--bootstrapsm--3 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--bootstrapxs--3">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--bootstrapxs--12 aem-Grid--default--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="image aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--bootstrapxs--12 aem-GridColumn--bootstrapsm--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/advisor/wolf-archard-group/our-firm.coreimg{.width}.png/structure/jcr:content/root/responsivegrid_1261976424/responsivegrid_copy_/responsivegrid_13724_2130609452/responsivegrid_copy_/responsivegrid/image/1608132393075/picto-courriel-rouge-80x80.png" data-asset="/content/dam/fbngp/picto/picto-courriel-rouge-80x80.png" data-asset-id="90b308e2-cadc-4b0d-b7a4-541a3dfb1444" data-title="Email picto" id="image-a80ca4fd99" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/advisor/wolf-archard-group/our-firm.coreimg.png/structure/_jcr_content/root/responsivegrid_1261976424/responsivegrid_copy_/responsivegrid_13724_2130609452/responsivegrid_copy_/responsivegrid/image/1608132393075/picto-courriel-rouge-80x80.png" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Email picto"/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="text aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--bootstrapxs--12 aem-GridColumn--bootstrapsm--12">
+<div id="text-b28ce352b6" class="cmp-text">
+    <p>
+  <b>
+    <a href="mailto:laurent.achard@nbc.ca">laurent.achard@nbc.ca</a></b></p>
+ <p>
+  <a href="mailto:davidalexandre.wolf@nbc.ca"><b>davidalexandre.wolf@nbc.ca</b></a></p>
+
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid margin_top_2_per aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="footer aem-GridColumn aem-GridColumn--default--12">
+    
+    
+
+
+<footer id="footer-fbngp-en" class="cmp-staticFooter">
+    <div class="staticFooterContainer">
+    <nav aria-label="Information and contact links" class="first-level">
+    <ul>
+    <li>
+    <div class="controller" id="aideController" aria-owns="aide">
+    <p>Help and contact</p>
+    <img loading="lazy" alt="closed" src="/content/dam/bnc/particuliers/picto/collapse-closed.svg"/>
+    </div>
+    <div class="links" id="aide">
+    <a href="/contact.html">Contact us</a>
+    </div>
+    </li>
+    <li>
+    <div class="controller" id="utilesController" aria-owns="utiles">
+    <p>Useful links</p>
+    <img loading="lazy" alt="closed" src="/content/dam/bnc/particuliers/picto/collapse-closed.svg"/>
+    </div>
+    <div class="links" id="utiles">
+    <a href="/advisor.html">Find an advisor</a>
+    <a href="/about/regulatory-information.html">Regulatory information</a>
+<a href="/complaint-settlement.html">Complaint settlement</a>
+    </div>
+    </li>
+    <li>
+    <div class="controller" id="proposController" aria-owns="propos">
+    <p>About us</p>
+    <img loading="lazy" alt="closed" src="/content/dam/bnc/particuliers/picto/collapse-closed.svg"/>
+    </div>
+    <div class="links" id="propos">
+    <a href="/about.html">Our organisation</a>
+    <a href="https://www.nbc.ca/personal.html">National Bank of Canada</a>
+    <a href="https://www.nbc.ca/contact-us.html">Our subsidiaries</a>
+    <a href="/career.html">Careers</a>
+    </div>
+    </li>
+    <li>
+    <div class="controller" id="affutController" aria-owns="affut">
+    <p>Stay tuned</p>
+    <img loading="lazy" alt="closed" src="/content/dam/bnc/particuliers/picto/collapse-closed.svg"/>
+    </div>
+    <div class="links" id="affut">
+    <a href="https://www.nbc.ca/about-us/news-media.html">Press releases</a>
+    </div>
+    </li>
+    </ul>
+    </nav>
+    <hr>
+    <nav aria-label="Regulatory links" class="second-level">
+    <ul>
+    <li>
+    <a href="/user-agreement.html">User agreement</a>
+    </li>
+    <li>
+    <a href="https://www.nbc.ca/privacy-policy.html">Privacy policy</a>
+    </li>
+    <li>
+    <a href="/digital-data-policy.html">Digital data policy</a>
+    </li>
+    <li>
+    <a href="https://www.nbc.ca/abcs-of-security.html">ABCs of security</a>
+    </li>
+    <li>
+    <a href="https://www.nbc.ca/about-us/esg/accessibility-statement.html">Accessibility</a>
+    </li>
+    <li>
+        <a href="https://www.nbc.ca/about-us/esg/accessibility-progress-report.html">Accessibility Progress Report</a>
+        </li>
+    <li>
+    <a href="https://www.nbc.ca/about-us/esg/accessibility-plan.html#2.2">Accessibility feedback process</a>
+    </li>
+    </ul>
+    </nav>
+    <hr>
+    <nav aria-label="Legal notes and social media" class="third-level">
+    <ul>
+    <li>
+    <img loading="lazy" alt="National Bank" src="/content/dam/bnc/particuliers/picto/picto-logo-bn-24x22.svg"/>
+    </li>
+    </li>
+    <li>
+    <p id="copyright">© NBFWM. All rights reserved 2026.</p>
+    </li>
+    <li>
+    <a href="https://www.linkedin.com/company/financi-re-banque-nationale/" target="_blank">
+    <img class="social-footer" loading="lazy" alt="LinkedIn, external link which opens in a new tab." src="/content/dam/bnc/particuliers/picto/picto-social-linkedin.svg"/>
+    </a>
+    </li>
+    </ul>
+    </nav>
+    <nav aria-label="Partners" class="fourth-level">
+    <ul>
+    <li>
+    <a href="https://www.ciro.ca/" target="_blank">
+    <img loading="lazy" alt="Canadian Investment Regulatory Organization (CIRO), external link which opens in a new tab." src="/content/dam/fbngp/logos/logo-ciro.svg"/>
+    </a>
+    <a href="https://www.ciro.ca/office-investor/know-your-advisor-advisor-report" target="_blank" aria-label="See advisor reports of the CIRO, external link which opens in a new tab.">See advisor reports of the CIRO
+<img class="external-link" loading="lazy" alt="" src="/content/dam/bnc/particuliers/picto/external-link.svg">
+</a>
+    </li>
+    <li>
+    <a href="https://www.cipf.ca/" target="_blank">
+    <img loading="lazy" alt="Canadian Investor Protection Fund (CIPF), external link which opens in a new tab." src="/content/dam/fbngp/logos/logo-cipf.svg"/>
+    </a>
+    </li>
+    </ul>
+    </nav>
+    </div>
+</footer>
+
+
+
+</div>
+
+    
+</div>
+</div>
+
+
+            
+    
+    
+<script src="/etc.clientlibs/core/wcm/components/commons/site/clientlibs/container.min.0a6aff292f5cc42142779cde92054524.js"></script>
+
+
+
+    
+    
+    
+<script src="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-core-components.min.0e78d12b97b3829e02f2e042879f70aa.js"></script>
+
+
+
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/staticFooter/clientlibs.min.56d0cad8fb312fb999e0715679433926.css" type="text/css">
+<script src="/etc.clientlibs/web-sites-toolkit/components/content/staticFooter/clientlibs.min.45ad76f31352c347554825e250a74963.js"></script>
+
+
+
+
+    
+
+    
+
+    
+    
+    
+
+            
+
+
+            
+            
+
+        
+    </body>
+</html>

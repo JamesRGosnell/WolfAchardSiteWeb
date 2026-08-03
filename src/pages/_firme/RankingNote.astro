@@ -1,0 +1,150 @@
+---
+/**
+ * PAGE-LOCAL. `Petits détails pour tout savoir` — the FR-ONLY ranking footnote.
+ *
+ * ═════════════════════════════════════════════════════════════════════════════
+ * FRENCH ONLY. There is no English counterpart and none may be created.
+ *
+ * The English firm page has neither this accordion nor the claim it discloses
+ * (§1.7, C-35). Translating a competitive ranking claim into a language whose
+ * compliance file never approved it would be inventing regulated content
+ * (P-16, P-5). The English page component simply never renders this.
+ *
+ * IT IS NOT THE LEGAL-NOTES ACCORDION. `LegalNotes.astro` renders the five
+ * numbered platform disclaimers and may only be used for them; this page
+ * carries ZERO `<sup>` markers in both languages — verified directly on the
+ * captures, not taken on trust — so the numbered disclaimers do not appear on
+ * this page at all and P-12 is satisfied by their absence.
+ *
+ * THE LEADING `*` REFERENCES NOTHING. Verified on `fr-notre-firme.html`: zero
+ * `<sup>`, zero `<sub>`, and no other `*` anywhere in the body copy. It ships
+ * as found. Deleting an orphan reference removes a disclosure signal; adding a
+ * matching footnote invents regulatory wording (N-15, P-6). Neither is a
+ * builder's call.
+ *
+ * THE CLAIM IS STALE AND PROPERLY ATTRIBUTED — the only claim on the entire
+ * site that cites a source. `Investor Economics (mars 2019)` is over seven
+ * years old at rebuild. It ships verbatim with its date attached; only NBF may
+ * supply a refreshed citation or retire the footnote (C-35).
+ *
+ * POSITION IS LOAD-BEARING: live, it sits after the parent-bank block and
+ * before the closing contact block. It stays there.
+ * ═════════════════════════════════════════════════════════════════════════════
+ *
+ * Built on <details> so the text is always in the DOM, is keyboard-operable
+ * natively, and prints expanded — the same contract `LegalNotes.astro` follows,
+ * for the same reason: disclosure text must never be hidden from search, print
+ * or assistive technology. The live control is a `<button>` inside an `<h3>`;
+ * `<summary>` is its accessible equivalent and keeps the heading in the outline.
+ */
+import Icon from '../../components/Icon.astro';
+import type { FirmNote } from '../../data/pages/firm.types';
+
+interface Props {
+  note: FirmNote;
+  id?: string;
+}
+
+const { note, id = 'ranking-note' } = Astro.props;
+const headingId = `${id}-title`;
+---
+
+<section id={id} class="note" aria-labelledby={headingId}>
+  <details class="note__details">
+    <summary class="note__summary">
+      {/* <h3> because the live accordion header is an <h3>. */}
+      <h3 id={headingId} class="note__title">{note.title}</h3>
+      <Icon name="chevron-down" size={18} class="note__chevron" />
+    </summary>
+
+    <p class="note__body">{note.body}</p>
+  </details>
+</section>
+
+<style>
+  .note {
+    border-block: 1px solid var(--rule);
+  }
+
+  .note__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-block-size: 56px;
+    padding-block: 0.75rem;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .note__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .note__summary::marker {
+    content: '';
+  }
+
+  .note__summary:focus-visible {
+    outline: 2px solid var(--nb-red);
+    outline-offset: 2px;
+  }
+
+  .note__title {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-eyebrow);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color 180ms var(--ease-wa);
+  }
+
+  .note__summary:hover .note__title {
+    color: var(--fg);
+  }
+
+  /* :global — the chevron is rendered by <Icon>, outside this scope. */
+  .note__summary :global(.note__chevron) {
+    flex: none;
+    color: var(--muted);
+    transition: transform 220ms var(--ease-wa);
+  }
+
+  .note__details[open] .note__summary :global(.note__chevron) {
+    transform: rotate(180deg);
+  }
+
+  .note__body {
+    /* Calibrated measure — 1ch of Instrument Sans renders ~1.5 characters
+       of this client's copy, so --measure is 48ch, not 72ch.
+
+       ⚠ THERE WAS A SECOND `max-inline-size: 78ch` THREE LINES BELOW THIS ONE,
+       and being later in the same rule it won: the cap never applied and this
+       paragraph shipped at 95 characters per line. It is the C-35 Investor
+       Economics ranking claim — the one regulated string on the site that
+       cites a source — so it is the last block that should be hard to read.
+       Declare the measure once. */
+    max-inline-size: var(--measure);
+    margin: 0;
+    padding-block-end: 1.75rem;
+    font-size: 0.8125rem;
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  /* Disclosure text prints, expanded, whatever its state on screen. */
+  @media print {
+    .note__summary :global(.note__chevron) {
+      display: none;
+    }
+
+    .note__details:not([open]) > :not(summary) {
+      content-visibility: visible !important;
+      display: revert !important;
+    }
+  }
+</style>

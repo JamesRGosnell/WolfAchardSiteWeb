@@ -1,0 +1,198 @@
+---
+/**
+ * News / publication card.
+ *
+ * COMPLIANCE
+ *  · Publication links go OUT to their ORIGINAL URL, verbatim from the capture
+ *    for THAT language — including `cid=` parameters and the per-language
+ *    anchors. Never rewrite one, never point both languages at the same URL.
+ *  · NEVER pin a dated PDF filename. National Bank's publications are
+ *    syndicated and their own link labels promise "the latest version"; a
+ *    hard-coded dated file silently stops updating. Claims and figures freeze;
+ *    syndicated bank content tracks the bank.
+ *  · NO video iframes anywhere. A video is a card that links out to the
+ *    original player — this component cannot embed one, by design.
+ *  · Blurbs are corporate boilerplate: keep them verbatim, never summarise and
+ *    never re-attribute research.
+ *  · `external` adds target/rel plus a visible external-link icon and an
+ *    "opens in a new window" announcement; `note="PDF"` labels PDFs.
+ */
+import { Image } from 'astro:assets';
+import Icon from './Icon.astro';
+
+interface Props {
+  title: string;
+  /** Verbatim blurb. */
+  summary?: string;
+  href: string;
+  image?: ImageMetadata;
+  /** Alt text in the page's language. */
+  imageAlt?: string;
+  /** Small meta line above the title — category or date, verbatim. */
+  meta?: string;
+  /**
+   * Format badge, e.g. "PDF" — the shared `.badge-format` chip (NC-05). Same
+   * word, same chip, as the services toolbox: the visual lives in
+   * `global.css`, not here, so the two surfaces cannot diverge.
+   */
+  note?: string;
+  external?: boolean;
+  externalLabel?: string;
+  /** CTA text. Defaults to no visible CTA — the whole card is the link. */
+  cta?: string;
+  level?: 2 | 3 | 4;
+  class?: string;
+}
+
+const {
+  title,
+  summary,
+  href,
+  image,
+  imageAlt,
+  meta,
+  note,
+  external = false,
+  externalLabel,
+  cta,
+  level = 3,
+  class: className,
+} = Astro.props;
+
+const Heading = `h${level}` as 'h2' | 'h3' | 'h4';
+---
+
+<article class:list={['ncard card card-lift', className]}>
+  {
+    image && (
+      <div class="ncard__media">
+        <Image
+          src={image}
+          alt={imageAlt ?? ''}
+          widths={[320, 480, 720]}
+          sizes="(min-width: 62rem) 22rem, 90vw"
+          loading="lazy"
+        />
+      </div>
+    )
+  }
+
+  <div class="ncard__body">
+    {meta && <p class="ncard__meta">{meta}</p>}
+
+    <Heading class="ncard__title t-h3">
+      <a
+        class="ncard__link"
+        href={href}
+        {...external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+      >
+        {title}
+        {external && externalLabel && <span class="sr-only"> ({externalLabel})</span>}
+      </a>
+    </Heading>
+
+    {summary && <p class="ncard__summary">{summary}</p>}
+
+    <p class="ncard__foot">
+      {note && <span class="badge-format">{note}</span>}
+      {cta && <span class="ncard__cta">{cta}</span>}
+      <span class="ncard__icon" aria-hidden="true">
+        <Icon name={external ? 'external-link' : 'arrow-right'} size={16} />
+      </span>
+    </p>
+  </div>
+</article>
+
+<style>
+  .ncard {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .ncard__media {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: var(--greige);
+  }
+
+  .ncard__media :global(img) {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    filter: saturate(0.92) contrast(1.02);
+  }
+
+  .ncard__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.625rem;
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  }
+
+  .ncard__meta {
+    margin: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .ncard__title {
+    margin: 0;
+  }
+
+  .ncard__link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* Whole-card target, with the real focus ring still on the link. */
+  .ncard__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .ncard__summary {
+    margin: 0;
+    font-size: var(--text-small);
+    line-height: 1.6;
+    color: var(--muted);
+    max-inline-size: 46ch;
+  }
+
+  .ncard__foot {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin: 0.25rem 0 0;
+    font-size: var(--text-small);
+    font-weight: 600;
+    color: var(--fg);
+  }
+
+  /* The `PDF` / `Vidéo` chip is `.badge-format` in global.css — shared with the
+     services toolbox so one authored word cannot grow two looks. */
+
+  /* No standing red micro-accents — three cards in a row would put three of
+     them in one viewport. The arrow is quiet until hover. */
+  .ncard__icon {
+    display: inline-flex;
+    color: var(--muted);
+    transition:
+      transform 220ms var(--ease-wa),
+      color 220ms var(--ease-wa);
+  }
+
+  .ncard:hover .ncard__icon {
+    color: var(--fg);
+    transform: translateX(3px);
+  }
+
+  .ncard:focus-within {
+    border-color: var(--nb-red);
+  }
+</style>

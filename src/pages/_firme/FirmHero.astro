@@ -1,0 +1,102 @@
+---
+/**
+ * PAGE-LOCAL. The firm-page opener, both languages.
+ *
+ * THE HERO RULE (DESIGN_BRIEF §3), same as the home page's:
+ *
+ *   The client's VERBATIM live <h1> ships exactly as captured, at label size.
+ *   The large visual line lives in a NON-HEADING element beside it.
+ *
+ * Neither line is new copy. The <h1> is `À propos` / `About us` and the display
+ * line is the live <p> that already sits immediately after it inside the same
+ * AEM teaser (`cmp-teaser__description`) — `Financière Banque Nationale –
+ * Gestion de patrimoine` / `National Bank Financial - Wealth Management`.
+ * Nothing was written and nothing was substituted, so the hero raises no NC-
+ * row. Note the two languages punctuate that line differently (U+2013 against
+ * U+002D); each ships its own.
+ *
+ * The display line is the FIRM'S NAME, so it is set at the smaller end of the
+ * hero range and allowed a wider measure than the home page's short slogan —
+ * `Financière Banque Nationale – Gestion de patrimoine` is 50 characters and
+ * would otherwise break into four ragged lines at 76px.
+ *
+ * The banner is a wide plate UNDER the type rather than a full-bleed strip with
+ * text over it: the DAM master is 2000×375, and a bank photograph must not be
+ * asked to guarantee text contrast it has no treatment for.
+ */
+import Figure from '../../components/Figure.astro';
+import type { FirmHero } from '../../data/pages/firm.types';
+
+interface Props {
+  hero: FirmHero;
+}
+
+const { hero } = Astro.props;
+---
+
+<section class="bg-paper on-paper hero">
+  <div class="container-site hero__inner">
+    <h1 class="hero__name">{hero.heading}</h1>
+    <p class="hero__message serif-display">{hero.message}</p>
+
+    {
+      hero.banner && (
+        <div class="media hero-media hero__plate">
+          <Figure image={hero.banner} loading="eager" fetchpriority="high" />
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding-block: clamp(2.25rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem);
+  }
+
+  .hero__inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* The verbatim <h1>, at LABEL size. Full ink, not muted. */
+  .hero__name {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 1.375rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.005em;
+    color: var(--ink);
+  }
+
+  /* The display line. >=56px from 1100px upward. It is a <p>, so the document
+     outline is untouched. Sized a step below the home page's because this is a
+     50-character firm name, not a five-word slogan. */
+  .hero__message {
+    margin-block: clamp(0.875rem, 1.6vw, 1.375rem) 0;
+    max-inline-size: 26ch;
+    font-size: clamp(2.25rem, 4.4vw, 3.75rem);
+    line-height: 1.06;
+    letter-spacing: -0.012em;
+    color: var(--ink);
+  }
+
+  .hero__plate {
+    margin-block-start: clamp(2rem, 4.5vw, 3.5rem);
+    /* The DAM master's own ratio — no upscaling, no crop. */
+    aspect-ratio: 2000 / 375;
+    max-block-size: 22rem;
+  }
+
+  @media (max-width: 47.99rem) {
+    .hero__message {
+      max-inline-size: none;
+    }
+
+    /* 2000×375 is far too letterboxed to read on a phone. */
+    .hero__plate {
+      aspect-ratio: 16 / 9;
+    }
+  }
+</style>

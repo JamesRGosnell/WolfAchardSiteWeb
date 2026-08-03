@@ -1,0 +1,122 @@
+---
+/**
+ * Brand lockups and regulator marks.
+ *
+ * THE VARIANT IS CHOSEN FROM THE PAGE LOCALE, NEVER BY HAND. Showing the
+ * English lockup on a French page (or vice versa) is a compliance defect, so
+ * the mapping lives here and only here. No caller ever passes a file path.
+ *
+ * Sources and the DAM paths they came from are documented in
+ * `src/assets/README.md`. `src/assets/logos/` now holds the REAL artwork.
+ *
+ * ONE FILE PER (kind, tone, locale) — there is deliberately no width-conditional
+ * variant switch here, so the bar renders the `-L` lockup at every breakpoint.
+ * The DAM's `-M` team lockup is 4.186:1 on a trimmed canvas (vs 3.214:1 for
+ * `-L`); routing any breakpoint to it would break the 1280px nav fit measured in
+ * `src/assets/README.md`. Add a variant switch only with fresh French numbers.
+ *
+ * Two constraints the API enforces:
+ *  · Width always follows the file's own intrinsic ratio. A regulated lockup
+ *    may never be scaled non-uniformly.
+ *  · Regulator marks have no `-on-ink` variant, because official artwork may
+ *    not be recoloured. On dark surfaces they sit on a paper chip instead
+ *    (see Footer.astro, `.reg__chip`) — same file for both tones by design.
+ */
+import type { Locale } from '../data/types';
+
+import teamFr from '../assets/logos/team-fr.svg';
+import teamEn from '../assets/logos/team-en.svg';
+import teamFrInk from '../assets/logos/team-fr-on-ink.svg';
+import teamEnInk from '../assets/logos/team-en-on-ink.svg';
+import nbfwmFr from '../assets/logos/nbfwm-fr.svg';
+import nbfwmEn from '../assets/logos/nbfwm-en.svg';
+import nbfwmFrInk from '../assets/logos/nbfwm-fr-on-ink.svg';
+import nbfwmEnInk from '../assets/logos/nbfwm-en-on-ink.svg';
+import ocri from '../assets/logos/ocri.svg';
+import ciro from '../assets/logos/ciro.svg';
+import fcpi from '../assets/logos/fcpi.svg';
+import cipf from '../assets/logos/cipf.svg';
+import nbMark from '../assets/logos/nb-mark.svg';
+
+type Kind = 'team' | 'nbfwm' | 'regulator' | 'fund' | 'nb-mark';
+type Tone = 'paper' | 'ink';
+
+interface Props {
+  kind?: Kind;
+  locale: Locale;
+  tone?: Tone;
+  /**
+   * Nominal rendered height in px. Drives the width/height attributes, which
+   * reserve the box and derive the width from the intrinsic ratio — no CLS.
+   */
+  height?: number;
+  /**
+   * Optional CSS length for the DISPLAYED height, for responsive lockups:
+   * `cssHeight="var(--logo-h-bar)"`. Defaults to `height` in px. Width always
+   * follows the intrinsic ratio.
+   */
+  cssHeight?: string;
+  /** Empty string = decorative; the surrounding link carries the label. */
+  alt?: string;
+  loading?: 'eager' | 'lazy';
+  class?: string;
+}
+
+const {
+  kind = 'team',
+  locale,
+  tone = 'paper',
+  height = 40,
+  cssHeight,
+  alt = '',
+  loading = 'eager',
+  class: className,
+} = Astro.props;
+
+const table: Record<Kind, Record<Tone, Record<Locale, ImageMetadata>>> = {
+  team: {
+    paper: { fr: teamFr, en: teamEn },
+    ink: { fr: teamFrInk, en: teamEnInk },
+  },
+  nbfwm: {
+    paper: { fr: nbfwmFr, en: nbfwmEn },
+    ink: { fr: nbfwmFrInk, en: nbfwmEnInk },
+  },
+  // OCRI (fr) / CIRO (en). Official colours — no reversed variant.
+  regulator: {
+    paper: { fr: ocri, en: ciro },
+    ink: { fr: ocri, en: ciro },
+  },
+  // FCPI (fr) / CIPF (en). Same rule.
+  fund: {
+    paper: { fr: fcpi, en: cipf },
+    ink: { fr: fcpi, en: cipf },
+  },
+  // National Bank flag mark in the footer legal bar. One file, both languages;
+  // only the alt text changes. Its red is the artwork's own and must not be
+  // swapped for --nb-red.
+  'nb-mark': {
+    paper: { fr: nbMark, en: nbMark },
+    ink: { fr: nbMark, en: nbMark },
+  },
+};
+
+const asset = table[kind][tone][locale];
+// Astro derives dimensions from an SVG `viewBox` when width/height are absent.
+// If a real file carries neither, this fallback ratio SILENTLY LIES — check the
+// artwork rather than trusting it.
+const ratio = asset.width && asset.height ? asset.width / asset.height : 3;
+const width = Math.round(height * ratio);
+---
+
+<img
+  src={asset.src}
+  alt={alt}
+  width={width}
+  height={height}
+  loading={loading}
+  decoding="async"
+  draggable="false"
+  class:list={['logo-img', className]}
+  style={`--logo-h:${cssHeight ?? `${height}px`}`}
+/>

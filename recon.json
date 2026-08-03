@@ -1,0 +1,201 @@
+{
+  "fr": {
+    "host": "https://www.fbngp.ca",
+    "slug": "groupe-wolf-achard",
+    "url": "https://www.fbngp.ca/conseiller/groupe-wolf-achard.html",
+    "subPages": [
+      "nous-joindre",
+      "notre-equipe",
+      "nos-services",
+      "nouvelles-articles",
+      "notre-firme"
+    ],
+    "profiles": [
+      "notre-equipe/laurent-achard",
+      "notre-equipe/david-alexandre-wolf"
+    ]
+  },
+  "en": {
+    "host": "https://www.nbfwm.ca",
+    "slug": "wolf-archard-group",
+    "url": "https://www.nbfwm.ca/advisor/wolf-archard-group.html",
+    "subPages": [
+      "contact-us",
+      "our-team",
+      "our-services",
+      "news-articles",
+      "our-firm"
+    ],
+    "profiles": [
+      "our-team/laurent-achard",
+      "our-team/david-alexandre-wolf"
+    ]
+  },
+  "pages": {
+    "fr": [
+      {
+        "url": "https://www.fbngp.ca/conseiller/groupe-wolf-achard.html",
+        "status": 200,
+        "modified": "2025-09-19",
+        "bytes": 83705,
+        "altEn": "https://www.nbfwm.ca/advisor/wolf-archard-group.html"
+      },
+      {
+        "url": "https://www.fbngp.ca/conseiller/groupe-wolf-achard/nous-joindre.html",
+        "status": 200,
+        "modified": "2026-04-01",
+        "bytes": 64500,
+        "altEn": "https://www.nbfwm.ca/advisor/wolf-archard-group/contact-us.html"
+      },
+      {
+        "url": "https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe.html",
+        "status": 200,
+        "modified": "2025-07-14",
+        "bytes": 116586,
+        "altEn": "https://www.nbfwm.ca/advisor/wolf-archard-group/our-team.html"
+      },
+      {
+        "url": "https://www.fbngp.ca/conseiller/groupe-wolf-achard/nos-services.html",
+        "status": 200,
+        "modified": "2024-10-10",
+        "bytes": 69012,
+        "altEn": "https://www.nbfwm.ca/advisor/wolf-archard-group/our-services.html"
+      },
+      {
+        "url": "https://www.fbngp.ca/conseiller/groupe-wolf-achard/nouvelles-articles.html",
+        "status": 200,
+        "modified": "2024-10-10",
+        "bytes": 155626,
+        "altEn": "https://www.nbfwm.ca/advisor/wolf-archard-group/news-articles.html"
+      },
+      {
+        "url": "https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-firme.html",
+        "status": 200,
+        "modified": "2024-10-10",
+        "bytes": 64243,
+        "altEn": "https://www.nbfwm.ca/advisor/wolf-archard-group/our-firm.html"
+      },
+      {
+        "url": "https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe/laurent-achard.html",
+        "status": 200,
+        "modified": "2024-10-04",
+        "bytes": 57316,
+        "altEn": "https://www.nbfwm.ca/advisor/wolf-archard-group/our-team/laurent-achard.html"
+      },
+      {
+        "url": "https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe/david-alexandre-wolf.html",
+        "status": 200,
+        "modified": "2024-10-04",
+        "bytes": 57255,
+        "altEn": "https://www.nbfwm.ca/advisor/wolf-archard-group/our-team/david-alexandre-wolf.html"
+      }
+    ],
+    "en": [
+      {
+        "url": "https://www.nbfwm.ca/advisor/wolf-archard-group.html",
+        "status": 200,
+        "modified": "2025-09-19",
+        "bytes": 72227,
+        "altEn": "https://www.nbfwm.ca/advisor/wolf-archard-group.html"
+      },
+      {
+        "url": "https://www.nbfwm.ca/advisor/wolf-archard-group/contact-us.html",
+        "status": 200,
+        "modified": "2026-04-01",
+        "bytes": 64345,
+        "altEn": "https://www.nbfwm.ca/advisor/wolf-archard-group/contact-us.html"
+      },
+      {
+        "url": "https://www.nbfwm.ca/advisor/wolf-archard-group/our-team.html",
+        "status": 200,
+        "modified": "2025-09-02",
+        "bytes": 111484,
+        "altEn": "https://www.nbfwm.ca/advisor/wolf-archard-group/our-team.html"
+      },
+      {
+        "url": "https://www.nbfwm.ca/advisor/wolf-archard-group/our-services.html",
+        "status": 200,
+        "modified": "2025-09-02",
+        "bytes": 107110,
+        "altEn": "https://www.nbfwm.ca/advisor/wolf-archard-group/our-services.html"
+      },
+      {
+        "url": "https://www.nbfwm.ca/advisor/wolf-archard-group/news-articles.html",
+        "status": 200,
+        "modified": "2025-09-02",
+        "bytes": 152610,
+        "altEn": "https://www.nbfwm.ca/advisor/wolf-archard-group/news-articles.html"
+      },
+      {
+        "url": "https://www.nbfwm.ca/advisor/wolf-archard-group/our-firm.html",
+        "status": 200,
+        "modified": "2025-09-02",
+        "bytes": 61999,
+        "altEn": "https://www.nbfwm.ca/advisor/wolf-archard-group/our-firm.html"
+      },
+      {
+        "url": "https://www.nbfwm.ca/advisor/wolf-archard-group/our-team/laurent-achard.html",
+        "status": 200,
+        "modified": "2024-10-04",
+        "bytes": 56306,
+        "altEn": "https://www.nbfwm.ca/advisor/wolf-archard-group/our-team/laurent-achard.html"
+      },
+      {
+        "url": "https://www.nbfwm.ca/advisor/wolf-archard-group/our-team/david-alexandre-wolf.html",
+        "status": 200,
+        "modified": "2024-10-04",
+        "bytes": 56239,
+        "altEn": "https://www.nbfwm.ca/advisor/wolf-archard-group/our-team/david-alexandre-wolf.html"
+      }
+    ]
+  },
+  "structure": {
+    "bilingual": true,
+    "primary": "fr",
+    "frLivePages": 8,
+    "enLivePages": 8
+  },
+  "deadLinks": [],
+  "frOnlyPages": [],
+  "knownSyndicated": [
+    {
+      "url": "https://www.fbngp.ca/conseiller/groupe-wolf-achard/nouvelles-articles.html",
+      "modified": "2024-10-10"
+    },
+    {
+      "url": "https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe/laurent-achard.html",
+      "modified": "2024-10-04"
+    },
+    {
+      "url": "https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe/david-alexandre-wolf.html",
+      "modified": "2024-10-04"
+    },
+    {
+      "url": "https://www.nbfwm.ca/advisor/wolf-archard-group/news-articles.html",
+      "modified": "2025-09-02"
+    },
+    {
+      "url": "https://www.nbfwm.ca/advisor/wolf-archard-group/our-team/laurent-achard.html",
+      "modified": "2024-10-04"
+    },
+    {
+      "url": "https://www.nbfwm.ca/advisor/wolf-archard-group/our-team/david-alexandre-wolf.html",
+      "modified": "2024-10-04"
+    }
+  ],
+  "alsoSuspect": [
+    {
+      "url": "https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe.html",
+      "modified": "2025-07-14"
+    },
+    {
+      "url": "https://www.fbngp.ca/conseiller/groupe-wolf-achard/nos-services.html",
+      "modified": "2024-10-10"
+    },
+    {
+      "url": "https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-firme.html",
+      "modified": "2024-10-10"
+    }
+  ],
+  "damAssetsOnHome": 12
+}

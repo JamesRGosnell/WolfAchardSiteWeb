@@ -1,0 +1,140 @@
+---
+/**
+ * FRENCH firm page — `/notre-firme/`
+ *
+ * Section order is the CAPTURE's document order:
+ *   hero · Le partenaire financier des familles canadiennes · Un puissant allié
+ *   · Suivez l'actualité financière · À propos de la Banque Nationale ·
+ *   Petits détails pour tout savoir (FR only) · Contactez-nous
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * WHAT IS ON THIS PAGE, AND WHAT IS NOT
+ *
+ * It is 100% National Bank corporate copy. Not one sentence is about Groupe
+ * Wolf Achard; the only team-specific data is the two advisors' phone numbers
+ * and email addresses in the closing block. That is a finding for the client
+ * (D-15), not a gap to fill (P-5).
+ *
+ * NO DISCLAIMER ACCORDION. The capture renders ZERO `<sup>` and ZERO `<sub>`
+ * markers — verified directly on `fr-notre-firme.html`, not taken on trust — so
+ * the five numbered disclaimers do not belong on this page and P-12 is
+ * satisfied by their absence. `LegalNotes.astro` is deliberately not imported.
+ * The `Petits détails` accordion below is a DIFFERENT thing: a French-only
+ * ranking footnote, and the only accordion on either firm page.
+ *
+ * BAND RHYTHM (DESIGN_BRIEF §4): paper everywhere, exactly ONE greige tint
+ * block — the `Un puissant allié` stat band, which the live page also sets on
+ * its own surface (`showcase-light-full`). Ink stays in the footer.
+ *
+ * Do NOT edit shared files (components, layouts, lib, styles, config,
+ * data/{fr,en}.ts) from a page build. Report the friction instead.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/Section.astro';
+import FirmHero from '../_firme/FirmHero.astro';
+import StatBand from '../_firme/StatBand.astro';
+import SplitBlock from '../_firme/SplitBlock.astro';
+import RankingNote from '../_firme/RankingNote.astro';
+import ContactBlock from '../../components/ContactBlock.astro';
+import Prose from '../../components/Prose.astro';
+import firm from '../../data/pages/firm.fr';
+
+const locale = 'fr' as const;
+---
+
+{/*
+   D-11 — this page closes with its own <ContactBlock>, which rendered
+   `Contactez-nous` as an <h3> immediately above the band's <h2> and printed
+   both advisors' numbers four times on one page.
+*/}
+<BaseLayout
+  locale={locale}
+  pageKey="firm"
+  title={firm.meta.title}
+  description={firm.meta.description}
+  showFooterCta={false}
+>
+  <FirmHero hero={firm.hero} />
+
+  <Section bg="paper" aria-labelledby="intro-heading">
+    <div class="intro">
+      <h2 id="intro-heading" class="t-h2 serif-display intro__heading">{firm.intro.heading}</h2>
+      <div class="intro__body">
+        {
+          firm.intro.body.map((paragraph) => (
+            <Prose text={paragraph} locale={locale} class="intro__prose" />
+          ))
+        }
+      </div>
+    </div>
+  </Section>
+
+  {/* THE one tint block on this page. */}
+  <Section bg="greige" aria-labelledby="stats-heading">
+    <StatBand band={firm.stats} locale={locale} headingId="stats-heading" />
+  </Section>
+
+  <Section bg="paper" aria-labelledby="publications-heading">
+    <SplitBlock block={firm.publications} locale={locale} headingId="publications-heading" />
+  </Section>
+
+  <Section bg="paper" aria-labelledby="parent-bank-heading">
+    <SplitBlock block={firm.parentBank} locale={locale} headingId="parent-bank-heading" />
+  </Section>
+
+  {/* FR ONLY, in its live position — after the parent-bank block, before the
+      contact block. The English page has no counterpart and none is created. */}
+  {
+    firm.note && (
+      <Section bg="paper" padding="compact">
+        <RankingNote note={firm.note} />
+      </Section>
+    )
+  }
+
+  <Section bg="paper" aria-labelledby="contact-heading">
+    <ContactBlock contact={firm.contact} headingId="contact-heading" />
+  </Section>
+</BaseLayout>
+
+<style>
+  /* The opening statement reads as a single measured paragraph pair, not as a
+     split with a photograph — the live page has no image here, and inventing
+     one to balance the column would be decoration. */
+  .intro {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  @media (min-width: 60rem) {
+    .intro {
+      grid-template-columns: 5fr 7fr;
+      align-items: start;
+      column-gap: clamp(2.5rem, 5vw, 4.5rem);
+    }
+  }
+
+  .intro__heading {
+    margin: 0;
+    max-inline-size: 20ch;
+  }
+
+  /* `<Prose>` and `<Figure>` forward the calling component's scope attribute
+     (they spread `...rest` onto their root element), so a plain scoped rule
+     DOES reach the paragraph they render. This was written as an anchored
+     `:global()` descendant before that was true; it is kept because it is
+     equally correct and strictly narrower — but a new rule does not need it.
+     What is NOT safe is a bare `:global(.foo)` with no scoped ancestor: that
+     leaks out of the component. */
+  .intro__body :global(.intro__prose) {
+    margin: 0 0 1.125rem;
+    /* --measure, not a hand-picked `ch` count: `62ch` rendered ~95 characters.
+       See the token in global.css. */
+    max-inline-size: var(--measure);
+    line-height: 1.65;
+  }
+
+  .intro__body :global(.intro__prose:last-child) {
+    margin-block-end: 0;
+  }
+</style>

@@ -1,0 +1,836 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+    <head>
+        <title>Laurent Achard , Conseiller en gestion de patrimoine | Financière Banque Nationale - Gestion de patrimoine</title>
+        
+
+    
+        <meta property="og:title" content="Laurent Achard , Conseiller en gestion de patrimoine | Financière Banque Nationale - Gestion de patrimoine"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe/laurent-achard.html"/>
+        <meta property="og:description" content="Laurent Achard , Conseiller en gestion de patrimoine à la Financière Banque Nationale. Découvrez une gamme complète de solutions pour planifier vos projets et gérer votre patrimoine."/>
+        <meta property="og:image" content="https://www.fbngp.ca/content/dam/global/logo/bnc-logo.png"/>
+    
+
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    
+    <meta name="keywords" content="Italien, Québec, Français, Montréal, PVM Montréal, Anglais"/>
+
+    
+    <meta name="description" content="Laurent Achard , Conseiller en gestion de patrimoine à la Financière Banque Nationale. Découvrez une gamme complète de solutions pour planifier vos projets et gérer votre patrimoine."/>
+
+    
+    
+
+    
+    <link rel="canonical" href="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe/laurent-achard.html"/>
+
+    
+    
+        
+            
+                
+                
+                
+                    <link rel="alternate" hreflang="fr" href="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe/laurent-achard.html"/>
+                    <link rel="alternate" hreflang="fr-ca" href="https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe/laurent-achard.html"/>
+                    <link rel="alternate" hreflang="x-default" href="https://www.nbfwm.ca/advisor/wolf-archard-group/our-team/laurent-achard.html"/>
+                
+                
+            
+        
+            
+                
+                
+                
+                
+                    <link rel="alternate" hreflang="en" href="https://www.nbfwm.ca/advisor/wolf-archard-group/our-team/laurent-achard.html"/>
+                    <link rel="alternate" hreflang="en-ca" href="https://www.nbfwm.ca/advisor/wolf-archard-group/our-team/laurent-achard.html"/>
+                
+            
+        
+    
+
+    
+    
+    
+
+    
+    
+        
+
+
+
+
+    <script>
+        function getLanguage() {
+            let frRegex = /\/content\/(.*)\/fr\//;
+            let pagePath = "/content/fbngp/fr/accueil/conseiller/groupe-wolf-achard/notre-equipe/laurent-achard";
+
+            if(frRegex.test(pagePath)){
+                return "fr";
+            }
+            else{ //default is English
+                return "en";
+            }
+        }
+
+        /*
+        * AEM Page properties hierarchy function
+        * Sets the SDK parameters to be the same as the default parameters configured by the site
+        */
+        function setSiteConfig(){
+            
+            scriptUrl = "https://dam.bnc.ca/content/dam/tools/cmp/notice.js";
+            configDidomi = ("true" === "true");
+            activateDidomi = ("true" === "true");
+            applyDidomiToChildren = ("true" === "true");
+            showDidomi = ("true" === "true");
+            siteToken = "bFXc6fFy";
+            lang = getLanguage();
+        }
+
+
+        /*
+        * AEM Page properties hierarchy function
+        * Updates the SDK parameters if a configuration was set on a page or on a parent page
+        */
+        function setChildParentConfig(){
+            
+            configDidomi = ("true" === "true");
+            activateDidomi = ("true" === "true");
+            applyDidomiToChildren = ("true" === "true");
+            showDidomi = ("true" === "true");
+            childToken = "null";
+            if(childToken === "null"){
+                configDidomi = false;
+            }else{
+                configDidomi = true;
+                foundParentConfig = true;
+            }
+            
+        }
+
+
+        /*
+        * AEM Page properties hierarchy function
+        * Sets the notice token based on the page hierarchy
+        */
+        function setToken(){
+            if(configDidomi){
+                //child on
+                if(foundParentConfig  && applyDidomiToChildren && activateDidomi){
+                    bannerToken = childToken;
+                }
+                //parent on
+                if(!foundParentConfig  && activateDidomi){
+                    bannerToken = childToken;
+                }
+                //parent on, child on with default
+                if(foundParentConfig && !applyDidomiToChildren){
+                    bannerToken = siteToken;
+                }
+            } else{ // default
+                bannerToken = siteToken;
+            }
+        }
+
+
+        /*
+        * Loads Didomi script (notice.js) with correct parameters
+        */
+        function loadJS(FILE_URL, async = true, language, token, enableDidomi) {
+            let scriptEle = document.createElement("script");
+
+            scriptEle.setAttribute("src", FILE_URL);
+            scriptEle.setAttribute("type", "text/javascript");
+            scriptEle.setAttribute("async", async);
+            scriptEle.setAttribute("language", language);
+            scriptEle.setAttribute("token", token);
+            scriptEle.setAttribute("enableDidomi", enableDidomi);
+
+            document.head.appendChild(scriptEle);
+
+            // error event
+            scriptEle.addEventListener("error", (ev) => {
+                console.log("Error on loading file", ev);
+            });
+        }
+
+        /*
+        * The AEM parameters retrieved earlier from the page properties are set in the Didomi SDK
+        * language: the language the banner appears in
+        * notice.enable: wether the notice is visible on the page or not
+        */
+        function setSDKConfigs(language, enableDidomi){
+            //default Didomi config
+            window.didomiConfig = {
+                languages: {
+                    enabled: ['en', 'fr'],
+                    default: ''
+                },
+                notice: {
+                    enable: true
+                }
+            };
+
+            //set banner visibility
+            if(!enableDidomi){
+                window.didomiConfig.notice.enable = enableDidomi;
+            }
+
+            //set language
+            if("fr" === language){
+                window.didomiConfig.languages.enabled = ['fr']
+                window.didomiConfig.languages.default = 'fr'
+            } else{
+                window.didomiConfig.languages.enabled = ['en']
+                window.didomiConfig.languages.default = 'en'
+            }
+        }
+
+
+        /*
+        * Given the banner token, loads Didomi SDK
+        * Config Parameters must always be set before the SDK is loaded
+        */
+        function loadSDK(token) {
+
+            window.gdprAppliesGlobally = true;
+            (function() {
+                (function(e, r) {
+                    var t = document.createElement("link");
+                    t.rel = "preconnect";
+                    t.as = "script";
+
+                    var n = document.createElement("link");
+                    n.rel = "dns-prefetch";
+                    n.as = "script";
+
+                    var i = document.createElement("link");
+                    i.rel = "preload";
+                    i.as = "script";
+
+                    var o = document.createElement("script");
+                    o.id = "spcloader";
+                    o.type = "text/javascript";
+                    o.async = true;
+                    o.charset = "utf-8";
+
+                    var a = "https://sdk.privacy-center.org/" + e + "/loader.js?target_type=notice&target=" + r;
+                    if (window.didomiConfig && window.didomiConfig.user) {
+                        var c = window.didomiConfig.user;
+                        var s = c.country;
+                        var d = c.region;
+                        if (s) {
+                            a += "&country=" + s;
+                            if (d) {
+                                a += "&region=" + d;
+                            }
+                        }
+                    }
+
+                    t.href = "https://sdk.privacy-center.org/";
+                    n.href = "https://sdk.privacy-center.org/";
+                    i.href = a;
+                    o.src = a;
+
+                    var p = document.getElementsByTagName("script")[0];
+                    p.parentNode.insertBefore(t, p);
+                    p.parentNode.insertBefore(n, p);
+                    p.parentNode.insertBefore(i, p);
+                    p.parentNode.insertBefore(o, p);
+                })("f93cfeed-d62f-4357-bfe9-f9f6887f69fb", token);
+            })();
+        }
+
+
+        /*
+        * main function
+        */
+        function initializeDidomi(){
+
+            // set default parameters
+            setSiteConfig();
+
+            // if didomi is active at site level
+            if(configDidomi && applyDidomiToChildren && activateDidomi){
+
+                //reset variables for child/parent configs
+                configDidomi = false;
+
+                setChildParentConfig();
+                setToken();
+
+
+                if(true){
+                    setSDKConfigs(lang, showDidomi);
+                    loadSDK(bannerToken);
+                }else{
+                    loadJS(scriptUrl, true, lang, bannerToken, showDidomi);
+                }
+            }
+            // else didomi should not appear on the page
+        }
+
+
+        // PARAMETERS
+        let lang = "";
+        let bannerToken = "";
+        let siteToken = "";
+        let configDidomi = false;
+        let applyDidomiToChildren = false;
+        let activateDidomi = false;
+        let showDidomi = false;
+        let foundParentConfig = false;
+        let childToken = "";
+        let scriptUrl = "";
+
+        initializeDidomi();
+    </script>
+
+    
+
+    
+    <meta name="template" content="fiche-conseillers-placement-template"/>
+    
+
+
+    
+        
+        
+            
+    
+<script src="/etc.clientlibs/web-sites/clientlibs/vendor/jquery/base.min.3f56e989e786c643b30d5668a97daa52.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/websites.min.afe369e2daa031e232e9e25e1415ac64.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/dataLayer.min.bb151da6cddfb1aa78316cc5dbef60db.js"></script>
+
+
+
+            
+    <!--    Activate Adobe Launch-->
+    <script async src="//assets.adobedtm.com/launch-ENce80544c76a04686ae546c50bbd9979e.min.js" type="text/javascript"></script>
+    
+        
+    
+
+        
+    
+
+    
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-core-components.min.92ac67899fe3d5f4241b959add6754f8.css" type="text/css">
+
+
+
+    
+    
+<script src="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-dependencies.min.e8e8c2ccd7e4637d6fecf48ffeddbf45.js"></script>
+
+
+
+
+    
+    
+<script src="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-base.min.fe820b99b615c60d012a61d56eefc89a.js"></script>
+
+
+
+
+    
+        
+    
+
+
+
+
+
+
+    
+    
+    
+
+    
+
+    
+    
+    
+<link rel="stylesheet" href="/libs/wcm/foundation/components/page/responsive.min.dd681ee257834c2b1fb20fb9af28568b.css" type="text/css">
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/advisorUI/clientlibs/site.min.c5c98dc76e6dd7f94d462bf075f7d28d.css" type="text/css">
+
+
+
+    
+
+
+
+    
+    
+
+    
+    
+        <link rel="icon" type="image/ico" href="/content/dam/global/logo/favicon.ico"/>
+    
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-bncr/clientlibs/clientlib-site/theme.min.088b0040784f488f5ba8f374e2680914.css" type="text/css">
+
+
+
+
+    
+        <link type="text/css" rel="stylesheet" href="/content/dam/css/fbngp-microsite.css"/>
+    
+
+
+
+    
+    
+        
+
+
+
+<script>
+    var dataLayerDefinitionFile = '/content/dam/dataLayerConfig/rules-fbngp.json';
+    var dtmEventSource = 'nbfwm';
+    var dataLayerPagePayload = JSON.parse('[{"elementName":"loB","elementValue":"nbfwm"}]');
+    var responseStatus = 200;
+
+    // Old payload
+    var elements = [];
+    
+
+    Websites.DataLayer.init(dtmEventSource, dataLayerPagePayload, dataLayerDefinitionFile, responseStatus);
+
+</script>
+
+
+
+    <!-- Schema.org Page informations  -->
+    
+    
+    
+
+    <script>
+        var cqtags = [];
+        
+            cqtags.push('fbngp:Employee-Languages/english');
+        
+            cqtags.push('fbngp:equipe-mobile/quebec/montreal/pvm-montreal');
+        
+            cqtags.push('fbngp:equipe-mobile/quebec/montreal');
+        
+            cqtags.push('fbngp:Employee-Languages/french');
+        
+            cqtags.push('fbngp:Employee-Languages/italian');
+        
+            cqtags.push('fbngp:equipe-mobile/quebec');
+        
+
+        Websites.Schema.createPageTag (
+            {
+                jcrPageTitle: "Laurent Achard, Conseiller en gestion de patrimoine",
+                jcrDescription: "Laurent Achard , Conseiller en gestion de patrimoine à la Financière Banque Nationale. Découvrez une gamme complète de solutions pour planifier vos projets et gérer votre patrimoine.",
+                schemaTags: {}
+            });
+    </script>
+
+
+
+    
+
+    
+
+    
+
+    
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="167x167" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-167x167.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="167x167" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-167x167-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="152x152" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-152x152.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-152x152-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="144x144" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-144x144.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-144x144-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="120x120" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-120x120.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-120x120-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="any" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-48x48.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="any" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-48x48-precomposed.png"/>
+
+
+
+    
+                                <script>!function(e){var n="https://s.go-mpulse.net/boomerang/";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,n="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="CBWCH-YHXC8-UX5PM-CKJ3F-WKW7N",function(){function e(){if(!r){var e=document.createElement("script");e.id="boomr-scr-as",e.src=window.BOOMR.url,e.async=!0,o.appendChild(e),r=!0}}function t(e){r=!0;var n,t,a,i,d=document,O=window;if(window.BOOMR.snippetMethod=e?"if":"i",t=function(e,n){var t=d.createElement("script");t.id=n||"boomr-if-as",t.src=window.BOOMR.url,BOOMR_lstart=(new Date).getTime(),e=e||d.body,e.appendChild(t)},!window.addEventListener&&window.attachEvent&&navigator.userAgent.match(/MSIE [67]\./))return window.BOOMR.snippetMethod="s",void t(o,"boomr-async");a=document.createElement("IFRAME"),a.src="about:blank",a.title="",a.role="presentation",a.loading="eager",i=(a.frameElement||a).style,i.width=0,i.height=0,i.border=0,i.display="none",o.appendChild(a);try{O=a.contentWindow,d=O.document.open()}catch(_){n=document.domain,a.src="javascript:var d=document.open();d.domain='"+n+"';void 0;",O=a.contentWindow,d=O.document.open()}if(n)d._boomrl=function(){this.domain=n,t()},d.write("<bo"+"dy onload='document._boomrl();'>");else if(O._boomrl=function(){t()},O.addEventListener)O.addEventListener("load",O._boomrl,!1);else if(O.attachEvent)O.attachEvent("onload",O._boomrl);d.close()}function a(e){window.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!window.BOOMR||!window.BOOMR.version&&!window.BOOMR.snippetExecuted){window.BOOMR=window.BOOMR||{},window.BOOMR.snippetStart=(new Date).getTime(),window.BOOMR.snippetExecuted=!0,window.BOOMR.snippetVersion=14,window.BOOMR.url=n+"CBWCH-YHXC8-UX5PM-CKJ3F-WKW7N";var i=document.currentScript||document.getElementsByTagName("script")[0],o=i.parentNode,r=!1,d=document.createElement("link");if(d.relList&&"function"==typeof d.relList.supports&&d.relList.supports("preload")&&"as"in d)window.BOOMR.snippetMethod="p",d.href=window.BOOMR.url,d.rel="preload",d.as="script",d.addEventListener("load",e),d.addEventListener("error",function(){t(!0)}),setTimeout(function(){if(!r)t(!0)},3e3),BOOMR_lstart=(new Date).getTime(),o.appendChild(d);else t(!1);if(window.addEventListener)window.addEventListener("load",a,!1);else if(window.attachEvent)window.attachEvent("onload",a)}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var n=""=="true"?1:0,t="",a="r5uv2vvyd2lfa2tp6tkq-f-6f8e3365f-clientnsv4-s.akamaihd.net",i="false"=="true"?2:1,o={"ak.v":"41","ak.cp":"1490177","ak.ai":parseInt("891279",10),"ak.ol":"0","ak.cr":59,"ak.ipv":4,"ak.proto":"http/1.1","ak.rid":"471aea3b","ak.r":47660,"ak.a2":n,"ak.m":"b","ak.n":"essl","ak.cport":26320,"ak.gh":"184.30.149.80","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.0rtt.ed":"","ak.csrc":"-","ak.acc":"bbr","ak.t":"1785722069","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==6/ERm02xgEUpMDndm7qbgq2Vtc/FFyWnjSAzxWaVhxRdTZ7w4qJbDp7dJ+hAeRHnFbxrYGNZDsJPpGrjrTFtBicU6RnLs81D4lp5Tm2APxng/RFiWeZzYMSAzpir7r70uA5sbWe9UTR+K64kxySj4VMDSPdMFw9h1HcoFn4rO6vf8G7s23DKQY92wR+ac93oWMkQLaYr7DLgRpgB8cI3DibhCk6/pdAFDubHc1434rPUh+f+hcS5HbBinOPAcL5NxF+2RzyVQsRy2GjdeLVoWlHBZIa5HFT2f14i9ERLVF/dFlnw5XbRSSMzXcN1mxAn3eAZMAo45RJGiX2u24rZZu4ai8wHcT/zZMnc+gbT84src2P6awpjVsdaeaSiSr5n4IeXiqHjT7fmtSpJUImfLBaSdV5t/aLfPe86Yj4v5Hs=","ak.pv":"170","ak.dpoabenc":"","ak.tf":i};if(""!==t)o["ak.ruds"]=t;var r={i:!1,av:function(n){var t="http.initiator";if(n&&(!n[t]||"spa_hard"===n[t]))o["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(o)},rv:function(){var e=["ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.0rtt.ed","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:o,akDNSPreFetchDomain:a,init:function(){if(!r.i){var e=BOOMR.subscribe;e("before_beacon",r.av,null,null),e("onbeacon",r.rv,null,null),r.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+    <body class="page basicpage">
+
+        
+
+        
+
+
+
+        <div class="container-fluid">
+            
+<div class="root responsivegrid">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="header aem-GridColumn aem-GridColumn--default--12">
+    
+    
+        <div class="navigation-menu">
+            <link rel="stylesheet" href="/etc.clientlibs/web-sites-react/components/web-sites-react/clientlib.min.6ec3856b6df87ee1685172fb40c69188.css" type="text/css">
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-react/components/navigation-menu/clientlib.min.b3e2103e5f112609157e93cd4c4c3dd1.css" type="text/css">
+<div data-react-server="true" data-react="app" data-react-id="/content/fbngp/fr/jcr:content/navigation-menu_component"><style class="jss-server-side"></style><header class="navigation-menu-content"><nav class="navigation-menu-hidden-menu" aria-label="Menu rapide"><ul><li><button>Aller au contenu de la page</button></li><li><button>Aller au menu principal</button></li><li><button>Me connecter à mon compte</button></li></ul></nav><div class="quick-actions"><div class="container"><nav style="display:none" aria-label="Liens vers d&#x27;autres sections du site"><ul id="navigation-menu-websites-navigation" class="websites-links"><li class="active"><div class="qa-item-container"><a href="https://www.fbngp.ca/accueil.html" aria-current="page"><span>Financière Banque Nationale - Gestion de patrimoine</span></a></div></li></ul></nav><nav aria-label="Actions rapides"><ul id="navigation-menu-quick-actions" class="actions"><li class="quick-action__search"><button id="search-link" aria-expanded="false" tabindex="0" type="button" class="dsc-btn is-small has-icon simple tab-focus" data-test="button"><div class="dsc-btn__icon"><svg viewBox="0 0 64 64" focusable="false" width="16" fill="currentColor" height="16" class="dsc-icon"><path d="M44.471 41.643l16.45 16.45a2 2 0 01-2.828 2.828l-16.45-16.45A23.406 23.406 0 0126.5 50C13.521 50 3 39.479 3 26.5S13.521 3 26.5 3 50 13.521 50 26.5c0 5.77-2.079 11.053-5.529 15.143zM26.5 46C37.27 46 46 37.27 46 26.5S37.27 7 26.5 7 7 15.73 7 26.5 15.73 46 26.5 46z"></path></svg></div>Rechercher</button></li><li class="quick-action__locator"><a class="as-button simple dsc-btn is-small tab-focus" href="https://localisateur.bnc.ca/" target="_blank" tabindex="0"><svg viewBox="0 0 64 64" class="dsc-icon dsc-btn__icon" focusable="false" width="16" fill="currentColor" height="16"><path d="M32.399 0C44.866 0 54 8.795 54 21.344c0 8.14-6.369 21.374-19.086 40.048l-.867 1.267a2 2 0 01-3.302-.008C17.59 43.31 11 29.661 11 21.344 11 8.762 19.969 0 32.399 0zm0 4C22.157 4 15 10.992 15 21.344c0 6.751 5.526 18.648 16.596 35.395l.811 1.222.804-1.197c11.067-16.565 16.657-28.388 16.787-35.18l.002-.24C50 11.038 42.69 4 32.399 4zm-1.907 9.394c.318-.061.54-.124.776-.03.175.076.316.264.443.434l2.153 2.892c.127.17.27.373.443.435.238.093.46.047.776-.031l6.95-1.835v12.669l-6.95 1.865c-.316.063-.538.11-.776.031-.174-.077-.316-.264-.443-.435l-2.137-2.892c-.127-.17-.27-.357-.443-.434-.222-.094-.46-.032-.776.03l-6.95 1.82V15.229z"></path></svg>Nous trouver</a></li><li class="quick-action__lang"><a class="as-button simple dsc-btn is-small tab-focus" href="/chinois.html" lang="zh" target="_self"><svg viewBox="0 0 64 64" class="dsc-icon dsc-btn__icon" focusable="false" width="16" fill="currentColor" height="16"><path d="M5.212 34.067c.935 12.301 10.156 22.287 22.093 24.39a46.39 46.39 0 01-8.854-24.39H5.211zm0-4.134h13.235a46.336 46.336 0 018.858-24.39C15.367 7.645 6.147 17.631 5.212 29.932zm53.576 0c-.935-12.301-10.156-22.287-22.093-24.39a46.39 46.39 0 018.854 24.39h13.24zm0 4.134H45.553a46.336 46.336 0 01-8.858 24.39c11.938-2.103 21.158-12.089 22.093-24.39zm-36.203-4.134H41.41A42.202 42.202 0 0032 6.227a42.172 42.172 0 00-9.415 23.706zm18.83 4.134H22.59A42.202 42.202 0 0032 57.773a42.172 42.172 0 009.415-23.706zM32 63C14.88 63 1 49.12 1 32 1 14.88 14.88 1 32 1c17.12 0 31 13.88 31 31 0 17.12-13.88 31-31 31z"></path></svg>中国</a></li><li class="quick-action__lang"><a class="as-button simple dsc-btn is-small tab-focus" href="/bin/switchLanguage?lang=En&amp;p=ecf1661cef70ae14a8660666d0e7af49105f8469fdabc54ade1a27ab651ecc8c2f37d8c59f560a4b211c017f282f71fa1eb04bb21adb9dd965ac9264487aee0d6cf60a4ebb154d5381ef832b97d6b1d818e50b22c03da5fd6ea653ad707236afcdc6d96956f999a7b8da31e02a3c2cad" aria-label="Consult the site in English" lang="en"><svg viewBox="0 0 64 64" class="dsc-icon dsc-btn__icon" focusable="false" width="16" fill="currentColor" height="16"><path d="M5.212 34.067c.935 12.301 10.156 22.287 22.093 24.39a46.39 46.39 0 01-8.854-24.39H5.211zm0-4.134h13.235a46.336 46.336 0 018.858-24.39C15.367 7.645 6.147 17.631 5.212 29.932zm53.576 0c-.935-12.301-10.156-22.287-22.093-24.39a46.39 46.39 0 018.854 24.39h13.24zm0 4.134H45.553a46.336 46.336 0 01-8.858 24.39c11.938-2.103 21.158-12.089 22.093-24.39zm-36.203-4.134H41.41A42.202 42.202 0 0032 6.227a42.172 42.172 0 00-9.415 23.706zm18.83 4.134H22.59A42.202 42.202 0 0032 57.773a42.172 42.172 0 009.415-23.706zM32 63C14.88 63 1 49.12 1 32 1 14.88 14.88 1 32 1c17.12 0 31 13.88 31 31 0 17.12-13.88 31-31 31z"></path></svg>En</a></li><li class="quick-action__signin"><div class="menu-popover"><button aria-controls="login-menu-button" aria-expanded="false" tabindex="0" type="button" class="dsc-btn is-primary is-small is-transactional has-icon login tab-focus focus-child-sibling bnc-chatbot-highlight" data-test="button"><div class="dsc-btn__icon"><svg viewBox="0 0 64 64" focusable="false" width="16" fill="currentColor" height="16" class="dsc-icon"><path d="M34 44.465V49a2 2 0 11-4 0v-4.535A3.997 3.997 0 0128 41c0-2.21 1.79-4 4-4s4 1.79 4 4a3.997 3.997 0 01-2 3.465zM14 26v-7c0-9.941 8.059-18 18-18s18 8.059 18 18v7h.538c2.985 0 5.482 2.29 5.482 5.192v17.65c0 7.343-6.678 13.197-14.77 13.197H21.77C13.676 62.04 7 56.185 7 48.843V31.192C7 28.29 9.496 26 12.482 26H14zm36.538 4H12.482c-.85 0-1.482.58-1.482 1.192v17.65c0 5.009 4.778 9.197 10.77 9.197h19.48c5.992 0 10.77-4.188 10.77-9.196V31.192c0-.612-.633-1.192-1.482-1.192zM46 19c0-7.732-6.268-14-14-14s-14 6.268-14 14v7h28v-7z"></path></svg></div>Accès client<svg viewBox="0 0 64 64" focusable="false" width="16" fill="currentColor" height="16" class="dsc-icon"><path d="M32 37.172l17.845-18.1a3.57 3.57 0 015.099 0 3.694 3.694 0 010 5.17L34.549 44.93a3.57 3.57 0 01-5.098 0L9.056 24.243a3.694 3.694 0 010-5.172 3.57 3.57 0 015.099 0L32 37.171z"></path></svg></button><div class="menu-popover-content"><span class="triangle-top"></span><div class="main"><label>Vous serez dirigé vers la page de connexion habituelle</label><ul id="login-menu-button"><li><a href="https://client.bnc.ca/fbngp/login" data-text="Accéder à la plateforme">Accéder à la plateforme</a><svg viewBox="0 0 64 64" focusable="false" width="16" fill="currentColor" height="16" class="dsc-icon"><path d="M39.172 32l-18.1-17.845a3.57 3.57 0 010-5.099 3.694 3.694 0 015.17 0L46.93 29.451a3.57 3.57 0 010 5.098L26.243 54.944a3.694 3.694 0 01-5.172 0 3.57 3.57 0 010-5.099L39.171 32z"></path></svg></li></ul></div></div></div></li></ul></nav></div></div><div id="navigation-menu-navigation" class="website-navigation"><div class="container"><span class="image-container"><a tabindex="-1" href="/accueil.html" aria-label="De retour à la page d&#x27;accueil"><img src="/content/dam/fbngp/logos/logo-fbngp-245x70.png" alt="Financière Banque Nationale"/></a></span><nav id="firstLevelMenu" class="main-navigation" aria-label="Menu principal"><ul><li class="current" aria-owns="secondLevelMenu"><a id="hash-200887521" class="tab-focus" href="https://www.fbngp.ca/conseiller.html" aria-current="page">Trouver un conseiller</a><button aria-label="Ouvrir la section produits et services: Trouver un conseiller" aria-haspopup="true" aria-controls="secondLevelMenu" aria-expanded="false" type="button" class="dsc-btn sub-section-button simple tab-focus" data-test="button"><svg viewBox="0 0 64 64" focusable="false" width="16" fill="currentColor" height="16" class="dsc-icon"><path d="M32 37.172l17.845-18.1a3.57 3.57 0 015.099 0 3.694 3.694 0 010 5.17L34.549 44.93a3.57 3.57 0 01-5.098 0L9.056 24.243a3.694 3.694 0 010-5.172 3.57 3.57 0 015.099 0L32 37.171z"></path></svg></button><span class="triangle-top"></span></li><li class="" aria-owns="secondLevelMenu"><a id="hash1142813920" class="tab-focus" href="https://www.fbngp.ca/comment-vous-aider.html">Comment vous aider</a><button aria-label="Ouvrir la section produits et services: Comment vous aider" aria-haspopup="true" aria-controls="secondLevelMenu" aria-expanded="false" type="button" class="dsc-btn sub-section-button simple tab-focus" data-test="button"><svg viewBox="0 0 64 64" focusable="false" width="16" fill="currentColor" height="16" class="dsc-icon"><path d="M32 37.172l17.845-18.1a3.57 3.57 0 015.099 0 3.694 3.694 0 010 5.17L34.549 44.93a3.57 3.57 0 01-5.098 0L9.056 24.243a3.694 3.694 0 010-5.172 3.57 3.57 0 015.099 0L32 37.171z"></path></svg></button><span class="triangle-top"></span></li><li class="" aria-owns="secondLevelMenu"><a id="hash385149207" class="tab-focus" href="https://www.fbngp.ca/documentation.html">Documentation</a><button aria-label="Ouvrir la section produits et services: Documentation" aria-haspopup="true" aria-controls="secondLevelMenu" aria-expanded="false" type="button" class="dsc-btn sub-section-button simple tab-focus" data-test="button"><svg viewBox="0 0 64 64" focusable="false" width="16" fill="currentColor" height="16" class="dsc-icon"><path d="M32 37.172l17.845-18.1a3.57 3.57 0 015.099 0 3.694 3.694 0 010 5.17L34.549 44.93a3.57 3.57 0 01-5.098 0L9.056 24.243a3.694 3.694 0 010-5.172 3.57 3.57 0 015.099 0L32 37.171z"></path></svg></button><span class="triangle-top"></span></li><li class="" aria-owns="secondLevelMenu"><a id="hash469385940" class="tab-focus" href="https://www.fbngp.ca/carriere.html">Faire carrière</a><button aria-label="Ouvrir la section produits et services: Faire carrière" aria-haspopup="true" aria-controls="secondLevelMenu" aria-expanded="false" type="button" class="dsc-btn sub-section-button simple tab-focus" data-test="button"><svg viewBox="0 0 64 64" focusable="false" width="16" fill="currentColor" height="16" class="dsc-icon"><path d="M32 37.172l17.845-18.1a3.57 3.57 0 015.099 0 3.694 3.694 0 010 5.17L34.549 44.93a3.57 3.57 0 01-5.098 0L9.056 24.243a3.694 3.694 0 010-5.172 3.57 3.57 0 015.099 0L32 37.171z"></path></svg></button><span class="triangle-top"></span></li><li class="" aria-owns="secondLevelMenu"><a id="hash-292690034" class="tab-focus" href="https://www.fbngp.ca/a-propos.html">À propos </a><button aria-label="Ouvrir la section produits et services: À propos " aria-haspopup="true" aria-controls="secondLevelMenu" aria-expanded="false" type="button" class="dsc-btn sub-section-button simple tab-focus" data-test="button"><svg viewBox="0 0 64 64" focusable="false" width="16" fill="currentColor" height="16" class="dsc-icon"><path d="M32 37.172l17.845-18.1a3.57 3.57 0 015.099 0 3.694 3.694 0 010 5.17L34.549 44.93a3.57 3.57 0 01-5.098 0L9.056 24.243a3.694 3.694 0 010-5.172 3.57 3.57 0 015.099 0L32 37.171z"></path></svg></button><span class="triangle-top"></span></li><li class="" aria-owns="secondLevelMenu"><a id="hash-1798581190" class="tab-focus" href="https://www.fbngp.ca/services-numeriques.html">Services numériques</a><button aria-label="Ouvrir la section produits et services: Services numériques" aria-haspopup="true" aria-controls="secondLevelMenu" aria-expanded="false" type="button" class="dsc-btn sub-section-button simple tab-focus" data-test="button"><svg viewBox="0 0 64 64" focusable="false" width="16" fill="currentColor" height="16" class="dsc-icon"><path d="M32 37.172l17.845-18.1a3.57 3.57 0 015.099 0 3.694 3.694 0 010 5.17L34.549 44.93a3.57 3.57 0 01-5.098 0L9.056 24.243a3.694 3.694 0 010-5.172 3.57 3.57 0 015.099 0L32 37.171z"></path></svg></button><span class="triangle-top"></span></li></ul></nav><div class="menu-popover"><button aria-controls="login-menu-button-small" aria-expanded="false" tabindex="0" type="button" class="dsc-btn is-primary is-small is-transactional has-icon login tab-focus focus-child-sibling bnc-chatbot-highlight small" data-test="button"><div class="dsc-btn__icon"><svg viewBox="0 0 64 64" focusable="false" width="16" fill="currentColor" height="16" class="dsc-icon"><path d="M34 44.465V49a2 2 0 11-4 0v-4.535A3.997 3.997 0 0128 41c0-2.21 1.79-4 4-4s4 1.79 4 4a3.997 3.997 0 01-2 3.465zM14 26v-7c0-9.941 8.059-18 18-18s18 8.059 18 18v7h.538c2.985 0 5.482 2.29 5.482 5.192v17.65c0 7.343-6.678 13.197-14.77 13.197H21.77C13.676 62.04 7 56.185 7 48.843V31.192C7 28.29 9.496 26 12.482 26H14zm36.538 4H12.482c-.85 0-1.482.58-1.482 1.192v17.65c0 5.009 4.778 9.197 10.77 9.197h19.48c5.992 0 10.77-4.188 10.77-9.196V31.192c0-.612-.633-1.192-1.482-1.192zM46 19c0-7.732-6.268-14-14-14s-14 6.268-14 14v7h28v-7z"></path></svg></div>Accès client<svg viewBox="0 0 64 64" focusable="false" width="16" fill="currentColor" height="16" class="dsc-icon"><path d="M32 37.172l17.845-18.1a3.57 3.57 0 015.099 0 3.694 3.694 0 010 5.17L34.549 44.93a3.57 3.57 0 01-5.098 0L9.056 24.243a3.694 3.694 0 010-5.172 3.57 3.57 0 015.099 0L32 37.171z"></path></svg></button><div class="menu-popover-content"><span class="triangle-top"></span><div class="main"><label>Vous serez dirigé vers la page de connexion habituelle</label><ul id="login-menu-button-small"><li><a href="https://client.bnc.ca/fbngp/login" data-text="Accéder à la plateforme">Accéder à la plateforme</a><svg viewBox="0 0 64 64" focusable="false" width="16" fill="currentColor" height="16" class="dsc-icon"><path d="M39.172 32l-18.1-17.845a3.57 3.57 0 010-5.099 3.694 3.694 0 015.17 0L46.93 29.451a3.57 3.57 0 010 5.098L26.243 54.944a3.694 3.694 0 01-5.172 0 3.57 3.57 0 010-5.099L39.171 32z"></path></svg></li></ul></div></div></div></div><div class="sub-navigation"><div class="container"><nav class="navSecondLevelMenu" aria-label="Menu produits et services"><ul id="secondLevelMenu"></ul></nav><div class="action-bar"><button tabindex="-1" type="button" class="dsc-btn is-small close-button" data-test="button">Fermer<svg viewBox="0 0 64 64" focusable="false" width="32" fill="currentColor" height="32" class="dsc-icon"><path d="M37.055 32l14.898 14.898a3.574 3.574 0 11-5.055 5.055L32 37.055 17.102 51.953a3.574 3.574 0 11-5.055-5.055L26.945 32 12.047 17.102a3.574 3.574 0 115.055-5.055L32 26.945l14.898-14.898a3.574 3.574 0 115.055 5.055L37.055 32z"></path></svg></button><div class="navigation-menu-ad"></div></div></div></div></div></header><div class="sticky-spacer"></div><span id="navigation-menu-content-skip"></span></div><script id="/content/fbngp/fr/jcr:content/navigation-menu_component">{"cache":{"resources":{"/content/fbngp/fr/jcr:content/navigation-menu":{"data":{"jcr:primaryType":"nt:unstructured","additionalLangUrl":"/content/fbngp/fr/accueil/chinois.html","logoAltText":"Financière Banque Nationale","signUpDisplay":"false","helpDisplay":"false","secureSectionDisplay":"false","desktopImageFileReference":"/content/dam/fbngp/logos/logo-fbngp-245x70.png","searchDisplay":"true","switchLangDisplay":"true","jcr:lastModifiedBy":"CORJ041","switchLangAriaLabel":"Consult the site in English","signInDisplay":"true","searchLabel":"Rechercher","signInListLabel":"Vous serez dirigé vers la page de connexion habituelle","hideHighlevelNavigation":"true","mobileImageFileReference":"/content/dam/bnc/commun/logo/logo-bnc-flag.png","additionalLangDisplay":"true","additionalLangAttribute":"zh","additionalLangLabel":"中国","locatorDisplay":"true","signInLabel":"Accès client","menuKey":"fbngp-menu-fr","jcr:lastModified":"Wed Oct 29 2025 10:24:27 GMT-0400","locatorLabel":"Nous trouver","homeURL":"/content/fbngp/fr/accueil","smallDesktopImageFileReference":"/content/dam/fbngp/logos/logo-fbngp-245x70.png","sling:resourceType":"web-sites-react/components/navigation-menu","helpTarget":"_self","locatorUrl":"https://localisateur.bnc.ca/","additionalLangTarget":"_self","searchUrl":"/resultats.html","signInLinks":{"jcr:primaryType":"nt:unstructured","item0":{"jcr:primaryType":"nt:unstructured","target":"_self","url":"https://client.bnc.ca/fbngp/login","label":"Accéder à la plateforme"}}},"depth":0}},"scripts":{},"included":{},"serviceCalls":{"/content/fbngp/fr/jcr:content/navigation-menu_com.bnc.aem.websites.toolkit.sling.models.react.I18nModel.getI18nFor(navigation-menu,fr)":"{\"accessibilityCommands.helpDetail\":\"Press H key to have detailed navigation instructions\",\"accessibilityCommands.leftRight\":\"Utiliser les flèches gauche et droite pour changer d'élément.\",\"accessibilityCommands.leftRightDown\":\"Utiliser les flèches gauche et droite pour parcourir les sections, et la flèche du bas pour parcourir les sous-sections\",\"accessibilityCommands.leftRightUpDown\":\"Utiliser les flèches gauche et droite pour changer de sous-sections, utiliser les flèches haut et bas pour parcourir les pages de la sous-section. Utiliser la touche échap pour revenir à la section\",\"linksNavbar.ariaLabel\":\"Liens vers d'autres sections du site\",\"quickActions.ariaLabel\":\"Actions rapides\",\"firstLevel.ariaLabel\":\"Menu principal\",\"secondLevel.ariaLabel\":\"Menu produits et services\",\"thirdLevel.ariaLabel\":\"Produits et services\",\"openFirstLevel.ariaLabel\":\"Ouvrir le menu principal \",\"openSecondLevel.ariaLabel\":\"Ouvrir le sous-menu: \",\"openThirdLevel.ariaLabel\":\"Ouvrir la section produits et services: \",\"closeFirstLevel.ariaLabel\":\"Fermer le menu principal \",\"closeSecondLevel.ariaLabel\":\"Aller au menu principal \",\"closeThirdLevel.ariaLabel\":\"Aller au sous-menu \",\"section.ariaLabel\":\"Section \",\"subSection.ariaLabel\":\"Sous-menu de navigation \",\"quickActions.secure.login\":\"Se connecter\",\"quickActions.secure.logout\":\"Se déconnecter\",\"mobile.welcome.paragraph\":\"Accueil\",\"logo.backToHome.ariaLabel\":\"De retour à la page d'accueil\",\"search.placeholder\":\"Rechercher\",\"search.section\":\"Section recherche\",\"search.input\":\"Champ de recherche\",\"search.button\":\"Rechercher\",\"search.erase\":\"Effacer la recherche\",\"search.close\":\"Fermeture de la recherche\",\"search.close.content\":\"Fermer\",\"hiddenMenu.navLabel\":\"Menu rapide\",\"hiddenMenu.skipTocontent\":\"Aller au contenu de la page\",\"hiddenMenu.skipToQuickActions\":\"Me connecter à mon compte\",\"hiddenMenu.skipToNavigation\":\"Aller au menu principal\",\"hiddenMenu.skipToWebsites\":\"Aller au site\"}","/content/fbngp/fr/jcr:content/navigation-menu_com.bnc.aem.websites.toolkit.sling.models.react.NavigationMenu.getMenuAsJsonString(fbngp-menu-fr)":"{\"websites\":[{\"label\":\"Financière Banque Nationale - Gestion de patrimoine\",\"url\":\"https://www.fbngp.ca/accueil.html\",\"current\":true,\"navigation\":[{\"label\":\"Trouver un conseiller\",\"url\":\"https://www.fbngp.ca/conseiller.html\",\"current\":true,\"sections\":[{\"label\":\"TROUVER UN CONSEILLER PRÈS DE CHEZ VOUS\",\"url\":\"\",\"current\":false,\"links\":[{\"label\":\"Chercher un conseiller par région\",\"url\":\"https://www.fbngp.ca/conseiller.html\",\"current\":true}]}]},{\"label\":\"Comment vous aider\",\"url\":\"https://www.fbngp.ca/comment-vous-aider.html\",\"current\":false,\"sections\":[{\"label\":\"NOTRE ACCOMPAGNEMENT\",\"url\":\"\",\"current\":false,\"links\":[{\"label\":\"Bâtir votre patrimoine\",\"url\":\"https://www.fbngp.ca/comment-vous-aider/batir-patrimoine.html\",\"current\":false},{\"label\":\"Protéger votre famille\",\"url\":\"https://www.fbngp.ca/comment-vous-aider/famille.html\",\"current\":false},{\"label\":\"Planifier votre retraite\",\"url\":\"https://www.fbngp.ca/comment-vous-aider/retraite.html\",\"current\":false},{\"label\":\"Planifier votre succession\",\"url\":\"https://www.fbngp.ca/comment-vous-aider/succession.html\",\"current\":false}]},{\"label\":\"NOS SERVICES\",\"url\":\"\",\"current\":false,\"links\":[{\"label\":\"Gestion de patrimoine\",\"url\":\"https://www.fbngp.ca/comment-vous-aider/gestion-patrimoine.html\",\"current\":false},{\"label\":\"Gestion de portefeuille\",\"url\":\"https://www.fbngp.ca/comment-vous-aider/gestion-patrimoine/gestion-portefeuille.html\",\"current\":false},{\"label\":\"Planification financière\",\"url\":\"https://www.fbngp.ca/comment-vous-aider/gestion-patrimoine/planification-financiere.html\",\"current\":false},{\"label\":\"Planification fiscale\",\"url\":\"https://www.fbngp.ca/comment-vous-aider/gestion-patrimoine/planification-fiscale.html\",\"current\":false},{\"label\":\"Planification successorale\",\"url\":\"https://www.fbngp.ca/comment-vous-aider/gestion-patrimoine/planification-successorale.html\",\"current\":false},{\"label\":\"Solutions bancaires\",\"url\":\"https://www.fbngp.ca/comment-vous-aider/gestion-patrimoine/solutions-bancaires.html\",\"current\":false},{\"label\":\"Protection et rentes\",\"url\":\"https://www.fbngp.ca/comment-vous-aider/gestion-patrimoine/protection-rentes.html\",\"current\":false}]},{\"label\":\"SERVICES SPÉCIALISÉS\",\"url\":\"\",\"current\":false,\"links\":[{\"label\":\"Gestion déléguée\",\"url\":\"https://www.fbngp.ca/comment-vous-aider/gestion-deleguee.html\",\"current\":false}]}]},{\"label\":\"Documentation\",\"url\":\"https://www.fbngp.ca/documentation.html\",\"current\":false,\"sections\":[{\"label\":\"RAPPORTS ET RELEVÉS\",\"url\":\"\",\"current\":false,\"links\":[{\"label\":\"Rapports et relevés\",\"url\":\"https://www.fbngp.ca/documentation/releves.html\",\"current\":false},{\"label\":\"Relevé de portefeuille d'investissement \",\"url\":\"https://www.fbngp.ca/documentation/releves/releves-portefeuille.html\",\"current\":false},{\"label\":\"Rapport sur le rendement des placements\",\"url\":\"https://www.fbngp.ca/documentation/releves/rendement-placements.html\",\"current\":false},{\"label\":\"Rapport annuel des frais et de la rémunération\",\"url\":\"https://www.fbngp.ca/documentation/releves/frais-remuneration.html\",\"current\":false}]},{\"label\":\"PUBLICATIONS\",\"url\":\"\",\"current\":false,\"links\":[{\"label\":\"Publications financières\",\"url\":\"https://www.fbngp.ca/documentation/publications-financieres.html\",\"current\":false},{\"label\":\"Renseignements fiscaux\",\"url\":\"https://www.fbngp.ca/documentation/impots.html\",\"current\":false}]}]},{\"label\":\"Faire carrière\",\"url\":\"https://www.fbngp.ca/carriere.html\",\"current\":false,\"sections\":[{\"label\":\"JOINDRE NOTRE ÉQUIPE\",\"url\":\"\",\"current\":false,\"links\":[{\"label\":\"Faire carrière à la FBNGP\",\"url\":\"https://www.fbngp.ca/carriere.html\",\"current\":false},{\"label\":\"Femmes en gestion de patrimoine\",\"url\":\"https://www.fbngp.ca/carriere/femmes-gestion-patrimoine.html\",\"current\":false},{\"label\":\"Mentorat pour les jeunes femmes étudiantes\",\"url\":\"https://www.fbngp.ca/carriere/programme-mentorat.html\",\"current\":false}]},{\"label\":\"NOTRE EXPERTISE EN ACTION\",\"url\":\"\",\"current\":false,\"links\":[{\"label\":\"Notre impact dans les médias\",\"url\":\"https://www.fbngp.ca/carriere/expertise/media.html\",\"current\":false},{\"label\":\"Nos leaders, notre culture\",\"url\":\"https://www.fbngp.ca/carriere/expertise/culture.html\",\"current\":false},{\"label\":\"Tous les articles\",\"url\":\"https://www.fbngp.ca/carriere/expertise.html\",\"current\":false}]},{\"label\":\"ÉQUIPE QUÉBEC\",\"url\":\"\",\"current\":false,\"links\":[{\"label\":\"Est du Québec\",\"url\":\"https://www.fbngp.ca/carriere/est-quebec.html\",\"current\":false},{\"label\":\"Rive-Nord de Montréal\",\"url\":\"https://www.fbngp.ca/carriere/rive-nord-montreal.html\",\"current\":false},{\"label\":\"Montréal\",\"url\":\"https://www.fbngp.ca/carriere/montreal.html\",\"current\":false},{\"label\":\"Rive-Sud de Montréal\",\"url\":\"https://www.fbngp.ca/carriere/rive-sud-montreal.html\",\"current\":false}]},{\"label\":\"ÉQUIPE OUEST CANADIEN\",\"url\":\"\",\"current\":false,\"links\":[{\"label\":\"Prairies\",\"url\":\"https://www.fbngp.ca/carriere/prairies.html\",\"current\":false},{\"label\":\"Colombie-Britannique\",\"url\":\"https://www.fbngp.ca/carriere/colombie-britannique.html\",\"current\":false}]},{\"label\":\"ÉQUIPE ONTARIO\",\"url\":\"\",\"current\":false,\"links\":[{\"label\":\"Ontario\",\"url\":\"https://www.fbngp.ca/carriere/ontario.html\",\"current\":false},{\"label\":\"Toronto\",\"url\":\"https://www.fbngp.ca/carriere/toronto.html\",\"current\":false}]},{\"label\":\"ÉQUIPE ATLANTIQUE\",\"url\":\"\",\"current\":false,\"links\":[{\"label\":\"Atlantique\",\"url\":\"https://www.fbngp.ca/carriere/atlantique.html\",\"current\":false}]}]},{\"label\":\"À propos \",\"url\":\"https://www.fbngp.ca/a-propos.html\",\"current\":false,\"sections\":[{\"label\":\"FINANCIÈRE BANQUE NATIONALE - GESTION DE PATRIMOINE\",\"url\":\"\",\"current\":false,\"links\":[{\"label\":\"À propos de la Financière Banque Nationale\",\"url\":\"https://www.fbngp.ca/a-propos.html\",\"current\":false},{\"label\":\"Informations réglementaires\",\"url\":\"https://www.fbngp.ca/a-propos/informations-reglementaires.html\",\"current\":false},{\"label\":\"Protection de vos actifs\",\"url\":\"https://www.fbngp.ca/a-propos/protection-actifs.html\",\"current\":false}]}]},{\"label\":\"Services numériques\",\"url\":\"https://www.fbngp.ca/services-numeriques.html\",\"current\":false,\"sections\":[{\"label\":\"SERVICES NUMÉRIQUES\",\"url\":\"\",\"current\":false,\"links\":[{\"label\":\"Accès en ligne et application mobile\",\"url\":\"https://www.fbngp.ca/services-numeriques.html\",\"current\":false}]}]}]}]}","/content/fbngp/fr/jcr:content/navigation-menu_com.bnc.aem.websites.toolkit.sling.models.react.NavigationMenu.isSecure()":"false","/content/fbngp/fr/jcr:content/navigation-menu_com.bnc.aem.websites.toolkit.sling.models.react.NavigationMenu.getSecureUrl()":"https://www.fbngp.ca/conseiller/groupe-wolf-achard/notre-equipe/laurent-achard.html/secure","/content/fbngp/fr/jcr:content/navigation-menu_com.bnc.aem.websites.toolkit.sling.models.LanguageSwitcher.getLanguageTwoCharName()":"En","/content/fbngp/fr/jcr:content/navigation-menu_com.bnc.aem.websites.toolkit.sling.models.LanguageSwitcher.getCurrentEncodedPagePath()":"ecf1661cef70ae14a8660666d0e7af49105f8469fdabc54ade1a27ab651ecc8c2f37d8c59f560a4b211c017f282f71fa1eb04bb21adb9dd965ac9264487aee0d6cf60a4ebb154d5381ef832b97d6b1d818e50b22c03da5fd6ea653ad707236afcdc6d96956f999a7b8da31e02a3c2cad","/content/fbngp/fr/jcr:content/navigation-menu_com.bnc.aem.websites.toolkit.sling.models.LanguageSwitcher.getLanguageFirstLetterCapitalized()":"English"}},"resourceType":"web-sites-react/components/navigation-menu","path":"/content/fbngp/fr/jcr:content/navigation-menu","wcmmode":"disabled"}</script><script src="/etc.clientlibs/web-sites-toolkit/clientlibs/web-sites-toolkit/toolkit-clientlib/clientlibs/vendor/lodash.min.a98e817fa80e9f0446305f835cdaa621.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/vendor/react.min.45e0671f00ea10ecf34e891cd69b1f90.js"></script>
+<script src="/etc.clientlibs/web-sites-react/components/web-sites-react/clientlib.min.fe11aea912e2dd12fabdd3005a3b27d5.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/eventListenerHandlers.min.6da5ec95ff88986fe5a678195fb73f2e.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/basepage.min.3097d244e3acdaa1cc46cbe27a844341.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/sticky.min.f7421d1f70d92b9a74fb9655256bba54.js"></script>
+<script src="/etc.clientlibs/web-sites-react/components/navigation-menu/clientlib.min.b4b22ad67a81f751655f944101a7ede1.js"></script>
+
+        </div>
+    
+        
+
+
+
+</div>
+<div class="landmarks container responsivegrid aem-GridColumn aem-GridColumn--default--12">
+    <main id="landmarks-24c0d90ad7" class="cmp-landmarks">
+        
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="contentFragmentDataTransfer contentfragment aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+    
+
+
+
+    
+
+</div>
+<div class="contentFragmentDataTransfer contentfragment aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+    
+
+
+
+    
+
+</div>
+<div class="contentFragmentDataTransfer contentfragment aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+    
+
+
+
+    
+
+</div>
+<div class="responsivegrid bnc-container aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="advisorUI aem-GridColumn aem-GridColumn--default--12">
+
+<div class="cmp-advisor--main-container">
+
+    <div class="cmp-advisor-see-all"><a href="#">< Voir tous les conseillers</a></div>
+    <div class="cmp-advisor--main-content">
+        <div class="cmp-advisor--main-image"><img src="/content/dam/fbngp/photo/photo-laurent-achard-montreal-350x330.png"/></div>
+        <div class="cmp-advisor--main-info">
+            <div class="cmp-advisor--title">
+                <h1>Laurent Achard </h1>
+            </div>
+            <div class="cmp-advisor--job-title">
+                <h3>Conseiller en gestion de patrimoine</h3>
+                <hr class="cmp-advisor--separator"/>
+            </div>
+            <div class="cmp-advisor--personal-info">
+                <div class="cmp-advisor--personal-info--col">
+                    <div class="cmp-advisor--personal-info--col--element">
+                        <span class="icon"><i class="bnc-icon-menu-phone"></i></span>
+                        <a class="mobile-tel" href="tel:514-395-1937" target="_blank">514 395-1937</a>
+                        <p class="desktop-tel">514 395-1937</p>
+                    </div>
+                    
+                    
+                    <div class="cmp-advisor--personal-info--col--element">
+                        <span class="icon"><i class="bnc-icon-mail"></i></span>
+                        <a href="mailto:laurent.achard@bnc.ca" target="_blank">laurent.achard@bnc.ca</a></div>
+                </div>
+                <div class="cmp-advisor--personal-info--col">
+                    
+                    <div class="cmp-advisor--personal-info--col--element">
+                        <span class="icon"><i class="bnc-icon-globe"></i></span>
+                        <a href="https://www.fbngp.ca/conseiller/groupe-wolf-achard.html" target="_blank">Voir le site Web</a>
+                    </div>
+                    <div class="cmp-advisor--personal-info--col--element--large">
+                        <span class="icon"><i class="bnc-icon-locator"></i></span>
+                        <a href="https://localisateur.bnc.ca/financiere-banque-nationale/qc/montreal/1-place-ville-marie" target="_blank">1 Place Ville-Marie, Bureau 1700, Montréal (Québec) H3B 2C1</a>
+                    </div>
+                    <div class="cmp-advisor--personal-info--col--element">
+                        <span class="icon"><i class="bnc-icon-sms"></i></span>
+                        <p>
+                            
+                                Français,
+                                
+                            
+                                Anglais,
+                                
+                            
+                                
+                                Italien
+                            
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div></div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="advisorBiographyUI aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid bnc-container aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    
+    
+</div>
+</div>
+
+    
+</div>
+
+    </main>
+</div>
+<div class="footer aem-GridColumn aem-GridColumn--default--12">
+    
+    
+
+
+<footer id="footer-fbngp-fr" class="cmp-staticFooter">
+    <div class="staticFooterContainer">
+<nav aria-label="Liens d’informations et de contact" class="first-level">
+<ul>
+<li>
+<div class="controller" id="aideController" aria-owns="aide">
+<p>Aide et contact</p>
+<img loading="lazy" alt="closed" src="/content/dam/bnc/particuliers/picto/collapse-closed.svg"/>
+</div>
+<div class="links" id="aide">
+<a href="/contact.html">Nous joindre</a>
+</div>
+</li>
+<li>
+<div class="controller" id="utilesController" aria-owns="utiles">
+<p>Liens utiles</p>
+<img loading="lazy" alt="closed" src="/content/dam/bnc/particuliers/picto/collapse-closed.svg"/>
+</div>
+<div class="links" id="utiles">
+<a href="/conseiller.html">Trouver un conseiller</a>
+<a href="/a-propos/informations-reglementaires.html">Informations réglementaires</a>
+<a href="/resolution-insatisfactions.html">Résolution des insatisfactions</a>
+</div>
+</li>
+<li>
+<div class="controller" id="proposController" aria-owns="propos">
+<p>À propos de nous</p>
+<img loading="lazy" alt="closed" src="/content/dam/bnc/particuliers/picto/collapse-closed.svg"/>
+</div>
+<div class="links" id="propos">
+<a href="/a-propos.html">Notre organisation</a>
+<a href="https://www.bnc.ca/particuliers.html">Banque Nationale du Canada</a>
+<a href="https://www.bnc.ca/coordonnees.html">Filiales Banque Nationale</a>
+<a href="/carriere.html">Carrières</a>
+</div>
+</li>
+<li>
+<div class="controller" id="affutController" aria-owns="affut">
+<p>Restez à l'affût</p>
+<img loading="lazy" alt="closed" src="/content/dam/bnc/particuliers/picto/collapse-closed.svg"/>
+</div>
+<div class="links" id="affut">
+<a href="https://www.bnc.ca/a-propos-de-nous/nouvelles-medias.html">Communiqués</a>
+</div>
+</li>
+</ul>
+</nav>
+<hr>
+<nav aria-label="Liens de règlementation" class="second-level">
+<ul>
+<li>
+<a href="/convention.html">Convention</a>
+</li>
+<li>
+<a href="https://www.bnc.ca/politique-de-confidentialite.html">Politique de protection des renseignements personnels</a>
+</li>
+<li>
+<a href="/politique-donnees-numeriques.html">Politique sur les données numériques</a>
+</li>
+<li>
+<a href="https://www.bnc.ca/abc-securite.html">ABC de la sécurité</a>
+</li>
+<li>
+<a href="https://www.bnc.ca/a-propos-de-nous/esg/enonce-sur-accessibilite.html">Accessibilité</a>
+</li>
+<li>
+    <a href="https://www.bnc.ca/a-propos-de-nous/esg/rapport-etape-accessibilite.html">Rapport d'étape sur l'accessibilité</a>
+    </li>
+<li>
+<a href="https://www.bnc.ca/a-propos-de-nous/esg/plan-accessibilite.html#2.2">Processus de rétroaction en matière d'accessibilité</a>
+</li>
+</ul>
+</nav>
+<hr>
+<nav aria-label="Notes légales et réseaux sociaux" class="third-level">
+<ul>
+<li>
+<img loading="lazy" alt="Banque Nationale" src="/content/dam/bnc/particuliers/picto/picto-logo-bn-24x22.svg"/>
+</li>
+</li>
+<li>
+<p id="copyright">© FBNGP Tous droits réservés 2026.</p>
+</li>
+<li>
+<a href="https://www.linkedin.com/company/financi-re-banque-nationale/" target="_blank">
+<img class="social-footer" loading="lazy" alt="LinkedIn, lien externe qui s'ouvre dans un nouvel onglet." src="/content/dam/bnc/particuliers/picto/picto-social-linkedin.svg"/>
+</a>
+</li>
+</ul>
+</nav>
+<nav aria-label="Partenaires" class="fourth-level">
+<ul>
+<li>
+<a href="https://www.ocri.ca/" target="_blank">
+<img loading="lazy" alt="Organisme Canadien de Réglementation des Investissements (OCRI), lien externe qui s'ouvre dans un nouvel onglet." src="/content/dam/fbngp/logos/logo-ocri.svg"/>
+</a>
+<a href="https://www.ocri.ca/bureau-des-investisseurs/rapport-info-conseiller" target="_blank" aria-label="Consultez les rapports Info-Conseiller de l'OCRI, lien externe qui s'ouvre dans un nouvel onglet.">Consultez les rapports Info-Conseiller de l'OCRI
+<img class="external-link" loading="lazy" alt="" src="/content/dam/bnc/particuliers/picto/external-link.svg">
+</a>
+</li>
+<li>
+<a href="https://www.fcpi.ca/" target="_blank">
+<img loading="lazy" alt="Fonds Canadien de protection des investisseurs (FPCI), lien externe qui s'ouvre dans un nouvel onglet." src="/content/dam/fbngp/logos/logo-fcpi.svg"/>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</footer>
+
+
+
+</div>
+
+    
+</div>
+</div>
+
+
+        </div>
+        
+    
+    
+    
+    
+    
+    
+<script src="/etc.clientlibs/core/wcm/components/commons/site/clientlibs/container.min.0a6aff292f5cc42142779cde92054524.js"></script>
+<script src="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-core-components.min.0e78d12b97b3829e02f2e042879f70aa.js"></script>
+
+
+
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/staticFooter/clientlibs.min.56d0cad8fb312fb999e0715679433926.css" type="text/css">
+<script src="/etc.clientlibs/web-sites-toolkit/components/content/staticFooter/clientlibs.min.45ad76f31352c347554825e250a74963.js"></script>
+
+
+
+
+    
+
+    
+
+    
+    
+    
+
+        
+
+
+        
+    
+    
+
+
+
+
+
+        
+        <div id="base-xs" class="device-xs visible-xs visible-xs-block"></div>
+        <div id="base-sm" class="device-sm visible-sm visible-sm-block"></div>
+        <div id="base-md" class="device-md visible-md visible-md-block"></div>
+        <div id="base-lg" class="device-lg visible-lg visible-lg-block"></div>
+        
+    
+<script src="/etc.clientlibs/web-sites/clientlibs/core/responsiveBootstrapToolkit.min.afc2afb52200829364788f6cc6d3a5ec.js"></script>
+
+
+
+        
+
+        <!-- This include need to be at the end of the body -->
+        
+        <!--[if lt IE 10]><script src="/etc.clientlibs/web-sites/clientlibs/author/placeholders.min.js"></script>
+<![endif]-->
+
+        
+        
+        
+
+
+    </body>
+</html>

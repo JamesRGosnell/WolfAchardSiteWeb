@@ -1,0 +1,141 @@
+---
+/**
+ * FRENCH CONTACT — `/contact/`
+ *
+ * Route is a deliberate change from the live `nous-joindre.html`, registered as
+ * U-01. The English twin is `/en/contact/`; the pair is a real one, so the
+ * hreflang set comes from `pageKey="contact"`.
+ *
+ * SECTION ORDER IS THE CAPTURE'S DOCUMENT ORDER:
+ *   hero · `Nous sommes à votre écoute` + coordinates · `Notre équipe
+ *   d'experts` + the two advisors.
+ *
+ * BAND RHYTHM: paper, ONE greige tint block (the coordinates — which is the
+ * block the live page itself tints, `background-light`), paper again, ink in
+ * the footer only.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * NO `<LegalNotes>` ON THIS PAGE, AND THAT IS MEASURED
+ *
+ * `fr-nous-joindre.html` renders ZERO `<sup>` and ZERO `<sub>` elements — the
+ * whole capture was scanned, not just the body. P-12 binds a marker to an
+ * accordion, not the reverse, and COMPLIANCE §3.3 lists this page as carrying
+ * neither. Adding an accordion here would be as much a deviation as dropping
+ * one from the services page.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * NO CONTACT FORM (P-10)
+ *
+ * The live site has no form on any of its sixteen pages. `tel:` and `mailto:`
+ * are the entire conversion path, so this build makes them as strong as they
+ * can be — the two advisors' direct lines appear in the coordinates block, again
+ * on their own cards, again in the footer and again in the sticky strip — rather
+ * than adding a form that would need a backend, a privacy notice and NBF
+ * approval, none of which exist. A dead form that silently drops an enquiry is a
+ * service failure at a regulated dealer.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/Section.astro';
+import ContactHero from '../_contact/ContactHero.astro';
+import OfficeBlock from '../_contact/OfficeBlock.astro';
+import AdvisorCard from '../_contact/AdvisorCard.astro';
+import { t, advisorPath } from '../../lib/i18n';
+import page from '../../data/pages/contact.fr';
+
+const locale = 'fr' as const;
+const s = t(locale);
+
+/**
+ * Pair each advisor with the phone and email rows the SHARED dictionary already
+ * holds, by live display name. Nothing is retyped, and a name that stops
+ * matching fails the build here instead of shipping a card with a missing line
+ * beside a licensed advisor's photograph.
+ */
+const advisors = page.team.advisors.map((advisor) => {
+  const index = s.contact.phones.findIndex((phone) => phone.label === advisor.name);
+  const phone = s.contact.phones[index];
+  const email = s.contact.emails[index];
+
+  if (!phone || !email) {
+    throw new Error(
+      `contact.fr: no contact row in src/data/fr.ts for "${advisor.name}". ` +
+        `Advisor names on the contact page must match contact.phones[].label exactly.`,
+    );
+  }
+
+  return { advisor, phone, email, href: advisorPath(advisor.slug, locale) };
+});
+---
+
+{/*
+   ---------------------------------------------------------------------
+   D-11 — the footer's CTA band does not render on the contact page.
+
+   `<Footer>` closes every page with the block D-07 relocated there. On THIS
+   page that block is wrong twice over:
+
+     · its eyebrow is `Nous sommes à votre écoute`, which is this page's own
+       <h2>, verbatim — the string would appear once as the section heading
+       and again 800px lower as a footer label;
+     · its button is `Nous joindre` pointing at `/contact/`, i.e. the page the
+       visitor is already on. The site's single most prominent call to action
+       would become a link to nowhere precisely where a visitor is trying to
+       act.
+
+   No information is lost: both advisors' numbers appear in the coordinates
+   block, again on their cards, and again in the sticky contact strip.
+
+   This replaces the `body.page-contact .site-footer .cta { display: none }`
+   hook this page used while `src/components/` was out of scope for a page
+   build; the `bodyClass="page-contact"` that fed it is gone too, since
+   nothing else on the site used it. Reverting D-11 is deleting this line.
+   ------------------------------------------------------------------
+*/}
+<BaseLayout
+  locale={locale}
+  pageKey="contact"
+  title={page.meta.title}
+  description={page.meta.description}
+  showFooterCta={false}
+>
+  <ContactHero hero={page.hero} />
+
+  {/* THE one tint block on this page — and the one the live page tints too. */}
+  <Section bg="greige" aria-labelledby="office-heading">
+    <OfficeBlock
+      locale={locale}
+      heading={page.office.heading}
+      lead={page.office.lead}
+      headingId="office-heading"
+    />
+  </Section>
+
+  <Section bg="paper" aria-labelledby="team-heading">
+    <h2 id="team-heading" class="t-h2 serif-display team__heading">{page.team.heading}</h2>
+    <div class="team__grid">
+      {
+        advisors.map(({ advisor, phone, email, href }) => (
+          <AdvisorCard advisor={advisor} phone={phone} email={email} href={href} />
+        ))
+      }
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .team__heading {
+    margin: 0 0 clamp(1.75rem, 3.5vw, 2.5rem);
+    max-inline-size: 18ch;
+  }
+
+  .team__grid {
+    display: grid;
+    gap: clamp(1.25rem, 2.5vw, 1.75rem);
+  }
+
+  @media (min-width: 52rem) {
+    .team__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

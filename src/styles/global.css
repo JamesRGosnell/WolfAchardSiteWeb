@@ -1,0 +1,1062 @@
+/* =============================================================================
+   Groupe Wolf Achard — global stylesheet
+
+   THE SINGLE SOURCE OF VISUAL TRUTH. Never hard-code a hex, radius, duration or
+   breakpoint in a component; add a token here and reference it.
+
+   The system (design-system.md):
+     · ONE warm world. Warm paper, white rounded cards. Ink lives in the FOOTER
+       only, plus small chrome (the contact strip). No page section is
+       full-bleed ink.
+     · ONE calm type voice. Roman serif for large headlines only. No italic
+       accents, no decorative numerals, no ornamented eyebrows.
+     · Soft shape language. Pill buttons, 16px cards and images, hairlines only
+       where a list genuinely needs ruling.
+     · Brand red is DISCIPLINED. At rest it appears on disclaimer superscripts
+       and focus rings, and nowhere else. Not on buttons, ticks or icons.
+
+   Naming: short aliases (--paper, --ink, --nb-red …) are defined in :root from
+   the Tailwind @theme namespace, so `var(--paper)` and `bg-paper` are the same
+   colour by construction and cannot drift.
+
+   Utilities provided at the bottom of this file:
+     .container-site .container-narrow .section .measure .measure-tight .tabular
+     .serif-display .t-hero .t-h2 .t-h3 .t-lead .t-small .eyebrow
+     .hairline / .rule-t / .rule-b / .rule-y
+     .btn (+ .btn-primary .btn-secondary .btn-on-ink .btn-pill .btn-sm .btn-block)
+     .link-rule .link-quiet .tap .card .card-lift .logo-img .media
+     .skip-link .reveal .note-ref .page-hero .on-ink / .on-paper
+   ========================================================================== */
+
+@import 'tailwindcss' source(none);
+
+/* Self-hosted type. Latin + latin-ext ONLY — latin-ext carries the French
+   diacritics (É, à, ç, œ) and nothing else ships. Zero third-party font
+   requests, by construction. font-display:swap comes from @fontsource. */
+@import '@fontsource/instrument-serif/latin-400.css';
+@import '@fontsource/instrument-serif/latin-ext-400.css';
+@import '@fontsource-variable/instrument-sans/wght.css';
+
+/* Explicit source registration. Without it Tailwind scans source-assets/html/
+   (~1.3 MB of scraped bank markup) and pollutes the utility set. */
+@source '../**/*.{astro,html,js,jsx,ts,tsx,md,mdx}';
+
+/* -----------------------------------------------------------------------------
+   1. Theme — Tailwind v4 namespaces (generates bg-paper, text-ink, font-serif …)
+   -------------------------------------------------------------------------- */
+@theme {
+  /* --- paper world --------------------------------------------------- */
+  --color-paper: #f7f4ef;
+  --color-paper-raised: #ffffff;
+  /* The ONE tint block. A page with two of these is fighting itself. */
+  --color-greige: #eae5dd;
+  /* Rule colour for directory/list rows. */
+  --color-hairline: #dcd5ca;
+  /* Warmer and lighter than --hairline: the border of a white card on paper. */
+  --color-card-border: #e7e1d8;
+
+  /* --- ink world — the FOOTER, plus small chrome. Never a page band. -- */
+  --color-ink: #15181d;
+  /* Primary controls deepen toward black on hover. */
+  --color-ink-deep: #0b0d10;
+  --color-ink-soft: #232830;
+  --color-ink-hairline: rgb(247 244 239 / 0.16);
+  --color-on-ink: #f2efe9;
+  --color-on-ink-muted: #a9a49b;
+
+  /* --- the red thread -------------------------------------------------
+     National Bank red. VERIFY against this team's own lockup SVG the moment
+     src/assets/logos/ is populated — the DAM artwork is the authority, and a
+     token that disagrees with the logo beside it is visible. Contrast facts:
+     red on white 4.96:1 (passes AA for the superscripts); red on --ink 2.59:1
+     (FAILS — see the .on-ink .note-ref rule near the bottom of this file). */
+  --color-nb-red: #de161d;
+  --color-nb-red-deep: #a91116;
+
+  /* --- supporting ----------------------------------------------------- */
+  /* Icons rest here, not in red. */
+  --color-stone: #6e6861;
+  --color-sea: #3d5a6c;
+
+  /* --- type families -------------------------------------------------- */
+  --font-serif: 'Instrument Serif', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Instrument Sans Variable', 'Instrument Sans', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+  /* --- type scale (fluid) --------------------------------------------- */
+  --text-hero: clamp(2.8rem, 7.5vw, 5.75rem);
+  --text-hero--line-height: 1.02;
+  --text-hero--letter-spacing: -0.01em;
+  --text-h2: clamp(2rem, 4.5vw, 3.5rem);
+  --text-h2--line-height: 1.08;
+  --text-h2--letter-spacing: -0.008em;
+  --text-h3: clamp(1.35rem, 2.2vw, 1.75rem);
+  --text-h3--line-height: 1.25;
+  --text-lead: clamp(1.125rem, 1.6vw, 1.3125rem);
+  --text-lead--line-height: 1.55;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.65;
+  --text-small: 0.9375rem;
+  --text-small--line-height: 1.55;
+  --text-eyebrow: 0.8125rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.14em;
+
+  /* --- radii — buttons are pills; cards and images 16px ----------------
+     --radius-btn stays square-ish for the non-button controls that need it
+     (inputs, the footer's regulator chips). */
+  --radius-btn: 2px;
+  --radius-pill: 999px;
+  --radius-card: 16px;
+  --radius-media: 16px;
+
+  /* The one shadow tier. Hover lift only — nothing rests on a shadow. */
+  --shadow-lift: 0 1px 2px rgb(21 24 29 / 0.06), 0 8px 24px rgb(21 24 29 / 0.07);
+
+  /* --- motion ---------------------------------------------------------- */
+  --ease-wa: cubic-bezier(0.2, 0.6, 0.2, 1);
+
+  /* --- layout ---------------------------------------------------------- */
+  --container-site: 76rem;
+
+  /* --- measure: THE 60–75 CHARACTER LINE THE BRIEF REQUIRES ------------- *
+   * ⚠ `ch` IS NOT A CHARACTER. It is the advance width of the digit `0`,
+   * and in Instrument Sans that glyph is about HALF AGAIN as wide as the
+   * average character in this client's copy. Every `Nch` cap on this site
+   * therefore permitted roughly 1.5N characters, which is how six page
+   * builds independently authored `60ch`–`68ch` caps and rendered 79–101
+   * character lines.
+   *
+   * MEASURED, not estimated — characters counted per rendered line box with
+   * the Range API at 1280px, French and English, four different blocks:
+   *
+   *   block                       px/char   1ch      chars per ch
+   *   ─────────────────────────── ───────── ──────── ─────────────
+   *   home  .split__prose  17px     7.80    11.32       1.45
+   *   svc   .sblock__prose 17px     7.24    11.32       1.56
+   *   home  .essay__body   24px    10.41    15.99       1.54
+   *   svc   .intro__prose  20.5px   9.18    13.64       1.49
+   *
+   * Worst case 1.56 characters per `ch`. So 48ch tops out at 75 characters
+   * on the densest block and 70 on the loosest — the whole band, from one
+   * number, at every type size the site uses. Anything wider than this is
+   * outside the brief; re-measure before changing it, and re-measure in
+   * FRENCH, which sets the wider lines.                                   */
+  --measure: 48ch;
+  /* Short leads and the footer CTA — deliberately below the band's floor,
+     for two-line statements that should not run the full measure. */
+  --measure-tight: 40ch;
+  --spacing-gutter: clamp(1.25rem, 4vw, 3rem);
+  --spacing-section: clamp(4rem, 8vw, 7rem);
+  --spacing-section-compact: clamp(3rem, 6vw, 5rem);
+  /* Reduced leading padding when two sections share a background: the colour
+     change is what makes big padding read as rhythm. Without it the same-colour
+     seam is just dead whitespace. */
+  --spacing-section-seam: clamp(2.5rem, 4.5vw, 4rem);
+
+  /* --- header / mobile-menu switch -------------------------------------
+     FRENCH IS THE BINDING LOCALE. It has the longer labels and the wider
+     lockups, so the bar is measured in French and English gets the slack.
+
+     THE STRUCTURAL PROBLEM. Benchmark advisor sites carry ONE ~80px square
+     mark. This site carries TWO ~3.21:1 wordmarks — the team's and National
+     Bank's, at equal prominence, which is a compliance requirement and not
+     negotiable. That is ~205px of bar at a 32px lockup height and ~460px at
+     72px. The bar therefore starts ~150px behind any single-mark competitor,
+     and every pixel back has to come from the right-hand cluster, never from
+     shrinking a regulated lockup.
+
+     MEASURED in the browser, in French, webfonts loaded, lockups at the 32px
+     floor. `before` is the first pass; `now` is after NC-01 and the padding
+     audit:
+
+                        before     now
+       nav labels        569.7    477.4   NC-01: `Nouvelles et articles`
+                                          -> `Nouvelles` IN THE BAR ONLY
+       + label gaps      112.0     96.0   list gap cap 1.75rem -> 1.5rem
+       + brand cluster   242.3    242.3   untouched, and untouchable
+       + end cluster     264.5    240.5   CTA padding 1.625rem -> 1.25rem,
+                                          toggle 2.25rem -> 2rem, gap -> 1rem
+       + cluster gaps     80.0     64.0   bar gap cap 2.5rem -> 2rem
+       + page gutters     96.0     96.0
+       ----------------------------------
+                        1364.5   1216.2   of CONTENT width
+
+     A viewport also loses ~15px to the scrollbar. 80rem (1280px) gives 1265px
+     of content, so one row fits with ~49px of measured headroom, and the nav is
+     full at every common laptop width. The lockup ramp below is held FLAT until
+     1400px so it cannot eat that headroom back — every 1px of lockup height
+     costs 6.4px of bar width with two lockups at this ratio.
+
+     70rem (1120px) is NOT reachable: it offers 1105px of content against a
+     1209px requirement (the gutter narrows to 4vw there). The only remaining
+     lever worth ~184px is removing the client-access CTA from the bar, which is
+     compliance-adjacent chrome and an orchestrator decision, not a CSS one.
+
+     MEASURE, DO NOT ESTIMATE. Three arithmetic passes got this wrong before the
+     browser settled it: at 82rem the end cluster overflowed its own gutter by
+     47px with the client CTA flush against the viewport edge; 88rem landed at
+     exactly ZERO headroom because `Accès client` is ~24px wider once Instrument
+     Sans has loaded than in the fallback face; 90rem was correct but bought the
+     margin by handing every common laptop a burger menu.
+
+     `flex: none` on the brand cluster prevented the worse failure throughout
+     (lockups silently overprinting the first nav link), which is exactly why it
+     is there.
+
+     NOT AVAILABLE AS LEVERS: the nav font size (17px; the floor is 16px and the
+     client asked for a larger, more legible nav), the lockup heights, and the
+     external-link icon inside the CTA.
+
+     RE-MEASURED IN FRENCH ON THE REAL ARTWORK, 2026-08-02, webfonts loaded.
+     THIS VALUE AND THE RAMP BELOW ARE CONFIRMED CORRECT AND WERE NOT CHANGED.
+     Free space in the one-row bar, French, at the 32px lockup floor:
+
+       1200  -42.8  (deficit — the full nav genuinely does not fit)
+       1280  +37.2  <- the gate
+       1366 +123.2
+       1440 +176.7  (lockup 35.2px here; the ramp has started)
+       1900 +400.1  (lockup 72px, bar 116px)
+
+     Zero page overflow and zero brand/nav overprint at every width, 375 up.
+     The real French L lockups are 3.2143:1 against the 3.208:1 placeholders —
+     0.4px across both lockups — so the previous pass's 37.5px estimate held to
+     within a third of a pixel.
+
+     THE BAR RENDERS THE -L LOCKUP AT EVERY BREAKPOINT. Logo.astro maps one file
+     per (kind, tone, locale) with no width-conditional switch, so the DAM's -M
+     team lockup (4.186:1 on a trimmed canvas) never reaches the DOM. It would
+     not fit at 1280 if it did.
+
+     If any of this is ever re-solved, reconcile with NAV_BREAKPOINT in
+     src/scripts/main.ts and the two @media blocks in Header.astro. All four must
+     move together. */
+  --breakpoint-nav: 80rem;
+}
+
+/* -----------------------------------------------------------------------------
+   2. Short aliases + component-scoped variables
+   -------------------------------------------------------------------------- */
+:root {
+  /* paper world */
+  --paper: var(--color-paper);
+  --paper-raised: var(--color-paper-raised);
+  --greige: var(--color-greige);
+  --hairline: var(--color-hairline);
+  --card-border: var(--color-card-border);
+
+  /* ink world */
+  --ink: var(--color-ink);
+  --ink-deep: var(--color-ink-deep);
+  --ink-soft: var(--color-ink-soft);
+  --ink-hairline: var(--color-ink-hairline);
+  --on-ink: var(--color-on-ink);
+  --on-ink-muted: var(--color-on-ink-muted);
+
+  /* red thread */
+  --nb-red: var(--color-nb-red);
+  --nb-red-deep: var(--color-nb-red-deep);
+
+  /* supporting */
+  --stone: var(--color-stone);
+  --sea: var(--color-sea);
+
+  /* Contextual: re-pointed by .on-ink / .on-paper so rules and muted text
+     adapt without any component knowing which surface it is on. */
+  --rule: var(--hairline);
+  --muted: var(--stone);
+  --surface: var(--paper);
+  --surface-raised: var(--paper-raised);
+  --fg: var(--ink);
+
+  /* --- header metrics --------------------------------------------------
+     THE LOCKUPS DRIVE THE BAR, NOT THE OTHER WAY ROUND. --logo-h-bar is the one
+     authored value; both header heights derive from it with a fixed clearance,
+     so a lockup can never outgrow the bar holding it.
+
+     The ramp is bounded by a hard horizontal fact: on one row the bar must fit
+     two lockups + five nav labels + the language toggle + the CTA. The lockups
+     are ~3.21:1 in French and there are two of them, so every 1px of lockup
+     height costs ~6.4px of bar width. That is why this ramp is so shallow.
+
+     SOLVED FROM THE TWO BENCHMARK BANDS, not from a feel. At 1440 the bar must
+     measure 95–110px AND the lockups 58–72px. With the fixed 2.75rem clearance
+     below, those two bands intersect at a lockup of 58–66px, so the curve is
+     pinned through (1280 → 32px) and (1440 → 58px):
+
+       slope  = (58 − 32) / (1440 − 1280) = 0.1625 px/px = 16.25vw
+       offset = 0.1625 × 1280 − 32        = 176px        = 11rem
+
+     32px at 1280 is BIT-IDENTICAL to the previous ramp, which is the whole
+     point: the nav appears at 1280 with 37.2px of MEASURED headroom and the
+     smallest lockup that clears the 58px band floor is the one that spends the
+     least of it. 58px at 1440 costs 26 × 6.4286 = 167.1px of the 197.2px
+     available there, leaving 30.1px.
+
+     Free space along the ramp changes by 1 − 6.4286 × 0.1625 = −0.0446px per px
+     of viewport, so the TIGHTEST point is not 1280 or 1440 but the knee where
+     the 72px cap binds, 16.25vw − 176 = 72 → 1526px. Measure there, not only at
+     the round numbers.
+
+     Measured on the real lockups, French, transitions disabled:
+     32px at 375/768/1280 · 45.98px at 1366 · 58px at 1440 · 72px from 1526 on.
+     Bar: 76 / 76 / 76 / 90 / 102 / 116px. Headroom: 37.2 at 1280, 30.2 at 1440,
+     26.6 at 1526. Every lockup renders at its own intrinsic 3.2143:1 — width is
+     never derived from anything but the file's viewBox, and with two lockups on
+     the row every 1px of height costs 6.4286px of bar width. */
+  --logo-h-bar: clamp(2rem, 16.25vw - 11rem, 4.5rem);
+  --logo-h-bar-scrolled: calc(var(--logo-h-bar) * 0.82);
+  --header-h: max(4.75rem, calc(var(--logo-h-bar) + 2.75rem));
+  --header-h-scrolled: max(4.25rem, calc(var(--logo-h-bar-scrolled) + 2.25rem));
+
+  /* Height of the mobile contact bar (<ContactStrip>). The footer reserves it
+     so the bar can never cover the legal block. */
+  --cstrip-bar-h: 3rem;
+
+  color-scheme: light;
+  accent-color: var(--nb-red);
+}
+
+/* Any dark surface opts in: <footer class="bg-ink on-ink"> */
+.on-ink {
+  --rule: var(--ink-hairline);
+  --muted: var(--on-ink-muted);
+  --surface: var(--ink);
+  --surface-raised: var(--ink-soft);
+  --fg: var(--on-ink);
+  color: var(--on-ink);
+}
+
+.on-paper {
+  --rule: var(--hairline);
+  --muted: var(--stone);
+  --surface: var(--paper);
+  --surface-raised: var(--paper-raised);
+  --fg: var(--ink);
+  color: var(--ink);
+}
+
+/* -----------------------------------------------------------------------------
+   3. Base elements
+   -------------------------------------------------------------------------- */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-h) + 1.5rem);
+  }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.65;
+    font-optical-sizing: auto;
+    font-synthesis-weight: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-wrap: break-word;
+  }
+
+  /* Remove the legacy tap delay without suppressing native focus or selection.
+     Interactive controls provide their own pressed state below. */
+  a,
+  button {
+    touch-action: manipulation;
+  }
+
+  /* French copy is long — never let a lock scroll leak into the body. */
+  body[data-menu-open='true'] {
+    overflow: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  h1,
+  h2 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+  }
+
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  a {
+    color: inherit;
+    text-underline-offset: 0.22em;
+    text-decoration-thickness: from-font;
+  }
+
+  strong,
+  b {
+    font-weight: 600;
+  }
+
+  ::selection {
+    background-color: var(--nb-red);
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--nb-red);
+    outline-offset: 2px;
+    border-radius: 1px;
+  }
+
+  /* Never remove the ring for keyboard users; pointer users just don't see it. */
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  img,
+  picture,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    margin: 0;
+  }
+
+  address {
+    font-style: normal;
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   4. Layout utilities
+   -------------------------------------------------------------------------- */
+@layer components {
+  .container-site {
+    width: 100%;
+    max-width: var(--container-site);
+    margin-inline: auto;
+    padding-inline: var(--spacing-gutter);
+  }
+
+  .container-narrow {
+    width: 100%;
+    max-width: 58rem;
+    margin-inline: auto;
+    padding-inline: var(--spacing-gutter);
+  }
+
+  .section {
+    padding-block: var(--spacing-section);
+  }
+
+  .section--compact {
+    padding-block: var(--spacing-section-compact);
+  }
+
+  .section--flush {
+    padding-block: 0;
+  }
+
+  /* Same-background neighbours collapse their shared seam (see the token). */
+  main section.bg-paper + section.bg-paper,
+  main section.bg-greige + section.bg-greige,
+  main section.bg-ink + section.bg-ink {
+    padding-block-start: var(--spacing-section-seam);
+  }
+
+  /* Both read from the calibrated tokens above. `max-inline-size`, not
+     `max-width`: everything else on this site is logical-property sized. */
+  .measure {
+    max-inline-size: var(--measure);
+  }
+
+  .measure-tight {
+    max-inline-size: var(--measure-tight);
+  }
+
+  /* Regulated data — phone numbers, figures — reads better tabular. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  /* -------------------------------------------------------------------------
+     5. Type utilities
+     ---------------------------------------------------------------------- */
+  .serif-display {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+
+  /* Roman is ENFORCED even if markup slips an <em> in. The italic-accent
+     "house signature" is not part of this system: semantics are preserved,
+     typography is normalised. */
+  .serif-display em,
+  .serif-display i {
+    font-style: normal;
+  }
+
+  .t-hero {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: var(--text-hero);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+  }
+
+  .t-h2 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: var(--text-h2);
+    line-height: 1.08;
+    letter-spacing: -0.008em;
+  }
+
+  .t-h3 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: var(--text-h3);
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+  }
+
+  .t-lead {
+    font-size: var(--text-lead);
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  .t-small {
+    font-size: var(--text-small);
+    line-height: 1.55;
+  }
+
+  /* Eyebrow — small caps in --stone, UNADORNED. No red tick, no rule, no
+     numeral, no glyph. The device budget is spent elsewhere. */
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-family: var(--font-sans);
+    font-size: var(--text-eyebrow);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .eyebrow--center {
+    justify-content: center;
+  }
+
+  /* -------------------------------------------------------------------------
+     6. Hairline rules — the private-bank stationery structure
+     ---------------------------------------------------------------------- */
+  .hairline {
+    border: 0;
+    border-top: 1px solid var(--rule);
+    block-size: 0;
+    margin: 0;
+  }
+
+  .rule-t {
+    border-top: 1px solid var(--rule);
+  }
+
+  .rule-b {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .rule-y > * + * {
+    border-top: 1px solid var(--rule);
+  }
+
+  /* -------------------------------------------------------------------------
+     7. Buttons — PILLS. Primary = ink bg / paper text, hover deepens toward
+     black. Secondary = transparent with a 1px border. There are NO red
+     buttons: red is reserved for disclaimer superscripts and focus rings.
+     Every target is >= 44px.
+     ---------------------------------------------------------------------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-block-size: 44px;
+    padding: 0.75rem 1.625rem;
+    border: 1px solid transparent;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      transform 100ms ease-out,
+      background-color 220ms var(--ease-wa),
+      border-color 220ms var(--ease-wa),
+      color 220ms var(--ease-wa);
+  }
+
+  .btn svg {
+    flex: none;
+    transition: transform 220ms var(--ease-wa);
+  }
+
+  .btn:hover svg {
+    transform: translateX(2px);
+  }
+
+  .btn:active {
+    transform: scale(0.97);
+  }
+
+  .btn-primary {
+    background-color: var(--ink);
+    color: var(--on-ink);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--ink-deep);
+    color: #ffffff;
+  }
+
+  /* --muted, not --hairline: a control boundary needs 3:1 non-text contrast
+     (WCAG 1.4.11), and a rule colour meant for stationery lines measures
+     ~1.2:1 on paper. */
+  .btn-secondary {
+    background-color: transparent;
+    border-color: var(--muted);
+    color: inherit;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--fg);
+    background-color: transparent;
+  }
+
+  /* Primary control placed on the ink footer: paper bg, ink text. */
+  .btn-on-ink {
+    background-color: var(--paper);
+    color: var(--ink);
+  }
+
+  .btn-on-ink:hover {
+    background-color: #ffffff;
+    color: var(--ink-deep);
+  }
+
+  /* Every button is already a pill; this variant only tightens the inline
+     padding for compact chrome placements. */
+  .btn-pill {
+    border-radius: var(--radius-pill);
+    padding-inline: 1.25rem;
+  }
+
+  .btn-sm {
+    min-block-size: 44px;
+    padding-block: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  .btn-block {
+    inline-size: 100%;
+  }
+
+  /* -------------------------------------------------------------------------
+     8. Links
+     ---------------------------------------------------------------------- */
+  .link-rule {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  /* A `.link-rule` sitting INSIDE a sentence is exempt from the 44px floor by
+     WCAG 2.5.8's inline exception, and padding one out would wreck the line
+     rhythm of the paragraph around it. A `.link-rule` that IS the paragraph is
+     not inline in anything, so it gets the floor like every other standalone
+     control. One element on the site currently matches: the `Wealth management
+     - Banking-offer` PDF link on `/en/services/`. */
+  p > .link-rule:only-child {
+    min-block-size: 44px;
+  }
+
+  /* Red as a TRANSIENT hover hairline is the one decorative use that survives
+     the discipline: it is never at rest. */
+  .link-rule::after {
+    content: '';
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: -3px;
+    block-size: 1px;
+    background-color: var(--nb-red);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 220ms var(--ease-wa);
+  }
+
+  .link-rule:hover::after,
+  .link-rule:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  .link-quiet {
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 180ms var(--ease-wa);
+  }
+
+  .link-quiet:hover {
+    color: var(--fg);
+  }
+
+  /* Icon-only / compact targets stay >= 44px without looking bulky. */
+  .tap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: 44px;
+    min-block-size: 44px;
+    transition: transform 100ms ease-out;
+  }
+
+  .tap:active {
+    transform: scale(0.94);
+  }
+
+  /* FORMAT BADGE — the small outlined `PDF` / `Vidéo` chip that tells a visitor
+     what a link opens. NC-05.
+
+     It lives here, not in a component, because the same authored word plays the
+     same role in two places that used to style it independently: the news
+     cards (<NewsCard>) and the services toolbox (<Toolbox>). One declaration
+     means the two can never diverge into two different-looking badges for the
+     same word.
+
+     CONTRACT: it labels a FORMAT, never a claim. It carries no colour of its
+     own beyond --muted and --rule, so it can sit on paper, on greige or inside
+     a card without a variant. Do NOT use it for anything a compliance reader
+     could mistake for a qualifier on the link text. */
+  .badge-format {
+    display: inline-flex;
+    align-items: center;
+    flex: none;
+    padding: 0.125rem 0.4rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-btn);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+
+  /* -------------------------------------------------------------------------
+     9. Surfaces
+     ---------------------------------------------------------------------- */
+  /* A white card on paper: 16px radius, 1px warm border, no shadow at rest.
+     Padding stays with the consumer — cards differ (a news card pads its body
+     only, below an edge-to-edge thumbnail). */
+  .card {
+    background-color: var(--surface-raised);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-card);
+  }
+
+  /* On ink the warm border disappears — fall back to the ink hairline. */
+  .on-ink .card {
+    border-color: var(--ink-hairline);
+  }
+
+  .card-lift {
+    transition:
+      transform 220ms var(--ease-wa),
+      box-shadow 220ms var(--ease-wa),
+      border-color 220ms var(--ease-wa);
+  }
+
+  /* Hover = the hairline darkens + a 2px lift. Pointer-specific, so touch
+     devices never retain a sticky hover state. */
+  @media (hover: hover) and (pointer: fine) {
+    .card-lift:hover {
+      transform: translateY(-2px);
+      border-color: var(--hairline);
+      box-shadow: var(--shadow-lift);
+    }
+  }
+
+  .card-lift:active {
+    transform: translateY(0) scale(0.99);
+    box-shadow: none;
+  }
+
+  /* Brand lockups: height is driven by --logo-h (set by <Logo>), width follows
+     the intrinsic ratio. NEVER scale a regulated logo non-uniformly. */
+  .logo-img {
+    block-size: var(--logo-h, 2.5rem);
+    inline-size: auto;
+    max-inline-size: none;
+  }
+
+  .media {
+    overflow: hidden;
+    border-radius: var(--radius-media);
+    background-color: var(--greige);
+  }
+
+  .media img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    filter: saturate(0.92) contrast(1.02);
+  }
+
+  .on-ink .media {
+    border: 1px solid var(--ink-hairline);
+  }
+
+  /* -------------------------------------------------------------------------
+     10. Skip link
+     ---------------------------------------------------------------------- */
+  .skip-link {
+    position: fixed;
+    inset-block-start: 0.5rem;
+    inset-inline-start: 0.5rem;
+    z-index: 200;
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+    padding: 0.5rem 1.25rem;
+    background-color: var(--ink);
+    color: var(--on-ink);
+    border-radius: var(--radius-btn);
+    font-size: var(--text-small);
+    font-weight: 600;
+    text-decoration: none;
+    transform: translateY(calc(-100% - 1rem));
+    transition: transform 180ms var(--ease-wa);
+  }
+
+  .skip-link:focus-visible {
+    transform: translateY(0);
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   10b. Legal-note markers and the compact page hero.
+
+   DELIBERATELY UNLAYERED. Astro emits component <style> blocks outside every
+   cascade layer, so anything inside `@layer components` above loses to a
+   component's own scoped rule. These two must win over a scoped default, so
+   they sit here at the top level.
+   -------------------------------------------------------------------------- */
+
+/* Footnote markers into <LegalNotes>. Small, red, real superscript LINKS.
+   Marker markup contract for page authors — the ids are stable:
+
+     <sup class="note-ref"><a href="#legal-note-3"
+          aria-label="Note légale 3">3</a></sup>                             */
+.note-ref {
+  font-family: var(--font-sans);
+  font-size: 0.6875em;
+  font-weight: 600;
+  line-height: 0;
+  margin-inline-start: 0.15em;
+  vertical-align: super;
+}
+
+.note-ref a {
+  color: var(--nb-red);
+  text-decoration: none;
+  padding-inline: 0.15em;
+}
+
+.note-ref a:hover {
+  text-decoration: underline;
+}
+
+/* On any ink surface the marker MUST change colour: National Bank red on --ink
+   measures 2.59:1, well below the 4.5:1 AA floor for text. It keeps the red
+   thread as its UNDERLINE and takes --on-ink for the glyph. A regulatory
+   reference nobody can read is a defect (WCAG 1.4.3). Components must not
+   re-declare a bare `.note-ref a` colour that would shadow this. */
+.on-ink .note-ref a {
+  color: var(--on-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--nb-red);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.on-ink .note-ref a:hover,
+.on-ink .note-ref a:focus-visible {
+  color: #ffffff;
+  text-decoration-thickness: 2px;
+}
+
+/* Compact page hero — the opener every subpage shares, applied as
+   `<Section padding="compact" class="page-hero">`.
+
+   The base rule is visually neutral on purpose: a built page follows its hero
+   with its own section, and a border here would double up against one the next
+   block already draws.
+
+   A `.page-hero` that is the LAST element in <main>, however, is an unreplaced
+   stub — a lone h1 in a shallow band butting straight into the footer reads
+   like a truncated build. Those get the full section rhythm and a
+   hairline-ruled close, so the scaffold looks deliberate until a page agent
+   replaces it. The rule un-applies itself the moment real content lands below. */
+.page-hero {
+  position: relative;
+}
+
+.page-hero:last-child {
+  padding-block: clamp(4rem, 8.5vw, 7rem) 0;
+}
+
+.page-hero:last-child > .container-site {
+  padding-block-end: clamp(2.5rem, 5vw, 4rem);
+  border-block-end: 1px solid var(--hairline);
+}
+
+/* -----------------------------------------------------------------------------
+   11. Motion — IntersectionObserver adds .is-visible (src/scripts/main.ts)
+   -------------------------------------------------------------------------- */
+@layer components {
+  .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+      opacity 550ms var(--ease-wa),
+      transform 550ms var(--ease-wa);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Hero: one slow settle on load. No parallax, ever. */
+  .hero-media img {
+    animation: hero-settle 1400ms var(--ease-wa) both;
+  }
+
+  @keyframes hero-settle {
+    from {
+      transform: scale(1.06);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+}
+
+/* -----------------------------------------------------------------------------
+   12. Reduced motion — kills everything
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .btn:active,
+  .tap:active,
+  .card-lift:hover,
+  .card-lift:active {
+    transform: none;
+  }
+
+  .hero-media img {
+    animation: none;
+  }
+}
+
+/* Accessibility preferences for materials and elevated surfaces. The sticky
+   header owns its own scoped transparency fallback; these aliases strengthen
+   the remaining rules and controls. */
+@media (prefers-contrast: more) {
+  :root {
+    --hairline: var(--stone);
+    --card-border: var(--stone);
+  }
+
+  .on-paper {
+    --muted: var(--ink);
+    --rule: var(--stone);
+  }
+
+  .on-ink {
+    --muted: var(--on-ink);
+    --rule: var(--on-ink-muted);
+  }
+
+  .btn-secondary,
+  .card {
+    border-color: currentColor;
+  }
+}
+
+/* Windows high-contrast / forced colours: keep structure legible. Markers keep
+   their underline, which forced colours preserve. */
+@media (forced-colors: active) {
+  .btn,
+  .card {
+    border: 1px solid;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+}

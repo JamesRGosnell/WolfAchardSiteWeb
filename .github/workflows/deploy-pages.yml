@@ -1,0 +1,69 @@
+# Deploys the CLIENT DEMO to GitHub Pages under /WolfAchardSiteWeb/.
+#
+# WHY THE HARDENING. This is an unapproved draft of a co-branded National Bank
+# site. It must be shareable by link so the client can look at it from anywhere,
+# and it must not enter a search index while it carries NBF marks without NBF
+# sign-off. Demo-only hardening applied here and NEVER in the real production
+# build:
+#   - internal root-absolute links are prefixed with the Pages base
+#     (asset URLs already carry it via ASTRO_BASE at build time)
+#   - every page gets <meta name="robots" content="noindex, nofollow">
+#   - robots.txt disallows everything, sitemaps are dropped
+#
+# NOTE FOR WHOEVER PUSHES. This triggers on push to main. On a repo where every
+# commit lands on main, committing IS publishing the demo — say so before you do
+# it, and branch instead while the client has not signed off.
+
+name: Deploy demo to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      ASTRO_SITE: https://JamesRGosnell.github.io
+      ASTRO_BASE: /WolfAchardSiteWeb
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+
+      - name: Demo hardening (subpath links + noindex)
+        run: |
+          find dist -name '*.html' -print0 \
+            | xargs -0 perl -pi -e 's{(href|src)="/(?!WolfAchardSiteWeb/|/)}{$1="/WolfAchardSiteWeb/}g'
+          find dist -name '*.html' -print0 \
+            | xargs -0 perl -pi -e 's{<head>}{<head><meta name="robots" content="noindex, nofollow">}'
+          printf 'User-agent: *\nDisallow: /\n' > dist/robots.txt
+          rm -f dist/sitemap-index.xml dist/sitemap-0.xml
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

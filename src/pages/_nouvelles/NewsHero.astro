@@ -1,0 +1,57 @@
+---
+/**
+ * News page hero — the verbatim `<h1>` over the page's own banner.
+ *
+ * The banner `<img>` on both live pages carries a VALUELESS `alt` attribute, so
+ * it is decorative and ships `alt=""`. Writing one would be authoring a
+ * description of National Bank's artwork (P-9, N-12 precedent).
+ *
+ * ⚠ The two banners are not the same class of asset. French serves artwork made
+ * for this team (`/microsites/groupe-wolf-achard/bannieres/…`); English serves
+ * National Bank's shared microsite banner. Same pattern as D-04 on the home
+ * page. Each language ships its own, unaltered.
+ */
+import { Image } from 'astro:assets';
+import type { NewsContent } from '../../data/pages/news.types';
+
+interface Props {
+  hero: NewsContent['hero'];
+  headingId: string;
+}
+
+const { hero, headingId } = Astro.props;
+---
+
+<div class="nhero">
+  <h1 id={headingId} class="t-hero serif-display nhero__title">{hero.heading}</h1>
+
+  <div class="media nhero__media">
+    <Image
+      src={hero.banner.src}
+      alt={hero.banner.alt}
+      widths={hero.banner.widths}
+      sizes={hero.banner.sizes}
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+</div>
+
+<style>
+  .nhero__title {
+    margin: 0 0 clamp(1.5rem, 3vw, 2.25rem);
+    max-inline-size: 20ch;
+  }
+
+  /* 2000×380 artwork. Letting it keep its own ratio is the only way it is not
+     cropped through the type baked into the French lockup band. */
+  .nhero__media {
+    aspect-ratio: 2000 / 380;
+  }
+
+  @media (max-width: 47.99rem) {
+    .nhero__media {
+      aspect-ratio: 16 / 9;
+    }
+  }
+</style>

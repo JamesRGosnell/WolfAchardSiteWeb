@@ -1,0 +1,174 @@
+---
+/**
+ * PAGE-LOCAL. `Boîte à outils` / `Toolbox` — eight resource links in two
+ * columns, in the live left-then-right reading order.
+ *
+ * THIS BLOCK IS NATIONAL BANK'S, NOT THIS TEAM'S. In both captures it is
+ * wrapped in `class="experiencefragment"` and served from
+ * `/content/experience-fragments/fbngp/boite_outils_v3/…` — a central AEM
+ * fragment shared by every advisor microsite. A static rebuild freezes content
+ * the bank keeps current (P-14). Two consequences are reported rather than
+ * fixed here:
+ *   · every root-relative path is stored HOST-ABSOLUTE per language (§3.2),
+ *     because `/documentation/statements.html` silently 404s on a new domain;
+ *   · the English `Budget tool` and `Mortgage calculator` point at the SAME
+ *     URL (N-08). Shipped as found — the French page proves a correct budget
+ *     URL exists, but guessing the English one invents a destination.
+ *
+ * PDF LINKS CARRY THE SHARED `PDF` FORMAT BADGE (NC-05, scope extended).
+ * Three of the eight links in each language resolve to a PDF; the rest are web
+ * pages. The badge is the SAME authored word, in the SAME role and rendered by
+ * the SAME `.badge-format` chip as the news pages' document links — telling a
+ * visitor what a link opens, on the two surfaces of this site that publish
+ * document links. Leaving it off here was an inconsistency, not a compliance
+ * position: the live LABELS are still verbatim and untouched; the badge sits
+ * beside the label, never inside it.
+ *
+ * It is derived from the href, not stored in the data, so it cannot drift from
+ * the destination — retarget a link at an HTML page and the badge goes with it.
+ * The one PDF link on this page that does NOT get a badge is the inline
+ * `Wealth management - Banking-offer | Exclusive benefits` run inside the
+ * English `Banking solutions` prose: that is body copy rendered by <Prose>, and
+ * a chip inside a sentence is a different thing from a chip on a link list.
+ */
+import Figure from '../../components/Figure.astro';
+import Icon from '../../components/Icon.astro';
+import type { Locale } from '../../data/types';
+import type { ServicesToolbox } from '../../data/pages/services.types';
+import { t } from '../../lib/i18n';
+
+interface Props {
+  toolbox: ServicesToolbox;
+  headingId: string;
+  locale: Locale;
+}
+
+const { toolbox, headingId, locale } = Astro.props;
+const s = t(locale);
+
+/** A link is a document link if its destination IS the document. */
+const isPdf = (href: string) => href.toLowerCase().endsWith('.pdf');
+---
+
+<div class="toolbox">
+  <div class="toolbox__intro">
+    <span class="toolbox__icon">
+      <Figure image={toolbox.icon} class="toolbox__img" />
+    </span>
+    <h2 id={headingId} class="t-h2 serif-display toolbox__title">{toolbox.heading}</h2>
+    <p class="t-lead measure toolbox__lead">{toolbox.lead}</p>
+  </div>
+
+  <ul class="toolbox__list">
+    {
+      toolbox.links.map((link) => (
+        <li class="toolbox__item">
+          <a class="toolbox__link tap" href={link.href} target="_blank" rel="noopener noreferrer">
+            <span class="toolbox__label">{link.label}</span>
+            {isPdf(link.href) && <span class="badge-format">{s.formats.pdf}</span>}
+            <Icon name="external-link" size={16} class="toolbox__glyph" />
+            <span class="sr-only">({s.a11y.opensNewWindow})</span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
+
+<style>
+  .toolbox {
+    display: grid;
+    gap: clamp(1.75rem, 4vw, 3rem);
+  }
+
+  @media (min-width: 60rem) {
+    .toolbox {
+      grid-template-columns: 5fr 7fr;
+      column-gap: clamp(2.5rem, 5vw, 4.5rem);
+      align-items: start;
+    }
+  }
+
+  .toolbox__icon {
+    display: block;
+    inline-size: 4rem;
+    block-size: 4rem;
+    margin-block-end: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  /* :global — the <img> is emitted by <Figure>, outside this scope. */
+  .toolbox__icon :global(.toolbox__img) {
+    inline-size: 100%;
+    block-size: auto;
+  }
+
+  .toolbox__title {
+    margin: 0;
+  }
+
+  .toolbox__lead {
+    margin-block: 1rem 0;
+  }
+
+  .toolbox__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 48rem) {
+    .toolbox__list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(1.5rem, 3vw, 2.5rem);
+    }
+  }
+
+  .toolbox__item {
+    border-block-start: 1px solid var(--rule);
+  }
+
+  /* On two columns the first row's rule would double against the section's own
+     top edge on the right-hand column only, so both first children lose it. */
+  @media (min-width: 48rem) {
+    .toolbox__item:nth-child(-n + 2) {
+      border-block-start: 0;
+    }
+  }
+
+  /* One row, no wrapping: the LABEL wraps internally and the badge and glyph
+     stay beside it, vertically centred. Letting the flex line wrap instead
+     pushed the badge onto a line of its own under the two long tax-guide
+     labels and grew those rows from 72px to 99px. `.badge-format` and
+     `.toolbox__glyph` are both `flex: none`, so only the label ever shrinks. */
+  .toolbox__link {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    min-block-size: 44px;
+    padding-block: 0.75rem;
+    color: inherit;
+    text-decoration: none;
+    transition: color 180ms var(--ease-wa);
+  }
+
+  .toolbox__link:hover .toolbox__label {
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+  }
+
+  .toolbox__label {
+    font-size: 1.0625rem;
+    line-height: 1.4;
+  }
+
+  .toolbox__link :global(.toolbox__glyph) {
+    flex: none;
+    color: var(--stone);
+    transition: transform 180ms var(--ease-wa);
+  }
+
+  .toolbox__link:hover :global(.toolbox__glyph) {
+    transform: translate(2px, -2px);
+  }
+</style>

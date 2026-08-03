@@ -1,0 +1,238 @@
+---
+/**
+ * The one layout.
+ *
+ * Owns: <head> (title, description, canonical, hreflang, OG/Twitter, theme
+ * colour, favicon, JSON-LD), the skip link, Header, <main>, Footer, the sticky
+ * contact strip, and the single client script. Pages supply copy and sections —
+ * nothing else.
+ *
+ * COMPLIANCE
+ *  · hreflang alternates are emitted ONLY for pages that genuinely exist in
+ *    both languages. A page with no counterpart passes `pageKey={null}` and no
+ *    `alternates`, so it ships with zero `<link rel="alternate">` while the
+ *    language toggle still resolves somewhere sensible. Never fabricate a
+ *    counterpart.
+ *  · The advisor profile pages ARE a real pair with no `PageKey`; they pass an
+ *    explicit `alternates` set built with `alternatesForPair`.
+ *  · ⚠ THE JSON-LD IS THE ONLY PLACE THIS SITE MAKES MACHINE-READABLE CLAIMS
+ *    ABOUT A REGULATED ENTITY, AND THE LIVE SITE HAS NONE AT ALL. Registered as
+ *    **D-51**; flagged for NBF compliance. The rule that keeps it defensible:
+ *    every property must restate something the page already says in visible
+ *    text. Nothing may be asserted here that is not asserted on the page.
+ *      · `parentOrganization` — National Bank Financial – Wealth Management.
+ *        A bare `FinancialService` node with no parent presents an advisor team
+ *        as an independent firm, which is exactly the relationship this site may
+ *        not misstate. Traces to the footer lockup, the parent-bank block and
+ *        disclaimer 1.
+ *      · `brand` was REMOVED. It named NBFWM as this team's brand — a second,
+ *        different claim from the parent relationship, and one no visible string
+ *        makes. The team's brand is its own name, which `name` already carries.
+ *      · `name` / `address` / `telephone` are verified character-for-character
+ *        against COMPLIANCE §2 per language (C-21, C-22, C-03/C-04, C-23).
+ *    It carries no Organization-level identifier (no registration number, no
+ *    `duns`, no `naics`) that the team does not itself hold, and no `email`,
+ *    `founder`, `employee`, `aggregateRating` or `award` node. Do not add one.
+ *  · There is NO analytics, NO third-party script and NO consent stack. That is
+ *    the honest position for this build: a consent banner governing tracking
+ *    that does not exist is worse than no banner. If analytics is ever wanted,
+ *    gate it behind an env flag AND explicit consent, dynamically imported only
+ *    after the visitor enables the category.
+ */
+import type { Locale, PageKey } from '../data/types';
+import type { Alternate } from '../lib/i18n';
+import { t, alternatesFor, otherLocale, homePath, htmlLang } from '../lib/i18n';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ContactStrip from '../components/ContactStrip.astro';
+import ogImage from '../assets/images/og-default.jpg';
+import '../styles/global.css';
+
+interface Props {
+  locale: Locale;
+  /** Page title WITHOUT the brand suffix. Empty string = brand suffix only. */
+  title: string;
+  description: string;
+  /** `null` for pages with no cross-language counterpart (404, dynamic routes). */
+  pageKey?: PageKey | null;
+  /**
+   * Explicit hreflang set for a genuine FR<->EN pair that has no `PageKey` —
+   * the per-advisor profile pages. Build it with `alternatesForPair`. Never
+   * pass a set for a page whose counterpart does not exist.
+   */
+  alternates?: Alternate[];
+  /** Language-toggle target. Defaults to the `pageKey` pair, else the home page. */
+  switchHref?: string;
+  /** Nav item to mark current. Defaults to `pageKey`. */
+  activeKey?: PageKey | null;
+  noindex?: boolean;
+  /** Emit the structured-data graph. Off for the 404. */
+  structuredData?: boolean;
+  bodyClass?: string;
+  /**
+   * Render the footer's CTA band. Default ON.
+   *
+   * D-11 — pass `false` on any page whose OWN main content already carries the
+   * same call to action: every page that renders `<ContactBlock>`, and the
+   * contact page pair whose `<h2>` is the band's eyebrow verbatim. The full
+   * policy and the page-by-page decision table live in `Footer.astro`.
+   */
+  showFooterCta?: boolean;
+}
+
+const {
+  locale,
+  title,
+  description,
+  pageKey = null,
+  alternates: alternatesProp,
+  switchHref,
+  activeKey,
+  noindex = false,
+  structuredData = true,
+  bodyClass,
+  showFooterCta = true,
+} = Astro.props;
+
+const s = t(locale);
+const other = otherLocale(locale);
+
+// `Astro.site` is set from astro.config.mjs; the literal is only a dev-server
+// fallback and must be kept in sync with SITE_URL there. Importing the config
+// here would drag the sitemap and Vite plugins into the page bundle.
+const site = Astro.site ?? new URL('https://groupewolfachard.ca');
+const abs = (path: string) => new URL(path, site).href;
+
+const currentPath = Astro.url.pathname;
+const canonical = abs(currentPath);
+
+const fullTitle = title ? `${title} | ${s.meta.titleSuffix}` : s.meta.titleSuffix;
+
+// Only true FR<->EN pairs get alternates. Never fabricate one.
+const alternates = alternatesProp ?? (pageKey ? alternatesFor(pageKey) : []);
+const toggleHref =
+  switchHref ??
+  (pageKey ? alternatesFor(pageKey).find((a) => a.locale === other)!.path : homePath(other));
+
+const ogImageUrl = abs(ogImage.src);
+
+const jsonLd = structuredData
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'FinancialService',
+      // C-21, per language: `Groupe Wolf Achard` FR, `Wolf Archard Group` EN —
+      // the same strings the <h1>, the <title> and the lockup's accessible name
+      // carry, including the English tree's misspelling (N-01). Never unify.
+      name: s.brand.name,
+      // The client's OWN live meta description, spliced byte-exact. It is
+      // org-level, so it does NOT vary per page — it is a description of the
+      // team, not of the page it happens to sit on.
+      description: s.meta.defaultDescription,
+      // Each page's own canonical. This was `abs(homePath(locale))`, which made
+      // all 16 structured-data nodes claim the home page as their URL — correct
+      // on 2 pages, wrong on 14.
+      url: canonical,
+      image: ogImageUrl,
+      inLanguage: htmlLang[locale],
+      // NEVER standalone — the team operates under National Bank Financial, and
+      // a bare `FinancialService` node presents an advisor team as an
+      // independent firm. This is the one machine-readable claim the build makes
+      // about a regulated entity's corporate structure; it traces to visible
+      // content on every page (the NBFWM lockup in the footer, the parent-bank
+      // block, and disclaimer 1's `pour le compte de la Financière Banque
+      // Nationale inc.`). Registered as D-51 — do not add a sibling assertion
+      // here without one.
+      parentOrganization: {
+        '@type': 'Organization',
+        name: s.brand.nbfwmName,
+        url: s.brand.nbfwmHref,
+      },
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: s.contact.addressParts.street,
+        addressLocality: s.contact.addressParts.locality,
+        addressRegion: s.contact.addressParts.region,
+        postalCode: s.contact.addressParts.postalCode,
+        addressCountry: s.contact.addressParts.country,
+      },
+      // `tollFree` is optional and absent on this site (COMPLIANCE §2.4), so
+      // the list is just the head-of-team pair. `faxNumber` is omitted from the
+      // JSON-LD entirely rather than emitted empty — an empty structured-data
+      // field is an assertion that the office has a fax and it is blank.
+      telephone: [s.contact.tollFree, ...s.contact.phones]
+        .filter((phone) => Boolean(phone?.href))
+        .map((phone) => phone!.href.replace(/^tel:/, '')),
+      ...(s.contact.fax ? { faxNumber: s.contact.fax.display } : {}),
+    }
+  : null;
+---
+
+<!doctype html>
+<html lang={s.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    {
+      alternates.map((alternate) => (
+        <link rel="alternate" hreflang={alternate.hreflang} href={abs(alternate.path)} />
+      ))
+    }
+
+    {/* --paper, #F7F4EF — kept in sync with src/styles/global.css by hand; a
+        meta tag cannot read a custom property. */}
+    <meta name="theme-color" content="#F7F4EF" />
+    <meta name="color-scheme" content="light" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="mask-icon" href="/favicon-mask.svg" color="#DE161D" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={s.meta.siteName} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:width" content={String(ogImage.width)} />
+    <meta property="og:image:height" content={String(ogImage.height)} />
+    <meta property="og:image:alt" content={s.meta.ogImageAlt} />
+    <meta property="og:locale" content={s.meta.ogLocale} />
+    {alternates.length > 0 && <meta property="og:locale:alternate" content={s.meta.ogLocaleAlternate} />}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+
+    {jsonLd && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+
+  <body class={bodyClass}>
+    <a class="skip-link" href="#main">{s.a11y.skipToContent}</a>
+
+    <Header
+      locale={locale}
+      currentPath={currentPath}
+      switchHref={toggleHref}
+      activeKey={activeKey ?? pageKey}
+    />
+
+    <main id="main" aria-label={s.a11y.mainLandmark}>
+      <slot />
+    </main>
+
+    <Footer locale={locale} showCta={showFooterCta} />
+
+    {/* Last in the DOM on purpose — it is chrome, and nothing before it should
+        be pushed out of reading order by a fixed element. */}
+    <ContactStrip locale={locale} />
+
+    <script>
+      import '../scripts/main.ts';
+    </script>
+  </body>
+</html>

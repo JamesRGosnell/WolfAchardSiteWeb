@@ -1,0 +1,65 @@
+---
+/**
+ * One `RichText` paragraph — an ordered list of runs.
+ *
+ * SHARED. It was previously re-declared in `_home/`, `_firme/` and `_services/`
+ * because a page build may not create files here; the three copies differed
+ * only in how they treated a link. This one is the union of all three and the
+ * three page-local copies are gone.
+ *
+ * WHY RUNS AND NOT A STRING. The live copy puts `<b>` emphasis and inline links
+ * INSIDE sentences — the parent-bank paragraph alone carries two. Storing the
+ * flattened sentence would drop the client's own formatting; it would also
+ * break the verbatim sweep, which replaces a stripped tag with a space, so no
+ * contiguous run in the capture matches the flattened form. Splitting at the
+ * tag boundary preserves both.
+ *
+ * ⚠ WHITESPACE IS SIGNIFICANT HERE AND SOME OF IT IS NOT AN ORDINARY SPACE.
+ * The surrounding spaces belong to the string runs, not to the markup, and
+ * several of them are U+00A0 or U+202F welded to a regulated figure. The
+ * fragments are therefore emitted with NO formatting whitespace between them —
+ * an Astro expression that introduced a newline here would insert a character
+ * the capture does not have, and an NBSP followed by a collapsible space
+ * renders as a VISIBLE DOUBLE SPACE. The expression below must stay on one
+ * line.
+ *
+ * EXTERNAL LINKS. `run.external` marks a link the live site opens in a new tab.
+ * It gets `target="_blank"`, `rel="noopener noreferrer"` and the site's
+ * existing screen-reader note — the same treatment `Footer.astro` gives its
+ * external links. The visible sentence is unchanged; `opensNewWindow` is
+ * established a11y microcopy from `src/data/{fr,en}.ts`, not new page copy.
+ * All eight inline links on the firm page are external in the capture; the one
+ * on the English home page points at this site's own team page and is not.
+ *
+ * ⚠ SCOPE PASSTHROUGH — the reason `{...rest}` is on the `<p>`.
+ * Astro scopes a parent's `<style>` to `[data-astro-cid-…]` and hands that
+ * attribute to a child component AS A PROP. A child that does not spread it
+ * renders a root element the parent's own rules cannot select, so
+ * `.split__prose { max-inline-size: 60ch }` silently does nothing. Spreading
+ * `rest` puts the parent's scope back on the paragraph, which is what makes
+ * `class="split__prose"` mean anything at all. Do not remove it.
+ */
+import type { RichText, Locale } from '../data/types';
+import { t } from '../lib/i18n';
+
+interface Props {
+  text: RichText;
+  locale: Locale;
+  class?: string;
+}
+
+const { text, locale, class: className, ...rest } = Astro.props;
+const newWindow = t(locale).a11y.opensNewWindow;
+---
+
+<p class={className} {...rest}>{
+  text.map((run) =>
+    typeof run === 'string' ? (
+      run
+    ) : 'strong' in run ? (
+      <strong>{run.strong}</strong>
+    ) : (
+      <a class="link-rule" href={run.href} {...run.external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}>{run.link}{run.external && <span class="sr-only"> ({newWindow})</span>}</a>
+    )
+  )
+}</p>

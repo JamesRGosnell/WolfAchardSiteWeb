@@ -1,0 +1,141 @@
+---
+/**
+ * PAGE-LOCAL, ENGLISH ONLY. `Our approach` — four numbered steps, eight
+ * bullets, as hairline-ruled rows.
+ *
+ * THE FRENCH PAGE HAS NO EQUIVALENT SECTION AT ALL. Not a shorter version, not
+ * an unlabelled one — it does not exist. Translating it is prohibited (P-16),
+ * so the French page simply omits this component rather than rendering an empty
+ * frame. The absence is a finding for the client, not a hole for a builder.
+ *
+ * The `1. ` … `4. ` numerals are part of the live `<h3>` strings, not an index
+ * this component adds. They are set at heading size, in ink — visually and
+ * semantically distinct from the small red superscript markers further down the
+ * page (audit check 16). No decorative numeral is drawn anywhere.
+ *
+ * The four pictograms are National Bank's, and their `alt` text is National
+ * Bank's, shipped verbatim and NOT suppressed with `aria-hidden`. Whether an
+ * icon of this class is informative or decorative is exactly the decision N-12
+ * leaves to the client; silently hiding supplied alt text would take it.
+ */
+import Figure from '../../components/Figure.astro';
+import type { ApproachStep } from '../../data/pages/services.types';
+
+interface Props {
+  steps: ApproachStep[];
+}
+
+const { steps } = Astro.props;
+---
+
+<ol class="steps">
+  {
+    steps.map((step) => (
+      <li class="step reveal">
+        <span class="step__icon">
+          <Figure image={step.icon} class="step__img" />
+        </span>
+        <h3 class="t-h3 step__title">{step.title}</h3>
+        <ul class="step__list">
+          {step.items.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .steps {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .step {
+    /* Calibrated measure — 1ch of Instrument Sans renders ~1.5 characters
+       of this client's copy, so --measure is 48ch, not 72ch. */
+    max-inline-size: var(--measure);
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0.875rem clamp(1rem, 2.5vw, 1.75rem);
+    align-items: start;
+    padding-block: clamp(1.5rem, 3vw, 2.25rem);
+    border-block-start: 1px solid var(--rule);
+  }
+
+  .step:last-child {
+    border-block-end: 1px solid var(--rule);
+  }
+
+  .step__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 3rem;
+    block-size: 3rem;
+  }
+
+  /* :global — the <img> is emitted by <Figure>, outside this scope. */
+  .step__icon :global(.step__img) {
+    inline-size: 100%;
+    block-size: auto;
+  }
+
+  .step__title {
+    margin: 0;
+    align-self: center;
+  }
+
+  .step__list {
+    grid-column: 2;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    max-inline-size: 62ch;
+    font-size: var(--text-small);
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .step__list > li {
+    position: relative;
+    padding-inline-start: 1.125rem;
+  }
+
+  .step__list > li + li {
+    margin-block-start: 0.625rem;
+  }
+
+  /* A dot, not a numeral. Numerals next to copy on THIS page collide with the
+     footnote markers, and a reader cannot tell decoration from a regulatory
+     reference. */
+  .step__list > li::before {
+    content: '';
+    position: absolute;
+    inset-inline-start: 0.1875rem;
+    inset-block-start: 0.6em;
+    inline-size: 4px;
+    block-size: 4px;
+    border-radius: 50%;
+    background-color: var(--stone);
+  }
+
+  /* Wide: icon · title · bullets, as one ruled row. */
+  @media (min-width: 60rem) {
+    .step {
+      grid-template-columns: auto 18rem minmax(0, 1fr);
+      column-gap: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
+    .step__title {
+      align-self: start;
+    }
+
+    .step__list {
+      grid-column: 3;
+      grid-row: 1;
+    }
+  }
+</style>

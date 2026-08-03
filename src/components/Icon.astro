@@ -1,0 +1,42 @@
+---
+/**
+ * Inline Lucide icons. No icon font, no runtime library.
+ *
+ * Decorative by default (`aria-hidden`). Pass `label` when the icon is the only
+ * content of a link or button and must expose an accessible name.
+ */
+import type { IconName } from './icons';
+import { ICONS } from './icons';
+
+interface Props {
+  name: IconName;
+  /** px */
+  size?: number;
+  stroke?: number;
+  label?: string;
+  class?: string;
+}
+
+const { name, size = 20, stroke = 1.75, label, class: className, ...rest } = Astro.props;
+const markup = ICONS[name];
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width={stroke}
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class={className}
+  {...rest}
+  role={label ? 'img' : undefined}
+  aria-hidden={label ? undefined : 'true'}
+  focusable="false"
+>
+  {label && <title>{label}</title>}
+  <Fragment set:html={markup} />
+</svg>

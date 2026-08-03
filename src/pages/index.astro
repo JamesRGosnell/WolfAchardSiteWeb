@@ -1,0 +1,259 @@
+---
+/**
+ * FRENCH HOME — `/`
+ *
+ * Section order is the CAPTURE's document order, not the design brief's sketch:
+ * intro · mission · commitments · philosophy · differentiators · process · news
+ * · contact. Reordering a client's own page is a deviation nobody asked for, and
+ * the brief itself says to confirm every section against the capture.
+ *
+ * BAND RHYTHM: paper everywhere, exactly ONE greige tint block (the philosophy
+ * essay — the page's pause), ink confined to the footer. Two tint blocks means
+ * the page is fighting itself.
+ *
+ * Every section here is guarded on its data being present. On this page they all
+ * are; on the English twin most of them are not, and the guard is what makes an
+ * absent section absent rather than empty.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import HomeHero from './_home/HomeHero.astro';
+import Prose from '../components/Prose.astro';
+import Figure from '../components/Figure.astro';
+import RuledList from './_home/RuledList.astro';
+import ProcessBlock from './_home/ProcessBlock.astro';
+import NewsBlock from './_home/NewsBlock.astro';
+import ContactBlock from '../components/ContactBlock.astro';
+import Button from '../components/Button.astro';
+import { t, pathFor } from '../lib/i18n';
+import home from '../data/pages/home.fr';
+
+const locale = 'fr' as const;
+const s = t(locale);
+
+/**
+ * D-52 — the two onward links under the process block.
+ *
+ * Before this, `<main>` on this page held FIVE internal links: four to
+ * `/nouvelles/` and one to `/contact/`. Zero to `/services/` or `/equipe/` —
+ * the two pages carrying the team's own writing, and the two the whole design
+ * argument points at. A reader who finished the process section had nowhere to
+ * go but National Bank's syndicated news.
+ *
+ * NO NEW COPY. The labels are `nav.items[].liveLabel`, i.e. the client's own
+ * live navigation wording, and the destinations are the same routes the header
+ * already links. Only the placement is ours.
+ */
+const onward = (['services', 'team'] as const).map((key) => ({
+  key,
+  label: s.nav.items.find((item) => item.key === key)!.liveLabel,
+  href: pathFor(key, locale),
+}));
+---
+
+{/*
+   D-11 — this page closes with its own <ContactBlock>: same heading, same
+   lead sentence, same two direct lines as the footer's CTA band.
+*/}
+<BaseLayout
+  locale={locale}
+  pageKey="home"
+  title={home.meta.title}
+  description={home.meta.description}
+  showFooterCta={false}
+>
+  <HomeHero hero={home.hero} />
+
+  {
+    home.intro && (
+      <Section bg="paper" aria-labelledby="intro-heading">
+        <div class="split">
+          <div class="split__text">
+            <h2 id="intro-heading" class="t-h2 serif-display split__heading">
+              {home.intro.heading}
+            </h2>
+            {home.intro.body.map((paragraph) => (
+              <Prose text={paragraph} locale={locale} class="split__prose" />
+            ))}
+          </div>
+          {home.intro.image && (
+            <div class="media split__media reveal">
+              <Figure image={home.intro.image} />
+            </div>
+          )}
+        </div>
+      </Section>
+    )
+  }
+
+  {/* Mission + commitments. No accessible name on the band: it holds TWO
+      sibling <h3> lists, so any single name would misdescribe it and a composed
+      one would be authored microcopy with no live counterpart. A <section>
+      without a name is not a landmark, which is the correct outcome. */}
+  {
+    home.lists && home.lists.length > 0 && (
+      <Section bg="paper">
+        <div class="lists">
+          {home.lists.map((list) => (
+            <RuledList list={list} class="reveal" />
+          ))}
+        </div>
+      </Section>
+    )
+  }
+
+  {/* THE one tint block on this page. */}
+  {
+    home.essay && (
+      <Section bg="greige" aria-labelledby="essay-heading">
+        <div class="essay">
+          {/* <h3> because that is what the live page uses. `Notre philosophie`
+              sits under the `Une gestion de patrimoine…` <h2> in the captured
+              outline, alongside `Notre mission`, `Nos engagements` and `Ce qui
+              nous distingue` — all four are <h3>. Promoting it would change the
+              document outline away from live for a purely visual reason. */}
+          <h3 id="essay-heading" class="essay__eyebrow">{home.essay.heading}</h3>
+          <Prose text={home.essay.body} locale={locale} class="essay__body" />
+        </div>
+      </Section>
+    )
+  }
+
+  {
+    home.distinctions && (
+      <Section bg="paper" aria-labelledby="distinctions-heading">
+        <div class="split split--reverse">
+          <div class="split__text">
+            <RuledList list={home.distinctions} headingId="distinctions-heading" />
+          </div>
+          {home.distinctions.image && (
+            <div class="media split__media reveal">
+              <Figure image={home.distinctions.image} />
+            </div>
+          )}
+        </div>
+      </Section>
+    )
+  }
+
+  <Section bg="paper" aria-labelledby="process-heading">
+    <ProcessBlock process={home.process} headingId="process-heading" />
+
+    {/* D-52 — see the note in the frontmatter. Secondary, not primary: the
+        page's primary control is its closing contact block. */}
+    <div class="onward">
+      {
+        onward.map((link) => (
+          <Button href={link.href} variant="secondary" icon="arrow-right">
+            {link.label}
+          </Button>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section bg="paper" aria-labelledby="news-heading">
+    <NewsBlock news={home.news} headingId="news-heading" />
+  </Section>
+
+  <Section bg="paper" aria-labelledby="contact-heading">
+    <ContactBlock contact={home.contact} headingId="contact-heading" />
+  </Section>
+</BaseLayout>
+
+<style>
+  /* Asymmetric split — text 7, image 5. Centred columns are what every other
+     advisor microsite does. */
+  .split {
+    display: grid;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+
+  @media (min-width: 60rem) {
+    .split {
+      grid-template-columns: 7fr 5fr;
+      align-items: center;
+      column-gap: clamp(2.5rem, 5vw, 4.5rem);
+    }
+
+    .split--reverse .split__text {
+      order: 2;
+    }
+  }
+
+  .split__heading {
+    margin: 0 0 clamp(1.25rem, 2.5vw, 1.75rem);
+    max-inline-size: 22ch;
+  }
+
+  .split__prose {
+    margin: 0 0 1rem;
+    /* --measure, not a hand-picked `ch` count: see the token in global.css for
+       why `60ch` rendered a 79-character line. */
+    max-inline-size: var(--measure);
+    line-height: 1.65;
+  }
+
+  .split__prose:last-child {
+    margin-block-end: 0;
+  }
+
+  .split__media {
+    aspect-ratio: 767 / 511;
+  }
+
+  /* D-52 — the two onward links. Wraps to one per row at 375px; every child is
+     a <Button>, so the 44px floor is already carried. */
+  .onward {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.875rem 1rem;
+    margin-block-start: clamp(2rem, 4vw, 2.75rem);
+  }
+
+  /* Mission + commitments, side by side. */
+  .lists {
+    display: grid;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+
+  @media (min-width: 48rem) {
+    .lists {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(2.5rem, 5vw, 4.5rem);
+      align-items: start;
+    }
+  }
+
+  /* The philosophy essay. A quiet label over a large-set paragraph — this is a
+     stated investment philosophy, not a pull-quote, and setting it as one would
+     dress a compliance-sensitive statement up as a slogan. */
+  .essay {
+    max-inline-size: 54rem;
+  }
+
+  .essay__eyebrow {
+    margin: 0 0 clamp(1rem, 2vw, 1.5rem);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    letter-spacing: 0.085em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  .essay__body {
+    margin: 0;
+    /* The essay is set large, so the 54rem band above it is far wider than a
+       readable line at 24px. The cap is on the paragraph, not the band: the
+       eyebrow keeps the full width. */
+    max-inline-size: var(--measure);
+    font-size: clamp(1.1875rem, 1.9vw, 1.5rem);
+    line-height: 1.5;
+    letter-spacing: -0.004em;
+  }
+
+  .essay__body :global(strong) {
+    font-weight: 600;
+  }
+</style>

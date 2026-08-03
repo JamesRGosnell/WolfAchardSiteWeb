@@ -1,0 +1,171 @@
+---
+/**
+ * PAGE-LOCAL. One partner / collaborator — Lysane Tougas, Jean-Francois Gobeil.
+ *
+ * WHY THIS EXISTS RATHER THAN A BARE <TeamCard>. The shared component does
+ * everything a partner needs except the one thing partners have and advisors do
+ * not: a `Biographie` accordion.
+ *
+ * `<TeamCard>` now exposes `<slot name="after" />`, so the accordion renders
+ * INSIDE the card rather than as a sibling beside it, and the wrapper div this
+ * file used to need is gone. The file itself stays, deliberately: deleting it
+ * would move ~90 lines of accordion markup and scoped CSS into BOTH
+ * `equipe/index.astro` and `en/team/index.astro`, trading one shared file for
+ * two copies of the same block — the exact duplication the promotion pass
+ * exists to remove. A biography accordion belongs to the team page and to no
+ * other page on the site, so it stays page-local.
+ *
+ * COMPLIANCE
+ *  · `title` carries the ONLY two disclaimer markers on this page. They are real
+ *    <sup> links into <LegalNotes> — rendered by <TeamCard> from `noteRefs` —
+ *    and the page MUST render <LegalNotes> too, or they are orphans (P-12).
+ *  · The biography is FRENCH ONLY on this site. `bio` is `undefined` in English
+ *    and this component then renders nothing at all — no empty accordion, no
+ *    placeholder. Translating it is prohibited (P-16): every paragraph is a
+ *    credential or experience claim about a named, licensed individual.
+ *  · Biography text is never excerpted, summarised or truncated behind a "read
+ *    more" (P-13). <details> keeps every word in the DOM, exposes its state
+ *    natively, and the print rule below opens it whatever its state on screen.
+ *  · Partners publish no phone, no email and no profile page, so no contact row
+ *    and no `href` is passed. Inventing either would be inventing identity data.
+ */
+import TeamCard from '../../components/TeamCard.astro';
+import Icon from '../../components/Icon.astro';
+import type { Locale } from '../../data/types';
+import type { Partner } from '../../data/pages/team.types';
+
+interface Props {
+  locale: Locale;
+  partner: Partner;
+  widths?: number[];
+  sizes?: string;
+  class?: string;
+}
+
+const { locale, partner, widths, sizes, class: className } = Astro.props;
+
+/* Stable, collision-free id per partner, built from the slot rather than the
+   name — a name is a client string and must not be reshaped into a token. */
+const bioId = `partner-bio-${partner.noteRefs.join('') || '0'}-${locale}`;
+---
+
+<TeamCard
+  locale={locale}
+  class={className}
+  name={partner.name}
+  title={partner.title}
+  org={partner.org}
+  noteRefs={partner.noteRefs}
+  image={partner.image.src}
+  imageAlt={partner.image.alt}
+  widths={widths ?? partner.image.widths}
+  sizes={sizes ?? partner.image.sizes}
+  level={3}
+>
+  {
+    partner.bio && (
+      <details class="partner__bio" id={bioId} slot="after">
+        <summary class="partner__summary">
+          {/* <h4>: the partner's name above is the <h3>. The live page puts the
+              accordion header at <h3> too, level with the name it belongs to,
+              which detaches the biography from its subject in the outline. */}
+          <h4 class="partner__bio-title">{partner.bio.heading}</h4>
+          <Icon name="chevron-down" size={16} class="partner__chevron" />
+        </summary>
+        <div class="partner__bio-body">
+          {partner.bio.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      </details>
+    )
+  }
+</TeamCard>
+
+<style>
+  /* Pulls the accordion up against the card's own hairline so the two read as
+     one object rather than a card with a stray control below it. The card body
+     is a flex column with a 0.375rem gap, so this margin is the remainder. */
+  .partner__bio {
+    margin-block-start: 0.375rem;
+    border-block-start: 1px solid var(--rule);
+  }
+
+  .partner__summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-block-size: 44px;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .partner__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .partner__summary::marker {
+    content: '';
+  }
+
+  .partner__summary:focus-visible {
+    outline: 2px solid var(--nb-red);
+    outline-offset: 2px;
+  }
+
+  .partner__bio-title {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--text-eyebrow);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color 180ms var(--ease-wa);
+  }
+
+  .partner__summary:hover .partner__bio-title {
+    color: var(--fg);
+  }
+
+  .partner__summary :global(.partner__chevron) {
+    flex: none;
+    color: var(--muted);
+    transition: transform 220ms var(--ease-wa);
+  }
+
+  .partner__bio[open] .partner__summary :global(.partner__chevron) {
+    transform: rotate(180deg);
+  }
+
+  .partner__bio-body {
+    padding-block: 0.25rem 1.25rem;
+  }
+
+  .partner__bio-body p {
+    margin: 0;
+    max-inline-size: 60ch;
+    font-size: var(--text-small);
+    line-height: 1.65;
+    color: var(--muted);
+  }
+
+  .partner__bio-body p + p {
+    margin-block-start: 0.75rem;
+  }
+
+  /* Credential claims must print, expanded, whatever their state on screen. */
+  @media print {
+    .partner__summary :global(.partner__chevron) {
+      display: none;
+    }
+
+    .partner__bio:not([open]) > :not(summary) {
+      content-visibility: visible !important;
+      display: revert !important;
+    }
+  }
+</style>

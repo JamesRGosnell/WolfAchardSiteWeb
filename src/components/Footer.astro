@@ -1,0 +1,711 @@
+---
+/**
+ * Site footer — four zones:
+ *
+ *   1. CTA band      — serif heading, primary control, direct phone lines
+ *                      (OPTIONAL — see `showCta` below)
+ *   2. Columns       — address block + site navigation + the bank's link bars
+ *   3. Regulatory    — FBNGP/NBFWM lockup + the `Partenaires` / `Partners`
+ *                      landmark: OCRI/CIRO, the advisor-report link, FCPI/CIPF
+ *   4. Legal         — the `Notes légales et réseaux sociaux` landmark:
+ *                      National Bank mark, © line, LinkedIn
+ *
+ * Zones 3 and 4 are SIBLING <nav>s carrying two of the four verbatim footer
+ * landmark names (COMPLIANCE §1.1/§1.2). Merging them drops `Partenaires` and
+ * fails check 55 — read the note above `.legal-region` before restructuring.
+ *
+ * This is the ONLY ink surface on a page (plus the contact strip and the mobile
+ * menu overlay). No page section may be full-bleed ink.
+ *
+ * COMPLIANCE — read before editing:
+ *  · There is NO long-form disclosure paragraph here, because the live site
+ *    does not have one. Do not add one and do not adapt one from another NBF
+ *    advisor site. The five numbered disclaimers are NOT footer content — they
+ *    live in <LegalNotes>, on the pages whose copy carries their superscript
+ *    markers.
+ *  · The regulator badges are UNLABELLED image links. Their alt text is
+ *    verbatim from the live site and must not be embellished with any
+ *    membership or regulation assertion the live site does not carry. The
+ *    advisor-report link is the only visible regulatory LABEL on the site.
+ *  · The copyright year is a frozen literal in the data files. Never compute it
+ *    from the clock.
+ *  · Link sets are language-specific by design: FR pages point at fbngp.ca /
+ *    bnc.ca, EN pages at nbfwm.ca / nbc.ca. That mapping lives in the data
+ *    files, so this component never chooses a URL.
+ *  · Regulator artwork keeps its official colours, so OCRI/CIRO and FCPI/CIPF
+ *    sit on paper chips inside the ink band rather than being reversed out.
+ *  · The site-navigation column is built from `nav.items`, so the footer nav
+ *    can never drift from the header nav.
+ */
+import type { Locale } from '../data/types';
+import { t, pathFor } from '../lib/i18n';
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import Button from './Button.astro';
+
+interface Props {
+  locale: Locale;
+  /**
+   * Render zone 1, the CTA band. Default ON — a page says nothing and gets it.
+   *
+   * ⚠ D-11 — SITE POLICY, and the reason this prop exists.
+   * The band is three RELOCATED LIVE STRINGS (D-07): `Contactez-nous` /
+   * `Contact us`, the `Obtenez les coordonnées…` lead and the two advisors'
+   * direct lines. Six of the site's seventeen pages already carry that exact
+   * call to action in their OWN main content, and the contact page IS the
+   * destination the band's button points at. Printing both puts the same
+   * heading on one page twice, 800px apart, and on `/contact/` it made the
+   * site's most prominent control a link to the page the visitor is on.
+   *
+   * THE POLICY: the band is suppressed on any page whose own main content
+   * already carries the same call to action. Concretely —
+   *
+   *   suppressed  every page that renders <ContactBlock> (home, services and
+   *               firm, both languages) plus the contact page pair, whose own
+   *               <h2> `Nous sommes à votre écoute` / `We're here for you` IS
+   *               this band's eyebrow, verbatim
+   *   shown       team, news and the two advisor profiles, both languages,
+   *               plus the 404 — none of them carries a closing contact block,
+   *               so the band is the only route to the contact page
+   *
+   * No information is ever lost by suppressing it: both numbers stay in the
+   * page's own block, in the footer address column and in the sticky contact
+   * strip. Pages set it through `<BaseLayout showFooterCta={false}>`; this
+   * component never decides.
+   *
+   * This replaces the `body.page-contact .site-footer .cta { display: none }`
+   * hook the contact page had to use while `src/components/` was out of scope
+   * for a page build. Reverting D-11 is passing nothing here.
+   */
+  showCta?: boolean;
+}
+
+const { locale, showCta = true } = Astro.props;
+const s = t(locale);
+
+const reg = s.footer.regulatory;
+const legal = s.footer.legal;
+
+/**
+ * `liveLabel`, not `label`. The footer column has no width constraint, so it
+ * carries the FULL live nav string — which means the shortening NC-01 applies
+ * to the header bar still leaves the complete string present on every page.
+ */
+const navLinks = s.nav.items.map((item) => ({
+  label: item.liveLabel,
+  href: pathFor(item.key, locale),
+}));
+---
+
+<footer class="site-footer on-ink" aria-label={s.a11y.footerLandmark}>
+  {/* ---------- Zone 1 — CTA band. Opt-out, see `showCta`. ---------- */}
+  {
+    showCta && (
+      <section class="cta" aria-labelledby="footer-cta-heading">
+        <div class="container-site cta__inner">
+          <div class="cta__text">
+            <p class="eyebrow">{s.footer.ctaEyebrow}</p>
+            <h2 id="footer-cta-heading" class="t-h2 serif-display cta__heading">
+              {s.footer.ctaHeading}
+            </h2>
+            <p class="t-lead measure-tight cta__lead">{s.footer.ctaLead}</p>
+          </div>
+
+          <div class="cta__actions">
+            {/* No red buttons. On the ink footer the primary control is the
+                paper-on-ink pill; red is reserved for the marks and the focus
+                ring. */}
+            <Button href={s.footer.ctaButton.href} variant="on-ink" icon="arrow-right">
+              {s.footer.ctaButton.label}
+            </Button>
+
+            <ul class="cta__phones">
+              {s.contact.phones.map((phone) => (
+                <li>
+                  <a class="cta__phone" href={phone.href}>
+                    <span class="cta__phone-label">{phone.label}</span>
+                    <span class="cta__phone-number tabular">
+                      <Icon name="phone" size={15} />
+                      {phone.display}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {/* ---------- Zone 2 — columns ---------- */}
+  <div class:list={['cols', !showCta && 'cols--first']}>
+    <div class="container-site cols__inner">
+      <div class="col col--address">
+        <h3 class="col__title">{s.footer.addressTitle}</h3>
+        <address class="address">
+          {s.contact.addressLines.map((line) => <span class="address__line">{line}</span>)}
+        </address>
+        <ul class="col__list">
+          {/* Toll-free and fax render ONLY if the language file declares them.
+              Groupe Wolf Achard publishes neither, so on this site both are
+              absent by design — never an empty row, never a template default.
+              COMPLIANCE.md §2.4 and audit check 23. */}
+          {
+            s.contact.tollFree && (
+              <li>
+                <a class="f-link" href={s.contact.tollFree.href}>
+                  <span class="f-link__label">{s.contact.tollFree.label}</span>
+                  <span class="tabular">{s.contact.tollFree.display}</span>
+                </a>
+              </li>
+            )
+          }
+          {
+            s.contact.fax && (
+              <li>
+                <p class="f-static">
+                  <span class="f-link__label">{s.contact.fax.label}</span>
+                  <span class="tabular">{s.contact.fax.display}</span>
+                </p>
+              </li>
+            )
+          }
+          <li>
+            <a
+              class="f-link"
+              href={s.contact.mapsHref}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name="map-pin" size={14} />
+              {s.contact.mapsLabel}
+              <span class="sr-only">({s.a11y.opensNewWindow})</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <nav class="col" aria-label={s.footer.navTitle}>
+        <h3 class="col__title">{s.footer.navTitle}</h3>
+        <ul class="col__list">
+          {
+            navLinks.map((link) => (
+              <li>
+                <a class="f-link" href={link.href}>
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      {
+        s.footer.columns.map((column) => (
+          <nav class="col" aria-label={column.title}>
+            <h3 class="col__title">{column.title}</h3>
+            <ul class="col__list">
+              {column.links.map((link) => (
+                <li>
+                  {link.external ? (
+                    <a
+                      class="f-link"
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={link.ariaLabel}
+                    >
+                      {link.label}
+                      <Icon name="external-link" size={13} />
+                      <span class="sr-only">({s.a11y.opensNewWindow})</span>
+                    </a>
+                  ) : (
+                    <a class="f-link" href={link.href} aria-label={link.ariaLabel}>
+                      {link.label}
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))
+      }
+    </div>
+  </div>
+
+  {/* ---------- Zones 3 + 4 — TWO sibling <nav>s, not one.
+       This wrapper is a plain <div> on purpose. It used to be the single
+       `<nav aria-label="Notes légales et réseaux sociaux">` that swallowed both
+       zones, and the cost was that the live site's FOURTH landmark name —
+       `Partenaires` / `Partners` — never shipped on any of the 17 pages, which
+       is audit check 55. Four verbatim names, four <nav> elements:
+
+         Liens d'informations et de contact  →  zone 2, footer columns
+         Liens de règlementation             →  zone 2, footer columns
+         Notes légales et réseaux sociaux    →  `.legal` below
+         Partenaires                         →  `.reg__badges` below
+
+       The split follows the live grouping exactly: `Partenaires` holds the
+       regulator marks (OCRI/CIRO + the advisor-report link + FCPI/CIPF), and
+       `Notes légales et réseaux sociaux` holds the National Bank mark, the
+       copyright line and LinkedIn — LinkedIn is the `réseaux sociaux` half of
+       its own name and belongs with the copyright, not with the regulators.
+
+       `data-footer-legal` stays on this wrapper: <ContactStrip> observes it by
+       attribute (`main.ts`, `[data-footer-legal]`), not by element, so the
+       strip still cannot float over the regulatory block. ---------- */}
+  <div class="legal-region" data-footer-legal>
+    {/* Zone 3 — regulatory row. Badges are unlabelled links. */}
+    <div class="reg">
+      <div class="container-site reg__inner">
+        {/*
+          BADGE SIZING LIVES ON THESE THREE <Logo> CALLS AND NOWHERE ELSE.
+          `height` reserves the box (width is derived from the intrinsic ratio,
+          so a regulated mark can never be scaled non-uniformly); `cssHeight`
+          feeds --logo-h for the responsive lockup. Do NOT re-declare
+          `block-size` on `.logo-img` in the stylesheet below — two sources of
+          truth is how these drift out of proportion.
+        */}
+        <a class="reg__parent" href={s.brand.nbfwmHref} target="_blank" rel="noopener noreferrer">
+          <Logo
+            kind="nbfwm"
+            tone="ink"
+            locale={locale}
+            height={64}
+            cssHeight="clamp(2.75rem, 5.5vw, 4rem)"
+            alt={s.brand.nbfwmLogoAlt}
+          />
+          <span class="sr-only">({s.a11y.opensNewWindow})</span>
+        </a>
+
+        {/* THE `Partenaires` / `Partners` LANDMARK. Verbatim live name; holds
+            exactly what the live `fourth-level` nav holds. */}
+        <nav class="reg__badges" aria-label={reg.navAriaLabel}>
+          <div class="reg__group">
+            <a class="reg__chip" href={reg.ciro.href} target="_blank" rel="noopener noreferrer">
+              <Logo kind="regulator" locale={locale} height={40} alt={reg.ciroLogoAlt} />
+              <span class="sr-only">({s.a11y.opensNewWindow})</span>
+            </a>
+            <a
+              class="f-link f-link--advisor"
+              href={reg.ciroAdvisorReport.href}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {reg.ciroAdvisorReport.label}
+              <Icon name="external-link" size={13} />
+              <span class="sr-only">({s.a11y.opensNewWindow})</span>
+            </a>
+          </div>
+
+          <a class="reg__chip" href={reg.cipf.href} target="_blank" rel="noopener noreferrer">
+            <Logo kind="fund" locale={locale} height={66} alt={reg.cipfLogoAlt} />
+            <span class="sr-only">({s.a11y.opensNewWindow})</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+
+    {/* Zone 4 — THE `Notes légales et réseaux sociaux` LANDMARK. Verbatim live
+        name, and it now holds what the live `third-level` nav holds: the
+        National Bank mark, the copyright line and LinkedIn.
+
+        `legal.links` is empty for this client: the live footer carries its link
+        bars in zone 2 and nothing below the copyright. The slot stays so a
+        page-level finding can add one without a component change. */}
+    <nav class="legal" aria-label={legal.navAriaLabel}>
+      <div class="container-site legal__inner">
+        {
+          legal.links.length > 0 && (
+            <ul class="legal__links">
+              {legal.links.map((link) => (
+                <li>
+                  <a
+                    class="legal__link"
+                    href={link.href}
+                    target={link.external ? '_blank' : undefined}
+                    rel={link.external ? 'noopener noreferrer' : undefined}
+                  >
+                    {link.label}
+                    {link.external && <span class="sr-only">({s.a11y.opensNewWindow})</span>}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+
+        <div class:list={['legal__bar', legal.links.length === 0 && 'legal__bar--bare']}>
+          <p class="legal__copy">
+            <Logo kind="nb-mark" locale={locale} height={18} alt={reg.nbMarkAlt} class="legal__mark" />
+            <span>{legal.copyright}</span>
+          </p>
+
+          {/* Live order inside this nav: National Bank mark, copyright,
+              LinkedIn. `.tap` carries the 44×44 floor. */}
+          <a
+            class="legal__social tap"
+            href={reg.linkedin.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={reg.linkedin.ariaLabel ?? reg.linkedin.label}
+          >
+            <Icon name="linkedin" size={20} />
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--ink);
+    color: var(--on-ink);
+  }
+
+  /* ---------------------------------------------------------------------
+     Zone 1 — CTA band
+     ------------------------------------------------------------------ */
+  .cta__inner {
+    display: grid;
+    gap: clamp(2rem, 5vw, 4rem);
+    padding-block: clamp(3.5rem, 8vw, 6rem);
+    align-items: end;
+  }
+
+  .cta__heading {
+    margin-block: 0.75rem 0;
+    max-inline-size: 16ch;
+  }
+
+  .cta__lead {
+    margin-block-start: 1.25rem;
+  }
+
+  .cta__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .cta__phones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cta__phone {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.125rem;
+    min-block-size: 44px;
+    text-decoration: none;
+  }
+
+  .cta__phone-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--on-ink-muted);
+  }
+
+  .cta__phone-number {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4375rem;
+    font-size: 1.0625rem;
+    color: var(--on-ink);
+    transition: color 180ms var(--ease-wa);
+  }
+
+  .cta__phone:hover .cta__phone-number {
+    color: #ffffff;
+  }
+
+  @media (min-width: 52rem) {
+    .cta__inner {
+      grid-template-columns: 1.2fr 1fr;
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+     Zone 2 — columns
+     ------------------------------------------------------------------ */
+  .cols {
+    border-block-start: 1px solid var(--ink-hairline);
+  }
+
+  /* With no CTA band above it the columns are the footer's first zone, so the
+     divider has nothing to divide — and the block needs its own top breathing
+     room instead of inheriting the band's. */
+  .cols--first {
+    border-block-start: 0;
+    padding-block-start: clamp(1rem, 2vw, 1.5rem);
+  }
+
+  .cols__inner {
+    display: grid;
+    gap: clamp(2rem, 4vw, 3rem);
+    padding-block: clamp(3rem, 6vw, 4.5rem);
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  }
+
+  .col__title {
+    margin: 0 0 1.125rem;
+    font-size: var(--text-eyebrow);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--on-ink-muted);
+  }
+
+  .col__list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .address {
+    display: flex;
+    flex-direction: column;
+    margin-block-end: 1rem;
+    font-size: var(--text-small);
+    line-height: 1.6;
+    color: var(--on-ink);
+  }
+
+  .f-link,
+  .f-static {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    min-block-size: 44px;
+    margin: 0;
+    padding-block: 0.25rem;
+    font-size: var(--text-small);
+    line-height: 1.4;
+    color: var(--on-ink-muted);
+    text-decoration: none;
+    transition: color 180ms var(--ease-wa);
+  }
+
+  .f-link:hover {
+    color: #ffffff;
+  }
+
+  .f-link :global(svg) {
+    flex: none;
+    opacity: 0.55;
+  }
+
+  .f-link__label {
+    color: var(--on-ink-muted);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* The only visible regulatory WORDING on the site — give it real presence so
+     it is not visually demoted by the unlabelled artwork beside it. On --ink
+     this measures 12.9:1: AA at any size. */
+  .f-link--advisor {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--on-ink);
+    max-inline-size: 24ch;
+  }
+
+  /* ---------------------------------------------------------------------
+     Zone 3 — regulatory
+     ------------------------------------------------------------------ */
+  .reg {
+    border-block-start: 1px solid var(--ink-hairline);
+  }
+
+  .reg__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    padding-block: clamp(2rem, 4vw, 2.75rem);
+  }
+
+  .reg__parent {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+    text-decoration: none;
+    transition: opacity 180ms var(--ease-wa);
+  }
+
+  .reg__parent:hover {
+    opacity: 0.85;
+  }
+
+  .reg__badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2rem);
+  }
+
+  /* MUST wrap. The French regulator mark is materially wider than its English
+     twin at the same height, which leaves no room beside it for the
+     advisor-report link inside a 335px content box at 375px. Wrapping drops the
+     link to its own line instead of overflowing the viewport. */
+  .reg__group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1rem;
+    max-inline-size: 100%;
+  }
+
+  /* Regulator artwork may not be recoloured, so it sits on a paper chip. The
+     chip is sized by the mark inside it (see the <Logo> calls above); it
+     declares no height of its own beyond the 44px tap-target floor, so the
+     badges can be rescaled from one place. */
+  .reg__chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-block-size: 44px;
+    max-inline-size: 100%;
+    padding: 0.5rem 0.75rem;
+    background-color: var(--paper);
+    border-radius: var(--radius-btn);
+    transition: background-color 180ms var(--ease-wa);
+  }
+
+  .reg__chip:hover {
+    background-color: #ffffff;
+  }
+
+  /* LinkedIn lives in the legal bar, not up here with the regulator marks —
+     see the landmark note above the `.legal-region` wrapper. */
+
+  /* ---------------------------------------------------------------------
+     Zone 4 — legal
+     ------------------------------------------------------------------ */
+  .legal {
+    border-block-start: 1px solid var(--ink-hairline);
+    background-color: var(--ink);
+  }
+
+  .legal__inner {
+    padding-block: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .legal__bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    margin-block-start: 1rem;
+    padding-block-start: 1rem;
+    border-block-start: 1px solid var(--ink-hairline);
+  }
+
+  .legal__social {
+    color: var(--on-ink-muted);
+    border: 1px solid var(--ink-hairline);
+    border-radius: var(--radius-pill);
+    transition:
+      color 180ms var(--ease-wa),
+      border-color 180ms var(--ease-wa);
+  }
+
+  .legal__social:hover {
+    color: #ffffff;
+    border-color: var(--on-ink-muted);
+  }
+
+  /* With no link bar above it there is nothing to be separated from. */
+  .legal__bar--bare {
+    margin-block-start: 0;
+    padding-block-start: 0;
+    border-block-start: 0;
+  }
+
+  .legal__copy {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--on-ink-muted);
+  }
+
+  .legal__copy :global(.legal__mark) {
+    flex: none;
+    block-size: 1.125rem;
+  }
+
+  .legal__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .legal__link {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 44px;
+    font-size: 0.8125rem;
+    color: var(--on-ink-muted);
+    text-decoration: none;
+    transition: color 180ms var(--ease-wa);
+  }
+
+  .legal__link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+
+  /* ---------------------------------------------------------------------
+     Print — the footer legal block must print. Ink backgrounds are usually
+     dropped by the print pipeline, so reverse the whole footer to
+     black-on-white rather than gamble on background printing.
+     ------------------------------------------------------------------ */
+  @media print {
+    .site-footer,
+    .legal,
+    .reg,
+    .cols {
+      background: #ffffff !important;
+      color: #000000 !important;
+      border-color: #999999 !important;
+    }
+
+    .site-footer :global(*) {
+      color: #000000 !important;
+    }
+
+    .cta {
+      display: none;
+    }
+
+    .legal__links,
+    .legal__bar {
+      page-break-inside: avoid;
+    }
+  }
+</style>

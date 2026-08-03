@@ -1,0 +1,3963 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+    <head>
+        <title>Nouvelles et articles | Financière Banque Nationale - Gestion de patrimoine</title>
+        
+
+    
+        <meta property="og:title" content="Nouvelles et articles | Financière Banque Nationale - Gestion de patrimoine"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="https://www.fbngp.ca/conseiller/groupe-wolf-achard/nouvelles-articles.html"/>
+        <meta property="og:description" content="Suivez l&#39;actualité des marchés financiers et profitez de nos analyses pour mieux atteindre vos objectifs."/>
+        <meta property="og:image" content="https://www.fbngp.ca/content/dam/global/logo/bnc-logo.png"/>
+    
+
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    
+
+    
+    <meta name="description" content="Suivez l&#39;actualité des marchés financiers et profitez de nos analyses pour mieux atteindre vos objectifs."/>
+    <meta name="template" content="notre-equipe-microsite"/>
+
+    
+    <link rel="canonical" href="https://www.fbngp.ca/conseiller/groupe-wolf-achard/nouvelles-articles.html"/>
+
+    
+    
+        
+            
+                
+                
+                    <link rel="alternate" hreflang="fr" href="https://www.fbngp.ca/conseiller/groupe-wolf-achard/nouvelles-articles.html"/>
+                    <link rel="alternate" hreflang="fr-ca" href="https://www.fbngp.ca/conseiller/groupe-wolf-achard/nouvelles-articles.html"/>
+                    <link rel="alternate" hreflang="x-default" href="https://www.nbfwm.ca/advisor/wolf-archard-group/news-articles.html"/>
+                
+                
+            
+        
+            
+                
+                
+                
+                    <link rel="alternate" hreflang="en" href="https://www.nbfwm.ca/advisor/wolf-archard-group/news-articles.html"/>
+                    <link rel="alternate" hreflang="en-ca" href="https://www.nbfwm.ca/advisor/wolf-archard-group/news-articles.html"/>
+                
+            
+        
+    
+
+    
+    
+    
+
+    
+    
+        
+
+
+
+
+    <script>
+        function getLanguage() {
+            let frRegex = /\/content\/(.*)\/fr\//;
+            let pagePath = "/content/fbngp/fr/accueil/conseiller/groupe-wolf-achard/nouvelles-articles";
+
+            if(frRegex.test(pagePath)){
+                return "fr";
+            }
+            else{ //default is English
+                return "en";
+            }
+        }
+
+        /*
+        * AEM Page properties hierarchy function
+        * Sets the SDK parameters to be the same as the default parameters configured by the site
+        */
+        function setSiteConfig(){
+            
+            scriptUrl = "https://dam.bnc.ca/content/dam/tools/cmp/notice.js";
+            configDidomi = ("true" === "true");
+            activateDidomi = ("true" === "true");
+            applyDidomiToChildren = ("true" === "true");
+            showDidomi = ("true" === "true");
+            siteToken = "bFXc6fFy";
+            lang = getLanguage();
+        }
+
+
+        /*
+        * AEM Page properties hierarchy function
+        * Updates the SDK parameters if a configuration was set on a page or on a parent page
+        */
+        function setChildParentConfig(){
+            
+            configDidomi = ("true" === "true");
+            activateDidomi = ("true" === "true");
+            applyDidomiToChildren = ("true" === "true");
+            showDidomi = ("true" === "true");
+            childToken = "null";
+            if(childToken === "null"){
+                configDidomi = false;
+            }else{
+                configDidomi = true;
+                foundParentConfig = true;
+            }
+            
+        }
+
+
+        /*
+        * AEM Page properties hierarchy function
+        * Sets the notice token based on the page hierarchy
+        */
+        function setToken(){
+            if(configDidomi){
+                //child on
+                if(foundParentConfig  && applyDidomiToChildren && activateDidomi){
+                    bannerToken = childToken;
+                }
+                //parent on
+                if(!foundParentConfig  && activateDidomi){
+                    bannerToken = childToken;
+                }
+                //parent on, child on with default
+                if(foundParentConfig && !applyDidomiToChildren){
+                    bannerToken = siteToken;
+                }
+            } else{ // default
+                bannerToken = siteToken;
+            }
+        }
+
+
+        /*
+        * Loads Didomi script (notice.js) with correct parameters
+        */
+        function loadJS(FILE_URL, async = true, language, token, enableDidomi) {
+            let scriptEle = document.createElement("script");
+
+            scriptEle.setAttribute("src", FILE_URL);
+            scriptEle.setAttribute("type", "text/javascript");
+            scriptEle.setAttribute("async", async);
+            scriptEle.setAttribute("language", language);
+            scriptEle.setAttribute("token", token);
+            scriptEle.setAttribute("enableDidomi", enableDidomi);
+
+            document.head.appendChild(scriptEle);
+
+            // error event
+            scriptEle.addEventListener("error", (ev) => {
+                console.log("Error on loading file", ev);
+            });
+        }
+
+        /*
+        * The AEM parameters retrieved earlier from the page properties are set in the Didomi SDK
+        * language: the language the banner appears in
+        * notice.enable: wether the notice is visible on the page or not
+        */
+        function setSDKConfigs(language, enableDidomi){
+            //default Didomi config
+            window.didomiConfig = {
+                languages: {
+                    enabled: ['en', 'fr'],
+                    default: ''
+                },
+                notice: {
+                    enable: true
+                }
+            };
+
+            //set banner visibility
+            if(!enableDidomi){
+                window.didomiConfig.notice.enable = enableDidomi;
+            }
+
+            //set language
+            if("fr" === language){
+                window.didomiConfig.languages.enabled = ['fr']
+                window.didomiConfig.languages.default = 'fr'
+            } else{
+                window.didomiConfig.languages.enabled = ['en']
+                window.didomiConfig.languages.default = 'en'
+            }
+        }
+
+
+        /*
+        * Given the banner token, loads Didomi SDK
+        * Config Parameters must always be set before the SDK is loaded
+        */
+        function loadSDK(token) {
+
+            window.gdprAppliesGlobally = true;
+            (function() {
+                (function(e, r) {
+                    var t = document.createElement("link");
+                    t.rel = "preconnect";
+                    t.as = "script";
+
+                    var n = document.createElement("link");
+                    n.rel = "dns-prefetch";
+                    n.as = "script";
+
+                    var i = document.createElement("link");
+                    i.rel = "preload";
+                    i.as = "script";
+
+                    var o = document.createElement("script");
+                    o.id = "spcloader";
+                    o.type = "text/javascript";
+                    o.async = true;
+                    o.charset = "utf-8";
+
+                    var a = "https://sdk.privacy-center.org/" + e + "/loader.js?target_type=notice&target=" + r;
+                    if (window.didomiConfig && window.didomiConfig.user) {
+                        var c = window.didomiConfig.user;
+                        var s = c.country;
+                        var d = c.region;
+                        if (s) {
+                            a += "&country=" + s;
+                            if (d) {
+                                a += "&region=" + d;
+                            }
+                        }
+                    }
+
+                    t.href = "https://sdk.privacy-center.org/";
+                    n.href = "https://sdk.privacy-center.org/";
+                    i.href = a;
+                    o.src = a;
+
+                    var p = document.getElementsByTagName("script")[0];
+                    p.parentNode.insertBefore(t, p);
+                    p.parentNode.insertBefore(n, p);
+                    p.parentNode.insertBefore(i, p);
+                    p.parentNode.insertBefore(o, p);
+                })("f93cfeed-d62f-4357-bfe9-f9f6887f69fb", token);
+            })();
+        }
+
+
+        /*
+        * main function
+        */
+        function initializeDidomi(){
+
+            // set default parameters
+            setSiteConfig();
+
+            // if didomi is active at site level
+            if(configDidomi && applyDidomiToChildren && activateDidomi){
+
+                //reset variables for child/parent configs
+                configDidomi = false;
+
+                setChildParentConfig();
+                setToken();
+
+
+                if(true){
+                    setSDKConfigs(lang, showDidomi);
+                    loadSDK(bannerToken);
+                }else{
+                    loadJS(scriptUrl, true, lang, bannerToken, showDidomi);
+                }
+            }
+            // else didomi should not appear on the page
+        }
+
+
+        // PARAMETERS
+        let lang = "";
+        let bannerToken = "";
+        let siteToken = "";
+        let configDidomi = false;
+        let applyDidomiToChildren = false;
+        let activateDidomi = false;
+        let showDidomi = false;
+        let foundParentConfig = false;
+        let childToken = "";
+        let scriptUrl = "";
+
+        initializeDidomi();
+    </script>
+
+    
+
+    
+    
+    
+
+    
+
+    
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/clientlibs/web-sites-toolkit/toolkit-clientlib/clientlibs/clientlib-grid.min.fe198145cabc1203cbab2e73c189fe6a.css" type="text/css">
+
+
+
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/clientlibs/web-sites-toolkit/toolkit-clientlib/clientlibs/clientlib-base.min.b9e58db3c42afa6e5488f495d4804f33.css" type="text/css">
+
+
+
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/layoutContainer.min.84beee8800683e039d2bd5c1da611ae1.css" type="text/css">
+
+
+
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/container/clientlibs.min.90932f7188b6de3499a57fd9afe1ddb6.css" type="text/css">
+
+
+
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-core-components.min.92ac67899fe3d5f4241b959add6754f8.css" type="text/css">
+
+
+
+
+    
+        
+    
+
+    
+
+        
+        
+            
+    
+<script src="/etc.clientlibs/web-sites/clientlibs/vendor/jquery/base.min.3f56e989e786c643b30d5668a97daa52.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/websites.min.afe369e2daa031e232e9e25e1415ac64.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/dataLayer.min.bb151da6cddfb1aa78316cc5dbef60db.js"></script>
+
+
+
+
+            <script async src="//assets.adobedtm.com/launch-ENce80544c76a04686ae546c50bbd9979e.min.js"></script>
+
+            
+
+            <script type="text/javascript">
+                var eventSource = "nbfwm";
+                var pageVariables = JSON.parse("[{\x22elementName\x22:\x22loB\x22,\x22elementValue\x22:\x22nbfwm\x22}]");
+                var rulesDefinitionFilePath = "/content/dam/dataLayerConfig/rules-fbngp.json";
+                var responseStatus = 200;
+
+                Websites.DataLayer.init(eventSource, pageVariables, rulesDefinitionFilePath, responseStatus);
+            </script>
+        
+    
+
+    
+    
+    
+
+    
+
+    
+    
+    
+
+
+
+    
+
+    
+
+    
+    
+        <link rel="icon" type="image/ico" href="/content/dam/global/logo/favicon.ico"/>
+    
+
+    
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+    
+        <link type="text/css" rel="stylesheet" href="/content/dam/css/fbngp-microsite.css"/>
+    
+
+
+
+    
+    
+    
+
+    
+
+    
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="167x167" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-167x167.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="167x167" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-167x167-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="152x152" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-152x152.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-152x152-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="144x144" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-144x144.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-144x144-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="120x120" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-120x120.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-120x120-precomposed.png"/>
+    <link rel="apple-touch-icon" sizes="any" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-48x48.png"/>
+    <link rel="apple-touch-icon-precomposed" sizes="any" href="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-static/resources/apple-touch-icon-48x48-precomposed.png"/>
+
+
+
+    
+                                <script>!function(e){var n="https://s.go-mpulse.net/boomerang/";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,n="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="CBWCH-YHXC8-UX5PM-CKJ3F-WKW7N",function(){function e(){if(!r){var e=document.createElement("script");e.id="boomr-scr-as",e.src=window.BOOMR.url,e.async=!0,o.appendChild(e),r=!0}}function t(e){r=!0;var n,t,a,i,d=document,O=window;if(window.BOOMR.snippetMethod=e?"if":"i",t=function(e,n){var t=d.createElement("script");t.id=n||"boomr-if-as",t.src=window.BOOMR.url,BOOMR_lstart=(new Date).getTime(),e=e||d.body,e.appendChild(t)},!window.addEventListener&&window.attachEvent&&navigator.userAgent.match(/MSIE [67]\./))return window.BOOMR.snippetMethod="s",void t(o,"boomr-async");a=document.createElement("IFRAME"),a.src="about:blank",a.title="",a.role="presentation",a.loading="eager",i=(a.frameElement||a).style,i.width=0,i.height=0,i.border=0,i.display="none",o.appendChild(a);try{O=a.contentWindow,d=O.document.open()}catch(_){n=document.domain,a.src="javascript:var d=document.open();d.domain='"+n+"';void 0;",O=a.contentWindow,d=O.document.open()}if(n)d._boomrl=function(){this.domain=n,t()},d.write("<bo"+"dy onload='document._boomrl();'>");else if(O._boomrl=function(){t()},O.addEventListener)O.addEventListener("load",O._boomrl,!1);else if(O.attachEvent)O.attachEvent("onload",O._boomrl);d.close()}function a(e){window.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!window.BOOMR||!window.BOOMR.version&&!window.BOOMR.snippetExecuted){window.BOOMR=window.BOOMR||{},window.BOOMR.snippetStart=(new Date).getTime(),window.BOOMR.snippetExecuted=!0,window.BOOMR.snippetVersion=14,window.BOOMR.url=n+"CBWCH-YHXC8-UX5PM-CKJ3F-WKW7N";var i=document.currentScript||document.getElementsByTagName("script")[0],o=i.parentNode,r=!1,d=document.createElement("link");if(d.relList&&"function"==typeof d.relList.supports&&d.relList.supports("preload")&&"as"in d)window.BOOMR.snippetMethod="p",d.href=window.BOOMR.url,d.rel="preload",d.as="script",d.addEventListener("load",e),d.addEventListener("error",function(){t(!0)}),setTimeout(function(){if(!r)t(!0)},3e3),BOOMR_lstart=(new Date).getTime(),o.appendChild(d);else t(!1);if(window.addEventListener)window.addEventListener("load",a,!1);else if(window.attachEvent)window.attachEvent("onload",a)}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var n=""=="true"?1:0,t="",a="r5uv2vvyd2lfa2tp6tka-f-1c39d0266-clientnsv4-s.akamaihd.net",i="false"=="true"?2:1,o={"ak.v":"41","ak.cp":"1490177","ak.ai":parseInt("891279",10),"ak.ol":"0","ak.cr":56,"ak.ipv":4,"ak.proto":"http/1.1","ak.rid":"471ae4c8","ak.r":47660,"ak.a2":n,"ak.m":"b","ak.n":"essl","ak.cport":26320,"ak.gh":"184.30.149.80","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.0rtt.ed":"","ak.csrc":"-","ak.acc":"bbr","ak.t":"1785722068","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==1mbyWTD09Rdi1Vgw+RhKERT5YPNTrEFEhOiL20CVYdOHOvTRZ0G6u9w8J1VYhHTGRB/AkvO+94OZfFCL4c+i8c85+n5urReIhRiUrSfO4Mt/FYFOMwbMJAeXwB7JdwtBPj1SK/XGFK3uGgZNO0ocsVJqMJJk4PcDC2af08HDrpGj/kjK3YJ29Zg77WIyUC70PJfqgzg12zD9Vu9PNQLLyMYwQIS9mNrI/Q2MO267UZIId9OmUaiviBFv9Emnrz9uuj74yUG9yvus+VoaxLk/XO+IDwGaV8lG99alxDbFWu0KgOgD0bukmjkj1YIBMkrBfocw8Ah0minPzIN9o9rpmB1ucdIOwhZ5nAqRDZRGQy+6ZFC2uY2AZg7TIxjj697Ne2mdY3PCUxg8tO1IYDee4OHm589KtjBnZXITqytfAeY=","ak.pv":"170","ak.dpoabenc":"","ak.tf":i};if(""!==t)o["ak.ruds"]=t;var r={i:!1,av:function(n){var t="http.initiator";if(n&&(!n[t]||"spa_hard"===n[t]))o["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(o)},rv:function(){var e=["ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.0rtt.ed","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:o,akDNSPreFetchDomain:a,init:function(){if(!r.i){var e=BOOMR.subscribe;e("before_beacon",r.av,null,null),e("onbeacon",r.rv,null,null),r.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+    <body class="page basicpage">
+        
+        
+            
+
+
+
+            
+<div class="root responsivegrid">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="headerreference aem-GridColumn aem-GridColumn--default--12">
+<div class="cmp-headerreference">
+
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/structure/menuMicrositeBase/v1/menuMicrositeBase/clientlibs/clientlib.min.a043b7e0920cd8528a2262dc1c8431e1.css" type="text/css">
+<script src="/etc.clientlibs/web-sites-toolkit/clientlibs/web-sites-toolkit/toolkit-clientlib/clientlibs/vendor/lodash.min.a98e817fa80e9f0446305f835cdaa621.js"></script>
+<script src="/etc.clientlibs/web-sites-toolkit/clientlibs/web-sites-toolkit/toolkit-clientlib/clientlibs/clientlib-base.min.9e53360934d7d8c817cca5a2a127c13f.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/events.min.16e5209efa2702100afd766ec89fcae0.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/component.min.047d4d7858d9ff4849ffebffd22e5c10.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/eventListenerHandlers.min.6da5ec95ff88986fe5a678195fb73f2e.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/basepage.min.3097d244e3acdaa1cc46cbe27a844341.js"></script>
+<script src="/etc.clientlibs/web-sites/clientlibs/core/sticky.min.f7421d1f70d92b9a74fb9655256bba54.js"></script>
+<script src="/etc.clientlibs/web-sites-toolkit/components/structure/menuMicrositeBase/v1/menuMicrositeBase/clientlibs/clientlib.min.96a238afac5ac7358bccd1854f8d7d77.js"></script>
+
+
+
+
+
+
+
+    <header id="microsite-header-91bbcdf627" class="header menuMicrosite">
+        <nav class="header__navigation" aria-label="main menu">
+            <div class="header__top_wrapper">
+                <div class="header__top">
+                    <div class="header__button-burger--wrapper">
+                        <button type="button" class="header__button-burger" id="header__button-burger" aria-expanded="false" aria-controls="menu__list">
+                            <span class="line"></span>
+                            <span class="line"></span>
+                            <span class="line"></span>
+                        </button>
+                    </div>
+                    <div class="header__logo_container-mobile">
+                        
+                            
+
+    <a class="header__logo-image_wrapper" target="_self" href="/conseiller/groupe-wolf-achard.html">
+        <img class="logo__image-mobile" src="/content/dam/fbngp/logos/logo-cp-fbngp-s.svg" alt="Logo Financière Banque Nationale Gestion de patrimoine"/>
+    </a>
+
+                        
+                        
+                            
+
+    <a class="header__logo-image_wrapper" target="_self" href="/conseiller/groupe-wolf-achard.html">
+        <img class="logo__image-mobile" src="/content/dam/fbngp/logos/groupe-wolf-achard/logo-cp-groupe-wolf-achard-S.svg" alt="Logo Groupe Wolf Achard"/>
+    </a>
+
+                        
+                    </div>
+                    <div class="header__links_container">
+                        <ul>
+                            
+                                
+                                
+    
+
+        
+        <li class="header__links_item header__links_item-desktop header__link-icon-view">
+            <a href="/conseiller/groupe-wolf-achard/nous-joindre.html" target="_self" class="header__top-menu-link header__link-styled false style3 ">
+                <i class="bnc-icon-menu-locator"></i>
+                <span>Nous joindre</span>
+            </a>
+        </li>
+    
+
+                            
+
+                            
+                                
+                                <li class="header__links_item header__links_item-desktop">
+                                    <a class="header__lang--mobile header__top-menu-link" href="https://www.nbfwm.ca/advisor/wolf-archard-group/news-articles.html" target="_self">
+                                        En</a>
+                                </li>
+                            
+
+                            
+                                
+                                
+    
+
+        
+        <li class="header__links_item header__link-icon-view">
+            <a href="https://client.bnc.ca/fbngp/login" target="_self" class="header__top-menu-link header__link-styled false style1 ">
+                <i class="bnc-icon-menu-secureLogin"></i>
+                <span>Accès client</span>
+            </a>
+        </li>
+    
+
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="header__bottom_wrapper">
+                <div id="menu__list" class="header__bottom menu-close">
+                    
+                    <div class="header__logo_container-desktop">
+                        <div class="header__logo-desktop">
+                            
+
+    <a class="header__logo-image_wrapper" target="_self" href="/conseiller/groupe-wolf-achard.html">
+        <img class="logo__image-desktop" src="/content/dam/fbngp/logos/logo-cp-fbngp-L.svg" alt="Logo Financière Banque Nationale Gestion de patrimoine"/>
+    </a>
+
+                        </div>
+                        <div class="header__logo-tablet">
+                            
+
+    <a class="header__logo-image_wrapper" target="_self" href="/conseiller/groupe-wolf-achard.html">
+        <img class="logo__image-tablet" src="/content/dam/fbngp/logos/logo-cp-fbngp-M.svg" alt="Logo Financière Banque Nationale Gestion de patrimoine"/>
+    </a>
+
+                        </div>
+                        <div class="header__logo-desktop">
+                            
+
+    <a class="header__logo-image_wrapper" target="_self" href="/conseiller/groupe-wolf-achard.html">
+        <img class="logo__image-desktop" src="/content/dam/fbngp/logos/groupe-wolf-achard/logo-cp-groupe-wolf-achard-L.svg" alt="Logo Groupe Wolf Achard"/>
+    </a>
+
+                        </div>
+                        <div class="header__logo-tablet">
+                            
+
+    <a class="header__logo-image_wrapper" target="_self" href="/conseiller/groupe-wolf-achard.html">
+        <img class="logo__image-tablet" src="/content/dam/fbngp/logos/groupe-wolf-achard/logo-cp-groupe-wolf-achard-M.svg" alt="Logo Groupe Wolf Achard"/>
+    </a>
+
+                        </div>
+                    </div>
+                    <div class="header__items_container">
+                        <div class="header__items_container--inner">
+                            <ul>
+                                
+                                <li class="header__links_item header__list-item--mobile header__list-item--mobile-home">
+                                    <a href="/conseiller/groupe-wolf-achard.html">Groupe Wolf Achard</a>
+                                </li>
+
+                                
+                                    <li class="header__links_item nav_item">
+                                        <a href="/conseiller/groupe-wolf-achard/notre-equipe.html" target="_self">Notre équipe</a>
+                                    </li>
+                                
+                                    <li class="header__links_item nav_item">
+                                        <a href="/conseiller/groupe-wolf-achard/nos-services.html" target="_self">Nos services</a>
+                                    </li>
+                                
+                                    <li class="header__links_item nav_item">
+                                        <a href="/conseiller/groupe-wolf-achard/nouvelles-articles.html" target="_self">Nouvelles et articles</a>
+                                    </li>
+                                
+                                    <li class="header__links_item nav_item">
+                                        <a href="/conseiller/groupe-wolf-achard/notre-firme.html" target="_self">Notre firme</a>
+                                    </li>
+                                
+                                
+                                    <li class="header__links_item header__list-item--mobile">
+                                        
+                                        <a class="header__items_link--mobile style3" href="/conseiller/groupe-wolf-achard/nous-joindre.html" target="_self">Nous joindre</a>
+                                    </li>
+                                
+                                
+                                    
+                                    <li class="header__links_item header__list-item--mobile">
+                                        <a class="header__lang--mobile" href="https://www.nbfwm.ca/advisor/wolf-archard-group/news-articles.html" target="_self">English</a>
+                                    </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    
+    
+
+</div>
+
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid microsite-banner aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid microsite-banner aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="teaser aem-GridColumn aem-GridColumn--default--12">
+
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/teaser/clientlib.min.2a8bf729728ac71c4139af1e8f923a85.css" type="text/css">
+
+
+
+
+<div id="teaser-45d80a7d12" class="cmp-teaser">
+    
+    <div class="cmp-teaser__image">
+<div data-cmp-is="image" data-cmp-lazy data-cmp-lazythreshold="0" data-cmp-src="/conseiller/groupe-wolf-achard/nouvelles-articles/_jcr_content/root/responsivegrid_528981803/responsivegrid/teaser.coreimg.100{.width}.jpeg/1728066875530/ban-page-nouvelles-articles-groupe-wolf-achard-lg.jpeg" data-cmp-widths="767,991,1199,2000" data-asset="/content/dam/fbngp/microsites/groupe-wolf-achard/bannieres/nouvelles-articles/ban-page-nouvelles-articles-groupe-wolf-achard-lg.jpg" id="image-45d80a7d12" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        <noscript data-cmp-hook-image="noscript">
+            
+            <img src="/conseiller/groupe-wolf-achard/nouvelles-articles/_jcr_content/root/responsivegrid_528981803/responsivegrid/teaser.coreimg.jpeg/1728066875530/ban-page-nouvelles-articles-groupe-wolf-achard-lg.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt/>
+            
+        </noscript>
+    
+    
+    
+</div>
+
+    
+
+</div>
+
+    <div class="cmp-teaser__content">
+        
+    
+
+        
+    <h1 class="cmp-teaser__title">
+        Nouvelles et articles
+    </h1>
+
+        
+    
+
+        
+    
+
+    </div>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    
+    
+</div>
+</div>
+<div class="responsivegrid bnc-container margin_top_2_per aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 ">
+    
+    <div class="title display-none aem-GridColumn aem-GridColumn--default--12">
+
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/title/clientlib.min.60c616f6d42d7869b8a5943fbf3fc194.css" type="text/css">
+
+
+
+
+<div id="title-f4e1bbfc15" class="cmp-title">
+    <h2 class="cmp-title__text">Nouvelles et articles</h2>
+</div>
+
+    
+
+</div>
+<div class="text aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/text/clientlib.min.771beae701bf79d068035f58f7ca4842.css" type="text/css">
+<script src="/etc.clientlibs/web-sites-toolkit/components/content/text/clientlib.min.e608268427093228dec948a90f1526fd.js"></script>
+
+
+
+
+
+
+    
+</div>
+<div class="bncButton button aem-GridColumn aem-GridColumn--default--12">
+
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/bncButton/clientlib.min.ff27e95926e61a9d67279e67e1ea9cd6.css" type="text/css">
+
+
+
+
+<button type="button" id="bncButton-3fa08faa37" class="cmp-button center" target="self">
+    
+    
+
+    
+</button></div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid bnc-container aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid bnc-container margin_top_2_per aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title display-none aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-8633cefb7a" class="cmp-title">
+    <h2 class="cmp-title__text">Nouvelles et articles</h2>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid bnc-container layout-container-gutter aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title display-none aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-d82051040b" class="cmp-title">
+    <h2 class="cmp-title__text">Nouvelles et articles</h2>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="experiencefragment aem-GridColumn aem-GridColumn--default--12">
+
+    
+    
+
+    
+
+
+
+<div class="xf-content-height">
+    
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid bnc-container aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="experiencefragment aem-GridColumn aem-GridColumn--default--12">
+
+    
+    
+
+    
+
+
+
+<div class="xf-content-height">
+    
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid bnc-container aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+<div id="economique" class="cmp-title">
+    <h2 class="cmp-title__text">Actualités politiques de Trump</h2>
+</div>
+
+    
+
+</div>
+<div class="responsivegrid layout-container-gutter layout_equal_height aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid layout-container-gutter padding_bottom_20 layout_equal_height aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid padding_bottom_20 margin_top_40_mobile aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--default--4 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--4 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--4 aem-GridColumn aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/droit-douane-trump-fr/master/_jcr_content/root/responsivegrid_20180/responsivegrid_copy__945796453/responsivegrid_copy_/responsivegrid_copy/image.coreimg{.width}.jpeg/1752693024795/img-obbba-767x433.jpeg" data-asset="/content/dam/fbngp/img/droit-douane-trump/img-obbba-767x433.jpeg" data-title="Drapeau du Canada et des États-Unis ensemble" id="image-787b0c4ce4" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/droit-douane-trump-fr/master/_jcr_content/root/responsivegrid_20180/responsivegrid_copy__945796453/responsivegrid_copy_/responsivegrid_copy/image.coreimg.jpeg/1752693024795/img-obbba-767x433.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Drapeau du Canada et des États-Unis ensemble"/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid padding_10 aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--bootstrapxs--12 aem-Grid--default--4 aem-Grid--bootstrapsm--4 ">
+    
+    <div class="text aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+<div id="text-9a764cf52c" class="cmp-text">
+    <p>
+  <a href="/content/dam/fbngp/pdf/228-fbn-corpo-pager-one-big-beautiful-bill-fr.pdf" target="_blank">One Big Beautiful Bill Act (OBBBA) - Projet
+    d'article 899</a></p>
+
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--default--4 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--4 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/droit-douane-trump-fr/master/_jcr_content/root/responsivegrid_20180/responsivegrid_copy__945796453/responsivegrid_copy_/responsivegrid_copy_670306065/image_copy.coreimg{.width}.png/1752693011030/img-projet-loi-899-767x433.png" data-asset="/content/dam/fbngp/img/droit-douane-trump/img-projet-loi-899-767x433.png" data-title=" " id="image-d947ea1672" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/droit-douane-trump-fr/master/_jcr_content/root/responsivegrid_20180/responsivegrid_copy__945796453/responsivegrid_copy_/responsivegrid_copy_670306065/image_copy.coreimg.png/1752693011030/img-projet-loi-899-767x433.png" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid padding_10 aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--bootstrapxs--12 aem-Grid--default--4 aem-Grid--bootstrapsm--4 ">
+    
+    <div class="text aem-GridColumn--bootstrapsm--4 aem-GridColumn aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+<div id="text-cb03ef386e" class="cmp-text">
+    <p>
+  <a href="/content/dam/fbngp/pdf/226-fbn-corpo-pager-article-after-senate-bill-fr.pdf" target="_blank">Projet d’article 899 – Impacts potentiels sur les
+    investisseurs canadiens</a></p>
+
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid padding_bottom_20 aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--default--4 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--4 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--4 aem-GridColumn aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/droit-douane-trump-fr/master/_jcr_content/root/responsivegrid_20180/responsivegrid_copy__945796453/responsivegrid_copy_/responsivegrid/image_667662265.coreimg{.width}.jpeg/1752693092501/img-droit-de-douane-trump-767x433.jpeg" data-asset="/content/dam/fbngp/img/droit-douane-trump/img-droit-de-douane-trump-767x433.jpeg" data-title=" Drapeau américain qui survole un navire de conteneurs portuaires. " id="image-53b2dbe18e" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/droit-douane-trump-fr/master/_jcr_content/root/responsivegrid_20180/responsivegrid_copy__945796453/responsivegrid_copy_/responsivegrid/image_667662265.coreimg.jpeg/1752693092501/img-droit-de-douane-trump-767x433.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt=" Drapeau américain qui survole un navire de conteneurs portuaires. "/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid padding_10 aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--bootstrapxs--12 aem-Grid--default--4 aem-Grid--bootstrapsm--4 ">
+    
+    <div class="text aem-GridColumn--bootstrapsm--4 aem-GridColumn aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+<div id="text-16c571e333" class="cmp-text">
+    <p>
+  <a href="/content/dam/fbngp/pdf/faire-face-ensemble-aux-tarifs-douaniers-notre-engagement.pdf" target="_blank">Faire face ensemble aux tarifs douaniers – Notre engagement</a></p>
+
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="experiencefragment aem-GridColumn aem-GridColumn--default--12">
+
+    
+    
+
+    
+
+
+
+<div class="xf-content-height">
+    
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="plainhtmlcode aem-GridColumn aem-GridColumn--default--12">
+<div data-emptytext="HTML Component" class="cq-placeholder"></div>
+<link type="text/css" rel="stylesheet" href="/content/dam/css/patchBncResponsive.css"/>
+
+</div>
+<div class="responsivegrid bnc-container aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="spotlight" class="cmp-title">
+    <h2 class="cmp-title__text">Contenus en vedette</h2>
+</div>
+
+    
+
+</div>
+<div class="responsivegrid padding_right_10 padding_left_10 round_corner aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid layout-container-gutter padding_bottom_20 layout_equal_height aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid background_color_beige_50 padding_bottom_20 margin_top_40_mobile aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--default--4 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--4 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/suggestions-lecture-fr/master/_jcr_content/root/responsivegrid_20818/responsivegrid/responsivegrid_copy_/responsivegrid_copy/image_copy.coreimg{.width}.jpeg/1782844222889/img-article-july-article-fusions-acquisitions.jpeg" data-asset="/content/dam/fbngp/img/suggestions-lecture/2026/img-article-july-article-fusions-acquisitions.jpg" data-title="Photo d’une spécialiste de la Banque Nationale qui échange avec ses clients sur des stratégies de fusions et d’acquisitions créatrices de valeur pour leur entreprise" id="image-93206f4086" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/suggestions-lecture-fr/master/_jcr_content/root/responsivegrid_20818/responsivegrid/responsivegrid_copy_/responsivegrid_copy/image_copy.coreimg.jpeg/1782844222889/img-article-july-article-fusions-acquisitions.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Photo d’une spécialiste de la Banque Nationale qui échange avec ses clients sur des stratégies de fusions et d’acquisitions créatrices de valeur pour leur entreprise"/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid padding_10 aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--bootstrapxs--12 aem-Grid--default--4 aem-Grid--bootstrapsm--4 ">
+    
+    <div class="text aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+<div id="text-8fbe7bf7ca" class="cmp-text">
+    <p>
+  <a href="https://www.nbc.ca/fr/article/fusions-acquisitions-rigueur-commerciale.html?cid=nti_5NBGJA8LTAX21671" target="_blank">La rigueur commerciale dans les fusions et
+    acquisitions : les meilleures pratiques pour créer de la valeur</a></p>
+
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid background_color_beige_50 margin_top_40_mobile aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--default--4 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--4 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/suggestions-lecture-fr/master/_jcr_content/root/responsivegrid_20818/responsivegrid/responsivegrid_copy_/responsivegrid_copy_670306065/image_copy.coreimg{.width}.jpeg/1782844309015/img-article-july-article-maximiser-son-patrimoine.jpeg" data-asset="/content/dam/fbngp/img/suggestions-lecture/2026/img-article-july-article-maximiser-son-patrimoine.jpg" data-title="Une mère aide ses enfants à faire leurs devoirs à l’îlot de la cuisine." id="image-7f928c9ffd" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/suggestions-lecture-fr/master/_jcr_content/root/responsivegrid_20818/responsivegrid/responsivegrid_copy_/responsivegrid_copy_670306065/image_copy.coreimg.jpeg/1782844309015/img-article-july-article-maximiser-son-patrimoine.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Une mère aide ses enfants à faire leurs devoirs à l’îlot de la cuisine."/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid padding_10 aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--bootstrapxs--12 aem-Grid--default--4 aem-Grid--bootstrapsm--4 ">
+    
+    <div class="text aem-GridColumn--bootstrapsm--4 aem-GridColumn aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+<div id="text-637fe5765e" class="cmp-text">
+    <p>
+  <a href="https://www.bnc.ca/particuliers/conseils/impots-revenus/gerer-son-patrimoine-par-ou-commencer.html?cid=nti_DFMJWWP7ZXN21672" target="_blank">8 conseils pour bien gérer votre patrimoine familial</a></p>
+
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid background_color_beige_50 padding_bottom_20 aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--default--4 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--4 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/suggestions-lecture-fr/master/_jcr_content/root/responsivegrid_20818/responsivegrid/responsivegrid_copy_/responsivegrid/image.coreimg{.width}.jpeg/1782844361588/img-article-july-article-pension-individuelle.jpeg" data-asset="/content/dam/fbngp/img/suggestions-lecture/2026/img-article-july-article-pension-individuelle.jpg" data-title="Une femme asiatique âgée travaille à domicile sur un ordinateur portable." id="image-fefc015dfd" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/suggestions-lecture-fr/master/_jcr_content/root/responsivegrid_20818/responsivegrid/responsivegrid_copy_/responsivegrid/image.coreimg.jpeg/1782844361588/img-article-july-article-pension-individuelle.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Une femme asiatique âgée travaille à domicile sur un ordinateur portable."/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid padding_10 aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--bootstrapxs--12 aem-Grid--default--4 aem-Grid--bootstrapsm--4 ">
+    
+    <div class="text aem-GridColumn--bootstrapsm--4 aem-GridColumn aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+<div id="text-9e09654af0" class="cmp-text">
+    <p>
+  <a href="https://www.bnc.ca/particuliers/conseils/epargne-placements/comprendre-le-regime-de-retraite-individuel.html?cid=nti_MTJE0ZLNX7F21673" target="_blank">Tout savoir sur le régime de retraite individuel</a></p>
+
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid padding_10 aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--bootstrapxs--12 aem-Grid--default--4 aem-Grid--bootstrapsm--4 ">
+    
+    
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="title aem-GridColumn aem-GridColumn--default--12">
+<div id="economic" class="cmp-title">
+    <h2 class="cmp-title__text">Actualités économiques</h2>
+</div>
+
+    
+
+</div>
+<div class="responsivegrid layout-container-gutter padding_bottom_20 layout_equal_height aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid margin_top_20_mobile aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--default--6 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="plainhtmlcode aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+<div data-emptytext="HTML Component" class="cq-placeholder"></div>
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'>
+
+<iframe src="https://www.youtube-nocookie.com/embed/B4Vb-32oER8" aria-label="Impact économique - Le dividende de paix s’estompe"></iframe></div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--bootstrapxs--12 aem-Grid--default--6 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-9a5bd27432" class="cmp-title">
+    <h3 class="cmp-title__text">Impact économique</h3>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="text aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="text-5b369977bd" class="cmp-text cmp-text-v2">
+    <p>Afin de vous éclairer et de stimuler votre réflexion face au contexte
+  actuel, Stéfane Marion et Nancy Paquet se penchent sur l’actualité
+  économique et vous partagent leurs perspectives via nos vidéos
+  informatives mensuelles.</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid padding_top_5 aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="bncButton button bt_cta_niveau2 aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<a id="bncButton-59d2d3d611" class="cmp-button left" href="https://www.bnc.ca/particuliers/conseils/impact-economique.html" target="_blank">
+    
+    
+
+    <span class="cmp-button__text">Visionnez les éditions précédentes</span>
+</a></div>
+
+    
+</div>
+</div>
+<div class="responsivegrid padding_top_10 aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="accordion panelcontainer aem-GridColumn aem-GridColumn--default--12">
+
+    
+<script src="/etc.clientlibs/core/wcm/components/commons/site/clientlibs/container.min.0a6aff292f5cc42142779cde92054524.js"></script>
+
+
+
+
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/accordion/clientlibs/site.min.f6c1348a612942645a5181a642bcadb4.css" type="text/css">
+
+
+
+
+
+<div id="impact-video" class="cmp-accordion" data-cmp-is="accordion" data-placeholder-text="faux">
+    <div class="cmp-accordion__item" data-cmp-hook-accordion="item" id="impact-video-item-0cb6cce144">
+        <h3 class="cmp-accordion__header">
+            <button id="impact-video-item-0cb6cce144-button" class="cmp-accordion__button" aria-controls="impact-video-item-0cb6cce144-panel" data-cmp-hook-accordion="button">
+                <span class="cmp-accordion__title">Vidéo Impact économique transcription</span>
+                <span class="cmp-accordion__icon"></span>
+            </button>
+        </h3>
+        <div data-cmp-hook-accordion="panel" id="impact-video-item-0cb6cce144-panel" class="cmp-accordion__panel cmp-accordion__panel--hidden" role="region" aria-labelledby="impact-video-item-0cb6cce144-button"><div class="responsivegrid">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="text aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="text-0ec1a3480f" class="cmp-text cmp-text-v2">
+    <p>Bonjour à tous, nous sommes mercredi le 15 juillet 2026. Mon cher
+  Stéfane, un plaisir de te recevoir. Alors dis donc, est-ce que le
+  marché boursier commence à s'essouffler ?</p>
+ <p>Si je te présente le graphique Nancy, tu pourrais voir que il
+  semblerait que oui. Donc le dernier sommet du marché boursier c'est
+  début juin donc on perçoit un certain essoufflement t'as absolument raison.</p>
+ <p>Aïe Aïe Aïe. Et donc ça c'est lié entre autres à ce qui se passe
+  macroéconomique bien entendu.</p>
+ <p>Ouais donc il y a la canicule, puis en plus il fait plus chaud dans
+  le détroit d'Ormuz, ce qui fait en sorte que le prix de l'énergie est
+  en hausse. Puis remarque que au niveau du prix du baril de pétrole on
+  est allé au-dessus de 100 $ sur le prix du Brent, mais là on a baissé
+  beaucoup. Puis avec ce qui se passe dans le détroit d'Ormuz, ça
+  remonte de façon quand même importante au cours des dernières semaines.</p>
+ <p>Tout à fait. Puis on voit déjà ce matin aussi là qu'il y avait
+  encore certains bombardements. Donc on n'aura pas une réponse
+  aujourd'hui sur est-ce que ça va réouvrir ou pas ?</p>
+ <p>La certitude qu'on a c'est que le détroit d'Ormuz, nonobstant les
+  dire des politiciens, mais il est pas ouvert. Puis ce que ça fait
+  Nancy, c'est que il y a un impact sur le prix du baril de pétrole.
+  Mais il y a plus que ça dans le dernier mois parce qu'il y a aussi une
+  autre guerre qui se déroule ailleurs en Europe en particulier, où là
+  il y a des destructions d'infrastructures, de raffinerie de pétrole
+  auxquelles on assiste, de sorte que ça a amené la Russie même à
+  interdire les exportations de diesel autour au niveau mondial. Puis ça
+  c'est un fournisseur à peu près 11 %. Donc j'ai le pétrole brut qui
+  est impacté. Puis au niveau des produits raffinés, de la destruction
+  des capacités de raffinage, elle est au niveau mondial présentement.
+  Ce qui fait en sorte que les coûts de raffinage ont explosé à un
+  niveau inédit. Nancy, on surpasse même ce qu'on avait vu en 2022.</p>
+ <p>Mon Dieu, alors c'est sûr que ça a un impact à la pompe ?</p>
+ <p>Ben c'est ça, parce que là tu pourrais dire mais non mais là le
+  pétrole il est pas à 100 $, pourquoi le prix de l'essence va remonter
+  à un niveau record ? Ben c'est à cause de ce qui se passe au niveau du
+  raffinage. Puis remarque, le prix de l'essence ou du diesel est en
+  hausse de plus de 45 %. Donc il y a le prix du brut, mais il y a le
+  prix des produits raffinés. Puis en bout de ligne l'économie
+  fonctionne avec des produits raffinés non pas le brut donc c'est pour
+  ça qu'il faut être prudent pour les prochains mois.</p>
+ <p>Ouais tout à fait. Et quelles sont nos prévisions de retour à la
+  normale dans le détroit d'Ormuz ?</p>
+ <p>Bien elles sont pas très intéressantes je dois t'avouer parce que si
+  tu regardes au niveau des marchés, genre la firme Polymarket où les
+  gens peuvent s'exprimer sur leur vision de réouverture ou pas. Écoute,
+  c'est tout nouveau qu'on utilise ça Nancy. Mais bon les probabilités
+  de réouverture en 31 juillet 2 % d'ici septembre 27 % ça va faire 6
+  mois en septembre que le détroit d'Ormuz est impacté négativement,
+  donc ta chaîne d'approvisionnement elle va s'en ressentir. Puis on
+  voit pas pour l'instant de capacité de réouvrir le détroit d'Ormuz
+  d'ici la fin de l'année donc il est faux de penser qu'il y aura pas
+  des ramifications sur la chaîne d'approvisionnement au cours des
+  prochaines semaines.</p>
+ <p>Ben justement parce que même si on rouvrait le 31 décembre, le
+  lendemain, tout ne se retrouve pas dans nos paniers d'épicerie ou à la
+  pompe dans nos marchés mondiaux.</p>
+ <p>Ben t'as raison, faut reconstituer les inventaires de tout ça. Fait
+  que ce que ça veut dire, c'est que pour l'instant, c'est que les
+  pressions sur des chaînes d'approvisionnement mondiales sont à des
+  niveaux qu'on n'a pas vu depuis la récession COVID. Historiquement
+  Nancy ce que ça veut dire, c'est que tu peux avoir des surprises
+  d'inflation à la hausse au cours des prochains mois. Bon je sais que
+  le rapport d'inflation aux États-Unis semblait pas pointé vers ça,
+  mais l'IPC c'est une façon de mesurer l'inflation. Après il y a ce qui
+  se passera au niveau des coûts de production au niveau des
+  entreprises, puis c'est là où ça pourrait augmenter au cours des
+  prochains mois. Donc faut pas être complaisant. On doit composer avec
+  cette incertitude là qui devrait perdurer pour encore plusieurs semaines.</p>
+ <p>Et malgré tout ça toute cette incertitude dont on parle depuis qu'on
+  a commencé notre conversation les marchés boursiers sont encore, les
+  attentes des marchés boursiers sont encore à des sommets.</p>
+ <p>T'as raison, fait que pourquoi on fait du sur place et que ça baisse
+  pas à la bourse et c'est seulement du sur place. Mais t'as raison,
+  c'est parce que les attentes de croissance des bénéfices par action au
+  niveau mondial presque toutes les régions du monde sont encore prévues
+  ou les anticipations c'est encore pour des des croissances des
+  bénéfices de plus de 20 %, 20 % ou plus dans presque toutes les
+  régions du monde. Donc tu vas me dire Ouais c'est pas fait partout
+  Stéfane c'est vrai que l'Europe puis le Japon c'est un peu plus faible.</p>
+ <p>Mais t'as aucun négatif ?</p>
+ <p>Non.</p>
+ <p>C'est déjà assez surprenant.</p>
+ <p>C'est du 2 chiffres, ce qui serait exceptionnel dans le contexte
+  actuel. Donc pour la bourse, on va si tu veux carburer, si tu
+  m'excuses d'utiliser l'expression, on va carburer à la saison des
+  bénéfices qui est à nos portes aux États-Unis, mais ce qui se produira
+  au cours des prochains mois, moi je pense que on peut avoir des
+  surprises qui pourraient être un peu plus négatives en 3e et 4e
+  trimestre. 2e trimestre, on sait déjà qu'il démarre quand même bien.</p>
+ <p>Oui.</p>
+ <p>Mais 3e, 4e trimestre si ma chaîne d'approvisionnement demeure
+  bouchée ou bloquée.</p>
+ <p>Ça va avoir un impact potentiel.</p>
+ <p>Ouais.</p>
+ <p>Et ce matin, nouvelles de la Banque du Canada, donc on ne bouge pas
+  les taux d'intérêt.</p>
+ <p>Bien tu m'en avais, tu m'avais questionné le mois passé, je disais
+  je pense pas, puis en fait ils ont passé leur tour, donc on demeure
+  dans une structure au Canada où tu sais la zone euro ils ont monté
+  leur taux là il y a à peine un mois. Donc au Canada on demeure dans
+  une juridiction où les taux d'intérêt demeurent relativement bas.</p>
+ <p>C'est intéressant. Puis t'as une autre bonne nouvelle au niveau de l'emploi.</p>
+ <p>Mais j'en ai 2, avant ça oublie pas la Banque du Canada a révisé à
+  la hausse sa prévision pour le 2e trimestre.</p>
+ <p>T'as raison.</p>
+ <p>Ils sont à 2,5 %. Donc tu sais les gens avaient beaucoup parlé des 2
+  trimestres négatifs donc il y a eu un rebond.</p>
+ <p>Tu nous disais que c'était pas une vraie récession malgré les 2 trimestres.</p>
+ <p>Puis que le rebond semblait se propager ou se confirmer pour le 3e
+  trimestre ce qui est fait. Mais l'autre chose t'as absolument raison.
+  Ce qui est important, c'est que c'est vrai que la population est en
+  baisse au Canada, mais l'immigration permanente continue d'entrer au
+  Canada. Puis c'est important parce que ça, c'est surtout les gens de
+  25 à 54 ans qui ont une incidence importante sur le site de crédit.
+  Puis sache Nancy que les travailleurs ou le nombre de travailleurs de
+  25 à 54 ans a augmenté de 88 000 au cours des 2 derniers mois. Oui,
+  c'était moche les mois précédents, mais on a fait un rebond important,
+  puis on attend un nouveau record au Canada.</p>
+ <p>Puis effectivement, ce sont ceux qui vont consommer davantage, les
+  instruments de crédit de consommation.</p>
+ <p>C'est vrai que c'est dommage pour les 15 à 24 ans, les étudiants
+  étrangers qui sont frappés par la politique d'immigration. Mais encore
+  une fois, l'immigration permanente, elle continue de demeurer positive
+  au Canada, même si la population chute à cause des étudiants
+  étrangers, les travailleurs temporaires pour la plupart, mais pour
+  l'impact sur l'économie, les 25 à 54 ans, ça c'est important Nancy,
+  donc ça veut dire que ça confirme tes chances d'avoir une meilleure
+  performance économique au Canada en 2e moitié de l'année.</p>
+ <p>Puis on se donne aussi les moyens de pouvoir assurer notre
+  croissance au Canada.</p>
+ <p>Ben c'est important. Nancy, c'est que la grosse annonce lapsus,
+  grosse annonce avec au niveau du fédéral pipeline entre l'Alberta et
+  la Colombie britannique pour se donner de nouveaux débouchés au niveau
+  de la production totale de pétrole, qui devrait passer bientôt à 6 000
+  000 de barils par jour. Le pipeline n'est pas construit, il y a déjà
+  des des optimisations qui étaient en cours Nancy, mais c'est</p>
+ <p>important parce que c'est aussi un effet levier pour l'économie,
+  diversification mais autre chose, c'est que c'est aussi un effet
+  levier pour des négociations avec la, tu m'avais expliqué là au niveau
+  du CUSMA, je m'excuse, j'ai oublié la traduction française, là.</p>
+ <p>Le Oh mon Dieu.</p>
+ <p>L'accord de libre échange Canada-États-Unis, puis le Mexique donc on
+  pourrait peut être entériner une une réouverture de l'accord ou une
+  signature positive d'ici les prochains mois, dans un contexte où le
+  pétrole est un atout névralgique pour, le pétrole canadien est un
+  atout et névralgique pour les Américains. Donc j'ai toujours bon
+  espoir que des nouvelles positives à ce niveau-là au cours des
+  prochaines semaines, même si les Américains l'ont pas entériné début juillet.</p>
+ <p>Ouais puis de toute façon on sait que c'est pas parce qu'il est pas
+  entériné que tout tombe, tu nous avais expliqué à la dernière
+  rencontre aussi, donc business as usual pour l'instant tu nous donnes
+  la belle nouvelle que t'as espoir que ça va se signer.</p>
+ <p>C'est reconduit, c'est juste que j'ai mon incertitude par rapport à
+  est-ce que je me lance dans un investissement à long terme si j'ai pas
+  accès au marché américain. Mais encore une fois, je pense que les
+  nouvelles en provenance d'Ottawa demeurent positives. Oubliez pas, on
+  a un symposium sur l'investissement au Canada d'ici Septembre. Puis je
+  pense que il y aurait lieu de penser qu'on aura de meilleures
+  nouvelles avant que le symposium se réalise, puis qu'il vienne au
+  Canada là.</p>
+ <p>Merci Stéfane. Alors malgré toute cette incertitude macroéconomique,
+  tu nous a communiqué quand même de bons messages positifs. C'est
+  l'été, on doit quand même se reposer. Donc malgré tout ça, continuez à
+  faire confiance à votre investissement, continuez de faire confiance à
+  votre conseiller et on vous souhaite de bonnes vacances pour ceux qui
+  en prennent. Et on se revoit au mois d'août. Merci Stéfane.</p>
+ <p>Merci.</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+</div>
+    </div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid margin_bottom_20 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--default--6 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="plainhtmlcode aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+<div data-emptytext="HTML Component" class="cq-placeholder"></div>
+<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'>
+
+<iframe src="https://www.youtube-nocookie.com/embed/ui6YnV1R15o" aria-label="5 4 3 | L’économie pourrait-elle encore surchauffer?"></iframe></div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--bootstrapxs--12 aem-Grid--default--6 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-288d19b729" class="cmp-title">
+    <h3 class="cmp-title__text">5 • 4 • 3 Perspectives de marché</h3>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="text aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="text-3b09bfd90d" class="cmp-text cmp-text-v2">
+    <p>5 minutes, 4 graphiques, 3 points clés à retenir… Découvrez « 5 • 4 •
+  3 », un nouveau regard trimestriel ciblé sur les marchés, l’économie
+  et l’investissement avec notre expert Louis Lajoie, du Bureau du chef
+  des placements de la Banque Nationale Investissements.</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid padding_top_10 aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="accordion panelcontainer aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+    
+
+
+
+
+
+<div id="impact-video" class="cmp-accordion" data-cmp-is="accordion" data-placeholder-text="faux">
+    <div class="cmp-accordion__item" data-cmp-hook-accordion="item" id="impact-video-item-05da101524">
+        <h3 class="cmp-accordion__header">
+            <button id="impact-video-item-05da101524-button" class="cmp-accordion__button" aria-controls="impact-video-item-05da101524-panel" data-cmp-hook-accordion="button">
+                <span class="cmp-accordion__title">5 • 4 • 3 Perspectives de marché transcription</span>
+                <span class="cmp-accordion__icon"></span>
+            </button>
+        </h3>
+        <div data-cmp-hook-accordion="panel" id="impact-video-item-05da101524-panel" class="cmp-accordion__panel cmp-accordion__panel--hidden" role="region" aria-labelledby="impact-video-item-05da101524-button"><div class="text">
+
+    
+
+
+
+
+<div id="text-407b4b8c94" class="cmp-text cmp-text-v2">
+    <p>Bonjour tout le monde. Aujourd'hui, 12 juin, je vais rapidement
+  revenir sur le contexte de marché, ce qui rassure, ce qui inquiète et
+  ce qu'on va suivre dans les prochains mois.</p>
+ <p>Mais avant, permettez-moi de revenir trois mois en arrière, lors de
+  l'enregistrement de la dernière capsule, qui était au tout début de ce
+  qui semblait être l'une des plus importantes crises énergétiques de
+  l'histoire moderne. À l'époque, il y avait essentiellement deux
+  narratifs ambiants : soit on se dirigeait vers 200 $ le baril de
+  pétrole, auquel cas il y aurait une récession mondiale, soit, à
+  l'inverse., on aurait une résolution rapide qui permettrait aux prix
+  de l'énergie de reculer. Or, ce qui s'est produit est ultimement
+  quelque chose entre les deux : en l'absence de résolution formelle,
+  les marchés du pétrole ont quand même réussi à trouver un certain
+  équilibre grâce, entre autres, à l'usage plus important de certains
+  pipelines, au fait que les blocus sont en partie perméables, bien que
+  légers. Mais surtout grâce à l'usage très important des réserves
+  stratégiques mondiales, ce qui, par définition, veut dire que cet
+  équilibre est fragile et temporaire. Il faudra donc quand même voir
+  très bientôt une reprise plus substantielle du trafic maritime dans le
+  détroit d’Ormuz.</p>
+ <p>Cela étant dit, ce qui est clair, c'est que dans tous les scénarios,
+  les prix de l'énergie ne reviendront pas à leurs creux précédents, ne
+  serait-ce qu'en raison du besoin de renflouer les réserves
+  stratégiques de pétrole qui ont été utilisées dernièrement. Cela étant
+  dit, la bonne nouvelle, c'est qu'on constate que cette hausse des prix
+  de l'énergie n'est pas suffisante pour empêcher les marchés boursiers
+  de renouer avec une tendance haussière, ce qui a effectivement été le
+  cas au cours du deuxième trimestre. Non pas seulement à cause d'un
+  quelconque espoir tourné vers l'avenir, mais vraiment en raison d'une
+  croissance substantielle des profits, qui est en fait supérieure à la
+  hausse des cours boursiers eux-mêmes depuis le début de l'année dans
+  l'ensemble des régions boursières. Évidemment, cela s'explique en
+  partie par des profits spectaculaires pour certains titres – les
+  manufacturiers de semi-conducteurs, entre autres, dans les marchés
+  émergents, certains ont un carnet de commandes qui déborde en ce moment.</p>
+ <p>Mais il y a quand même une résilience globale dans l'économie, si
+  l'on se fie, par exemple, à l'indice de surprise économique aux
+  États-Unis, qui est à son plus fort depuis 2024. C'est aussi une bonne
+  nouvelle, mais cela soulève quand même des questions sur la
+  trajectoire future de l'inflation, parce qu'on sait que l'inflation
+  réagit à retardement à l'activité économique. On en a eu un exemple
+  tout à fait extrême en 2021-2022. Cela n'a pas été le cas dans les
+  deux dernières années, probablement parce que le marché de l'emploi, à
+  cette période-là, était plus près d'un équilibre, et cela demeure
+  encore le cas. C'est pourquoi, pour nous, une surchauffe est davantage
+  un risque qu'une vue. Il faut quand même suivre cela de près.</p>
+ <p>Et ce que les marchés financiers vont suivre de près, très
+  clairement, c'est ce que la Réserve fédérale américaine fera dans ce
+  contexte. Pour la première fois en huit ans, on fera face à un nouveau
+  président de la Réserve fédérale, M. Warsh. Il y a trois mois, les
+  marchés se disaient qu'il pourrait probablement baisser les taux
+  d'intérêt. Mais dernièrement, ce sont plutôt des hausses de taux
+  d'intérêt qui sont escomptées par les marchés. Ce qui, en soi, ne
+  serait pas nécessairement catastrophique dans la mesure où on
+  parlerait quand même d'une politique monétaire largement située dans
+  une fourchette neutre, ce qui est mieux qu'une politique trop
+  accommodante peut-être qui, ultimement, ne créerait que de plus gros
+  problèmes d'inflation. Mais si, éventuellement, on se met à parler de
+  politique restrictive – ce n'est pas le cas –, mais si cela le
+  devient, ce serait une raison d'être un peu plus inquiet, probablement
+  avec plus de volatilité sur les marchés. C'est pourquoi le discours de
+  M. Warsh sera très pertinent à suivre dans les prochains mois.</p>
+ <p>Pour résumer les choses, encore une fois, le pire a été évité et
+  devrait continuer de l'être, même si on ne s'attend pas du tout à un
+  retour à une stabilité parfaite dans le golfe Persique. Il faudra donc
+  continuer de suivre l'évolution de l'inflation, qui ne semble
+  visiblement pas se diriger vers un retour à la cible de 2 %, que l'on
+  n'a pas vue depuis un peu plus de cinq ans maintenant. Il faudra donc
+  voir comment M. Warsh naviguera tout cela. Mais, dans l'ensemble, on
+  ne s'attend pas à un changement drastique dans les tendances de
+  marché, qui sont visiblement favorables aux marchés boursiers. Il faut
+  toutefois rester vigilant, parce que la réalité, c'est que l'éventail
+  des risques et de l'incertitude demeurent encore exceptionnellement larges.</p>
+ <p>C'est tout pour aujourd'hui. Merci d'avoir été à l'écoute. On se
+  reparle en septembre. D'ici là, bon été à tout le monde.</p>
+
+</div>
+
+    
+</div>
+</div>
+    </div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="experiencefragment aem-GridColumn aem-GridColumn--default--12">
+
+    
+    
+
+    
+
+
+
+<div class="xf-content-height">
+    
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid background_color_beige aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid bnc-container aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="finance" class="cmp-title">
+    <h2 class="cmp-title__text">Les finances en lumière</h2>
+</div>
+
+    
+
+</div>
+<div class="responsivegrid layout-container-gutter padding_bottom_5per padding_bottom_40 layout_equal_height aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid background_color_secondary_white aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--default--4 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--4 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/finance-lumiere-fr/master/_jcr_content/root/responsivegrid/responsivegrid_10711/responsivegrid_copy_/responsivegrid/image.coreimg{.width}.jpeg/1712073130800/invest-in-you.jpeg" data-asset="/content/dam/fbngp/img/invest-in-you.jpg" data-title="Défi oser s&#39;investir avec l&#39;ambassadrice Kathy Marquis en vedette." id="image-1d02d08ce7" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/finance-lumiere-fr/master/_jcr_content/root/responsivegrid/responsivegrid_10711/responsivegrid_copy_/responsivegrid/image.coreimg.jpeg/1712073130800/invest-in-you.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Défi oser s&#39;investir avec l&#39;ambassadrice Kathy Marquis en vedette."/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid padding_10 aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--bootstrapxs--12 aem-Grid--default--4 aem-Grid--bootstrapsm--4 ">
+    
+    <div class="text aem-GridColumn--bootstrapsm--4 aem-GridColumn aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+<div id="text-33fd4d48aa" class="cmp-text">
+    <p>
+  <a href="https://www.bnc.ca/particuliers/choisir-banque-nationale/femmes.html#video" target="_blank">Le défi Oser s'investir</a><br /> Regardez ces
+  capsules vidéos et découvrez nos conseils et outils pratiques pour
+  vous accompagner dans chacun de vos moments de vie de femme.</p>
+
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid background_color_secondary_white margin_top_40_mobile aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--default--4 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--4 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/finance-lumiere-fr/master/_jcr_content/root/responsivegrid/responsivegrid_10711/responsivegrid_copy_/responsivegrid_copy/image_copy.coreimg{.width}.png/1678652842773/img-publications-financieres-revues-de-marche-740x489.png" data-asset="/content/dam/fbngp/microsites/edwards-knutson-wealth-advisors/page-content/img-publications-financieres-revues-de-marche-740x489.png" data-title="Deux femmes assises ensemble devant un ordinateur portable." id="image-f85b463acd" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/finance-lumiere-fr/master/_jcr_content/root/responsivegrid/responsivegrid_10711/responsivegrid_copy_/responsivegrid_copy/image_copy.coreimg.png/1678652842773/img-publications-financieres-revues-de-marche-740x489.png" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Deux femmes assises ensemble devant un ordinateur portable."/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid padding_10 aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--bootstrapxs--12 aem-Grid--default--4 aem-Grid--bootstrapsm--4 ">
+    
+    <div class="text aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+<div id="text-72307d36bf" class="cmp-text">
+    <p>
+  <a href="https://www.bnc.ca/particuliers/conseils/vision-leaders.html" target="_blank">Leadership d’opinion</a><br /> Plongez dans les
+  articles et les vidéos de nos experts qui redéfinissent les tendances
+  du secteur</p>
+
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid background_color_secondary_white margin_top_40_mobile aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--default--4 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--4 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/finance-lumiere-fr/master/_jcr_content/root/responsivegrid/responsivegrid_10711/responsivegrid_copy_/responsivegrid_copy_670306065/image_copy.coreimg{.width}.png/1678652833118/img-publications-financieres-rapports-mensuels-740x489.png" data-asset="/content/dam/fbngp/img/img-publications-financieres-rapports-mensuels-740x489.png" data-title="Une femme et un homme assis à un bureau examinent ensemble un gros document." id="image-b713a0a243" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/finance-lumiere-fr/master/_jcr_content/root/responsivegrid/responsivegrid_10711/responsivegrid_copy_/responsivegrid_copy_670306065/image_copy.coreimg.png/1678652833118/img-publications-financieres-rapports-mensuels-740x489.png" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Une femme et un homme assis à un bureau examinent ensemble un gros document."/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid padding_10 aem-GridColumn--bootstrapsm--4 aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--4 aem-Grid--bootstrapxs--12 aem-Grid--default--4 aem-Grid--bootstrapsm--4 ">
+    
+    <div class="text aem-GridColumn--bootstrapsm--4 aem-GridColumn aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--12">
+<div id="text-72b066f942" class="cmp-text">
+    <p>
+  <a href="https://www.bnc.ca/particuliers/epargne-placements.html">Épargne
+    et placements</a><br /> Découvrez nos options d'investissement qui
+  vous aideront à réaliser vos projets ou à faire face aux imprévus</p>
+
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid bnc-container aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid bnc-container aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+<div id="economique" class="cmp-title">
+    <h2 class="cmp-title__text">Analyses économiques</h2>
+</div>
+
+    
+
+</div>
+<div class="responsivegrid layout-container-gutter layout_equal_height aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid layout-container-gutter padding_top_10 aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid margin_bottom_20 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--default--6 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/quebec/nouvelles-et-articles-fr-master-quebec/master/_jcr_content/root/responsivegrid_20180/responsivegrid_20180/responsivegrid_copy__945796453/responsivegrid_copy/responsivegrid_73870_1388003755/image.coreimg{.width}.jpeg/1688052500149/img-article-weekly-economic-watch-768x433.jpeg" data-asset="/content/dam/fbngp/img/img-article-weekly-economic-watch-768x433.jpg" data-title="Une femme assise dans son salon, examinant les offres et les produits financiers." id="image-5424e48d7e" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/quebec/nouvelles-et-articles-fr-master-quebec/master/_jcr_content/root/responsivegrid_20180/responsivegrid_20180/responsivegrid_copy__945796453/responsivegrid_copy/responsivegrid_73870_1388003755/image.coreimg.jpeg/1688052500149/img-article-weekly-economic-watch-768x433.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Une femme assise dans son salon, examinant les offres et les produits financiers."/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--bootstrapxs--12 aem-Grid--default--6 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-18b244ad3e" class="cmp-title">
+    <h3 class="cmp-title__text">L&#39;Hebdo économique</h3>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="text aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="text-5a91f1152d" class="cmp-text cmp-text-v2">
+    <p>Cette publication vous tient au courant de l'évolution d'un large
+  éventail d'indicateurs économiques et financiers nord-américains,
+  provinciaux et mondiaux. Elle présente des sujets d'actualité
+  économique et financière, accompagnés d'un bref commentaire.</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="bncButton button bt_cta_niveau2 aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<a id="bncButton-2d1acd7ebd" class="cmp-button left" href="/content/dam/bnc/taux-analyses/analyse-eco/hebdo-economique.pdf" target="_blank">
+    
+    
+
+    <span class="cmp-button__text">Lire la dernière version</span>
+</a></div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid margin_bottom_20 margin_top_20_mobile aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--default--6 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/quebec/nouvelles-et-articles-fr-master-quebec/master/_jcr_content/root/responsivegrid_20180/responsivegrid_20180/responsivegrid_copy__945796453/responsivegrid_copy/responsivegrid_73870/image.coreimg{.width}.jpeg/1688052511542/img-article-monthly-vision.jpeg" data-asset="/content/dam/fbngp/img/img-article-monthly-vision.jpg" data-title="Un couple assis à la table de la salle à manger, regardant ensemble un ordinateur portable." id="image-f6268ea06d" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/quebec/nouvelles-et-articles-fr-master-quebec/master/_jcr_content/root/responsivegrid_20180/responsivegrid_20180/responsivegrid_copy__945796453/responsivegrid_copy/responsivegrid_73870/image.coreimg.jpeg/1688052511542/img-article-monthly-vision.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Un couple assis à la table de la salle à manger, regardant ensemble un ordinateur portable."/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--bootstrapxs--12 aem-Grid--default--6 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-481db60688" class="cmp-title">
+    <h3 class="cmp-title__text">Vision</h3>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="text aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="text-b8c0792884" class="cmp-text cmp-text-v2">
+    <p>Vous recherchez une analyse financière fiable ? Le groupe économie et
+  stratégie fournit un rapport détaillé sur les taux d'intérêt, les
+  obligations, le marché boursier et la stratégie de portefeuille.</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid padding_top_5 aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="bncButton button bt_cta_niveau2 aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<a id="bncButton-f5136d7ae2" class="cmp-button left" href="/content/dam/fbngp/pdf/mensuel-economique-vision.pdf" target="_blank">
+    
+    
+
+    <span class="cmp-button__text">Lire la dernière version</span>
+</a></div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid layout-container-gutter padding_top_10 aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid margin_bottom_20 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--default--6 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/quebec/nouvelles-et-articles-fr-master-quebec/master/_jcr_content/root/responsivegrid_20180/responsivegrid_20180/responsivegrid_copy__945796453/responsivegrid_copy_/responsivegrid_73870_1388003755/image.coreimg{.width}.jpeg/1688052846207/img-article-monthly-economic-monitor.jpeg" data-asset="/content/dam/fbngp/img/img-article-monthly-economic-monitor.jpg" data-title="Un homme assis à une table, écrivant sur un bloc note avec un ordinateur portable devant lui." id="image-bc6ba1584c" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/quebec/nouvelles-et-articles-fr-master-quebec/master/_jcr_content/root/responsivegrid_20180/responsivegrid_20180/responsivegrid_copy__945796453/responsivegrid_copy_/responsivegrid_73870_1388003755/image.coreimg.jpeg/1688052846207/img-article-monthly-economic-monitor.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Un homme assis à une table, écrivant sur un bloc note avec un ordinateur portable devant lui."/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--bootstrapxs--12 aem-Grid--default--6 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-3c40811ce5" class="cmp-title">
+    <h3 class="cmp-title__text">Le mensuel économique</h3>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="text aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="text-0e2bd21e7e" class="cmp-text cmp-text-v2">
+    <p>Explorez un aperçu régional avec nos rapports mensuels couvrant le
+  Canada, les États-Unis et le monde, chacun offrant des prévisions
+  adaptées aux perspectives économiques de sa région.</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="bncButton button bt_cta_niveau2 aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<a id="bncButton-38b926036b" class="cmp-button left" href="https://www.bnc.ca/a-propos-de-nous/nouvelles-medias/actualite-economique/analyses-economiques.html#economique" target="_blank">
+    
+    
+
+    <span class="cmp-button__text">Lire les dernières versions</span>
+</a></div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid margin_bottom_20 margin_top_20_mobile aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--default--6 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/quebec/nouvelles-et-articles-fr-master-quebec/master/_jcr_content/root/responsivegrid_20180/responsivegrid_20180/responsivegrid_copy__945796453/responsivegrid_copy_/responsivegrid_73870/image.coreimg{.width}.jpeg/1688052862995/img-article-monthly-equity-monitor.jpeg" data-asset="/content/dam/fbngp/img/img-article-monthly-equity-monitor.jpg" data-title="Une femme assise à un bureau surplombant une ville, travaillant sur une tablette avec deux autres ordinateurs derrière elle." id="image-016915f6c9" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/quebec/nouvelles-et-articles-fr-master-quebec/master/_jcr_content/root/responsivegrid_20180/responsivegrid_20180/responsivegrid_copy__945796453/responsivegrid_copy_/responsivegrid_73870/image.coreimg.jpeg/1688052862995/img-article-monthly-equity-monitor.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Une femme assise à un bureau surplombant une ville, travaillant sur une tablette avec deux autres ordinateurs derrière elle."/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--bootstrapxs--12 aem-Grid--default--6 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-afb65c49c1" class="cmp-title">
+    <h3 class="cmp-title__text">Le mensuel boursier</h3>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="text aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="text-cca2e200f9" class="cmp-text cmp-text-v2">
+    <p>Dans ce rapport mensuel, les experts de la Banque nationale résument
+  l'état actuel des marchés boursiers à l'échelle mondiale.</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid padding_top_5 aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="bncButton button bt_cta_niveau2 aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<a id="bncButton-fff2ca7b83" class="cmp-button left" href="/content/dam/bnc/taux-analyses/analyse-eco/mensuel/mensuel-boursier.pdf" target="_blank">
+    
+    
+
+    <span class="cmp-button__text">Lire la dernière version</span>
+</a></div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid layout-container-gutter layout_equal_height aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+<div id="investment" class="cmp-title">
+    <h2 class="cmp-title__text">Stratégie d&#39;investissement</h2>
+</div>
+
+    
+
+</div>
+<div class="responsivegrid layout-container-gutter padding_top_10 aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid margin_bottom_20 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--default--6 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/quebec/nouvelles-et-articles-fr-master-quebec/master/_jcr_content/root/responsivegrid_20180/responsivegrid_20180/responsivegrid_copy_/responsivegrid_copy_/responsivegrid_73870_1388003755/image.coreimg{.width}.jpeg/1690224740227/img-article-strategie-placement-fr-767x433.jpeg" data-asset="/content/dam/fbngp/img/img-article-strategie-placement-fr-767x433.jpg" data-title="Stratégie de placement brun verre bâtiment visuel." id="image-2ab88b8090" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/quebec/nouvelles-et-articles-fr-master-quebec/master/_jcr_content/root/responsivegrid_20180/responsivegrid_20180/responsivegrid_copy_/responsivegrid_copy_/responsivegrid_73870_1388003755/image.coreimg.jpeg/1690224740227/img-article-strategie-placement-fr-767x433.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Stratégie de placement brun verre bâtiment visuel."/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--bootstrapxs--12 aem-Grid--default--6 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-79225f34bf" class="cmp-title">
+    <h3 class="cmp-title__text">Stratégie de placement</h3>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="text aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="text-2eac215477" class="cmp-text cmp-text-v2">
+    <p>Cette publication trimestrielle vous informe de la conjoncture
+  économique mondiale, des recommandations de répartition d’actifs et
+  des prévisions économiques.</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="bncButton button bt_cta_niveau2 aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<a id="bncButton-ad53e5b67d" class="cmp-button left" href="/content/dam/fbngp/pdf/doc-strategie-placement.pdf" target="_blank">
+    
+    
+
+    <span class="cmp-button__text">Lire la dernière version</span>
+</a></div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid margin_bottom_20 margin_top_20_mobile aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--default--6 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/quebec/nouvelles-et-articles-fr-master-quebec/master/_jcr_content/root/responsivegrid_20180/responsivegrid_20180/responsivegrid_copy_/responsivegrid_copy_/responsivegrid_73870/image.coreimg{.width}.jpeg/1688053691605/img-article-asset-allocation-strategy.jpeg" data-asset="/content/dam/fbngp/img/img-article-asset-allocation-strategy.jpg" data-title="Une personne utilisant une calculatrice devant un bureau sur lequel sont posés de nombreux documents." id="image-2fede408ba" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/quebec/nouvelles-et-articles-fr-master-quebec/master/_jcr_content/root/responsivegrid_20180/responsivegrid_20180/responsivegrid_copy_/responsivegrid_copy_/responsivegrid_73870/image.coreimg.jpeg/1688053691605/img-article-asset-allocation-strategy.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Une personne utilisant une calculatrice devant un bureau sur lequel sont posés de nombreux documents."/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--bootstrapxs--12 aem-Grid--default--6 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-c17ead091c" class="cmp-title">
+    <h3 class="cmp-title__text">Stratégie de répartition de l&#39;actif</h3>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="text aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="text-ab8a657c2a" class="cmp-text cmp-text-v2">
+    <p>Qu'est-ce qui évolue sur les marchés financiers et quel est l'impact
+  sur vos placements ? Banque Nationale Investissements propose une
+  stratégie de portefeuille sur l'ensemble des classes d'actifs.</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid padding_top_5 aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="bncButton button bt_cta_niveau2 aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<a id="bncButton-54a9e88bd4" class="cmp-button left" href="/content/dam/bni/publication/strategie-repartition-actif.pdf" target="_blank">
+    
+    
+
+    <span class="cmp-button__text">Lire la dernière version</span>
+</a></div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="title aem-GridColumn aem-GridColumn--default--12">
+<div id="economique" class="cmp-title">
+    <h2 class="cmp-title__text">Budgets fédéral et provincial</h2>
+</div>
+
+    
+
+</div>
+<div class="responsivegrid layout-container-gutter padding_top_10 aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid margin_bottom_20 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--default--6 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/quebec/nouvelles-et-articles-fr-master-quebec/master/_jcr_content/root/responsivegrid_20180/responsivegrid_20180/responsivegrid_copy_/responsivegrid_copy__1365097074/responsivegrid_73870_1388003755/image.coreimg{.width}.jpeg/1688053918304/img-article-federal-budget.jpeg" data-asset="/content/dam/fbngp/img/img-article-federal-budget.jpg" data-title="Le drapeau canadien flotte au coucher du soleil et représente le budget fédéral." id="image-1f64f6400b" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/quebec/nouvelles-et-articles-fr-master-quebec/master/_jcr_content/root/responsivegrid_20180/responsivegrid_20180/responsivegrid_copy_/responsivegrid_copy__1365097074/responsivegrid_73870_1388003755/image.coreimg.jpeg/1688053918304/img-article-federal-budget.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Le drapeau canadien flotte au coucher du soleil et représente le budget fédéral."/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--bootstrapxs--12 aem-Grid--default--6 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-c4967e002f" class="cmp-title">
+    <h3 class="cmp-title__text">Budget fédéral</h3>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="text aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="text-5b345e804c" class="cmp-text cmp-text-v2">
+    <p>Découvrez comment le gouvernement canadien prévoit de mettre en œuvre
+  le programme économique annuel dans le budget fédéral de cette année.</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="bncButton button bt_cta_niveau2 aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<a id="bncButton-9cf532971d" class="cmp-button left" href="/content/dam/bnc/taux-analyses/analyse-eco/budget/budget-fed.pdf" target="_blank">
+    
+    
+
+    <span class="cmp-button__text">Consulter le budget</span>
+</a></div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid margin_bottom_20 margin_top_20_mobile aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--default--6 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/quebec/nouvelles-et-articles-fr-master-quebec/master/_jcr_content/root/responsivegrid_20180/responsivegrid_20180/responsivegrid_copy_/responsivegrid_copy__1365097074/responsivegrid_73870/image.coreimg{.width}.jpeg/1688053932913/img-article-provincial-budget.jpeg" data-asset="/content/dam/fbngp/img/img-article-provincial-budget.jpg" data-title="Trois personnes assises à une table examinent les documents d&#39;investissement de leurs clients." id="image-690cae97ec" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/quebec/nouvelles-et-articles-fr-master-quebec/master/_jcr_content/root/responsivegrid_20180/responsivegrid_20180/responsivegrid_copy_/responsivegrid_copy__1365097074/responsivegrid_73870/image.coreimg.jpeg/1688053932913/img-article-provincial-budget.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Trois personnes assises à une table examinent les documents d&#39;investissement de leurs clients."/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--bootstrapxs--12 aem-Grid--default--6 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-68cee20cde" class="cmp-title">
+    <h3 class="cmp-title__text">Budget du Québec</h3>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="text aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="text-256533647c" class="cmp-text cmp-text-v2">
+    <p>Nos experts font l'analyse du budget de votre province et les mises à
+  jour financières correspondantes.</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid padding_top_5 aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="bncButton button bt_cta_niveau2 aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<a id="bncButton-fcb496af1f" class="cmp-button left" href="/content/dam/bnc/taux-analyses/analyse-eco/budget/budget-quebec.pdf" target="_blank">
+    
+    
+
+    <span class="cmp-button__text">Consulter le budget</span>
+</a></div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="experiencefragment aem-GridColumn aem-GridColumn--default--12">
+
+    
+    
+
+    
+
+
+
+<div class="xf-content-height">
+    
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid bnc-container aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+<div id="guide" class="cmp-title">
+    <h2 class="cmp-title__text">Guides et outils</h2>
+</div>
+
+    
+
+</div>
+<div class="responsivegrid layout-container-gutter layout_equal_height aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid layout-container-gutter padding_top_10 aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid margin_bottom_20 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--default--6 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/guides-outils-quebec-fr/master/_jcr_content/root/responsivegrid_20180/responsivegrid_copy__1462739345/responsivegrid_copy__686903710/responsivegrid_73870_1388003755/image.coreimg{.width}.jpeg/1774030775608/img-article-flip-book-trimestriel-v2-fr.jpeg" data-asset="/content/dam/fbngp/img/img-article-flip-book-trimestriel-v2-fr.jpg" data-title="Mythes et réalités par Banque Nationale Investissements." id="image-cc0bdb61f9" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/guides-outils-quebec-fr/master/_jcr_content/root/responsivegrid_20180/responsivegrid_copy__1462739345/responsivegrid_copy__686903710/responsivegrid_73870_1388003755/image.coreimg.jpeg/1774030775608/img-article-flip-book-trimestriel-v2-fr.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Mythes et réalités par Banque Nationale Investissements."/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--bootstrapxs--12 aem-Grid--default--6 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-9d6c9e7a0b" class="cmp-title">
+    <h3 class="cmp-title__text">Mythes et réalités</h3>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="text aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="text-e220f89eba" class="cmp-text cmp-text-v2">
+    <p>Vous recherchez une analyse financière fiable ? Le groupe Économie et
+  stratégie fournit un rapport détaillé sur les taux d'intérêt, les
+  obligations, le marché boursier et la stratégie de portefeuille.</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="bncButton button bt_cta_niveau2 aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<a id="bncButton-a2a3c8f94d" class="cmp-button left" href="/content/dam/bni/publication/mythes-realites.pdf" target="_blank">
+    
+    
+
+    <span class="cmp-button__text">Lire la dernière version</span>
+</a></div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid margin_bottom_20 margin_top_20_mobile aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--default--6 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/guides-outils-quebec-fr/master/_jcr_content/root/responsivegrid_20180/responsivegrid_copy__1462739345/responsivegrid_copy__686903710/responsivegrid_73870/image.coreimg{.width}.jpeg/1777487114628/guide-fiscal-quebec-2025.jpeg" data-asset="/content/dam/fbngp/microsites/images-articles/fr/guide-fiscal-quebec-2025.jpg" data-title="Éléments graphiques de différentes couleurs et texte écrit en rouge flash info." id="image-89c8057944" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/guides-outils-quebec-fr/master/_jcr_content/root/responsivegrid_20180/responsivegrid_copy__1462739345/responsivegrid_copy__686903710/responsivegrid_73870/image.coreimg.jpeg/1777487114628/guide-fiscal-quebec-2025.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Éléments graphiques de différentes couleurs et texte écrit en rouge flash info."/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--bootstrapxs--12 aem-Grid--default--6 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-d3fd3456d3" class="cmp-title">
+    <h3 class="cmp-title__text">Flash info</h3>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="text aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="text-e73ba0f345" class="cmp-text cmp-text-v2">
+    <p>Trouvez les différents montants des régimes gouvernementaux (RPC,
+  RRQ, PSV), les plafonds CELI, REER et REEE pour les contributions et
+  les liens vers les différentes tables d’impôts.</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid padding_top_5 aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="bncButton button bt_cta_niveau2 aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<a id="bncButton-95394d638d" class="cmp-button left" href="/content/dam/bnc/a-propos-de-nous/nouvelles-medias/info/flash-infos-bn-lettre.pdf" target="_blank">
+    
+    
+
+    <span class="cmp-button__text">Lire la dernière version</span>
+</a></div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid layout-container-gutter padding_top_10 aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid margin_bottom_20 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--default--6 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/guides-outils-quebec-fr/master/_jcr_content/root/responsivegrid_20180/responsivegrid_copy__1462739345/responsivegrid_copy__1420210145/responsivegrid_73870_1388003755/image.coreimg{.width}.jpeg/1774029570795/img-nouvelles-articles-guide-investir.jpeg" data-asset="/content/dam/fbngp/microsites/images-articles/fr/img-nouvelles-articles-guide-investir.jpg" data-title="Guide d&#39;investissement - des conseils clés pour votre sante financière." id="image-871e50f068" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/guides-outils-quebec-fr/master/_jcr_content/root/responsivegrid_20180/responsivegrid_copy__1462739345/responsivegrid_copy__1420210145/responsivegrid_73870_1388003755/image.coreimg.jpeg/1774029570795/img-nouvelles-articles-guide-investir.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Guide d&#39;investissement - des conseils clés pour votre sante financière."/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--bootstrapxs--12 aem-Grid--default--6 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-38076449a6" class="cmp-title">
+    <h3 class="cmp-title__text">Guide investir</h3>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="text aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="text-fe8ea54b50" class="cmp-text cmp-text-v2">
+    <p>Ce guide de référence contient une foule de renseignements pratiques
+  et vous outille pour planifier vos projets. Téléchargez-le sur votre
+  bureau pour profiter de toutes les fonctionnalités.</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="bncButton button bt_cta_niveau2 aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<a id="bncButton-372232deab" class="cmp-button left" href="/content/dam/fbngp/pdf/guide-investir-fbngp.pdf" target="_blank">
+    
+    
+
+    <span class="cmp-button__text">Téléchargez votre guide</span>
+</a></div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid margin_bottom_20 margin_top_20_mobile aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--default--6 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/guides-outils-quebec-fr/master/_jcr_content/root/responsivegrid_20180/responsivegrid_copy__1462739345/responsivegrid_copy__1420210145/responsivegrid_73870/image.coreimg{.width}.jpeg/1777486472915/flash-info.jpeg" data-asset="/content/dam/fbngp/microsites/images-articles/fr/flash-info.jpg" data-title="Guide fiscal et d&#39;investissement - une main tenant un formulaire." id="image-fdd3395fee" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/guides-outils-quebec-fr/master/_jcr_content/root/responsivegrid_20180/responsivegrid_copy__1462739345/responsivegrid_copy__1420210145/responsivegrid_73870/image.coreimg.jpeg/1777486472915/flash-info.jpeg" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Guide fiscal et d&#39;investissement - une main tenant un formulaire."/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--6 aem-Grid--bootstrapxs--12 aem-Grid--default--6 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-a62f90879c" class="cmp-title">
+    <h3 class="cmp-title__text">Guide fiscalité et investissement</h3>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="text aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="text-5e64ee5a50" class="cmp-text cmp-text-v2">
+    <p>Vous trouverez tout ce dont vous avez besoin pour remplir avec succès
+  votre déclaration d'impôts dans notre guide complet sur les impôts et
+  les investissements.</p>
+
+</div>
+
+    
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid padding_top_5 aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="bncButton button bt_cta_niveau2 aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<a id="bncButton-10a6e4028a" class="cmp-button left" href="/content/dam/fbngp/pdf/guide-fiscal-qc-fbngp.pdf" target="_blank">
+    
+    
+
+    <span class="cmp-button__text">Guide du Québec</span>
+</a></div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="experiencefragment aem-GridColumn aem-GridColumn--default--12">
+
+    
+    
+
+    
+
+
+
+<div class="xf-content-height">
+    
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid bnc-container aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="finance" class="cmp-title">
+    <h2 class="cmp-title__text">Prévention de la fraude</h2>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid padding_right_10 padding_left_10 aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="responsivegrid layout-container-gutter aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--4 aem-GridColumn--default--2">
+
+
+<div class="aem-Grid aem-Grid--2 aem-Grid--default--2 aem-Grid--bootstrapxs--4 ">
+    
+    <div class="image aem-GridColumn aem-GridColumn--bootstrapxs--4 aem-GridColumn--default--2">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/prevention-fraude-fr/master/_jcr_content/root/responsivegrid_10711/responsivegrid/responsivegrid_copy/responsivegrid/image.coreimg{.width}.png/1698243127550/picto-protection-identity.png" data-asset="/content/dam/fbngp/picto/picto-protection-identity.png" data-title="Une personne et un bouclier pour représenter la protection contre la fraude à la banque." id="image-d23535d54b" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/content/experience-fragments/fbngp/nouvelles-et-articles-3/prevention-fraude-fr/master/_jcr_content/root/responsivegrid_10711/responsivegrid/responsivegrid_copy/responsivegrid/image.coreimg.png/1698243127550/picto-protection-identity.png" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Une personne et un bouclier pour représenter la protection contre la fraude à la banque."/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn aem-GridColumn--default--10 aem-GridColumn--bootstrapxs--8 aem-GridColumn--offset--default--0">
+
+
+<div class="aem-Grid aem-Grid--10 aem-Grid--default--10 aem-Grid--bootstrapxs--8 ">
+    
+    <div class="responsivegrid aem-GridColumn aem-GridColumn--default--10 aem-GridColumn--bootstrapxs--8">
+
+
+<div class="aem-Grid aem-Grid--10 aem-Grid--default--10 ">
+    
+    <div class="text aem-GridColumn aem-GridColumn--default--10">
+<div id="text-c686215af2" class="cmp-text">
+    <p>Voyez les mesures à prendre pour vous protéger contre les tentatives
+  de fraude.</p>
+ <p>
+  <u>
+    <a href="https://www.bnc.ca/abc-securite/fraude.html">Lisez nos conseils</a></u></p>
+
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+
+</div>
+</div>
+
+    
+</div>
+
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    <div class="title display-none aem-GridColumn aem-GridColumn--default--12">
+
+    
+
+
+
+
+<div id="title-4cb159114b" class="cmp-title">
+    <h2 class="cmp-title__text">Nouvelles et articles</h2>
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    
+    
+</div>
+</div>
+<div class="responsivegrid layout_equal_height aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    
+    
+</div>
+</div>
+<div class="responsivegrid bnc-container layout-container-gutter margin_top_3_per layout_equal_height aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--bootstrapsm--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid layout_equal_height aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12 aem-GridColumn--bootstrapsm--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid footer1 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12 aem-GridColumn--bootstrapsm--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--6 aem-Grid--bootstrapxs--6 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="title aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--bootstrapxs--6 aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0">
+<div id="title-65537eac4f" class="cmp-title">
+    <h3 class="cmp-title__text">Contactez-nous</h3>
+</div>
+
+    
+
+</div>
+<div class="text aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--bootstrapxs--6 aem-GridColumn--default--6 aem-GridColumn--offset--bootstrapsm--0">
+<div id="text-f2d01c8850" class="cmp-text">
+    <p>Obtenez les coordonnées des membres de notre équipe et voyez où se
+  trouvent nos bureaux.</p>
+  <p> </p>
+
+</div>
+
+    
+
+</div>
+<div class="bncButton button bt_cta_niveau1 aem-GridColumn--bootstrapsm--4 aem-GridColumn--default--none aem-GridColumn aem-GridColumn--offset--default--0 aem-GridColumn--default--4 aem-GridColumn--bootstrapxs--4">
+
+    
+
+
+
+
+<a id="bncButton-7f9fcbfa38" class="cmp-button left" href="/conseiller/groupe-wolf-achard/nous-joindre.html" target="_self">
+    
+    
+
+    <span class="cmp-button__text">Voir nos coordonnées</span>
+</a></div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid layout_equal_height aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--12 ">
+    
+    <div class="responsivegrid footer2 aem-GridColumn--bootstrapxs--none aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12 aem-GridColumn--bootstrapsm--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--3 aem-Grid--bootstrapxs--3 aem-Grid--bootstrapsm--3 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--bootstrapsm--3 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--bootstrapxs--3">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--bootstrapxs--11 aem-Grid--default--12 aem-Grid--bootstrapsm--9 ">
+    
+    <div class="image aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--bootstrapxs--11 aem-GridColumn--bootstrapsm--9">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/conseiller/groupe-wolf-achard/nouvelles-articles.coreimg{.width}.png/structure/jcr:content/root/responsivegrid_copy_/responsivegrid_20512/responsivegrid/responsivegrid/image/1608132653421/picto-telephone-rouge-80x80.png" data-asset="/content/dam/fbngp/picto/picto-telephone-rouge-80x80.png" data-asset-id="5667bd1a-3d4b-478e-84a0-2ddb892c8864" data-title="Picto téléphone" id="image-1a9bc80b0c" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/conseiller/groupe-wolf-achard/nouvelles-articles.coreimg.png/structure/_jcr_content/root/responsivegrid_copy_/responsivegrid_20512/responsivegrid/responsivegrid/image/1608132653421/picto-telephone-rouge-80x80.png" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Picto téléphone"/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="text aem-GridColumn aem-GridColumn--default--12 aem-GridColumn--bootstrapxs--11 aem-GridColumn--bootstrapsm--9">
+<div id="text-8a7832464c" class="cmp-text">
+    <p>
+  <a href="tel:+15143951937">514 395-1937</a></p>
+ <p>
+  <a href="tel:+15144120370">514 412-0370</a></p>
+
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid layout_equal_height aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--3 aem-Grid--default--3 aem-Grid--bootstrapxs--12 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="responsivegrid footer2 aem-GridColumn--bootstrapxs--none aem-GridColumn--bootstrapsm--6 aem-GridColumn--default--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--offset--default--0 aem-GridColumn--bootstrapxs--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--3 aem-Grid--bootstrapxs--3 aem-Grid--bootstrapsm--3 ">
+    
+    <div class="responsivegrid aem-GridColumn--bootstrapxs--none aem-GridColumn--offset--bootstrapxs--0 aem-GridColumn--bootstrapsm--none aem-GridColumn aem-GridColumn--bootstrapsm--3 aem-GridColumn--offset--bootstrapsm--0 aem-GridColumn--default--3 aem-GridColumn--bootstrapxs--3">
+
+
+<div class="aem-Grid aem-Grid--3 aem-Grid--bootstrapxs--11 aem-Grid--default--3 aem-Grid--bootstrapsm--6 ">
+    
+    <div class="image aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--3 aem-GridColumn--bootstrapxs--11">
+<div data-cmp-is="image" data-cmp-lazythreshold="0" data-cmp-src="/conseiller/groupe-wolf-achard/nouvelles-articles.coreimg{.width}.png/structure/jcr:content/root/responsivegrid_copy_/responsivegrid_13724_2130609452/responsivegrid_copy_/responsivegrid/image/1608132660009/picto-courriel-rouge-80x80.png" data-asset="/content/dam/fbngp/picto/picto-courriel-rouge-80x80.png" data-asset-id="90b308e2-cadc-4b0d-b7a4-541a3dfb1444" data-title="Picto courriel" id="image-ccfe88e6e1" class="cmp-image" itemscope itemtype="http://schema.org/ImageObject">
+    
+        
+            
+            <img src="/conseiller/groupe-wolf-achard/nouvelles-articles.coreimg.png/structure/_jcr_content/root/responsivegrid_copy_/responsivegrid_13724_2130609452/responsivegrid_copy_/responsivegrid/image/1608132660009/picto-courriel-rouge-80x80.png" class="cmp-image__image" itemprop="contentUrl" data-cmp-hook-image="image" alt="Picto courriel"/>
+            
+        
+    
+    
+    
+</div>
+
+    
+
+</div>
+<div class="text aem-GridColumn--bootstrapsm--6 aem-GridColumn aem-GridColumn--default--3 aem-GridColumn--bootstrapxs--11">
+<div id="text-8f8166b446" class="cmp-text">
+    <p>
+  <b>
+    <a href="mailto:laurent.achard@bnc.ca">laurent.achard@bnc.ca</a></b></p>
+ <p>
+  <a href="mailto:davidalexandre.wolf@bnc.ca"><b>davidalexandre.wolf@bnc.ca</b></a></p>
+
+</div>
+
+    
+
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+</div>
+<div class="responsivegrid margin_top_2_per aem-GridColumn aem-GridColumn--default--12">
+
+
+<div class="aem-Grid aem-Grid--12 aem-Grid--default--12 ">
+    
+    
+    
+</div>
+</div>
+<div class="footer aem-GridColumn aem-GridColumn--default--12">
+    
+    
+
+
+<footer id="footer-fbngp-fr" class="cmp-staticFooter">
+    <div class="staticFooterContainer">
+<nav aria-label="Liens d’informations et de contact" class="first-level">
+<ul>
+<li>
+<div class="controller" id="aideController" aria-owns="aide">
+<p>Aide et contact</p>
+<img loading="lazy" alt="closed" src="/content/dam/bnc/particuliers/picto/collapse-closed.svg"/>
+</div>
+<div class="links" id="aide">
+<a href="/contact.html">Nous joindre</a>
+</div>
+</li>
+<li>
+<div class="controller" id="utilesController" aria-owns="utiles">
+<p>Liens utiles</p>
+<img loading="lazy" alt="closed" src="/content/dam/bnc/particuliers/picto/collapse-closed.svg"/>
+</div>
+<div class="links" id="utiles">
+<a href="/conseiller.html">Trouver un conseiller</a>
+<a href="/a-propos/informations-reglementaires.html">Informations réglementaires</a>
+<a href="/resolution-insatisfactions.html">Résolution des insatisfactions</a>
+</div>
+</li>
+<li>
+<div class="controller" id="proposController" aria-owns="propos">
+<p>À propos de nous</p>
+<img loading="lazy" alt="closed" src="/content/dam/bnc/particuliers/picto/collapse-closed.svg"/>
+</div>
+<div class="links" id="propos">
+<a href="/a-propos.html">Notre organisation</a>
+<a href="https://www.bnc.ca/particuliers.html">Banque Nationale du Canada</a>
+<a href="https://www.bnc.ca/coordonnees.html">Filiales Banque Nationale</a>
+<a href="/carriere.html">Carrières</a>
+</div>
+</li>
+<li>
+<div class="controller" id="affutController" aria-owns="affut">
+<p>Restez à l'affût</p>
+<img loading="lazy" alt="closed" src="/content/dam/bnc/particuliers/picto/collapse-closed.svg"/>
+</div>
+<div class="links" id="affut">
+<a href="https://www.bnc.ca/a-propos-de-nous/nouvelles-medias.html">Communiqués</a>
+</div>
+</li>
+</ul>
+</nav>
+<hr>
+<nav aria-label="Liens de règlementation" class="second-level">
+<ul>
+<li>
+<a href="/convention.html">Convention</a>
+</li>
+<li>
+<a href="https://www.bnc.ca/politique-de-confidentialite.html">Politique de protection des renseignements personnels</a>
+</li>
+<li>
+<a href="/politique-donnees-numeriques.html">Politique sur les données numériques</a>
+</li>
+<li>
+<a href="https://www.bnc.ca/abc-securite.html">ABC de la sécurité</a>
+</li>
+<li>
+<a href="https://www.bnc.ca/a-propos-de-nous/esg/enonce-sur-accessibilite.html">Accessibilité</a>
+</li>
+<li>
+    <a href="https://www.bnc.ca/a-propos-de-nous/esg/rapport-etape-accessibilite.html">Rapport d'étape sur l'accessibilité</a>
+    </li>
+<li>
+<a href="https://www.bnc.ca/a-propos-de-nous/esg/plan-accessibilite.html#2.2">Processus de rétroaction en matière d'accessibilité</a>
+</li>
+</ul>
+</nav>
+<hr>
+<nav aria-label="Notes légales et réseaux sociaux" class="third-level">
+<ul>
+<li>
+<img loading="lazy" alt="Banque Nationale" src="/content/dam/bnc/particuliers/picto/picto-logo-bn-24x22.svg"/>
+</li>
+</li>
+<li>
+<p id="copyright">© FBNGP Tous droits réservés 2026.</p>
+</li>
+<li>
+<a href="https://www.linkedin.com/company/financi-re-banque-nationale/" target="_blank">
+<img class="social-footer" loading="lazy" alt="LinkedIn, lien externe qui s'ouvre dans un nouvel onglet." src="/content/dam/bnc/particuliers/picto/picto-social-linkedin.svg"/>
+</a>
+</li>
+</ul>
+</nav>
+<nav aria-label="Partenaires" class="fourth-level">
+<ul>
+<li>
+<a href="https://www.ocri.ca/" target="_blank">
+<img loading="lazy" alt="Organisme Canadien de Réglementation des Investissements (OCRI), lien externe qui s'ouvre dans un nouvel onglet." src="/content/dam/fbngp/logos/logo-ocri.svg"/>
+</a>
+<a href="https://www.ocri.ca/bureau-des-investisseurs/rapport-info-conseiller" target="_blank" aria-label="Consultez les rapports Info-Conseiller de l'OCRI, lien externe qui s'ouvre dans un nouvel onglet.">Consultez les rapports Info-Conseiller de l'OCRI
+<img class="external-link" loading="lazy" alt="" src="/content/dam/bnc/particuliers/picto/external-link.svg">
+</a>
+</li>
+<li>
+<a href="https://www.fcpi.ca/" target="_blank">
+<img loading="lazy" alt="Fonds Canadien de protection des investisseurs (FPCI), lien externe qui s'ouvre dans un nouvel onglet." src="/content/dam/fbngp/logos/logo-fcpi.svg"/>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</footer>
+
+
+
+</div>
+
+    
+</div>
+</div>
+
+
+            
+    
+    
+
+
+
+    
+    
+    
+<script src="/etc.clientlibs/web-sites-toolkit/clientlibs/clientlib-core-components.min.0e78d12b97b3829e02f2e042879f70aa.js"></script>
+
+
+
+    
+    
+<link rel="stylesheet" href="/etc.clientlibs/web-sites-toolkit/components/content/staticFooter/clientlibs.min.56d0cad8fb312fb999e0715679433926.css" type="text/css">
+<script src="/etc.clientlibs/web-sites-toolkit/components/content/staticFooter/clientlibs.min.45ad76f31352c347554825e250a74963.js"></script>
+
+
+
+
+    
+
+    
+
+    
+    
+    
+
+            
+
+
+            
+            
+
+        
+    </body>
+</html>

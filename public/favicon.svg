@@ -1,0 +1,13 @@
+<!-- PLACEHOLDER FAVICON. Replace with a mark derived from the team's own
+     lockup once src/assets/logos/ holds real artwork. Deliberately hatched and
+     red-dashed so it is obvious in a browser tab that this is not final. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <pattern id="h" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#15181D" stroke-width="1" opacity="0.25"/>
+    </pattern>
+  </defs>
+  <rect width="32" height="32" rx="6" fill="#F7F4EF"/>
+  <rect width="32" height="32" rx="6" fill="url(#h)"/>
+  <rect x="1" y="1" width="30" height="30" rx="5" fill="none" stroke="#DE161D" stroke-width="2" stroke-dasharray="3 2"/>
+</svg>

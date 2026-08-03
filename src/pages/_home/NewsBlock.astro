@@ -1,0 +1,135 @@
+---
+/**
+ * PAGE-LOCAL. The three news teasers plus the "all news" control.
+ *
+ * HEADING LEVELS ARE THE CAPTURE'S. `Nouvelles et articles` / `News and
+ * articles` is an <h2> on the live page and stays one. Each teaser TITLE is
+ * `<p><a …>` on the live page — not a heading — so it ships as a paragraph with
+ * a link. Promoting the three cards to <h3> would read better in a screen
+ * reader's heading list, but it would invent document structure on a page whose
+ * outline is part of what compliance approved, and this build reproduces the
+ * live outline everywhere else (`Contactez-nous` is an <h3>, `Notre
+ * philosophie` is an <h3>). Consistency wins; the link is a perfectly good
+ * accessible name.
+ *
+ * The whole card is the target (a stretched link over the thumbnail and the
+ * title), so the click area matches what the card looks like.
+ *
+ * Destinations keep the live FRAGMENTS (`#spotlight`, `#economic`, `#guide`)
+ * and take the rebuilt path from `routeMap` — the news page must keep those
+ * section ids. This section links to National Bank's syndicated news page but
+ * carries none of its content, so nothing here is subject to the
+ * do-not-pin-a-dated-filename rule (P-14).
+ */
+import Button from '../../components/Button.astro';
+import Figure from '../../components/Figure.astro';
+import type { HomeNews } from '../../data/pages/home.types';
+
+interface Props {
+  news: HomeNews;
+  headingId: string;
+}
+
+const { news, headingId } = Astro.props;
+---
+
+<h2 id={headingId} class="t-h2 serif-display news__title">{news.heading}</h2>
+
+<ul class="news__grid">
+  {
+    news.teasers.map((teaser) => (
+      <li class="card card-lift news__card">
+        <div class="media news__media">
+          <Figure image={teaser.image} />
+        </div>
+        <div class="news__body">
+          <p class="news__card-title">
+            <a class="news__link" href={teaser.href}>
+              {teaser.title}
+            </a>
+          </p>
+          <p class="news__blurb">{teaser.blurb}</p>
+        </div>
+      </li>
+    ))
+  }
+</ul>
+
+<div class="news__actions">
+  <Button variant="secondary" href={news.allLink.href} icon="arrow-right">
+    {news.allLink.label}
+  </Button>
+</div>
+
+<style>
+  .news__title {
+    margin: 0;
+  }
+
+  .news__grid {
+    display: grid;
+    gap: clamp(1.25rem, 2.5vw, 1.75rem);
+    margin: clamp(2rem, 4vw, 3rem) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 48rem) {
+    .news__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  .news__card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .news__media {
+    border-radius: 0;
+    aspect-ratio: 767 / 307;
+  }
+
+  .news__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.25rem 1.375rem 1.5rem;
+  }
+
+  .news__card-title {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .news__link {
+    text-decoration: none;
+  }
+
+  /* Whole card is the target; the title keeps the accessible name. */
+  .news__link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .news__link:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+  }
+
+  .news__blurb {
+    margin: 0;
+    color: var(--muted);
+    font-size: var(--text-small);
+    line-height: 1.55;
+  }
+
+  .news__actions {
+    margin-block-start: clamp(1.75rem, 3.5vw, 2.5rem);
+  }
+</style>

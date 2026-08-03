@@ -1,0 +1,64 @@
+---
+/**
+ * 404.
+ *
+ * A static host serves ONE 404 document for the whole site, so this page cannot
+ * know which language tree the visitor came from. It is therefore FRENCH — the
+ * site's default locale and the language of the root — and `<html lang>` says
+ * so honestly rather than shipping a bilingual page under a single `lang`,
+ * which is a real accessibility defect (a screen reader would read the English
+ * half with French pronunciation rules).
+ *
+ * The English route back is offered as a link with its own `lang` and
+ * `hreflang`, so the two words of English on the page are correctly announced.
+ *
+ * No hreflang alternates and no structured data: this page has no counterpart
+ * and is not a business entity.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import Button from '../components/Button.astro';
+import { t, homePath } from '../lib/i18n';
+
+const locale = 'fr' as const;
+const s = t(locale);
+const en = t('en');
+---
+
+<BaseLayout
+  locale={locale}
+  pageKey={null}
+  activeKey={null}
+  title={s.notFound.heading}
+  description={s.notFound.lead}
+  noindex
+  structuredData={false}
+>
+  <Section bg="paper" class="page-hero">
+    <p class="eyebrow">{s.notFound.eyebrow}</p>
+    <h1 class="t-hero serif-display nf__heading">{s.notFound.heading}</h1>
+    <p class="t-lead measure">{s.notFound.lead}</p>
+
+    <p class="nf__actions">
+      <Button href={homePath(locale)} variant="primary" pill icon="arrow-right">
+        {s.cta.backHome.label}
+      </Button>
+      <Button href={homePath('en')} variant="secondary" pill lang={en.htmlLang} hreflang={en.htmlLang}>
+        {en.cta.backHome.label}
+      </Button>
+    </p>
+  </Section>
+</BaseLayout>
+
+<style>
+  .nf__heading {
+    margin-block: 0.75rem 1rem;
+  }
+
+  .nf__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-block-start: 2rem;
+  }
+</style>

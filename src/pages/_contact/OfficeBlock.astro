@@ -1,0 +1,286 @@
+---
+/**
+ * PAGE-LOCAL. The office coordinates — the densest identity block on the site.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * EVERY STRING HERE COMES FROM THE SHARED DICTIONARY. NONE IS DECLARED LOCALLY.
+ *
+ * The address lines, both phone numbers, both email addresses, the two advisor
+ * names and the branch-locator link are read from `t(locale).contact`, which
+ * was filled byte-exactly from these two captures in the archive pass. This
+ * component re-transcribes nothing, which is the only way the number beside a
+ * licensed advisor's name here, the number in the footer and the number in the
+ * sticky strip can be the same string by construction.
+ *
+ * In particular:
+ *  · `addressLines` is ALREADY this page's own rendering in both languages.
+ *    English is form (i) of C-22, two lines carrying THREE U+00A0 —
+ *    `1, Place Ville-Marie⟨NBSP⟩Suite 1700` / `Montreal⟨NBSP⟩QC⟨NBSP⟩H3B 2C1`.
+ *    Those three characters are the only thing holding `Suite 1700`, `QC` and
+ *    the postal code on their intended lines. `addressInline` in the same file
+ *    is form (ii), the ADVISOR PROFILE pages' single-line rendering, and it is
+ *    deliberately not used here. The three live renderings are not harmonised.
+ *  · `phones[].href` is the microsite E.164 form (`tel:+15143951937`). The
+ *    profile pages use a local, country-code-less `tel:514-395-1937`; that is
+ *    C-23 and it is not this surface's form. Display strings are per-language
+ *    and are never derived from one another: `514 395-1937` in French,
+ *    `514-395-1937` in English.
+ *  · `mapsLabel` is the CLIENT'S OWN label for this destination —
+ *    `Heures d'ouverture` / `Business hours`, not a `View on map` we would have
+ *    written (D-06).
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * NO TOLL-FREE LINE, NO FAX LINE, AND THEREFORE NO LABEL COLONS
+ *
+ * National Bank's template carries `Sans-frais :` / `Toll-Free :` and
+ * `Télécopieur :` / `Fax :`. This site publishes neither, verified across all
+ * sixteen captures (COMPLIANCE §2.4, D-08). Both fields were removed from
+ * `SiteStrings` rather than left blank, so there is nothing here to guard on.
+ *
+ * If a team ever does publish one, note that the colon is PART OF THE STRING,
+ * not CSS — including the French no-break space before it. A label colon
+ * rendered by a stylesheet is an identity string edited with no register row.
+ *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * THE PICTOGRAMS ARE NOT REPRODUCED — D-13
+ *
+ * The live block sets three decorative platform PNGs above the columns
+ * (`picto-contact-appel-46x43`, `picto-contact-localisation-31x44`,
+ * `picto-courriel-rouge-40x40`), the last of them in brand red. Two reasons
+ * they are replaced by the site's own icon set in `--stone`, exactly as the
+ * home page's contact block already does: brand red is disciplined to
+ * disclaimer superscripts and focus rings, and an icon in red spends the whole
+ * budget on decoration. No wording changes — the pictogram alts asserted
+ * nothing. One consequence worth recording: `Adress picto ` (missing `d`,
+ * trailing space, F-11) therefore does not ship, because the artwork it
+ * described does not ship. It is reported, not silently dropped.
+ *
+ * NO FORM. `tel:` and `mailto:` are the whole affordance, here and everywhere
+ * (P-10). The live site has no contact form on any of its sixteen pages.
+ */
+import type { Locale } from '../../data/types';
+import { t } from '../../lib/i18n';
+import Icon from '../../components/Icon.astro';
+
+interface Props {
+  locale: Locale;
+  heading: string;
+  lead: string;
+  headingId: string;
+}
+
+const { locale, heading, lead, headingId } = Astro.props;
+const s = t(locale);
+const c = s.contact;
+
+/**
+ * The head-of-team pair, paired by index exactly as <ContactStrip> does, so the
+ * name printed above a number and the number itself can never come from
+ * different rows. Sliced defensively: if a third line is ever added to the
+ * dictionary, this block still shows the two people the live page shows.
+ */
+const lines = c.phones.slice(0, 2).map((phone, index) => ({
+  name: phone.label,
+  phone,
+  email: c.emails[index],
+}));
+---
+
+<div class="office">
+  <div class="office__intro">
+    <h2 id={headingId} class="t-h2 serif-display office__heading">{heading}</h2>
+    <p class="t-lead measure office__lead">{lead}</p>
+  </div>
+
+  {/* One <address> for the whole block: this IS the contact information of the
+      page's owner, and the element gives the group meaning without any authored
+      label. The live page labels these three columns with nothing but the
+      pictograms above them, so inventing headings here would be new copy. */}
+  <address class="office__grid">
+    <div class="office__group">
+      <ul class="office__list">
+        {
+          lines.map((line) => (
+            <li class="office__item">
+              {/* The name is `phones[].label` — a live identity string, not an
+                  authored label. Without it the live block shows two bare
+                  numbers with no indication of whose is whose; the footer CTA
+                  band already prints them this way. */}
+              <span class="office__label">{line.name}</span>
+              <a class="office__value tabular" href={line.phone.href}>
+                <Icon name="phone" size={17} class="office__icon" />
+                {line.phone.display}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="office__group">
+      <p class="office__address">
+        {/* Rendered one line per captured line. English carries three U+00A0
+            inside these two strings and they must survive to the built HTML —
+            see the verification note in the build report. */}
+        {c.addressLines.map((line) => <span class="office__address-line">{line}</span>)}
+      </p>
+
+      <a
+        class="office__value office__value--link"
+        href={c.mapsHref}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icon name="map-pin" size={17} class="office__icon" />
+        {c.mapsLabel}
+        <Icon name="external-link" size={13} class="office__ext" />
+        <span class="sr-only">({s.a11y.opensNewWindow})</span>
+      </a>
+    </div>
+
+    <div class="office__group">
+      <ul class="office__list">
+        {
+          c.emails.slice(0, 2).map((email) => (
+            <li class="office__item">
+              {/* No name label on this column: the address contains the name, so
+                  a label would repeat it rather than resolve anything. */}
+              <a class="office__value" href={email.href}>
+                <Icon name="mail" size={17} class="office__icon" />
+                {email.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </address>
+</div>
+
+<style>
+  .office__heading {
+    margin: 0;
+    max-inline-size: 18ch;
+  }
+
+  .office__lead {
+    margin-block: 1rem 0;
+  }
+
+  /* `<address>` is italic by default in every browser. This is an office
+     address, not an aside. */
+  .office__grid {
+    font-style: normal;
+    display: grid;
+    gap: clamp(2rem, 4vw, 2.75rem);
+    margin-block-start: clamp(2.5rem, 5vw, 3.75rem);
+  }
+
+  /* Three groups from 60rem, matching the live page's own three-column
+     arrangement — phones, office, email addresses, in that order. */
+  @media (min-width: 60rem) {
+    .office__grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: clamp(2rem, 4vw, 3.5rem);
+      align-items: start;
+    }
+  }
+
+  /* A hairline rule per group rather than a card: the block already sits on the
+     page's single tint band, and a card inside a tint band is two surfaces
+     doing one job. */
+  .office__group {
+    padding-block-start: 1.25rem;
+    border-block-start: 1px solid var(--hairline);
+  }
+
+  .office__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 1.125rem;
+  }
+
+  .office__item {
+    display: grid;
+    gap: 0.1875rem;
+  }
+
+  .office__label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  .office__value {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-block-size: 44px;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--ink);
+    text-decoration: none;
+    /* A long address must never push the column wider than its track. */
+    overflow-wrap: anywhere;
+  }
+
+  /* The name label already sits above the number, so a 44px row would leave a
+     visible gap under every line — hence 32px for the STATIC rows inside an
+     item (the label lines, which are not targets at all). */
+  .office__item .office__value {
+    min-block-size: 32px;
+  }
+
+  /* Anything that is actually a link keeps the full 44px, UNCONDITIONALLY.
+     This used to sit behind `@media (pointer: coarse)`, which looks right and
+     is not: `pointer` reports the PRIMARY input, so a Windows laptop with a
+     touchscreen and a trackpad reports `fine` and served 32px targets to
+     someone tapping with a finger. Specificity note — `.office__item
+     .office__value` is (0,2,0), so the anchor rule must carry the item class
+     too or it loses. */
+  .office__item a.office__value {
+    min-block-size: 44px;
+  }
+
+  .office__value:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.22em;
+  }
+
+  /* Icons rest in --stone. Never red — that is the whole point of D-13. */
+  .office__icon {
+    flex: none;
+    color: var(--stone);
+  }
+
+  .office__ext {
+    flex: none;
+    color: var(--stone);
+    opacity: 0.7;
+  }
+
+  .office__address {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0.5rem;
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    color: var(--ink);
+  }
+
+  /* Each captured line is its own row. The English lines carry the U+00A0 that
+     hold `Suite 1700`, `QC` and the postal code together WITHIN a line; this
+     rule governs the break BETWEEN lines and never substitutes for them. */
+  .office__address-line {
+    display: block;
+  }
+
+  .office__value--link {
+    margin-inline-start: -0.125rem;
+  }
+</style>

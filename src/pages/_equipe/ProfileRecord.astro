@@ -1,0 +1,184 @@
+---
+/**
+ * PAGE-LOCAL. The identity record on an advisor's profile page.
+ *
+ * WHAT THIS PAGE IS. Not this team's content — a structured advisor record
+ * National Bank syndicates to every microsite on the platform
+ * (`meta[name=template]=fiche-conseillers-placement-template` on all four live
+ * pages). Every value below is a FIELD IN NBF'S RECORD, so it renders from
+ * `src/data/advisors.ts` and from the shared address/locator strings, never from
+ * anything authored here.
+ *
+ * WHAT THE LIVE PAGE SHOWS, AND WHAT THIS RENDERS
+ *
+ *   live row                     here      why
+ *   ──────────────────────────── ───────── ──────────────────────────────────
+ *   phone                        yes       advisors.ts, per-surface display
+ *   email                        yes       advisors.ts, never translated
+ *   `Voir le site Web` /                   DROPPED — D-21. On the live site the
+ *   `View website`               NO        profile sits in the bank's corporate
+ *                                          chrome and this is the only route
+ *                                          back to the microsite. Here the page
+ *                                          IS inside the microsite, wearing its
+ *                                          header and footer, so the link points
+ *                                          from the site to itself. Both ENGLISH
+ *                                          profiles also point it at the FRENCH
+ *                                          microsite (N-09) — shipping that
+ *                                          would import a language-purity breach
+ *                                          into our own build, and repointing it
+ *                                          would edit NBF's record
+ *                                          (`COMPLIANCE.md` AP-01).
+ *   office address               yes       verbatim per-surface string (C-22),
+ *                                          linked to the same branch locator the
+ *                                          live page links to
+ *   languages                    yes       advisors.ts `profile` value — which
+ *                                          CONTRADICTS the team page in both
+ *                                          languages (`COMPLIANCE.md` C-07 /
+ *                                          C-08 / AP-03) and
+ *                                          is shipped unharmonised on purpose
+ *
+ * `COMPLIANCE.md` AP-02: the live profile pages carry NO <sup> markers and no disclaimer
+ * accordion. Nothing here cites one, so <LegalNotes> is deliberately absent.
+ * Adding it would be as much a deviation as dropping one.
+ *
+ * THE FIELD LABELS ARE NEW COPY (NC-06). The live page labels these four facts
+ * with empty `<i class="bnc-icon-…">` elements — decorative glyphs carrying no
+ * accessible name at all, so a screen-reader user hears `514 395-1937`,
+ * `laurent.achard@bnc.ca` and `Français, Anglais, Italien` with nothing to say
+ * what any of them is. Three words per language replace three unnamed icons.
+ * They are interface microcopy in the NC-04 sense: not a claim, not a figure,
+ * not a credential, not a regulatory phrase. `Bureau` / `Office` is not new — it
+ * is the site's own existing footer label, reused rather than reinvented.
+ */
+import type { Locale } from '../../data/types';
+import type { Advisor } from '../../data/advisors';
+import { t } from '../../lib/i18n';
+
+interface Props {
+  locale: Locale;
+  advisor: Advisor;
+}
+
+const { locale, advisor } = Astro.props;
+const s = t(locale);
+
+/* NC-06. Page-local because `src/data/{fr,en}.ts` belongs to the shared chrome
+   and a page build may not edit it — reported as friction. */
+const labels = {
+  fr: { phone: 'Téléphone', email: 'Courriel', languages: 'Langues' },
+  en: { phone: 'Phone', email: 'Email', languages: 'Languages' },
+}[locale];
+
+const rows: { label: string; value: string; href?: string; tabular?: boolean }[] = [
+  {
+    label: labels.phone,
+    // Per-surface display string: `514 395-1937` in French, `514-395-1937` in
+    // English. C-03 / C-04 — never derive one from the other.
+    value: advisor.phone.display.profile,
+    href: advisor.phone.href,
+    tabular: true,
+  },
+  {
+    label: labels.email,
+    value: advisor.email,
+    href: `mailto:${advisor.email}`,
+  },
+  {
+    // The site's own footer label, not a new string.
+    label: s.footer.addressTitle,
+    // VERBATIM per-language address. The English profile pages render it
+    // `1 Place Ville-Marie, Suite 1700, Montreal, Quebec, H3B 2C1` — a THIRD
+    // form, different from the English contact page's two-paragraph version
+    // (C-22). Each surface keeps its own; do not harmonise.
+    value: s.contact.addressInline,
+    // Same branch locator the live profile page links, per language.
+    href: s.contact.mapsHref,
+  },
+  {
+    label: labels.languages,
+    // ⚠ Contradicts this advisor's own team-page value in BOTH languages, and
+    // the English team page asserts `English` only while this asserts
+    // `French, English, Italian`. `COMPLIANCE.md` C-07 / C-08 / AP-03: a self-declared
+    // capability claim about a licensed individual. Do not pick a canonical.
+    value: advisor.languages.profile,
+  },
+];
+---
+
+<dl class="record">
+  {
+    rows.map((row) => (
+      <div class="record__row">
+        <dt class="record__label">{row.label}</dt>
+        <dd class:list={['record__value', row.tabular && 'tabular']}>
+          {row.href ? (
+            <a class="record__link" href={row.href}>
+              {row.value}
+            </a>
+          ) : (
+            row.value
+          )}
+        </dd>
+      </div>
+    ))
+  }
+</dl>
+
+<style>
+  .record {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    border-block-start: 1px solid var(--rule);
+  }
+
+  @media (min-width: 48rem) {
+    .record {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(2rem, 4vw, 3.5rem);
+    }
+  }
+
+  .record__row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    padding-block: 0.875rem;
+    border-block-end: 1px solid var(--rule);
+  }
+
+  .record__label {
+    margin: 0;
+    font-size: var(--text-eyebrow);
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .record__value {
+    margin: 0;
+    font-size: var(--text-body);
+    line-height: 1.5;
+    color: var(--fg);
+    overflow-wrap: anywhere;
+  }
+
+  .record__link {
+    color: inherit;
+    text-decoration: none;
+    min-block-size: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Red underline on hover, never red text — brand red is reserved for
+     disclaimer superscripts and focus rings. */
+  .record__link:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--nb-red);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.28em;
+  }
+</style>

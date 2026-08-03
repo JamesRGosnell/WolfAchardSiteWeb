@@ -1,0 +1,168 @@
+---
+/**
+ * FRENCH SERVICES — `/services/`
+ *
+ * Section order is the CAPTURE's document order:
+ *   hero · opener H2 + prose (with the services wheel and its caption beside
+ *   it) · the seven services · Boîte à outils · Notes légales · contact.
+ *
+ * THIS PAGE IS NOT A TRANSLATION OF ITS ENGLISH TWIN, and the differences are
+ * structural, not stylistic. French has no `Our approach` section, no `Our
+ * services` H2, no `Purpose` / `Main benefits` lists, and no per-service
+ * footnote sentences — 5 list items on the whole page against English's 52.
+ * The two accordions also run in different orders (fiscale 3rd / successorale
+ * 4th here; estate 3rd / tax 4th in English). Both are reproduced as found;
+ * P-16 forbids filling either gap and nothing is harmonised.
+ *
+ * MARKER DISCIPLINE — the reason this page exists in this shape:
+ *   · The live page renders exactly ONE marker, `<sup> 1, 2, 3</sup>` (opening
+ *     with U+00A0, not a space), on the wheel caption. It becomes three real
+ *     `<sup>` links into `#legal-note-1|2|3`. D-24.
+ *   · <LegalNotes> renders ALL FIVE disclaimers, in order, always — never the
+ *     subset a page happens to cite (P-12/P-13). Disclaimers 4 and 5 therefore
+ *     render here citing nothing, which is the correct state.
+ *   · The `Solutions bancaires` block makes fee and financing claims with NO
+ *     marker on the live page (C-42). No marker is invented for it (P-6); it
+ *     is reported instead.
+ *
+ * BAND RHYTHM: paper everywhere, exactly ONE greige tint block (the toolbox),
+ * ink confined to the footer.
+ *
+ * Do NOT edit shared files (components, layouts, lib, styles, config,
+ * data/{fr,en,types}.ts) from a page build. Report the friction instead.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/Section.astro';
+import LegalNotes from '../../components/LegalNotes.astro';
+import ServicesHero from '../_services/ServicesHero.astro';
+import Prose from '../../components/Prose.astro';
+import Figure from '../../components/Figure.astro';
+import NoteRefs from '../_services/NoteRefs.astro';
+import ServiceBlock from '../_services/ServiceBlock.astro';
+import Toolbox from '../_services/Toolbox.astro';
+/* The closing contact block is the SAME live block the home page ends on, so
+   it is the same component rather than a second copy that could drift. It
+   lives under `_home/` only because the home page was built first; promoting it
+   to `src/components/` is a shared-file edit this build may not make, and is
+   reported as friction. */
+import ContactBlock from '../../components/ContactBlock.astro';
+import services from '../../data/pages/services.fr';
+
+const locale = 'fr' as const;
+const wheel = services.services.wheel;
+---
+
+{/*
+   D-11 — this page closes with its own <ContactBlock>.
+*/}
+<BaseLayout
+  locale={locale}
+  pageKey="services"
+  title={services.meta.title}
+  description={services.meta.description}
+  showFooterCta={false}
+>
+  <ServicesHero hero={services.hero} />
+
+  <Section bg="paper" aria-labelledby="intro-heading">
+    <div class="opener">
+      <div class="opener__text">
+        <h2 id="intro-heading" class="t-h2 serif-display opener__heading">
+          {services.intro.heading}
+        </h2>
+        {
+          services.intro.body.map((paragraph) => (
+            <Prose text={paragraph} locale={locale} class="opener__prose" />
+          ))
+        }
+      </div>
+
+      {/* The wheel is BESPOKE FRENCH ARTWORK reading `Groupe Wolf Achard` and
+          `Vous`; the English page's is National Bank's generic diagram, which
+          never names the team. Text baked into an image is still a claim
+          (C-51) — neither is swapped for the other. */}
+      <figure class="wheel reveal">
+        <div class="media wheel__media">
+          <Figure image={wheel.image} />
+        </div>
+        {/* No whitespace between the caption and its marker — the live markup
+            carries a U+00A0 there and nothing else, and that character is on
+            the end of the caption string. */}
+        <figcaption class="wheel__caption">{wheel.caption.text}<NoteRefs refs={wheel.caption.refs} locale={locale} /></figcaption>
+      </figure>
+    </div>
+
+    <div class="blocks rule-y">
+      {services.services.blocks.map((block) => <ServiceBlock block={block} locale={locale} />)}
+    </div>
+  </Section>
+
+  {/* THE one tint block on this page. */}
+  <Section bg="greige" aria-labelledby="toolbox-heading">
+    <Toolbox toolbox={services.toolbox} headingId="toolbox-heading" locale={locale} />
+  </Section>
+
+  {/* Every marker above resolves into this. All five notes, in order, on the
+      same page — never a subset (P-12). */}
+  <Section bg="paper" padding="compact">
+    <LegalNotes locale={locale} refs={[1, 2, 3]} id={services.legalNotesId} />
+  </Section>
+
+  <Section bg="paper" aria-labelledby="contact-heading">
+    <ContactBlock contact={services.contact} headingId="contact-heading" />
+  </Section>
+</BaseLayout>
+
+<style>
+  /* Asymmetric split — text 7, wheel 5. */
+  .opener {
+    display: grid;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+
+  @media (min-width: 60rem) {
+    .opener {
+      grid-template-columns: 7fr 5fr;
+      align-items: center;
+      column-gap: clamp(2.5rem, 5vw, 4.5rem);
+    }
+  }
+
+  .opener__heading {
+    margin: 0 0 clamp(1.25rem, 2.5vw, 1.75rem);
+    max-inline-size: 22ch;
+  }
+
+  .opener__prose {
+    margin: 0 0 1rem;
+    max-inline-size: var(--measure);
+    line-height: 1.65;
+  }
+
+  .opener__prose:last-child {
+    margin-block-end: 0;
+  }
+
+  .wheel {
+    margin: 0;
+  }
+
+  .wheel__media {
+    aspect-ratio: 1 / 1;
+  }
+
+  /* The one place this page carries a marker. Small, but never smaller than
+     the site's small size and never hidden — it is a disclosure. */
+  .wheel__caption {
+    margin-block-start: 0.875rem;
+    font-size: var(--text-small);
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  .blocks {
+    margin-block-start: clamp(2.5rem, 5vw, 4rem);
+    border-block-start: 1px solid var(--rule);
+    border-block-end: 1px solid var(--rule);
+  }
+</style>

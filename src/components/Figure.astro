@@ -1,0 +1,68 @@
+---
+/**
+ * One image from a page data module.
+ *
+ * SHARED. Five byte-similar copies of this file existed under `_home/`,
+ * `_equipe/`, `_contact/`, `_services/` and `_firme/` — each page build wrote
+ * its own because it could not create a file here. They differed only in which
+ * per-page `*Image` type they imported, and those five types are the same
+ * shape, now declared once as `SiteImage`.
+ *
+ * · Raster art goes through Astro's <Image> so sharp emits a srcset. The
+ *   `widths` arrays in the data modules are capped at each file's SOURCE width
+ *   — the DAM masters are small (350px headshots, 767px content photos,
+ *   1199px English banners) — so nothing is ever upscaled.
+ * · SVG is passed straight through as <img>: sharp does not rasterise it, and
+ *   asking for widths on a vector is meaningless.
+ * · `alt=""` is honoured exactly as the data says. Several hero banners carry a
+ *   valueless `alt` on the live site and therefore ship decorative; alt text is
+ *   never invented to fill one in (P-9, N-12). Attribute values pass straight
+ *   through, so the live defects that ship SIC — the `patrimoin ` truncation
+ *   (F-01), the doubled and trailing spaces (F-07, F-08) — survive into the
+ *   built HTML unchanged.
+ *
+ * ⚠ SCOPE PASSTHROUGH — see the same note in `Prose.astro`. `{...rest}` carries
+ * the calling page's `data-astro-cid-…` onto the rendered element so a parent's
+ * scoped rule can select it. Without it a rule like `.toolbox__img { … }`
+ * silently does nothing.
+ */
+import { Image } from 'astro:assets';
+import type { SiteImage } from '../data/types';
+
+interface Props {
+  image: SiteImage;
+  class?: string;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
+}
+
+const { image, class: className, loading = 'lazy', fetchpriority, ...rest } = Astro.props;
+const isVector = image.src.format === 'svg';
+---
+
+{
+  isVector ? (
+    <img
+      class={className}
+      src={image.src.src}
+      alt={image.alt}
+      width={image.src.width}
+      height={image.src.height}
+      loading={loading}
+      decoding="async"
+      {...rest}
+    />
+  ) : (
+    <Image
+      class={className}
+      src={image.src}
+      alt={image.alt}
+      widths={image.widths}
+      sizes={image.sizes}
+      loading={loading}
+      fetchpriority={fetchpriority}
+      decoding="async"
+      {...rest}
+    />
+  )
+}

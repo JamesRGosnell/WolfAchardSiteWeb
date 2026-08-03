@@ -1,0 +1,137 @@
+---
+/**
+ * PAGE-LOCAL. `Un puissant allié` / `A strong partner` — four National Bank
+ * figures.
+ *
+ * ═════════════════════════════════════════════════════════════════════════════
+ * THIS COMPONENT EXISTS TO *NOT* BUILD A STAT ROW.
+ *
+ * The obvious design for four numbers is four big numerals with a caption each:
+ * `1 G$` at 64px over `de revenus par année`. That design is prohibited here,
+ * and the reason is not aesthetic.
+ *
+ * All four of these figures are UNSOURCED AND UNDATED on the live site
+ * (C-31…C-34: no source, no as-of date, and the band never says whose revenue
+ * or market share of what). A figure keeps whatever qualification its own
+ * sentence gives it — `Plus de`, `More than`, `par année`, `au Québec`. Cut the
+ * numeral away from those words and set it at display size and you have
+ * manufactured a bare, authoritative-looking statistic that the source does not
+ * support, and that no one at National Bank has approved in that form. On a
+ * page whose neighbouring paragraph carries a figure that is only defensible
+ * BECAUSE it is dated (`424 milliards … au 31 octobre 2023`), that is exactly
+ * how a compliance problem gets created.
+ *
+ * So each figure renders as its WHOLE live sentence, with the live <b> span
+ * kept as <strong> — the same emphasis the client's own page applies, at
+ * reading size, never larger than the section heading. The number is never
+ * alone on a line by design.
+ *
+ * NO ATTRIBUTION LINE IS RENDERED, and that is deliberate: the live page has
+ * none, and writing `Source: National Bank of Canada` would invent an
+ * attribution for figures whose source the site never states (P-1 / P-6). The
+ * absence is registered as D-16 instead of being papered over.
+ *
+ * ⚠ The four SVG pictos are supplied brand artwork and are NOT recoloured (the
+ * D-05 precedent). Two of them are attached to the statistic their filename
+ * does not name; that is the live pairing and it is reproduced.
+ * ═════════════════════════════════════════════════════════════════════════════
+ */
+import Figure from '../../components/Figure.astro';
+import Prose from '../../components/Prose.astro';
+import type { FirmStatBand } from '../../data/pages/firm.types';
+import type { Locale } from '../../data/types';
+
+interface Props {
+  band: FirmStatBand;
+  locale: Locale;
+  headingId: string;
+}
+
+const { band, locale, headingId } = Astro.props;
+---
+
+<h2 id={headingId} class="t-h2 serif-display band__title">{band.heading}</h2>
+
+<ul class="band">
+  {
+    band.stats.map((stat) => (
+      <li class="band__item reveal">
+        <Figure image={stat.icon} class="band__icon" />
+        <Prose text={stat.text} locale={locale} class="band__text" />
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .band__title {
+    margin: 0 0 clamp(2rem, 4vw, 3rem);
+    text-align: center;
+  }
+
+  .band {
+    display: grid;
+    gap: clamp(2rem, 4vw, 2.75rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 34rem) {
+    .band {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(1.5rem, 3vw, 2.5rem);
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .band {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .band__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  /* Supplied brand artwork, at its own aspect ratio. The four pictos have
+     different intrinsic widths (52 / 62 / 93 / 68) and a shared 65px height, so
+     the HEIGHT is fixed and the width follows — otherwise the pie chart would
+     tower over the lightbulb. */
+  .band__item :global(.band__icon) {
+    inline-size: auto;
+    block-size: 3.25rem;
+  }
+
+  /* Reading size. NEVER a display numeral — see the note at the top of this
+     file. This is capped below the section heading on purpose.
+
+     `.band__text` is rendered by <Prose> and `.band__icon` by <Figure>. Both
+     now forward this component's scope attribute (they spread `...rest` onto
+     their root element), so a plain scoped rule would reach them. These stay
+     anchored `:global()` descendants because that is equally correct and
+     strictly narrower — but a NEW rule here does not need the anchor. A bare
+     `:global(.band__text)` with no scoped ancestor would still be wrong: it
+     leaks out of the component. */
+  .band__item :global(.band__text) {
+    margin: 0;
+    max-inline-size: 20ch;
+    font-size: 1.0625rem;
+    line-height: 1.45;
+    color: var(--muted);
+    /* The figures carry U+00A0 and U+202F precisely so they never break across
+       a line. Nothing here may re-introduce a break inside one. */
+    text-wrap: balance;
+  }
+
+  /* The live <b> span, reproduced. Emphasis, not a display size. */
+  .band__item :global(.band__text strong) {
+    font-weight: 600;
+    font-size: 1.1875rem;
+    color: var(--fg);
+  }
+</style>
