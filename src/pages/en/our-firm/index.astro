@@ -2,9 +2,18 @@
 /**
  * ENGLISH firm page — `/en/our-firm/`
  *
- * Section order is the CAPTURE's document order:
- *   hero · A financial partner for Canadian families · A strong partner ·
- *   Keep up with financial news · About National Bank of Canada · Contact us
+ * Section order is the CAPTURE's document order, with ONE addition at the top:
+ *   hero · ⚠ Wolf Archard Group (NC-28) · A financial partner for Canadian
+ *   families · A strong partner · Keep up with financial news · About National
+ *   Bank of Canada · Contact us
+ *
+ * ⚠ D-15 IS ANSWERED, 2026-08-03. The live page carries not one sentence about
+ * this team. `firm.team` is now one short paragraph about it, rendering FIRST,
+ * above every National Bank block. It is assembled from ENGLISH strings the
+ * team already publishes — see the traced note in `firm.en.ts` — and it is NOT
+ * a translation of the French paragraph on `/notre-firme/`. It is three
+ * sentences where the French is four, deliberately (D-73): the French ends on
+ * the four-step process and the English tree has no four-step process.
  *
  * ─────────────────────────────────────────────────────────────────────────────
  * SIX SECTIONS HERE AGAINST SEVEN IN FRENCH, AND THE PAGE IS NOT MISSING ONE.
@@ -57,6 +66,20 @@ const locale = 'en' as const;
 >
   <FirmHero hero={firm.hero} />
 
+  {/* NC-28 — the team's own paragraph, ABOVE the National Bank material. */}
+  {
+    firm.team && (
+      <Section bg="paper" aria-labelledby="team-heading">
+        <div class="team-intro">
+          <h2 id="team-heading" class="t-h2 serif-display team-intro__heading">
+            {firm.team.heading}
+          </h2>
+          <Prose text={firm.team.body} locale={locale} class="team-intro__prose" />
+        </div>
+      </Section>
+    )
+  }
+
   <Section bg="paper" aria-labelledby="intro-heading">
     <div class="intro">
       <h2 id="intro-heading" class="t-h2 serif-display intro__heading">{firm.intro.heading}</h2>
@@ -92,6 +115,36 @@ const locale = 'en' as const;
 </BaseLayout>
 
 <style>
+  /* NC-28 — the team's paragraph. Same 5/7 rhythm as the National Bank intro
+     below it, so the page reads as one page rather than as an insert bolted on
+     top of a bank template. Set at lead size, one step above the block below,
+     because it is the only thing on this page that is about the team. */
+  .team-intro {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  @media (min-width: 60rem) {
+    .team-intro {
+      grid-template-columns: 5fr 7fr;
+      align-items: start;
+      column-gap: clamp(2.5rem, 5vw, 4.5rem);
+    }
+  }
+
+  .team-intro__heading {
+    margin: 0;
+    max-inline-size: 14ch;
+  }
+
+  .team-intro :global(.team-intro__prose) {
+    margin: 0;
+    /* --measure, not a hand-picked `ch` count. See the token in global.css. */
+    max-inline-size: var(--measure);
+    font-size: var(--text-lead);
+    line-height: 1.55;
+  }
+
   .intro {
     display: grid;
     gap: clamp(1.5rem, 3vw, 2.5rem);

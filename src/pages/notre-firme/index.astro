@@ -2,18 +2,26 @@
 /**
  * FRENCH firm page — `/notre-firme/`
  *
- * Section order is the CAPTURE's document order:
- *   hero · Le partenaire financier des familles canadiennes · Un puissant allié
- *   · Suivez l'actualité financière · À propos de la Banque Nationale ·
- *   Petits détails pour tout savoir (FR only) · Contactez-nous
+ * Section order is the CAPTURE's document order, with ONE addition at the top:
+ *   hero · ⚠ Groupe Wolf Achard (NC-27) · Le partenaire financier des familles
+ *   canadiennes · Un puissant allié · Suivez l'actualité financière · À propos
+ *   de la Banque Nationale · Petits détails pour tout savoir (FR only) ·
+ *   Contactez-nous
  *
  * ─────────────────────────────────────────────────────────────────────────────
  * WHAT IS ON THIS PAGE, AND WHAT IS NOT
  *
- * It is 100% National Bank corporate copy. Not one sentence is about Groupe
- * Wolf Achard; the only team-specific data is the two advisors' phone numbers
- * and email addresses in the closing block. That is a finding for the client
- * (D-15), not a gap to fill (P-5).
+ * The LIVE page is 100% National Bank corporate copy. Not one sentence on it is
+ * about Groupe Wolf Achard; the only team-specific data is the two advisors'
+ * phone numbers and email addresses in the closing block. That was D-15 — the
+ * page a prospective client opens to find out who they would be dealing with,
+ * answering "National Bank" and stopping.
+ *
+ * ⚠ D-15 IS ANSWERED, 2026-08-03. `firm.team` is one short paragraph about this
+ * team, and it renders FIRST, above every National Bank block. It is assembled
+ * from French strings the team already publishes — see the traced note in
+ * `firm.fr.ts`. It is not translated from English and it is not authored: no
+ * years in business, no client count, no assets, no superlatives.
  *
  * NO DISCLAIMER ACCORDION. The capture renders ZERO `<sup>` and ZERO `<sub>`
  * markers — verified directly on `fr-notre-firme.html`, not taken on trust — so
@@ -55,6 +63,20 @@ const locale = 'fr' as const;
   showFooterCta={false}
 >
   <FirmHero hero={firm.hero} />
+
+  {/* NC-27 — the team's own paragraph, ABOVE the National Bank material. */}
+  {
+    firm.team && (
+      <Section bg="paper" aria-labelledby="team-heading">
+        <div class="team-intro">
+          <h2 id="team-heading" class="t-h2 serif-display team-intro__heading">
+            {firm.team.heading}
+          </h2>
+          <Prose text={firm.team.body} locale={locale} class="team-intro__prose" />
+        </div>
+      </Section>
+    )
+  }
 
   <Section bg="paper" aria-labelledby="intro-heading">
     <div class="intro">
@@ -98,6 +120,36 @@ const locale = 'fr' as const;
 </BaseLayout>
 
 <style>
+  /* NC-27 — the team's paragraph. Same 5/7 rhythm as the National Bank intro
+     below it, so the page reads as one page rather than as an insert bolted on
+     top of a bank template. It is set at lead size, one step above the block
+     below, because it is the only thing on this page that is about the team. */
+  .team-intro {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  @media (min-width: 60rem) {
+    .team-intro {
+      grid-template-columns: 5fr 7fr;
+      align-items: start;
+      column-gap: clamp(2.5rem, 5vw, 4.5rem);
+    }
+  }
+
+  .team-intro__heading {
+    margin: 0;
+    max-inline-size: 14ch;
+  }
+
+  .team-intro :global(.team-intro__prose) {
+    margin: 0;
+    /* --measure, not a hand-picked `ch` count. See the token in global.css. */
+    max-inline-size: var(--measure);
+    font-size: var(--text-lead);
+    line-height: 1.55;
+  }
+
   /* The opening statement reads as a single measured paragraph pair, not as a
      split with a photograph — the live page has no image here, and inventing
      one to balance the column would be decoration. */

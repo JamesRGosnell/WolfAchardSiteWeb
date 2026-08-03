@@ -7,12 +7,19 @@
  * page has the same five sections in the same order as the French one, so
  * nothing here is a compensating layout.
  *
- * THE ONE DIFFERENCE IS THE BIOGRAPHIES. French carries two `Biographie`
- * accordions; this page carries none, because the live English page carries
- * none. P-16 forbids writing them — they are credential claims about named,
- * licensed individuals. `bio` is `undefined` in `team.en.ts` and <PartnerCard>
- * renders nothing at all for it, so the English cards are simply shorter. No
- * empty accordion, no placeholder, no heading over absent content.
+ * ⚠ THE BIOGRAPHIES ARE NEW ON THIS PAGE — 2026-08-03. The live English page
+ * carries none; the live French page carries two `Biographie` accordions of
+ * credential claims. P-16 forbade writing them, and **the client amended P-16**
+ * (`content/COMPLIANCE.md` §6.5) to allow closing that gap BY TRANSLATION of
+ * the published French copy. Both partner cards now carry a `Biography` panel
+ * from `team.en.ts` (NC-24 … NC-26), rendered by the same <PartnerCard> the
+ * French page uses. **Nothing in this file changed to make that happen** — the
+ * component already rendered `bio` when a partner had one, and `bio` is still
+ * optional, so a partner without one still renders nothing at all.
+ *
+ * The credential lines in those panels are the most compliance-sensitive copy
+ * on the site: read the ⚠ block at the head of `team.en.ts` before touching a
+ * word of them, and note that the CFA line (C-17) is an open client question.
  *
  * The live page's closing `Contact us` block is not repeated here — D-07 moved
  * it into the site footer, where it renders at the foot of every page.

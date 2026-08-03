@@ -62,10 +62,10 @@ which file the reader had open, which is exactly how a reader reads them: side b
 | **`F-`** | **both** | Editorial fix to a live defect | `F-01` … `F-13` **here** · `F-14` → `CHANGES` |
 | **`AP-`** | **both** | Advisor profile pages | `AP-01` … `AP-03` **here** · `AP-04` → `CHANGES` |
 | **`N-`** | **this file only** | Flag-only. A live defect we will **not** repair, because repairing it is a legal, identity or regulatory decision | `N-01` … `N-15` |
-| **`P-`** | **this file only** | Prohibition — a standing rule the build must not violate | `P-1` … `P-16` *(no leading zero, deliberately — a `P-` is a rule, not a row)* |
+| **`P-`** | **this file only** | Prohibition — a standing rule the build must not violate | `P-1` … `P-16` *(no leading zero, deliberately — a `P-` is a rule, not a row)* · **`P-16` is partially amended — §6.5** |
 | **`R-`** | **this file only** | Risk found during review, including risks in our own documents | `R-01` … `R-33` |
-| **`D-`** | `CHANGES` **only** | Build decision the client confirms | `D-01` … `D-32` |
-| **`NC-`** | `CHANGES` **only** | New copy written for the rebuild | `NC-01` … `NC-07` |
+| **`D-`** | `CHANGES` **only** | Build decision the client confirms | `D-01` … `D-32`, then `D-51` … `D-53`, then `D-70` … `D-76` *(the gaps are deliberate — parallel agents, and a gap is cheaper than a collision)* |
+| **`NC-`** | `CHANGES` **only** | New copy written for the rebuild | `NC-01` … `NC-07`, then `NC-20` … `NC-28` *(gap deliberate, same reason)* |
 | **`S-`** | `CHANGES` **only** | Syndicated National Bank content | `S-01` … `S-08` |
 | **`A-`** | `CHANGES` **only** | Brand artwork substitutions | `A-01` … `A-05` |
 | **`U-`** | `CHANGES` **only** | URL change | `U-01` |
@@ -728,7 +728,7 @@ Binary. Any one of these on the finished site is a **launch blocker**.
 | **P-13** | **No renumbering, re-ordering, splitting, merging, excerpting or selectively omitting disclaimers 1–5**, and no dropping a marker because it is visually awkward. **No excerpting legal or regulated text** — reproduce whole or omit. |
 | **P-14** | **Claims, figures and dates are frozen strings. Syndicated bank publications track the bank.** Two separate categories; never collapse them. Copyright year is the literal `2026`, not `new Date()`. `October 31, 2023`, `mars 2019`, `Twitter` and every §4 figure are frozen. **But** `news-articles` / `nouvelles-articles` is a central NBF AEM Experience Fragment and its PDFs sit at evergreen URLs NBF overwrites in place — the approved labels literally say `Read the latest version` / `Lire la dernière version`. **Never pin a dated PDF filename**; freezing those links breaks the approved copy instead of preserving it. |
 | **P-15** | **Do not mix the two team navies within one language tree.** FR artwork is `#274155`, EN artwork is `#00324d`. Until the client picks one, each tree uses its own artwork's navy consistently. No third navy, no blend, no "split the difference". |
-| **P-16** | **DO NOT FILL THE ENGLISH CONTENT GAP.** ⚠ *Client-specific to this build.* The English tree is materially thinner than the French: EN home has **zero** list items against the French home's 11 plus a mission, commitments, differentiators and a philosophy essay; the EN team page carries **no biographies at all** against the French page's two; the EN firm page has neither the ranking footnote nor its accordion. **Writing English copy to balance them is prohibited.** It would be invented copy about named, licensed individuals and their credentials. The imbalance is itself the finding — it goes to the client as a commissioning decision ("do you want English biographies written and approved?"), not to a builder as a gap to close. The reverse also holds: the EN services page's `Our approach` section and 52 list items must **not** be translated into French. |
+| **P-16** | **DO NOT FILL THE ENGLISH CONTENT GAP** — ⚠ **PARTIALLY AMENDED 2026-08-03, see §6.5.** *Client-specific to this build.* The English tree is materially thinner than the French: EN home had **zero** list items against the French home's 11 plus a mission, commitments, differentiators and a philosophy essay; the EN team page carried **no biographies at all** against the French page's two; the EN firm page has neither the ranking footnote nor its accordion. **Writing English copy to balance them was prohibited outright.** ⚠ **The client granted a narrow amendment on 2026-08-03: six named blocks may be closed BY TRANSLATION of the existing French copy — the home page's mission, commitments, philosophy and differentiators, and the two team biographies.** §6.5 is the amendment and its scope limit is the operative text; read it before writing any English string. **Everything else in this row stands unchanged:** authoring English copy is still prohibited, every other FR-only block is still FR-only (the FR home intro, the four described process steps, and the `Petits détails pour tout savoir` ranking note in particular), and **the reverse direction is not amended at all** — the EN services page's `Our approach` section and 52 list items must **not** be translated into French. A translation is not an invention; anything that cannot be traced to a published French string still is. |
 
 ---
 
@@ -876,6 +876,68 @@ the amendment. **§6.4 is not a loophole in §6; it is the boundary of §6.**
 > for a purely cosmetic gain. The `F-` series means *"a live defect we found"*; §6.1/§6.2 vs
 > §6.4 says what kind. **§7 check 49 is written to match.**
 
+### 6.5 POLICY AMENDMENT — P-16, granted by the client 2026-08-03
+
+**This is the first policy amendment on this build.** It amends **P-16 and nothing else.**
+
+> #### The amendment, in full
+>
+> **Dated 2026-08-03. Granted by the client.** The English content gap identified in
+> `INTAKE.md` Q3 and in question 2 of `CHANGES-FOR-APPROVAL.md` **may now be closed**, by
+> translation, for the blocks named in the scope below.
+>
+> **SCOPE — TRANSLATION OF EXISTING FRENCH COPY ONLY.**
+>
+> 1. **Only translation.** Every English string produced under this amendment must be a
+>    faithful rendering of a French string that is already published on this team's live
+>    site. **No new claim, no new credential, no new figure, no new relationship, no
+>    marketing register the team never used.** If a sentence cannot be traced to a French
+>    source string, it does not ship — the amendment does not authorise authoring.
+> 2. **No improvement.** Faithful means faithful. A translation may not expand, soften,
+>    strengthen, modernise, quantify, de-quantify, re-date or tidy its source. A live
+>    French defect that survives translation (a rolling year count, a present-tense
+>    candidacy claim, an unquantified qualifier) **survives it into English**, and gets a
+>    flag, not a repair.
+> 3. **Named blocks only.** The amendment covers exactly: the French home page's
+>    `Notre mission`, `Nos engagements`, `Notre philosophie` and `Ce qui nous distingue`;
+>    and the French team page's two `Biographie` panels. **Every other FR-only block stays
+>    FR-only** — see the exclusion list below.
+> 4. **The reverse direction is NOT amended.** P-16's second half stands untouched: the
+>    English services page's `Our approach` section and its 52 list items **may not** be
+>    translated into French.
+> 5. **Credential and regulatory strings are individually flagged, not silently shipped.**
+>    Every translated line carrying a credential, a professional-body membership, an
+>    academic qualification, a date or a designation-in-progress is registered on its own
+>    `NC-` line with the French source string beside it, and **every one of them needs NBF
+>    compliance sign-off before launch.** `C-17` (the CFA line) is subject to CFA Institute
+>    rules on describing candidacy and was already an open item; translating it does not
+>    close it and makes it visible to a second audience.
+> 6. **This amendment does not touch §6.1/§6.2.** No editorial-fix amendment has been
+>    granted. **Every `F-` row is still PENDING and every live typo still ships sic.**
+>    §6's scope limit — *"F-numbered editorial typos only; §1 legal blocks, §2 identity
+>    strings, §4 claims and figures, and all N-items stay strictly verbatim"* — is
+>    unchanged and still governs everything that is not a translation under this section.
+> 7. **Nothing here is a `C-` disposition.** Every `C-` row keeps `[KEEP VERBATIM]` on its
+>    French string. A translation is an *additional* English surface for the same claim,
+>    never a replacement for, or a re-statement of, the French one.
+
+**Explicitly OUT of scope, and still prohibited.** These are FR-only blocks the amendment
+does **not** reach, listed so a later pass does not read the amendment as general permission:
+
+| FR-only block | Why it stays FR-only |
+|---|---|
+| FR home `Une gestion de patrimoine sur mesure pour des clients uniques` (H2 + two paragraphs + photo) | Not named in the client's authorisation. Untranslated. |
+| FR home `Un processus éprouvé` — the four **described** steps | Not named in the authorisation, **and the English home page's process block is four different items**: `Our personalized approach` / `Our integrity` / `Our professionalism` / `Our transparency` are qualities, not steps, and they are not translations of `Faisons connaissance` / `Établissons une stratégie` / `Déployons notre plan` / `Restons en contact`. Attaching the French descriptions to the English labels would describe the wrong thing. |
+| FR firm `Petits détails pour tout savoir` — the Investor Economics ranking note (§1.7, C-35) | **Still prohibited.** A competitive ranking claim whose substantiation is over seven years old, put in front of English readers for the first time, is a compliance decision and not a translation. `CHANGES` D-20 stands. |
+| FR home / FR news alt strings, and the four crossed process-icon alts (`CHANGES` D-03) | Alt text for artwork whose description is already wrong is repaired by NBF, not translated by a builder (P-9, N-12). |
+| The five numbered disclaimers, the footer legal block, every §2 identity string | Never in scope. Platform-standard text exists in both languages already. |
+
+**What shipped under this amendment**, in `CHANGES-FOR-APPROVAL.md`:
+`NC-20` … `NC-26` (the translations) and `D-70` … `D-76` (the decisions taken while making
+them). `NC-27` / `NC-28` are **not** translations and do not rely on this amendment — they
+are the firm-page team paragraph, composed from strings already published in the language
+they appear in, and they rest on `D-15`, not on P-16.
+
 ---
 
 ## 7. Final audit checklist
@@ -989,7 +1051,39 @@ Binary. Run against the **built output**, both language trees, every page. Any �
 
 **F. Prohibitions (42–48)**
 
-42. **Zero invented English content.** The EN home still has no list items; the EN team page still has no biographies; the EN firm page still has no ranking footnote (P-16). ☐
+42. **Zero invented English content — REWRITTEN 2026-08-03, and it now tests the rule rather than the gap.** ☐
+    > **This check used to read:** *"The EN home still has no list items; the EN team page still
+    > has no biographies; the EN firm page still has no ranking footnote (P-16)."*
+    > **After §6.5 it would have failed by design** — the client authorised the first two, and
+    > *a check that fails by design is a check nobody reads* (the same correction §7 checks 12
+    > and 51 already needed). P-16 is now a rule with a boundary, so the check tests the
+    > boundary. **Three parts, all three must pass:**
+    >
+    > **(a) Every English string in a §6.5 block traces to a French source string.** The EN home
+    > page's `Our mission`, `Our commitments`, `Our philosophy` and `What sets us apart`, and
+    > both EN `Biography` panels, carry **no sentence** that is not a rendering of a live
+    > `fr-home.html` / `fr-notre-equipe.html` string. Each source is quoted in the code comment
+    > beside its translation and again in `CHANGES` NC-20 … NC-26. **Any English sentence
+    > without a quoted French source is invented content and fails this check.**
+    >
+    > **(b) Nothing outside §6.5's six named blocks was filled.** Measured on the build:
+    > EN home has **no** `intro` block and **no** process-step descriptions; EN firm has **no**
+    > ranking footnote and **no** accordion; EN services is **unchanged**. ☐
+    >
+    > **(c) The reverse direction is still zero.** Unchanged from check 43 — nothing translated
+    > into French. ☐
+    >
+    > ⚠ **`NC-27` / `NC-28` are outside all three parts** and must not be tested against them.
+    > The firm-page team paragraph is **not a translation**: each language is assembled from
+    > strings already published *in that language*, so it has no French source to trace to and
+    > it does not rely on §6.5. It is tested by check 42d instead.
+    >
+    > **(d) The firm-page team paragraph asserts nothing the site does not already say.**
+    > Names and titles trace to §2.1; the plural titles `conseillers en gestion de patrimoine` /
+    > `wealth advisors` trace to **C-29, on the same page**; the mission, commitments and
+    > process clauses trace to C-25/C-26 and the FR home process block; the city traces to the
+    > §2.3 address. **Grep it for digits: there must be none.** No year, no count, no figure —
+    > P-1 and P-3 govern it exactly as they govern every other sentence on the site. ☐
 43. **Zero invented French content.** The EN-only `Our approach` section and its 52 list items have **not** been translated into French (P-16). ☐
 44. **Neither navy is mixed within a language tree.** `grep -c "#274155"` returns zero inside the EN tree's CSS/assets and `grep -c "#00324d"` returns zero inside the FR tree's — or, if the client has chosen a single navy, that choice is applied uniformly and registered (P-15). ☐
 45. No testimonials, client quotes, ratings, case studies or endorsement language. ☐

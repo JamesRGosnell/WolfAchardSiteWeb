@@ -9,6 +9,13 @@ import { pathFor } from '../../lib/i18n';
  * document order. Nothing is reordered, added, or translated from the English
  * page (P-16 runs in both directions).
  *
+ * ⚠ ONE EXCEPTION, and it is the only block on this page that is about the
+ * team: `team` below is NOT in the capture. It is NC-27 — a paragraph assembled
+ * from FRENCH strings this team already publishes elsewhere on the site, in
+ * answer to D-15. It is not a translation and it relies on no amendment. The
+ * verbatim sweep must exclude that object rather than fold it in; everything
+ * else in this file is still capture-exact.
+ *
  * ─────────────────────────────────────────────────────────────────────────────
  * THE NINE NON-BREAKING SPACES THAT SHIP FROM THIS FILE
  *
@@ -106,6 +113,70 @@ const content: FirmContent = {
       widths: [767, 1199, 1600, 2000],
       sizes: '(min-width: 82rem) 76rem, calc(100vw - 2.5rem)',
     },
+  },
+
+  /* ------------------------------------------------------------------------
+   * NC-27 — THE ONLY BLOCK ON THIS PAGE THAT IS ABOUT THIS TEAM.
+   *
+   * D-15 recorded that not one sentence on the live `Notre firme` page is about
+   * Groupe Wolf Achard. The client authorised a short paragraph on 2026-08-03;
+   * this is it, and it sits above every National Bank block on the page.
+   *
+   * NOT A TRANSLATION and NOT AN INVENTION. Every clause is assembled from
+   * French strings this team already publishes. Traced sentence by sentence:
+   *
+   *  1. `Notre équipe réunit Laurent Achard et David Alexandre Wolf,
+   *      conseillers en gestion de patrimoine à Montréal.`
+   *     · `Notre équipe` — the team's own live nav label and the opening words
+   *       of its own `Notre équipe est composée de…` on the team page.
+   *     · Both names — §2.1 identity table, `advisors.ts`. `David Alexandre`
+   *       with NO hyphen (D-09).
+   *     · `conseillers en gestion de patrimoine` — the PLURAL, lowercase, is a
+   *       live string ON THIS PAGE: `près de 850 conseillers en gestion de
+   *       patrimoine` in the paragraph immediately below (C-29). Their singular
+   *       title `Conseiller en gestion de patrimoine ` (C-01/C-02) is a
+   *       regulated string and is not re-cased or pluralised here; the plural
+   *       is borrowed from the page's own copy instead.
+   *     · `à Montréal` — the office city, from the site-wide address
+   *       (`1 Place Ville-Marie, Bureau 1700, Montréal (Québec) H3B 2C1`).
+   *       The street line is not repeated; the footer already prints it in full
+   *       on every page.
+   *
+   *  2. `Notre mission est de…` — the `Notre mission` heading plus three of its
+   *     four items, home page, C-26. Verbatim except for the infinitive
+   *     conjugation the sentence requires (`Sécuriser` → `de sécuriser`).
+   *     The fourth item, `Construire une relation à long terme…`, is used in
+   *     sentence 3.
+   *
+   *  3. `Nous nous engageons à…` — the `Nos engagements` heading, plus that
+   *     block's first item (`Agir de manière intègre et communiquer de façon
+   *     transparente`) and the mission's fourth item.
+   *
+   *  4. `Notre processus se déroule en quatre étapes:` plus the four step
+   *     titles of `Un processus éprouvé`, verbatim and in live order.
+   *     `éprouvé` is dropped — it is their claim and they may keep it on the
+   *     home page, but a superlative is not what this paragraph is for.
+   *     ⚠ THE COLON HAS NO SPACE BEFORE IT, against French typography and WITH
+   *     this team's own habit: `vous pourrez toujours compter sur:` on the home
+   *     page and `une passion commune: celle d'aider` on the team page both
+   *     omit it. Their voice, not a typo of ours.
+   *
+   * NOT USED, and each for a reason: `Investir de manière audacieuse` and
+   * `Demeurer informés` (two more commitments — the paragraph is short by
+   * design and three claims is enough), `Un processus éprouvé`'s four
+   * DESCRIPTIONS (too long), and every §4 figure on this page (they are
+   * National Bank's, not the team's).
+   *
+   * Apostrophes are U+2019, matching this team's own body copy on the home
+   * page. No U+00A0 anywhere in it — this is new copy, so there is no live
+   * no-break space to preserve (§0, D-32).
+   * ---------------------------------------------------------------------- */
+  team: {
+    // The team's own name, verbatim. Not new copy — an identity string.
+    heading: 'Groupe Wolf Achard',
+    body: [
+      'Notre équipe réunit Laurent Achard et David Alexandre Wolf, conseillers en gestion de patrimoine à Montréal. Notre mission est de sécuriser votre avenir financier, de vous accompagner dans la réalisation de vos projets de vie ambitieux et d’être le partenaire principal dans votre réussite financière. Nous nous engageons à agir de manière intègre, à communiquer de façon transparente et à construire une relation à long terme basée sur la confiance et le professionnalisme. Notre processus se déroule en quatre étapes: faisons connaissance, établissons une stratégie, déployons notre plan, restons en contact.',
+    ],
   },
 
   intro: {

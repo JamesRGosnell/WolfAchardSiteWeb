@@ -62,7 +62,7 @@ const onward = (['services', 'team'] as const).map((key) => ({
   description={home.meta.description}
   showFooterCta={false}
 >
-  <HomeHero hero={home.hero} />
+  <HomeHero hero={home.hero} locale={locale} />
 
   {
     home.intro && (

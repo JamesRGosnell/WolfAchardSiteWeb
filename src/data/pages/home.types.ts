@@ -12,23 +12,32 @@ import type { Locale, LinkItem, Run, RichText, ContactLine, SiteImage, SiteConta
  *   section                     FR (fr-home.html)        EN (en-home.html)
  *   ─────────────────────────── ──────────────────────── ────────────────────
  *   hero banner                 bespoke team artwork     NBF generic stock
- *   intro (H2 + prose + photo)  yes                      —
+ *   intro (H2 + prose + photo)  yes                      — (still absent)
  *   `Personalized support`      —                        yes
  *   `Discover our company`      —                        yes (H3 + two H4s)
- *   mission / commitments       8 list items             — (zero list items)
- *   philosophy essay            yes                      —
- *   differentiators             3 list items             —
- *   process                     4 steps, H3 + a described 4 steps, bare <p>
- *                               paragraph each           labels, no prose
+ *   mission / commitments       8 list items             8, TRANSLATED §6.5
+ *   philosophy essay            yes                      yes, TRANSLATED §6.5
+ *   differentiators             3 list items             3, TRANSLATED §6.5
+ *   process                     4 steps, H3 + a described 4 DIFFERENT items,
+ *                               paragraph each           bare <p>, no prose
  *   news teasers                3                        3
  *   contact block               yes                      yes
  *
- * P-16 PROHIBITS writing English copy to close that gap: it would be invented
- * copy about named, licensed individuals. So the gap is expressed structurally
- * — an absent section is `undefined` here, and the page component renders
- * nothing at all for it. There is deliberately no "empty" or "placeholder"
- * state anywhere in this type: a heading can never appear over an absent list,
- * because the heading and the list are the same object.
+ * ⚠ P-16 WAS AMENDED BY THE CLIENT ON 2026-08-03 (`content/COMPLIANCE.md` §6.5).
+ * Four of the five gaps above are now closed **by translation of the published
+ * French copy and by nothing else** — see `home.en.ts`, which quotes the French
+ * source beside every English string. Authoring English copy is still
+ * prohibited, and the amendment does not run the other way at all.
+ *
+ * TWO GAPS REMAIN OPEN AND EVERY FIELD BELOW IS STILL OPTIONAL, because they
+ * are still real: `intro` has no English counterpart, and the four process
+ * items are not the same four things in the two languages (qualities vs steps),
+ * so `ProcessStep.description` is still English-absent by nature rather than by
+ * omission. The gap is expressed structurally — an absent section is
+ * `undefined` here and the page component renders nothing at all for it. There
+ * is deliberately no "empty" or "placeholder" state anywhere in this type: a
+ * heading can never appear over an absent list, because the heading and the
+ * list are the same object.
  *
  * ─────────────────────────────────────────────────────────────────────────────
  * VERBATIM
@@ -94,7 +103,13 @@ export interface HomeHero {
   banner?: HomeImage;
 }
 
-/** Heading + prose + optional photograph. FR only (`Une gestion de patrimoine…`). */
+/**
+ * Heading + prose + optional photograph.
+ *
+ * Used by the FR-only `intro` (`Une gestion de patrimoine…`, still untranslated
+ * — §6.5's exclusion list) and by the EN-only `support` (`Personalized
+ * support`, which must not be translated into French).
+ */
 export interface HomeProse {
   heading: string;
   body: RichText[];
@@ -108,7 +123,7 @@ export interface HomeList {
   image?: HomeImage;
 }
 
-/** FR only — `Notre philosophie`. One heading, one essay. */
+/** `Notre philosophie` / `Our philosophy` (NC-22). One heading, one essay. */
 export interface HomeEssay {
   heading: string;
   body: RichText;
@@ -126,7 +141,14 @@ export interface HomeCompany {
 export interface ProcessStep {
   icon: HomeImage;
   title: string;
-  /** FR carries a described paragraph per step; EN carries none. */
+  /**
+   * FR carries a described paragraph per step; EN carries none, and §6.5 does
+   * NOT authorise translating the French ones into these slots. The two
+   * languages list four DIFFERENT items here — French steps (`Faisons
+   * connaissance`…) against English qualities (`Our personalized approach`…) —
+   * so a French description attached to an English label would describe the
+   * wrong item. D-73.
+   */
   description?: string;
 }
 
@@ -185,15 +207,20 @@ export interface HomeContent {
   };
   hero: HomeHero;
 
-  /* ---- FR-only blocks. `undefined` in English, and that is the point. ---- */
+  /* ---- FR-only. `undefined` in English, and that is still the point. ----- */
+  /** `Une gestion de patrimoine sur mesure…`. Excluded from §6.5. */
   intro?: HomeProse;
-  /** `Notre mission` and `Nos engagements`, in live order. */
+
+  /* ---- Translated into English under §6.5 (NC-20 … NC-23). --------------- */
+  /** `Notre mission` and `Nos engagements` / `Our mission` and `Our commitments`,
+   *  in the French page's live order. */
   lists?: HomeList[];
   essay?: HomeEssay;
-  /** `Ce qui nous distingue`. */
+  /** `Ce qui nous distingue` / `What sets us apart`. The English block carries
+   *  no photograph — D-72. */
   distinctions?: HomeList;
 
-  /* ---- EN-only blocks. `undefined` in French. ---------------------------- */
+  /* ---- EN-only blocks. `undefined` in French, and NOT to be translated. --- */
   support?: HomeProse;
   company?: HomeCompany;
 

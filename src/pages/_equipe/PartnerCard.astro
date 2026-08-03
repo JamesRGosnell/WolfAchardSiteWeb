@@ -19,10 +19,13 @@
  *  · `title` carries the ONLY two disclaimer markers on this page. They are real
  *    <sup> links into <LegalNotes> — rendered by <TeamCard> from `noteRefs` —
  *    and the page MUST render <LegalNotes> too, or they are orphans (P-12).
- *  · The biography is FRENCH ONLY on this site. `bio` is `undefined` in English
- *    and this component then renders nothing at all — no empty accordion, no
- *    placeholder. Translating it is prohibited (P-16): every paragraph is a
- *    credential or experience claim about a named, licensed individual.
+ *  · The biography renders in BOTH languages since 2026-08-03 — the English
+ *    text is a translation made under the P-16 amendment
+ *    (`content/COMPLIANCE.md` §6.5, NC-24 … NC-26). Every paragraph is still a
+ *    credential or experience claim about a named, licensed individual, so it
+ *    is still never edited, summarised or strengthened; the French remains the
+ *    source of record. `bio` stays optional and this component still renders
+ *    nothing at all when it is absent — no empty accordion, no placeholder.
  *  · Biography text is never excerpted, summarised or truncated behind a "read
  *    more" (P-13). <details> keeps every word in the DOM, exposes its state
  *    natively, and the print rule below opens it whatever its state on screen.

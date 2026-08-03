@@ -13,14 +13,19 @@ decision, not a stall. Answering later changes a string, not the build.
 > these nine are the full set, with the register IDs behind each. If a default
 > changes in one file it changes in both, in the same edit.
 >
-> | This file | The five questions |
-> |---|---|
-> | Q1 team name | **1** |
-> | Q3 English is the bank's words | **2** |
-> | Q8 + Q8b stale figures and the CFA claim | **3** |
-> | Q5 + Q5b references that point at nothing | **4** |
-> | Q10 who owns the syndicated content | **5** |
-> | Q2, Q4, Q6, Q7, Q9 | *not in the five — each has a working default and needs no answer to proceed* |
+> | This file | The five questions | State |
+> |---|---|---|
+> | Q1 team name | **1** | open |
+> | Q3 English is the bank's words | **2** | ✅ **answered 2026-08-03 — a decision taken, not a pending question.** The translations shipped; what remains is NBF sign-off on seven credential lines, which is tracked here and on the pre-launch checklist, not as an unanswered question |
+> | Q8 + Q8b stale figures and the CFA claim | **3** | open — **and made more urgent by the answer to Q3**: the CFA sentence now appears in English too |
+> | Q5 + Q5b references that point at nothing | **4** | disposed |
+> | Q10 who owns the syndicated content | **5** | open |
+> | Q2, Q4, Q6, Q7, Q9 | *not in the five — each has a working default and needs no answer to proceed* | |
+>
+> **One question in this file is now answered, and both documents say so in the
+> same words.** An answered question keeps its number and its history — it is not
+> deleted — but it states what shipped and what is still owed, so that nobody
+> re-asks it and nobody mistakes "answered" for "finished".
 
 ---
 
@@ -121,9 +126,65 @@ The same pattern, in the opposite direction, on the rest of the site:
 > into English for the rebuild? That is new copy and needs NBF approval, but it
 > roughly doubles the English site.
 
-**Default:** reproduce both trees exactly as they are, thin English included. We
-are prohibited from inventing content to fill a language gap. Registered as the
-single largest improvement available to you.
+## ✅ Q3 — ANSWERED 2026-08-03. This is no longer a pending question.
+
+**The client said yes, and the prohibition was amended rather than overridden.**
+
+`content/COMPLIANCE.md` **P-16** previously forbade filling the English gap
+outright. It now carries a **dated, scope-limited amendment at §6.5** —
+*translation of existing French copy only* — naming the six blocks it covers,
+listing by name the blocks it does **not**, leaving the reverse direction
+(English → French) entirely un-amended, and stating explicitly that it does
+**not** grant the §6 editorial-fix amendment. Every `F-` typo row is still
+PENDING and every typo on the live site still ships sic. The decision is
+`CHANGES-FOR-APPROVAL.md` **D-70**.
+
+**What shipped**
+
+| English page | New block | Translated from | Register |
+|---|---|---|---|
+| `/en/` | `Our mission`, 4 items | `Notre mission` | NC-20 |
+| `/en/` | `Our commitments`, 4 items | `Nos engagements` | NC-21 |
+| `/en/` | `Our philosophy`, the essay | `Notre philosophie` | NC-22 |
+| `/en/` | `What sets us apart`, 3 items | `Ce qui nous distingue` | NC-23 |
+| `/en/team/` | Lysane Tougas — `Biography`, 3 paragraphs | her `Biographie` | NC-24, NC-25 |
+| `/en/team/` | Jean-Francois Gobeil — `Biography`, 2 paragraphs | his `Biographie` | NC-26 |
+
+The English home page went from **five sections to eight**. Nothing was
+improved, expanded, softened or re-dated on the way across; where the French
+carries a defect the English carries the same one, flagged.
+
+**What still needs NBF, and it is the whole of what is left open**
+
+- ⚠ **Seven credential and regulatory lines are now asserted in a second
+  language** about two named, licensed individuals: Barreau du Québec since
+  1998 (C-10) · bachelor's + master's in law, 2004 (C-11) · `B.B.A`, shipped
+  with its live missing period and lowercase `university` (C-14) · **IQPF
+  membership since 2015** (C-15) · HEC Montréal diploma (C-16) · **the CFA
+  Level III line** (C-17) · **`more than 8 years`** (C-18). **Every one needs
+  NBF compliance sign-off before launch** — that is a condition written into
+  the amendment itself, not an afterthought. Each is flagged individually at
+  `NC-25` / `NC-26`.
+- ⚠ **The CFA line is now urgent in two languages.** See Q8b below, which this
+  answer has made harder rather than easier.
+
+**What was NOT translated, and each has a reason on file**
+
+| Left in French only | Why |
+|---|---|
+| FR home `Une gestion de patrimoine sur mesure pour des clients uniques` | Not in the authorisation |
+| The four descriptions under `Un processus éprouvé` | Not in the authorisation — **and there is nothing to attach them to**: the English page's four items (`Our personalized approach`, `Our integrity`, `Our professionalism`, `Our transparency`) are *qualities*, not the French *steps*. `CHANGES` D-73 |
+| FR firm `Petits détails pour tout savoir` — the Investor Economics ranking | Still prohibited. A stale competitive ranking claim in front of a new audience is a separate decision — `CHANGES` D-20 |
+| EN services `Our approach` + its 52 list items | **The reverse direction is not amended at all.** Still prohibited |
+
+**Separately, and not a translation:** `Notre firme` / `Our Firm` now opens with
+a short paragraph about the team, assembled from strings already published in
+each language (`NC-27` / `NC-28`). That answers **D-15**, not this question, and
+it does not rely on the §6.5 amendment.
+
+**The original default, for the record:** reproduce both trees exactly, thin
+English included, because inventing content to fill a language gap was
+prohibited. That is what the build did until 2026-08-03.
 
 ---
 
@@ -252,6 +313,23 @@ Jean-Francois Gobeil's French biography, on a page carrying **no date**:
 named, licensed individual is not a builder's call. **This is the one question on
 the list that should be answered before launch rather than after** — it is the
 fastest-decaying sentence on the site. *(`COMPLIANCE.md` C-17, C-18; R-07.)*
+
+> ⚠ **UPDATED 2026-08-03 — answering Q3 raised the stakes on this one.**
+> Both sentences are now published **in English as well**, translated faithfully
+> under the §6.5 amendment: `is currently preparing for the CFA Level III exam`
+> and `more than 8 years of advisory expertise`. `actuellement` is preserved as
+> `currently` and the digit `8` is preserved as `8`, because a translation may
+> not quietly improve its source — softening either would have been exactly the
+> silent rewording this question exists to prevent.
+>
+> **The English is written to be the smallest claim available**: never
+> `CFA Level III candidate`, never `CFA candidate`, never `pursuing the CFA
+> charter`. CFA Institute rules constrain how candidacy may be described in
+> public material, and all three of those say more than the French does.
+>
+> **Two consequences.** The sentence now decays on two pages in front of two
+> audiences — and **one corrected sentence from Jean-Francois or NBF compliance
+> now fixes both at once.** *(`CHANGES` NC-26, lines (a) and (c).)*
 
 ---
 

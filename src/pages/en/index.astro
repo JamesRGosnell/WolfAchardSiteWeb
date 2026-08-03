@@ -2,34 +2,41 @@
 /**
  * ENGLISH HOME — `/en/`
  *
- * NOT a translation of `/`. A different page with a different section list,
- * because the live English tree is a different page. It has no mission, no
- * commitments, no philosophy, no differentiators and zero list items, and its
- * four process steps are bare labels. P-16 prohibits writing English copy to
- * close that gap.
+ * ⚠ REWRITTEN 2026-08-03 AFTER THE CLIENT AMENDED P-16
+ * (`content/COMPLIANCE.md` §6.5).
  *
- * So the page is composed to READ AS COMPOSED rather than as broken:
+ * This page used to omit `Our mission`, `Our commitments`, `Our philosophy` and
+ * `What sets us apart` because the live English page has none of them and P-16
+ * forbade writing them. **The client has authorised closing that gap by
+ * translation of the published French copy**, so all four now render, from
+ * `home.en.ts`, in the FRENCH page's own document order relative to one another
+ * (lists · essay · distinctions), inserted after this page's two English-only
+ * sections and before the process block. NC-20 … NC-23.
  *
- *  · Sections whose content does not exist in English are not rendered at all.
- *    `home.intro`, `home.lists`, `home.essay` and `home.distinctions` are
- *    `undefined` in `home.en.ts`, so there is no heading over an absent list and
- *    no card grid with holes — the markup for them never runs.
- *  · The page BREATHES rather than stretches. `Personalized support` is set at
- *    lead size on a short measure with a 5/7 split, so five sections of real
- *    content fill the page at a confident scale instead of six padded ones.
- *  · The process is the one place composed deliberately: the French ruled rows
- *    become a compact single-line rail (see ProcessBlock.astro), and it takes
- *    the page's single tint block so the thinnest section is also its most
- *    designed one.
+ * WHAT DID NOT CHANGE, AND WHY THE GUARDS STAY:
  *
- * Nobody sees the two languages side by side. This page has to stand alone, and
- * it does — with the client's own words only.
+ *  · `home.intro` is STILL `undefined` in English — the French
+ *    `Une gestion de patrimoine sur mesure…` block is on §6.5's exclusion list.
+ *    Every section below is still guarded on its own data, so an absent section
+ *    is absent rather than empty. Removing a guard would be trading a real
+ *    structural fact for a heading over nothing.
+ *  · The four process items are still bare labels, and they are still not the
+ *    French four (qualities against steps — D-73), so the compact rail stays.
+ *
+ * BAND RHYTHM — the one thing this rewrite MOVED. DESIGN_BRIEF §4 allows
+ * exactly one tint block per page. The tint used to sit on the process rail,
+ * on the stated ground that "the thinnest section is also its most designed
+ * one". That ground is gone: the page now carries eight sections, not five.
+ * The tint moves to `Our philosophy`, which is where the French page has it —
+ * so the two home pages now pause in the same place. One word per section, and
+ * still exactly one tint block. D-71.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Section from '../../components/Section.astro';
 import HomeHero from '../_home/HomeHero.astro';
 import Prose from '../../components/Prose.astro';
 import Figure from '../../components/Figure.astro';
+import RuledList from '../_home/RuledList.astro';
 import ProcessBlock from '../_home/ProcessBlock.astro';
 import NewsBlock from '../_home/NewsBlock.astro';
 import ContactBlock from '../../components/ContactBlock.astro';
@@ -68,7 +75,7 @@ const onward = (['services', 'team'] as const).map((key) => ({
   description={home.meta.description}
   showFooterCta={false}
 >
-  <HomeHero hero={home.hero} />
+  <HomeHero hero={home.hero} locale={locale} />
 
   {
     home.support && (
@@ -117,8 +124,55 @@ const onward = (['services', 'team'] as const).map((key) => ({
     )
   }
 
-  {/* THE one tint block on this page — the process rail. */}
-  <Section bg="greige" aria-labelledby="process-heading">
+  {/* Mission + commitments. NC-20 / NC-21. No accessible name on the band, for
+      the same reason as the French page: it holds TWO sibling <h3> lists, so
+      any single name would misdescribe it and a composed one would be authored
+      microcopy with no live counterpart in either language. A <section> without
+      a name is not a landmark, which is the correct outcome. */}
+  {
+    home.lists && home.lists.length > 0 && (
+      <Section bg="paper">
+        <div class="lists">
+          {home.lists.map((list) => (
+            <RuledList list={list} class="reveal" />
+          ))}
+        </div>
+      </Section>
+    )
+  }
+
+  {/* THE one tint block on this page — `Our philosophy`, where the French page
+      has it too (D-71). */}
+  {
+    home.essay && (
+      <Section bg="greige" aria-labelledby="essay-heading">
+        <div class="essay">
+          {/* <h3>, matching the French page: `Notre philosophie` sits at the
+              same level as `Notre mission`, `Nos engagements` and `Ce qui nous
+              distingue` in the captured French outline, and the translated
+              English blocks keep that outline rather than inventing one. */}
+          <h3 id="essay-heading" class="essay__eyebrow">{home.essay.heading}</h3>
+          <Prose text={home.essay.body} locale={locale} class="essay__body" />
+        </div>
+      </Section>
+    )
+  }
+
+  {/* NC-23. NO PHOTOGRAPH on this one — the French block is a split with a
+      photograph whose description exists only in French, and translating an
+      image description is authoring one (D-72, P-9). So this is the ruled list
+      on its own measure, not a 7/5 split with an empty column. */}
+  {
+    home.distinctions && (
+      <Section bg="paper" aria-labelledby="distinctions-heading">
+        <div class="distinctions">
+          <RuledList list={home.distinctions} headingId="distinctions-heading" class="reveal" />
+        </div>
+      </Section>
+    )
+  }
+
+  <Section bg="paper" aria-labelledby="process-heading">
     <ProcessBlock process={home.process} headingId="process-heading" />
 
     {/* D-52 — see the note in the frontmatter. Secondary, not primary: the
@@ -159,6 +213,61 @@ const onward = (['services', 'team'] as const).map((key) => ({
     flex-wrap: wrap;
     gap: 0.875rem 1rem;
     margin-block-start: clamp(2rem, 4vw, 2.75rem);
+  }
+
+  /* NC-20 / NC-21 — mission and commitments side by side, identical to the
+     French page's rule, because they are the same two lists. */
+  .lists {
+    display: grid;
+    gap: clamp(2rem, 4vw, 3rem);
+  }
+
+  /* NC-23 — the differentiators, on their own measure rather than in a split.
+     The French block pairs this list with a photograph; the English one has no
+     description for that photograph (D-72), so the list holds the column alone
+     and is capped so the three long items do not run the full 76rem container. */
+  .distinctions {
+    max-inline-size: 46rem;
+  }
+
+  @media (min-width: 48rem) {
+    .lists {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(2.5rem, 5vw, 4.5rem);
+      align-items: start;
+    }
+  }
+
+  /* NC-22 — the philosophy essay, set exactly as the French page sets it: a
+     quiet label over a large-set paragraph. This is a stated investment
+     philosophy (C-27, P-2), not a pull-quote, and setting it as one would dress
+     a compliance-sensitive statement up as a slogan. */
+  .essay {
+    max-inline-size: 54rem;
+  }
+
+  .essay__eyebrow {
+    margin: 0 0 clamp(1rem, 2vw, 1.5rem);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    font-weight: 600;
+    letter-spacing: 0.085em;
+    text-transform: uppercase;
+    color: var(--stone);
+  }
+
+  .essay__body {
+    margin: 0;
+    /* The cap is on the paragraph, not the band: the eyebrow keeps the full
+       width. `--measure`, not a hand-picked `ch` count — see global.css. */
+    max-inline-size: var(--measure);
+    font-size: clamp(1.1875rem, 1.9vw, 1.5rem);
+    line-height: 1.5;
+    letter-spacing: -0.004em;
+  }
+
+  .essay__body :global(strong) {
+    font-weight: 600;
   }
 
   @media (min-width: 60rem) {

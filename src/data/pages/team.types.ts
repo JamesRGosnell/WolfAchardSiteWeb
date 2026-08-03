@@ -14,17 +14,24 @@ import type { Locale, SiteImage } from '../types';
  *   hero banner                   bespoke team artwork      NBF generic stock
  *   intro (H2 + 2 paragraphs)     yes                       yes, different sentences
  *   advisors (H2 + 2 cards)       yes                       yes
- *   partners (H2 + 2 cards)       yes, WITH biographies     yes, NO biographies
+ *   partners (H2 + 2 cards)       yes, WITH biographies     yes, TRANSLATED §6.5
  *   contact block                 yes                       yes  ← see below
  *
- * THE ONE GAP IS THE BIOGRAPHIES. French carries two `Biographie` accordions —
- * Lysane Tougas and Jean-Francois Gobeil — running to five paragraphs of
- * credential claims (Barreau du Québec 1998, a maîtrise en droit 2004, a B.B.A,
- * IQPF membership since 2015, a CFA level III candidacy). English carries ZERO.
- * P-16 PROHIBITS translating them: they are invented copy about named, licensed
- * individuals and their credentials, and the imbalance is itself the finding.
- * So `bio` is optional on `Partner`, and the English cards are simply shorter —
- * there is no empty-accordion state anywhere in this type.
+ * THE ONE GAP WAS THE BIOGRAPHIES, AND IT IS NOW CLOSED BY TRANSLATION. French
+ * carries two `Biographie` accordions — Lysane Tougas and Jean-Francois Gobeil
+ * — running to five paragraphs of credential claims (Barreau du Québec 1998, a
+ * maîtrise en droit 2004, a B.B.A, IQPF membership since 2015, a CFA level III
+ * exam in preparation). The live English page carries ZERO, and P-16 prohibited
+ * translating them. ⚠ **The client amended P-16 on 2026-08-03**
+ * (`content/COMPLIANCE.md` §6.5): the two panels may be closed BY TRANSLATION
+ * of the published French copy, faithfully, with every credential line flagged
+ * individually and every one needing NBF sign-off. NC-24 … NC-26.
+ *
+ * `bio` STAYS OPTIONAL. Two reasons, and neither is inertia: the two advisors
+ * in `advisors.ts` have no biography in either language and never did, and the
+ * amendment is reversible in one line per partner if NBF declines a credential
+ * line. There is still no empty-accordion state anywhere in this type — a
+ * partner without a `bio` renders nothing at all, not a placeholder.
  *
  * THE CONTACT BLOCK IS NOT IN THIS TYPE. Both live pages end with `Contactez-nous`
  * / `Contact us`, the `Obtenez les coordonnées…` / `Get contact information…`
@@ -118,11 +125,16 @@ export interface Partner {
   org: string;
   image: TeamImage;
   /**
-   * `Biographie` accordion. FRENCH ONLY, and deliberately absent in English.
+   * `Biographie` / `Biography` accordion. Present in BOTH languages since
+   * 2026-08-03 — the English text is a translation of the French, made under
+   * the P-16 amendment in `content/COMPLIANCE.md` §6.5 (NC-24 … NC-26).
    *
    * Every paragraph is a credential or experience claim about a named, licensed
-   * individual (C-10 … C-19). None may be edited, summarised, excerpted or
-   * translated. `undefined` means the language genuinely has none.
+   * individual (C-10 … C-19). None may be edited, summarised, excerpted,
+   * strengthened or re-dated. The English is a faithful rendering of the French
+   * and nothing else; the French keeps `[KEEP VERBATIM]` and is the source of
+   * record. `undefined` still means the person genuinely has none — which is
+   * the case for both advisors, in both languages.
    */
   bio?: { heading: string; paragraphs: string[] };
 }

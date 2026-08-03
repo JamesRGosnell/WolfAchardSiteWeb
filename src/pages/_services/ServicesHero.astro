@@ -13,48 +13,126 @@
  * management. Financial planning. Estate planning.` Nothing was written and
  * nothing was substituted, so the hero adds no NC- row.
  *
- * The banner is a wide plate UNDER the type rather than a full-bleed strip with
- * text over it: both DAM masters are 2000×380 with no treatment that guarantees
- * text contrast, and a bank photograph must not be asked to provide it.
+ * ---------------------------------------------------------------------------
+ * THE BANNER CARRIES THE TYPE — IN FRENCH ONLY (D-60, D-61). Both masters are
+ * AEM teaser banners: the photograph occupies the RIGHT and the left is a
+ * SOLID FLAT FILL that the live site composites its heading over. Sampling
+ * every pixel column of each master:
  *
- * The two banners are NOT the same picture. French serves bespoke team artwork;
- * English serves National Bank's shared microsite banner. That divergence is the
- * live site's and is reproduced, not repaired (INTAKE Q4, D-04 precedent).
+ *   banner                                     master     flat fill   photo at
+ *   ─────────────────────────────────────────  ─────────  ──────────  ─────────
+ *   FR  ban-page-nos-services-groupe-wolf-…    2000×380   #ececec     x=1064 (53.20%)
+ *   EN  ban-couple-nos-services                2000×380   #ececec     x=1064 (53.20%)
+ *
+ * `photo at` is the first column not byte-identical to the fill; the fill is
+ * one value repeated over the full 380px height, which is what lets
+ * `--hero-fill` continue it in CSS with no visible seam. The two banners are
+ * different pictures — French is bespoke, English is National Bank's generic
+ * artwork (INTAKE Q4, D-04 precedent) — but here their GEOMETRY happens to
+ * agree to within one column. It was verified separately, not assumed.
+ *
+ *   `--hero-fill` is the fill AFTER `.media img`'s
+ *   `filter: saturate(.92) contrast(1.02)` — saturate() is identity on a
+ *   neutral grey, contrast(a) is c' = a(c − .5) + .5, so 236 → 238.17.
+ *   ⚠ RECOMPUTE IT IF THAT FILTER CHANGES.
+ *
+ * WHY ENGLISH DOES NOT OVERLAY, AND FRENCH DOES. Not the artwork — the copy.
+ * The English display line is 58 characters over three sentences; French is 27
+ * over one. At the pinned 76px the English line needs either ~600px of width
+ * on three lines or ~775px on two, and the reserve the photograph leaves is a
+ * function of the band height, so wanting more height costs width at 2.46:1.
+ * Solving it: there is NO band height between 180px and the master's own 380px
+ * at which the English line fits, at any viewport below ~1728px — at 1440 the
+ * best case still needs 515px of band to hold 380px. It is infeasible, not
+ * tight. Rather than shrink an approved display line, force a line break into
+ * the client's sentence, or lay a scrim over a bank photograph to buy contrast
+ * the artwork does not owe, THE ENGLISH HERO KEEPS THE TYPE ABOVE THE PLATE at
+ * every width. French overlays from 60rem up. That divergence is reported, not
+ * hidden.
+ *
+ * CONTRAST, FRENCH. `--hero-photo` stops the type at source column 1200 — 60%
+ * of the master — because the darkest pixel at any height in every column up
+ * to there clears 10:1 against --ink, over twice the 4.5:1 floor. Worst case
+ * across 960…2560px is 12.64:1. The type never reaches the photograph.
+ *
+ * BELOW 60rem, AND IN ENGLISH, `--hero-crop` is the photograph's own aspect
+ * ratio, so the plate shows the photograph and nothing else — the blank half
+ * that made the old plate read as a picture of nothing never appears.
  */
 import Figure from '../../components/Figure.astro';
 import type { ServicesHero } from '../../data/pages/services.types';
+import type { Locale } from '../../data/types';
 
 interface Props {
   hero: ServicesHero;
+  locale: Locale;
 }
 
-const { hero } = Astro.props;
+const { hero, locale } = Astro.props;
+
+/**
+ *   ratio  master width / height                  — art layer width at band height
+ *   photo  (master width − safe col) / height     — the type's right-hand reserve
+ *   crop   (master width − photo col) / height    — the stacked plate's aspect
+ *
+ * `sizes` describes the RENDERED image width. The banner is cover-cropped, so
+ * the picture is laid out much wider than the slot it shows through; the old
+ * value described the slot and under-served the srcset by about half.
+ */
+const BANNER = {
+  fr: {
+    overlay: true,
+    fill: '#eeeeee',
+    ratio: '5.26316',
+    photo: '2.10526',
+    crop: '2.46316',
+    sizes:
+      '(max-width: 47.99rem) calc(296vw - 8rem), (max-width: 59.99rem) calc(214vw - 6rem), (max-width: 68.24rem) 1432px, (max-width: 99.99rem) 116vw, 1853px',
+  },
+  en: {
+    overlay: false,
+    fill: '#eeeeee',
+    ratio: '5.26316',
+    photo: '2.10526',
+    crop: '2.46316',
+    sizes: '(max-width: 47.99rem) calc(296vw - 8rem), (max-width: 81.99rem) calc(214vw - 6rem), 2394px',
+  },
+}[locale];
+
+const banner = hero.banner ? { ...hero.banner, sizes: BANNER.sizes } : undefined;
 ---
 
-<section class="bg-paper on-paper hero">
-  <div class="container-site hero__inner">
+{/* `bg-paper` stays in the list even where the overlay repaints the band:
+    global.css collapses the seam between two same-coloured sections off that
+    class, and below 60rem — and in English at every width — this hero really
+    is paper. The overlay branch repaints the background AND puts the full
+    section rhythm back, because after a band of a different colour the seam
+    should not collapse. */}
+<section
+  class:list={['bg-paper', 'on-paper', 'hero', BANNER.overlay && 'hero--overlay']}
+  style={`--hero-fill:${BANNER.fill};--hero-ratio:${BANNER.ratio};--hero-photo:${BANNER.photo};--hero-crop:${BANNER.crop};`}
+>
+  {/* DOM order unchanged: heading, message, then the decorative banner. The
+      overlay is positioning only, so the reading order is what it always was. */}
+  <div class="hero__inner">
     <h1 class="hero__name">{hero.heading}</h1>
     <p class="hero__message serif-display">{hero.message}</p>
-
-    {
-      hero.banner && (
-        <div class="media hero-media hero__plate">
-          <Figure image={hero.banner} loading="eager" fetchpriority="high" />
-        </div>
-      )
-    }
   </div>
+
+  {
+    banner && (
+      <div class="hero__art">
+        <div class="media hero-media hero__plate">
+          <Figure image={banner} loading="eager" fetchpriority="high" />
+        </div>
+      </div>
+    )
+  }
 </section>
 
 <style>
-  .hero {
-    padding-block: clamp(2.25rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem);
-  }
-
-  .hero__inner {
-    display: flex;
-    flex-direction: column;
-  }
+  /* --------------------------------------------------------------- type --
+     Shared by both arrangements; only the box around them moves. */
 
   /* The verbatim <h1>, at LABEL size — same scale as the home page's. */
   .hero__name {
@@ -70,7 +148,8 @@ const { hero } = Astro.props;
   /* The display line. >=56px from 1040px upward, 76px at 1440 — identical to
      the home hero, so the two openers are the same instrument. The measure is
      wider than the home page's 19ch because the English line is a 58-character
-     three-sentence list, not a four-word phrase. */
+     three-sentence list, not a four-word phrase. Size is unchanged by the
+     overlay: the layout was fitted to the type, not the type to the layout. */
   .hero__message {
     margin-block: clamp(0.875rem, 1.6vw, 1.375rem) 0;
     max-inline-size: 22ch;
@@ -80,21 +159,33 @@ const { hero } = Astro.props;
     color: var(--ink);
   }
 
-    /* These are AEM teaser banners: the photograph sits in the RIGHT portion and
-     the left ~55% is deliberately empty, because the live site composites the
-     heading and description over it. We render the type above the plate instead,
-     so a centre crop keeps the blank half and shows a picture of nothing.
-     Right-align the crop and tighten the frame to the photographic region. */
-  .hero__plate :global(img) {
-    object-position: 100% 50%;
+  /* -------------------------------------- stacked (< 60rem, and all of EN) --
+     Type above, plate below, plate cropped to the photograph. */
+  /* Background comes from `bg-paper` on the element — see the note in the
+     markup. */
+  .hero {
+    padding-block: clamp(2.25rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem);
   }
 
-.hero__plate {
+  /* `.container-site`, inlined, because the overlay has to unwind it. */
+  .hero__inner,
+  .hero__art {
+    inline-size: 100%;
+    max-inline-size: var(--container-site);
+    margin-inline: auto;
+    padding-inline: var(--spacing-gutter);
+  }
+
+  .hero__art {
     margin-block-start: clamp(2rem, 4.5vw, 3.5rem);
-    /* Both masters are 2000×380. Bounded so the fold still shows the opener
-       beneath. */
-    aspect-ratio: 2.6 / 1;
-    max-block-size: 22rem;
+  }
+
+  .hero__plate {
+    aspect-ratio: var(--hero-crop);
+  }
+
+  .hero__plate :global(img) {
+    object-position: 100% 50%;
   }
 
   @media (max-width: 47.99rem) {
@@ -102,8 +193,107 @@ const { hero } = Astro.props;
       max-inline-size: none;
     }
 
+    /* A 2.46:1 strip is mean on a phone. 16/9 crops further INTO the
+       photograph, which keeps the subject and still never shows the fill. */
     .hero__plate {
       aspect-ratio: 16 / 9;
+    }
+  }
+
+  /* ------------------------------------- overlay (>= 60rem, FRENCH only) --
+     Full-bleed band, type on the artwork's flat region. One length drives it:
+
+       --hero-h        the band's height
+       art width       --hero-ratio × --hero-h   (the master at that height —
+                                                  never enlarged, never cropped)
+       type reserve    --hero-photo × --hero-h   (+ --hero-gap), which lands
+                                                  exactly on source column 1200
+
+     --hero-h tops out at 22rem = 352px against a 380px master, so the banner
+     is never scaled past 1:1. Verified across 960…2560px: worst vertical
+     headroom 25px, the message always fits its box, and the darkest pixel
+     under the type stays at 12.64:1. */
+  @media (min-width: 60rem) {
+    .hero--overlay {
+      --hero-h: clamp(17rem, 22vw, 22rem);
+      --hero-gap: clamp(1.75rem, 2.6vw, 2.75rem);
+      --hero-pad: clamp(1.75rem, 2.6vw, 2.5rem);
+
+      position: relative;
+      /* Holds the art layer, and the load settle, inside the band. */
+      overflow: hidden;
+      padding-block: 0;
+      /* The artwork's own flat fill, continued past the edge of the picture.
+         See the header comment before changing this value. Beats the
+         `bg-paper` utility on both specificity and layer. */
+      background-color: var(--hero-fill);
+    }
+
+    /* global.css collapses the seam between two paper sections. The band is
+       not paper here, so the section below it takes the full rhythm again —
+       otherwise the first block crowds a full-bleed colour change. */
+    .hero--overlay + :global(section) {
+      padding-block-start: var(--spacing-section);
+    }
+
+    .hero--overlay .hero__inner {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-block-size: var(--hero-h);
+      max-inline-size: none;
+      margin-inline: 0;
+      padding-block: var(--hero-pad);
+      /* Identical expression to `.container-site`'s content edge, so the <h1>
+         still lines up with every heading further down the page. */
+      padding-inline-start: calc(
+        (100% - min(100%, var(--container-site))) / 2 + var(--spacing-gutter)
+      );
+      /* The photograph's width at this band height, plus breathing room. */
+      padding-inline-end: calc(var(--hero-photo) * var(--hero-h) + var(--hero-gap));
+    }
+
+    /* Caps the measure on a very wide band. Wider than the reserve leaves at
+       every width up to ~2000px, so it only engages on the largest screens. */
+    .hero--overlay .hero__message {
+      max-inline-size: 11em;
+      /* Progressive: same line count, less ragged. Ignored where unsupported,
+         and the layout is fitted to the greedy result either way. */
+      text-wrap: balance;
+    }
+
+    .hero--overlay .hero__art {
+      position: absolute;
+      inset-block: 0;
+      inset-inline-end: 0;
+      z-index: 0;
+      inline-size: calc(var(--hero-ratio) * var(--hero-h));
+      max-inline-size: none;
+      margin: 0;
+      padding-inline: 0;
+    }
+
+    .hero--overlay .hero__plate {
+      block-size: 100%;
+      aspect-ratio: auto;
+      border-radius: 0;
+      /* `.media`'s greige would be a different colour showing through any
+         sub-pixel gap. The band's own fill is the right one. */
+      background-color: transparent;
+    }
+
+    .hero--overlay .hero__plate :global(img) {
+      object-position: 100% 50%;
+      /* `.hero-media img`'s one-off settle scales 1.06 → 1. Anchor it to the
+         edge the picture is already aligned to, so the subject stays put and
+         the frame eases around it instead of sliding in. The image only ever
+         grows, so it cannot uncover the fill behind it; measured at the first
+         frame, the worst pixel the type can reach is still 11.06:1. Reduced
+         motion switches the animation off entirely (global.css §12), and
+         nothing here is scroll-linked, so there is no parallax to suppress. */
+      transform-origin: 100% 50%;
     }
   }
 </style>

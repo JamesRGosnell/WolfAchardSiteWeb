@@ -72,11 +72,22 @@ verbatim; this is the single highest-value finding for the client conversation.
 
 **The two language trees are not translations of each other — they are different
 sites.** FR home has 11 list items plus mission, commitments, differentiators, a
-philosophy essay and a described 4-step process; EN home has **zero** list items
+philosophy essay and a described 4-step process; EN home had **zero** list items
 and bare unlabelled steps. FR services has 5 list items, EN has 52 and an entire
-`Our approach` section FR lacks. FR team page carries two biographies; EN carries
-none. **Do not fill either gap.** P-5 forbids inventing content to balance a
-language, and the imbalance itself is a finding for the client.
+`Our approach` section FR lacks. FR team page carries two biographies; EN carried
+none.
+
+> ⚠ **AMENDED 2026-08-03 — the client authorised closing part of that gap.**
+> `content/COMPLIANCE.md` **§6.5** is a dated, scope-limited amendment to P-16:
+> **translation of existing French copy only.** Six blocks are now translated
+> into English — the home page's mission, commitments, philosophy and
+> differentiators, and the team page's two biographies (`CHANGES` NC-20 … NC-26,
+> D-70). **Everything else in this paragraph stands.** Authoring English copy is
+> still prohibited; the FR home intro, the four described process steps and the
+> FR-only ranking note are still FR-only; and **the reverse direction is not
+> amended at all** — the EN services page's `Our approach` section and its 52
+> list items must **not** be translated into French. Read §6.5 before writing any
+> English string; the imbalance that remains is still a finding for the client.
 
 **Both team pages serve three complete nested HTML documents** — 3×`<html>`,
 3×`<head>`, 3×`<body>`, three conflicting canonicals, consent script loaded six

@@ -6,12 +6,31 @@ import type { Locale, Run, RichText, ContactLine, SiteImage, SiteContactBlock } 
  * ─────────────────────────────────────────────────────────────────────────────
  * WHAT THIS PAGE IS
  *
- * It is 100% National Bank corporate boilerplate. Measured: every string on
- * both captures belongs to FBNGP/NBFWM or to Banque Nationale du Canada, and
- * **not one sentence is about Groupe Wolf Achard**. The only team-specific data
- * on the page is the two advisors' phone numbers and email addresses in the
- * closing contact block. That is a finding for the client (D-15), not a gap to
- * fill: writing copy about this team's own firm would be invented content (P-5).
+ * The LIVE page is 100% National Bank corporate boilerplate. Measured: every
+ * string on both captures belongs to FBNGP/NBFWM or to Banque Nationale du
+ * Canada, and **not one sentence is about Groupe Wolf Achard**. The only
+ * team-specific data on the live page is the two advisors' phone numbers and
+ * email addresses in the closing contact block. That was D-15: the page a
+ * prospective client opens to find out who they would be dealing with answered
+ * "National Bank" and stopped.
+ *
+ * ⚠ D-15 IS NOW ANSWERED. The client authorised a short team paragraph on
+ * 2026-08-03, and `team` below carries it — one paragraph per language, ABOVE
+ * every National Bank block on the page. NC-27 (French), NC-28 (English).
+ *
+ * **It is not translated and it is not invented.** Every sentence is assembled
+ * from strings this team already publishes IN THAT LANGUAGE: the two advisors'
+ * names, the plural job title this very page already uses (`conseillers en
+ * gestion de patrimoine` / `wealth advisors`, C-29), the home page's own
+ * `Notre mission` / `Nos engagements` items, the home page's own process, and
+ * the office city from the site-wide address. It therefore does NOT rest on the
+ * P-16 amendment — nothing here is a translation. It rests on D-15.
+ *
+ * ⚠ WHAT IT DELIBERATELY DOES NOT SAY, because the site does not say it: no
+ * years in business, no founding date, no client count, no assets, no
+ * headcount, no ranking, no `trusted`, no `leading`, no `passionate`, no
+ * `boutique`, no `award-winning`. If a future edit wants one of those, the
+ * client supplies it and it becomes a `C-` row first.
  *
  * ─────────────────────────────────────────────────────────────────────────────
  * FIGURES — THE REASON THIS FILE IS COMMENTED THIS HEAVILY
@@ -100,6 +119,30 @@ export interface FirmIntro {
 }
 
 /**
+ * THE TEAM'S OWN INTRODUCTION — the only block on this page that is about
+ * Groupe Wolf Achard rather than about National Bank. NC-27 / NC-28, D-15.
+ *
+ * `heading` is the team's own name and nothing else: `Groupe Wolf Achard` in
+ * French, `Wolf Archard Group` in English. ⚠ The English form carries the live
+ * misspelling (two Rs) — it is an identity string governed by C-21 / N-01, and
+ * spelling it `Achard` here while all 39 other English strings on the site say
+ * `Archard` would silently take a side in an open client question (INTAKE Q1).
+ * It changes with the rest of them in one pass if Q1 is answered. D-76.
+ *
+ * `body` is ONE paragraph. The French has four sentences and the English three
+ * — that asymmetry is deliberate and registered (D-73): the fourth French
+ * sentence describes the four-step process, and the English tree has no
+ * four-step process to describe.
+ *
+ * OPTIONAL, like `note`, so that withdrawing it is deleting one key from one
+ * data file rather than a type change.
+ */
+export interface FirmTeamIntro {
+  heading: string;
+  body: RichText;
+}
+
+/**
  * One figure in the `Un puissant allié` / `A strong partner` band.
  *
  * `text` is the WHOLE live sentence as runs, with the live `<b>` span kept as a
@@ -171,6 +214,11 @@ export interface FirmContent {
     description: string;
   };
   hero: FirmHero;
+  /**
+   * The team's own paragraph, rendered ABOVE every National Bank block on the
+   * page. Both languages. NC-27 / NC-28.
+   */
+  team?: FirmTeamIntro;
   intro: FirmIntro;
   stats: FirmStatBand;
   /** `Suivez l'actualité financière` — photo LEFT, text RIGHT, as live. */

@@ -8,6 +8,15 @@ import { pathFor } from '../../lib/i18n';
  * Every string below is byte-exact from that capture, in the capture's own
  * document order. Nothing is translated from the French page (P-16).
  *
+ * ⚠ ONE EXCEPTION, and it is the only block on this page that is about the
+ * team: `team` below is NOT in the capture. It is NC-28 — a paragraph assembled
+ * from ENGLISH strings this team already publishes elsewhere on the site, in
+ * answer to D-15. **It is not a translation of the French paragraph on
+ * `/notre-firme/`**; each language was written from its own tree, which is why
+ * the two are not the same length (D-73). The verbatim sweep must exclude that
+ * object rather than fold it in; everything else in this file is still
+ * capture-exact.
+ *
  * ─────────────────────────────────────────────────────────────────────────────
  * ⚠ THIS FILE HOLDS ALL THREE OF THE SITE'S U+202F NARROW NO-BREAK SPACES
  *
@@ -106,6 +115,63 @@ const content: FirmContent = {
       widths: [767, 1199, 1600, 2000],
       sizes: '(min-width: 82rem) 76rem, calc(100vw - 2.5rem)',
     },
+  },
+
+  /* ------------------------------------------------------------------------
+   * NC-28 — THE ONLY BLOCK ON THIS PAGE THAT IS ABOUT THIS TEAM.
+   *
+   * The English twin of NC-27, and it is NOT a translation of it: each language
+   * is assembled from strings published in that language. Traced:
+   *
+   *  1. `Our team brings together Laurent Achard and David Alexandre Wolf,
+   *      wealth advisors in Montreal.`
+   *     · `Our team` — the team's own live English nav label, and the opening
+   *       of `Our team of highly qualified investment professionals…` on the
+   *       English team page.
+   *     · Both names — §2.1. `David Alexandre` with NO hyphen (D-09).
+   *     · `wealth advisors` — the PLURAL, lowercase, is a live string ON THIS
+   *       PAGE: `over 850 wealth advisors` in the paragraph immediately below
+   *       (C-29). Their singular regulated title `Wealth Advisor` (C-01/C-02)
+   *       is not re-cased or pluralised; the plural is borrowed from this
+   *       page's own copy instead.
+   *     · `Montreal`, UNACCENTED — this tree's own convention for the office
+   *       city (`Montreal QC H3B 2C1`, N-05). The French paragraph says
+   *       `Montréal`. Neither is derived from the other.
+   *
+   *  2–3. `Our mission is to…` and `We are committed to…` — the `Our mission`
+   *     and `Our commitments` blocks now on the English home page (NC-20 /
+   *     NC-21), which are themselves faithful translations of C-26 made under
+   *     §6.5. Three mission items and one commitment, conjugated into
+   *     sentences and otherwise word for word.
+   *
+   * ⚠ THERE IS NO FOURTH SENTENCE, AND THAT IS THE FINDING, NOT AN OVERSIGHT.
+   * The French paragraph ends on the team's four-step process — `faisons
+   * connaissance, établissons une stratégie, déployons notre plan, restons en
+   * contact`. **The English tree has no four-step process.** Its `Our unique
+   * approach` block lists four QUALITIES (`Our personalized approach`, `Our
+   * integrity`, `Our professionalism`, `Our transparency`), which are not those
+   * four steps and are not translations of them. Two ways to write a fourth
+   * English sentence and both are wrong:
+   *   (a) translate the French step titles here — then the firm page describes
+   *       a four-step process the home page does not have, a NEW internal
+   *       contradiction, and §6.5 does not cover those strings anyway;
+   *   (b) use the four English quality labels instead — then `integrity` and
+   *       `transparency` appear twice in a four-sentence paragraph, because
+   *       sentence 3 already carries them from `Our commitments`.
+   * So the English paragraph is three sentences of their own words rather than
+   * four with one padded. D-73. If the client wants the four steps in English,
+   * they are a separate translation on the HOME page first, and this sentence
+   * follows it.
+   * ---------------------------------------------------------------------- */
+  team: {
+    // The team's own name, verbatim from the English tree — `Archard`, two Rs,
+    // the live misspelling. C-21 / N-01 / D-76: an identity string, an open
+    // client question (INTAKE Q1), and not ours to settle by spelling it
+    // differently from the 39 other English strings that carry it.
+    heading: 'Wolf Archard Group',
+    body: [
+      'Our team brings together Laurent Achard and David Alexandre Wolf, wealth advisors in Montreal. Our mission is to secure your financial future, to support you in achieving your ambitious life projects and to be the main partner in your financial success. We are committed to acting with integrity, communicating transparently and building a long-term relationship based on trust and professionalism.',
+    ],
   },
 
   intro: {
