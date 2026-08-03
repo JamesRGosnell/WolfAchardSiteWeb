@@ -272,6 +272,11 @@ const MENU_ID = 'site-menu';
      1. The bar — see note 1 in the header comment above.
      ------------------------------------------------------------------ */
   .site-header {
+    /* The scrolled state shrinks this header by 8px. Chrome's scroll anchoring
+       compensates for that by adjusting scrollY, which can push the offset back
+       across the toggle threshold and oscillate. Opting out, plus the hysteresis
+       gap in main.ts, makes the flip one-way at any given scroll position. */
+    overflow-anchor: none;
     position: sticky;
     inset-block-start: 0;
     z-index: 100;

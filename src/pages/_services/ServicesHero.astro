@@ -80,11 +80,20 @@ const { hero } = Astro.props;
     color: var(--ink);
   }
 
-  .hero__plate {
+    /* These are AEM teaser banners: the photograph sits in the RIGHT portion and
+     the left ~55% is deliberately empty, because the live site composites the
+     heading and description over it. We render the type above the plate instead,
+     so a centre crop keeps the blank half and shows a picture of nothing.
+     Right-align the crop and tighten the frame to the photographic region. */
+  .hero__plate :global(img) {
+    object-position: 100% 50%;
+  }
+
+.hero__plate {
     margin-block-start: clamp(2rem, 4.5vw, 3.5rem);
     /* Both masters are 2000×380. Bounded so the fold still shows the opener
        beneath. */
-    aspect-ratio: 2000 / 380;
+    aspect-ratio: 2.6 / 1;
     max-block-size: 22rem;
   }
 

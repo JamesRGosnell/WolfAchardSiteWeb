@@ -76,9 +76,6 @@ const isRail = process.titleAs === 'p';
   }
 
   .proc__step {
-    /* Calibrated measure — 1ch of Instrument Sans renders ~1.5 characters
-       of this client's copy, so --measure is 48ch, not 72ch. */
-    max-inline-size: var(--measure);
     display: grid;
     grid-template-columns: auto 1fr;
     gap: clamp(1rem, 2.5vw, 2rem);
@@ -108,10 +105,12 @@ const isRail = process.titleAs === 'p';
   }
 
   .proc__step-text {
+    /* Measure belongs on the prose, NOT on .proc__step - that is the grid
+       row holding icon + body, and capping it collapsed the text column. */
+    max-inline-size: var(--measure);
     margin: 0.5rem 0 0;
     color: var(--muted);
     line-height: 1.6;
-    max-inline-size: 56ch;
   }
 
   /* ---------- FRENCH: described rows ------------------------------------- */

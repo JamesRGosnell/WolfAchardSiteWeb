@@ -40,12 +40,23 @@ function initHeader(): void {
     bar.toggleAttribute('data-scrolled', on);
   };
 
+  const ENTER_SCROLLED = 64;
+  const LEAVE_SCROLLED = 24;
+
   let ticking = false;
   const onScroll = () => {
     if (ticking) return;
     ticking = true;
     requestAnimationFrame(() => {
-      setScrolled(window.scrollY > 8);
+      /* Hysteresis. The scrolled state shrinks the header by 8px, and a single
+         8px threshold sat exactly on that delta: shrinking moved the scroll
+         offset back under the threshold, which grew the header, which moved it
+         back over — the header oscillated a few pixels below the top. Entering
+         and leaving at different offsets makes that impossible, and the gap is
+         far wider than any height change. */
+      const y = window.scrollY;
+      if (y > ENTER_SCROLLED) setScrolled(true);
+      else if (y < LEAVE_SCROLLED) setScrolled(false);
       ticking = false;
     });
   };
