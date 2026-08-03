@@ -160,7 +160,18 @@ const content: HomeContent = {
 
   process: {
     heading: 'Un processus éprouvé',
-    lead: 'Nos conseils, notre accompagnement et notre dévouement sont très appréciés de tous nos clients. En effet, vous pourrez toujours compter sur:',
+    /* F-20 - TRUNCATED, NOT REWRITTEN. The live lead ends
+       `... En effet, vous pourrez toujours compter sur:` and the next thing on
+       the page is the h3 `Faisons connaissance` - a process step, not a thing
+       you can count on. The colon promises a list the client never wrote; the
+       live document order (h2 > this p > h3 Faisons connaissance) confirms the
+       dangle is theirs, not ours. Cutting at the sentence boundary removes the
+       broken promise using only their words - no clause is rewritten and none
+       is invented. The remaining sentence is complete and introduces the
+       section cleanly. Reverting restores the live text exactly.
+       NOTE: their `Nos engagements` list IS four things a client can count on;
+       if they want the colon back, that list is the honest continuation. */
+    lead: 'Nos conseils, notre accompagnement et notre dévouement sont très appréciés de tous nos clients.',
     titleAs: 'h3',
     steps: [
       {
