@@ -553,6 +553,38 @@ copy this team authored.
 | **AP-02** | These pages carry **no disclaimer accordion, no `<sup>` markers, and no contact strip**. That is internally consistent (§1.5) and must stay that way. | **[KEEP AS-IS]** — do not add the accordion here; nothing on the page cites it. |
 | **AP-03** | The languages fields on these pages contradict the team pages in both languages (C-07, C-08) — and the profile pages are the **more detailed** source (`French, English, Italian` vs the team page's bare `English`). | **[KEEP VERBATIM, BOTH] + [FLAG]**. The profile record is the likelier source of truth, but that is a judgment about a licensed advisor's declared capability. **Do not pick.** |
 
+> #### ⚠ AP-01, addendum dated 2026-08-03 — **the record has a biography field and it is empty**
+>
+> `AP-01` said every string on these pages is a field in NBF's record. **True, and it
+> understates the finding.** All four captures render National Bank's own biography
+> component and it emits **zero bytes**:
+>
+> ```html
+> <div class="advisorBiographyUI aem-GridColumn aem-GridColumn--default--12">
+> </div>
+> ```
+>
+> Identical on `fr-laurent-achard`, `fr-david-alexandre-wolf`, `en-laurent-achard` and
+> `en-david-alexandre-wolf`. **So the four rows these pages show are not the ceiling of the
+> platform — they are the floor of what this team has supplied.**
+>
+> Re-fetched live on 2026-08-03, all four rendered pages, as a second signal: **no
+> designation, no fax, no LinkedIn, no education, no years of experience, no biography** —
+> confirming the capture. The only structured values the record carries beyond the four
+> rendered rows are AEM taxonomy tags — `fbngp:Employee-Languages/{english,french,italian}`
+> and `fbngp:equipe-mobile/quebec/montreal/pvm-montreal` — and **both are already rendered**,
+> as the languages row and the office row. *(Note the taxonomy is the only place the site
+> states Achard's three languages and Wolf's two consistently across both trees; it does not
+> resolve C-07/C-08, because a tag is not a published claim.)*
+>
+> **P-8 is unchanged and this addendum is not a licence.** Nothing may be written into that
+> slot by a builder: a biography is copy about a named, licensed individual (P-5, P-8), and
+> the two partners' biographies on the team page are the client's, not ours. **What this
+> addendum changes is the ask.** It is no longer *"could NBF hold anything more?"* — the
+> answer is measured and it is no. It is *"the field exists, it is blank, and one paragraph
+> per advisor per language fills it"* — on the live site as well as on this one.
+> `CHANGES-FOR-APPROVAL.md` `D-104`.
+
 ---
 
 ## 3. Required marks per page
@@ -734,11 +766,18 @@ Binary. Any one of these on the finished site is a **launch blocker**.
 
 ## 6. Approved editorial fixes
 
-### ⚠ STATUS: NO POLICY AMENDMENT EXISTS. EVERY `F-` ROW BELOW IS **PENDING**.
+### ⚠ STATUS: ONE `F-` ROW IS AUTHORISED (**F-30**, see §6.6). EVERY OTHER `F-` ROW BELOW IS **PENDING**.
 
-> This is a **spec build**. Nobody has authorised any editorial fix. The default behaviour is
-> **ship verbatim with a flag**; the corrected wording is pre-drafted below only so the client
-> can approve the whole set in one pass.
+> **Amended 2026-08-03.** This heading previously read *"NO POLICY AMENDMENT EXISTS. EVERY
+> `F-` ROW BELOW IS PENDING."* The client has since authorised **exactly one** row —
+> **`F-30`**, applied as **`F-60`** — and the authorisation is written out, dated and
+> scope-limited in **§6.6**. **Nothing else moved.** `F-01` … `F-16`, `F-31` and `F-50` …
+> `F-53` are all still PENDING and every other live typo still ships sic — including
+> **`F-03`, which sits in the very sentence `F-30` edits.**
+>
+> This is a **spec build**. Apart from the single row named above, nobody has authorised any
+> editorial fix. The default behaviour is **ship verbatim with a flag**; the corrected wording
+> is pre-drafted below only so the client can approve the whole set in one pass.
 >
 > **If and when the client agrees, record it here as an explicit, dated policy amendment with
 > this hard scope limit:**
@@ -755,7 +794,7 @@ Binary. Any one of these on the finished site is a **launch blocker**.
 |---|---|---|---|---|
 | **F-01** | `notre-equipe` + `nous-joindre`, FR — Achard photo `alt`/`title` (4 occurrences) | `Photo de Laurent Achard, Conseiller en gestion de patrimoin , membre de l'équipe expert.` | `Photo de Laurent Achard, Conseiller en gestion de patrimoine, membre de l'équipe expert.` | **PENDING.** Restores the dropped `e` and removes the space before the comma. The **word is truncated mid-title**; Wolf's identical alt on the same page is correct, which is the proof this is a slip and not a variant. Highest-priority F-row. |
 | **F-02** | `nos-services`, FR — opening H2 paragraph | `…dans le respect de critères et de paramètres qui lui sont propre.` | `…qui lui sont propres.` | **PENDING.** Plural agreement with `critères et paramètres`. |
-| **F-03** | `nos-services`, FR — Planification fiscale | `…en restant toujours à l'intérieure des dispositions de la loi.` | `…à l'intérieur des dispositions de la loi.` | **PENDING.** `intérieure` is the feminine adjective; the locution is `à l'intérieur de`. Apostrophe is U+2019 in the live markup — preserve it in the corrected string. |
+| **F-03** | `nos-services`, FR — Planification fiscale | `…en restant toujours à l'intérieure des dispositions de la loi.` | `…à l'intérieur des dispositions de la loi.` | **PENDING.** `intérieure` is the feminine adjective; the locution is `à l'intérieur de`. Apostrophe is U+2019 in the live markup — preserve it in the corrected string. ⚠ **Read §6.6 before touching this string.** `F-30` was authorised on 2026-08-03 and applied to **the same sentence**, whose first 24 characters are now deleted. **`F-03` was not authorised and is untouched**, so that one sentence currently carries one repaired defect and one live one. Approving `F-03` is still a separate word from the client; it is one letter and one file. |
 | **F-04** | `nouvelles-articles`, FR — `Guide investir` image `alt`/`title` | `Guide d'investissement - des conseils clés pour votre sante financière.` | `…pour votre santé financière.` | **PENDING.** Missing acute accent. |
 | **F-05** | `news-articles`, EN — `meta[name=description]` + `og:description` | `Get the latest news of the financial markets and take advantage of our analyzes to better achieve your goals.` | `…take advantage of our analyses to better achieve your goals.` | **PENDING.** `analyzes` is the third-person verb; the noun plural is `analyses`. |
 | **F-06** | `our-services`, EN — `meta[name=description]` + `og:description` | `Wolf Archard Group offer advice on estate planning, investment management and financial planning, providing solutions to fit their client’s financial needs. ` | `Wolf Archard Group offers advice on estate planning, investment management and financial planning, providing solutions to fit their clients’ financial needs.` | **PENDING.** Three defects in one string: (i) subject–verb — a singular group name takes `offers`; (ii) `their client’s` disagrees in number with `their`; (iii) **trailing space** present in `meta[name=description]` but absent from `og:description`. ⚠ **Note this string also contains `Wolf Archard` — C-21/N-01 governs the name and stays untouched by this fix.** |
@@ -917,6 +956,14 @@ the amendment. **§6.4 is not a loophole in §6; it is the boundary of §6.**
 >    §6's scope limit — *"F-numbered editorial typos only; §1 legal blocks, §2 identity
 >    strings, §4 claims and figures, and all N-items stay strictly verbatim"* — is
 >    unchanged and still governs everything that is not a translation under this section.
+>
+>    > ⚠ **SUPERSEDED IN PART, later the same day — see §6.6.** Rule 6 was true when this
+>    > section was written and is preserved unedited, because a rule that quietly changes
+>    > under a reader is worse than one that is dated. **A separate authorisation, granted
+>    > afterwards on 2026-08-03, covers exactly one `F-` row (`F-30`) and no others.** The
+>    > sentence *"every live typo still ships sic"* now has exactly one exception, and it is
+>    > named in §6.6. Everything else in rule 6 stands: §6.5 itself still authorises nothing
+>    > but translation, and `F-03` — in the same sentence as `F-30` — is still PENDING.
 > 7. **Nothing here is a `C-` disposition.** Every `C-` row keeps `[KEEP VERBATIM]` on its
 >    French string. A translation is an *additional* English surface for the same claim,
 >    never a replacement for, or a re-statement of, the French one.
@@ -937,6 +984,59 @@ does **not** reach, listed so a later pass does not read the amendment as genera
 them). `NC-27` / `NC-28` are **not** translations and do not rely on this amendment — they
 are the firm-page team paragraph, composed from strings already published in the language
 they appear in, and they rest on `D-15`, not on P-16.
+
+### 6.6 POLICY AMENDMENT — §6, ONE ROW ONLY (`F-30`), granted by the client 2026-08-03
+
+**This is the second policy amendment on this build, and the first that touches §6.** It is
+the narrowest amendment either document carries: **one row, one page, one paragraph, one
+deletion of twenty-four characters.**
+
+> #### The amendment, in full
+>
+> **Dated 2026-08-03. Granted by the client.** `F-30` **may be applied.** It is applied, and
+> it ships as **`F-60`** in `CHANGES-FOR-APPROVAL.md`.
+>
+> **SCOPE — `F-30` AND NOTHING ELSE.**
+>
+> 1. **One row.** `F-30` only. **`F-01`, `F-02`, `F-03`, `F-04`, `F-05`, `F-06`, `F-07`,
+>    `F-08`, `F-09`, `F-10`, `F-11`, `F-12`, `F-13`, `F-15`, `F-16`, `F-31`, `F-50`, `F-51`,
+>    `F-52` and `F-53` remain PENDING and every one of them still ships sic.** Approving one
+>    row is not approving a set, and §6's own scope limit is otherwise untouched.
+> 2. **⚠ `F-03` IS IN THE SAME SENTENCE AND IS NOT AMENDED.** The paragraph this row edits
+>    also carries `à l'intérieure` (`F-03`). It **ships sic**, inside the very sentence whose
+>    first 24 characters were deleted. Anyone re-reading that string will see one defect
+>    repaired and one left standing, one clause apart. **That is correct and deliberate.**
+> 3. **Deletion only — no word rewritten, none invented, none reordered.** The exact
+>    characters removed are `Planification`, U+0020, `fiscale`, U+0020, `:`, U+0020 — 24
+>    characters, all spaces plain (verified byte-level against
+>    `source-assets/html/fr-nos-services.html`; **no U+00A0, no U+202F**, despite the French
+>    typographic convention before a colon). The paragraph now begins at `La planification
+>    fiscale est un processus…`, which is **still a character-for-character substring of the
+>    live capture** — `npm`-side proof: `scripts/verbatim-sweep.mjs` on
+>    `services.fr.ts` reports **24/26 matched**, the same as before the edit, and both misses
+>    are CSS `sizes` values rather than copy.
+> 4. **The label is not lost — it is the heading.** `Planification fiscale` remains the
+>    block's `<h2>`, unchanged, directly above the paragraph. Nothing a reader could learn
+>    from the deleted label is unavailable to them.
+> 5. **Not a §1, §2 or §4 string.** This paragraph is the team's own service prose. It is
+>    not a legal block, not an identity string, not a claim or a figure carrying a number,
+>    and not an `N-` item. §6's scope limit already contemplated exactly this class.
+> 6. **This amendment does not touch §6.5, P-16 or any `N-` row.** It authorises no
+>    translation, no new copy and no repair anywhere else on the site.
+> 7. **Reversible in one string.** Re-inserting the 24 characters in
+>    `src/data/pages/services.fr.ts` restores the live wording exactly.
+
+**Checked across the whole build, not inferred from this page.** Every heading on all 17
+built pages was swept for the same pattern — a heading repeated as a `Heading : ` label at
+the start of the text beneath it. **240 headings carrying following text; 1 hit before the
+fix, 0 after.** The other six French service blocks never had it (they open
+`La gestion de portefeuille consiste à…`, `La planification financière est…`,
+`La planification successorale est…`, `Les assurances sont…`, `Pour effectuer leurs
+transactions…`, `La Fondation Philantra vous offre…`), and neither English set has it — the
+seven `Our services` blocks are `Purpose` / `Main benefits` lists, and the four `Our
+approach` steps open on `We take the time…`, `We recommend solutions…`, `We build your
+investment portfolio…`, `We monitor changes…`. **So "treat the other blocks consistently"
+resolves to: nothing else to change, measured rather than assumed.**
 
 ---
 

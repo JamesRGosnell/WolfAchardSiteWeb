@@ -17,8 +17,10 @@ import { pathFor } from '../../lib/i18n';
  *  · `qui lui sont propre` (opener) — live typo, F-02, PENDING. No §6 policy
  *    amendment exists, so it ships verbatim with a flag.
  *  · `à l’intérieure des dispositions` (Planification fiscale) — F-03, PENDING.
- *  · `Planification fiscale : La planification fiscale est…` — the block
- *    repeats its own title inside its first sentence. Live. Ships sic.
+ *  · `Planification fiscale : La planification fiscale est…` — the live block
+ *    repeated its own title inside its first sentence. ⚠ NO LONGER SIC: the
+ *    24-character label prefix is DELETED under §6.6 (F-30, applied as F-60,
+ *    2026-08-03). Nothing else on this page is touched by that amendment.
  *  · `Demandez nous plus d’informations sur le Services d’assistance
  *    juridique` (Solutions bancaires) — two live defects in one clause
  *    (missing hyphen in `Demandez-nous`, `le` against a plural link label).
@@ -164,9 +166,17 @@ const content: ServicesContent = {
         title: 'Planification fiscale',
         body: [
           [
-            // The block repeats its own title inside the sentence, and
-            // `à l’intérieure` is F-03 (PENDING). Both live, both sic.
-            'Planification fiscale : La planification fiscale est un processus qui consiste à définir une stratégie dont les objectifs consistent à réduire autant que possible la charge d’impôt et/ou d’en retarder le paiement en restant toujours à l’intérieure des dispositions de la loi.',
+            // F-60, APPLIED under the §6.6 amendment (2026-08-03): the live
+            // paragraph opened `Planification fiscale : La planification
+            // fiscale est…`, repeating the <h2> directly above it. Exactly 24
+            // characters were DELETED from the front — `Planification`, U+0020,
+            // `fiscale`, U+0020, `:`, U+0020 (all plain spaces, verified
+            // byte-level against the capture; no NBSP). No word is rewritten,
+            // reordered or invented, and the label survives as the heading it
+            // already is. The other six FR blocks never carried this pattern.
+            // ⚠ `à l’intérieure` in the SAME sentence is F-03 and is still
+            // PENDING — §6.6 covers F-30/F-60 only. It ships sic, untouched.
+            'La planification fiscale est un processus qui consiste à définir une stratégie dont les objectifs consistent à réduire autant que possible la charge d’impôt et/ou d’en retarder le paiement en restant toujours à l’intérieure des dispositions de la loi.',
           ],
           [
             'La planification fiscale peut inclure la mise en place d’une structure corporative, un plan d’allocation d’actifs, des méthodes de fractionnement de revenus ou d’autres stratégies fiscales.',

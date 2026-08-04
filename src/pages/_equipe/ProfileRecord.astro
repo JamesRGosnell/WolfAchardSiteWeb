@@ -37,6 +37,31 @@
  *                                          C-08 / AP-03) and
  *                                          is shipped unharmonised on purpose
  *
+ * ─────────────────────────────────────────────────────────────────────────────
+ * ⚠ THE RECORD HAS A BIOGRAPHY FIELD AND IT IS EMPTY — D-104, verified
+ * 2026-08-03.
+ *
+ * All four captures render National Bank's own biography component and it emits
+ * nothing at all:
+ *
+ *     <div class="advisorBiographyUI aem-GridColumn aem-GridColumn--default--12">
+ *     </div>
+ *
+ * Zero bytes of content, on every page, in both languages. So the four rows
+ * below are not the limit of NBF's advisor record — they are the limit of what
+ * this team has filled in. Re-fetching all four live pages on 2026-08-03
+ * confirmed the same: no designation, no fax, no LinkedIn, no education, no
+ * years of experience, no biography. The only structured values the record
+ * carries beyond these rows are AEM taxonomy tags — `fbngp:Employee-Languages/*`
+ * and `fbngp:equipe-mobile/quebec/montreal/pvm-montreal` — and both are already
+ * rendered here, as the languages row and the office row.
+ *
+ * DO NOT WRITE INTO THAT SLOT. A biography is client copy about a named,
+ * licensed individual (P-5, P-8). One paragraph per advisor per language, from
+ * the advisors themselves, fills a field NBF already has — which means it would
+ * appear on their live pages too, not only here.
+ * ─────────────────────────────────────────────────────────────────────────────
+ *
  * `COMPLIANCE.md` AP-02: the live profile pages carry NO <sup> markers and no disclaimer
  * accordion. Nothing here cites one, so <LegalNotes> is deliberately absent.
  * Adding it would be as much a deviation as dropping one.

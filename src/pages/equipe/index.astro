@@ -72,8 +72,13 @@ const ADVISOR_SIZES = '(min-width: 62rem) 22rem, (min-width: 40rem) 45vw, calc(1
     </div>
   </Section>
 
-  {/* The two registered advisors. Each name links to that advisor's own profile
-      page — an unlinked profile page is an orphan. */}
+  {/* The two registered advisors. Each NAME links to that advisor's own profile
+      page, exactly as the live `notre-equipe.html` links it — an unlinked
+      profile page is an orphan, and the four routes are not ours to delete.
+      ⚠ D-101: the link is the name and nothing else. <TeamCard> used to lay an
+      invisible overlay across the whole card, so any click on it navigated to a
+      page that repeats this card (D-91). The overlay was ours; the live page
+      never had one. Removed there, not here — this call site is unchanged. */}
   <Section bg="paper" aria-labelledby="advisors-heading">
     <h2 id="advisors-heading" class="t-h2 serif-display band__heading">
       {team.advisorsHeading}

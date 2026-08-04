@@ -152,10 +152,18 @@ const content: HomeContent = {
   /* ------------------------------------------------------------------------
    * TRANSLATED UNDER §6.5 — `Notre mission` / `Nos engagements`. NC-20 / NC-21.
    *
-   * Same two lists, same order, same eight items as `home.fr.ts`, which is the
-   * ONLY source. C-26 governs the French strings and keeps `[KEEP VERBATIM]`;
-   * this is an additional English surface for the same claims, not a
-   * restatement of them.
+   * Same two lists, same order, drawn ONLY from `home.fr.ts`. C-26 governs the
+   * French strings and keeps `[KEEP VERBATIM]`; this is an additional English
+   * surface for the same claims, not a restatement of them.
+   *
+   * ⚠ SIX ITEMS, NOT EIGHT — D-100, 2026-08-03. Two of the eight were CUT
+   * because they duplicated `Our purpose`, the client's live English block
+   * that sits immediately above this one and has no French counterpart
+   * (D-83). Both cuts are from OUR translation; not one character of the
+   * client's own copy was touched, and `home.fr.ts` still carries all eight
+   * French items. Each removal is written out at the point it was removed.
+   * A cut here is NOT a licence to re-translate the item under a different
+   * wording: the amendment authorises a faithful rendering or nothing.
    *
    * ⚠ `partenaire principal` and `audacieuse` are both claims in French and
    * both are claims here. `main partner` and `boldly` are the one-for-one
@@ -182,10 +190,18 @@ const content: HomeContent = {
         // your wealth`). `projets` → `projects`, kept distinct from
         // `objectifs` → `goals`, which the French uses separately elsewhere.
         'Support you in achieving your ambitious life projects',
-        // FR: `Être le partenaire principal dans votre réussite financière `
-        // (trailing U+00A0). `partner in your financial success` is the live EN
-        // home page's own phrase (`As your partner in financial success…`).
-        'Be the main partner in your financial success',
+        /* ⚠ REMOVED 2026-08-03 — D-100 / D-102. The third item read
+           `Be the main partner in your financial success`, rendering FR
+           `Être le partenaire principal dans votre réussite financière `.
+           It is CUT, not reworded, because `Our purpose` — the client's own
+           live English copy, sitting one block above this list — already opens
+           `As your partner in financial success, we're here to support you…`.
+           The phrase `partner in financial success` therefore landed twice in
+           two adjacent blocks (D-83). The cut is from OUR translation, never
+           from their live copy. The French home page is untouched and still
+           carries the item; the English clause also survives verbatim in
+           NC-28 on `/en/our-firm/`, where no `Our purpose` block exists and
+           nothing collides with it. */
         // FR: `Construire une relation à long terme basée sur la confiance et le professionnalisme`
         'Build a long-term relationship based on trust and professionalism',
       ],
@@ -194,8 +210,19 @@ const content: HomeContent = {
       // FR: `Nos engagements`
       heading: 'Our commitments',
       items: [
-        // FR: `Agir de manière intègre et communiquer de façon transparente`
-        'Act with integrity and communicate transparently',
+        /* ⚠ REMOVED 2026-08-03 — D-100 / D-103. The first item read
+           `Act with integrity and communicate transparently`, rendering FR
+           `Agir de manière intègre et communiquer de façon transparente`.
+           It is CUT, not reworded. `Our values` — live English copy in the
+           `Our purpose` block above — already reads `We're committed to
+           honesty, integrity and excellence.`, and `Our unique approach`
+           below lists `Our integrity` and `Our transparency` as two of its
+           four items. Both of those are the client's own live strings, so this
+           item was the only one of the three we could cut; keeping it put
+           `integrity` on the page three times (D-83) and `transparen*` twice.
+           The French home page is untouched and still carries the item; the
+           English clause also survives verbatim in NC-28 on `/en/our-firm/`,
+           which has no `Our purpose` block and no `Our unique approach`. */
         // FR: `Demeurer informés pour prendre des décisions éclairées`
         // The repetition (`informed` / `well-informed`) is the faithful
         // rendering of `informés` / `éclairées`. `sound decisions` would be an

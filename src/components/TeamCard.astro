@@ -190,10 +190,11 @@ const fallbackInitials =
       keeps the calling component's own `data-astro-cid`, so the caller styles
       it with its own scoped rules exactly as before.
 
-      ⚠ If the card also has `href`, `.tcard__name-link::after` lays a
-      whole-card overlay over everything inside. Interactive slotted content
-      must then set `position: relative; z-index: 1`, the same guard
-      `.tcard__link` already carries. No current caller does both.
+      ⚠ This slot used to carry a warning that `href` laid a whole-card overlay
+      over everything inside, so interactive slotted content had to set
+      `position: relative; z-index: 1`. D-101 removed that overlay — only the
+      name is a link now — so the warning no longer applies. It would apply
+      again the moment anyone re-adds `.tcard__name-link::after`.
     */}
     <slot name="after" />
   </div>
@@ -247,19 +248,24 @@ const fallbackInitials =
     font-size: 1.25rem;
   }
 
+  /* THE NAME IS THE LINK, AND ONLY THE NAME — D-101, 2026-08-03.
+     This rule used to be followed by `.tcard__name-link::after { inset: 0 }`
+     plus `.tcard:has(.tcard__name-link) { position: relative }`, which laid an
+     invisible overlay across the WHOLE card, so a click anywhere on the
+     photograph, the title or the languages line navigated to the advisor's
+     profile page.
+     Both are removed, for one reason: the destination returns nothing the card
+     did not already show (D-91). The live pages link the NAME only —
+     `<h3 class="cmp-title__text"><a class="cmp-title__link">Laurent Achard</a></h3>`
+     on `notre-equipe.html` and `our-team.html` alike — so the overlay was OUR
+     addition, not the client's, and it widened a promise the page cannot keep.
+     Our own `_contact/AdvisorCard.astro` already refuses the same pattern and
+     says why. THE LINK ITSELF IS UNTOUCHED: same href, same label, same live
+     wording, and the four profile routes are unchanged.
+     Restoring it is re-adding the two rules named above. */
   .tcard__name-link {
     text-decoration: none;
     color: inherit;
-  }
-
-  .tcard__name-link::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-  }
-
-  .tcard:has(.tcard__name-link) {
-    position: relative;
   }
 
   .tcard__name-link:hover {
@@ -314,7 +320,9 @@ const fallbackInitials =
     color: var(--fg);
     text-decoration: none;
     transition: color 180ms var(--ease-wa);
-    /* Sits above the whole-card overlay so tel:/mailto: stay clickable. */
+    /* Kept after D-101 removed the whole-card overlay these two lines were
+       guarding against. They now cost nothing and they mean that re-adding the
+       overlay cannot silently swallow a `tel:` or a `mailto:` again. */
     position: relative;
     z-index: 1;
   }
